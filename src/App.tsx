@@ -1,12 +1,11 @@
-import { useState } from 'react'
 import './App.css'
+import Router from './router'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
 
   return (
-    <div className="App">
-      <div></div>
+    <div>
+      <Router/>
     </div>
   )
 }
