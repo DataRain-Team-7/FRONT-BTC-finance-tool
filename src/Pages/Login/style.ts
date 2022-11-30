@@ -1,6 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const LoginContainer = styled.div`
-background-color: aliceblue;
+${({theme})=>css`
+background-color: ${theme.colors.tertiaryColor};
+font-size: ${theme.constants.titleFontSize};
+
+`}
 
 `

@@ -1,6 +1,6 @@
 export const colors = {
     primaryColor: "#FFFFFF",
     secundaryColor: "#0D78A0",
-    backgroundColor: "#F2F4F",
-    terceryColor: "#EF8E1C"
+    backgroundColor: "#F2F4F6",
+    tertiaryColor: "#EF8E1C"
 }   

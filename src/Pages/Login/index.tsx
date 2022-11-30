@@ -3,7 +3,7 @@ import * as Style from './style'
 const Login = () => {
     return (
         <Style.LoginContainer>
-        <h1>Login</h1>
+        <p>Login</p>
         
         </Style.LoginContainer>
     )
