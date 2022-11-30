@@ -1,9 +1,12 @@
 import * as Style from './style'
+import TopBar from '../../Components/TopBar'
+
 
 const Login = () => {
     return (
         <Style.LoginContainer>
-        <p>Login</p>
+            <TopBar />
+            <p>Login</p>
         
         </Style.LoginContainer>
     )
