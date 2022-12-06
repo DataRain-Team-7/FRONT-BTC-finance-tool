@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import topBar from '../../assets/images/topBar.png';
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsGear } from "react-icons/bs";
+import 'animate.css';
 
 export const HeaderContainer = styled.div`
 
@@ -36,12 +37,14 @@ ${({theme})=>css`
         flex-direction:row;
         color: ${theme.colors.primaryColor};
         align-items: center;
-        width: 22%;
+        width: 30%;
+        max-width: 23rem;
 
             div{
                 display:flex;
                 flex-direction: row;
-                width: 70%;
+                width: 80%;
+                max-width: 17rem;
             }
 
             img{
@@ -64,6 +67,19 @@ ${({theme})=>css`
 
 
     }
+        .badge{
+            margin-top:0.2rem;
+        }
+
+        input{
+            width: 33%;
+            height: 1.5rem;
+            outline: 0;
+            border: none;
+            border-radius: 0.75rem;
+            text-align: center;
+            margin-left: -10%;
+        }
     }
     `}
     
