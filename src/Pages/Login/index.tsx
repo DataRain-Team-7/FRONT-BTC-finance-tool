@@ -1,5 +1,5 @@
 import * as Style from './style'
-import TopBar from '../../Components/TopBar'
+import TopBar from '../../components/TopBar'
 
 
 const Login = () => {
