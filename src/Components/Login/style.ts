@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import theme from "../../styles/theme";
 
+
 export const AuthFormContainer = styled.div`
   ${({ theme }) => css`
     font-size: ${theme.constants.titleFontSize};
@@ -14,17 +15,19 @@ export const AuthFormContainer = styled.div`
 
 export const AuthForm = styled.form`
   ${({ theme }) => css`
-    width: 420px;
+    width: 520px;
+    height: 50vh;
     box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
     padding-top: 30px;
     padding-bottom: 20px;
     border-radius: 8px;
     background-color: white;
-  `}
-`;
+    `}
+    `;
 
 export const AuthFormContent = styled.div`
   ${({ theme }) => css`
+  font-size: ${theme.constants.fontBody};
     padding-left: 12%;
     padding-right: 12%;
   `}
@@ -34,7 +37,8 @@ export const AuthFormTitle = styled.h3`
   ${({ theme }) => css`
     text-align: center;
     margin-bottom: 1em;
-    font-size: 24px;
+    font-size: ${theme.constants.titleFontSize};
+    /* font-size: 24px; */
     color: rgb(34, 34, 34);
     font-weight: 800;
   `}
@@ -48,8 +52,11 @@ export const Label = styled.label`
   `}
 `;
 
-export const LoginContainer = styled.div`
-  ${({ theme }) => css``}
+export const LinkTo = styled.a`
+  ${({ theme }) => css`
+  text-decoration: none;
+  color: ${theme.colors.secundaryColor};
+  `}
 `;
 
 // export const LoginContainer = styled.div`

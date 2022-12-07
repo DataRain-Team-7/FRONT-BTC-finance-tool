@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import * as Style from "./style";
 
 const Login = () => {
@@ -24,16 +25,19 @@ const Login = () => {
                 placeholder="Insira a senha"
               />
             </div>
+            <p>
+              <Style.LinkTo href="#">Esqueceu a senha?</Style.LinkTo>
+            </p>
             <div className="d-grid gap-2 mt-3">
               <button type="submit"
               // className="btn btn-primary"
               >
-                Concluir
+                Entrar
               </button>
-            </div>
             <p>
-              Esqueceu <a href="#">a senha?</a>
+              <Style.LinkTo href="#">Clique aqui para criar uma nova conta</Style.LinkTo>
             </p>
+            </div>
           </Style.AuthFormContent>
         </Style.AuthForm>
       </Style.AuthFormContainer>
