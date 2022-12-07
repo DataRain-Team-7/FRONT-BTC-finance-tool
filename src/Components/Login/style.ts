@@ -26,11 +26,30 @@ export const LoginCard = styled.div`
     flex-direction: column;
     justify-content: space-between;
 
-    section{
+    form{
       display: flex;
       flex-direction: column;
-      height: 38%;
+      height: 70%;
       justify-content: space-between;
+
+      section{
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        height: 40%;
+        width: 100%;
+
+        .buttonEnter{
+          background-color: ${theme.colors.tertiaryColor};
+          height: 3rem;
+          width: 80%;
+          font-size: ${theme.constants.buttonFontSize};
+        }
+        .buttonEnter:hover{
+          background-color: ${theme.colors.tertiaryColor};
+        }
+      }
+
     }
 
     .inputContainer{
@@ -90,17 +109,7 @@ export const LoginCard = styled.div`
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      height: 35%;
-
-      .buttonEnter{
-        background-color: ${theme.colors.tertiaryColor};
-        height: 3rem;
-        width: 80%;
-        font-size: ${theme.constants.buttonFontSize};
-      }
-      .buttonEnter:hover{
-        background-color: ${theme.colors.tertiaryColor};
-      }
+      height: 13%;
 
       .or{
         width: 100%;

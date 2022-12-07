@@ -10,7 +10,8 @@ interface AuthProviderProps{
 
 interface loginParams{
     token:string,
-    user:User
+    user:User,
+    isCkecked: Boolean,
 }
 
 interface AuthProviderData{
@@ -46,9 +47,11 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         if(token) checkTokenExpiration();
     } , [])
 
-    const login = ({token, user}:loginParams) =>{
-        localStorage.setItem("token", token)
-        localStorage.setItem("user", JSON.stringify(user))
+    const login = ({token, user, isCkecked}:loginParams) =>{
+        if(isCkecked){
+            localStorage.setItem("token", token)
+            localStorage.setItem("user", JSON.stringify(user))
+        }
         setLogged(true);
         // navegate("/")    COLOCAR ROTA CORRETA AQUI
         toast.success("login bem sucedido")
