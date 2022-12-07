@@ -1,22 +1,77 @@
 import styled, { css } from "styled-components";
+import theme from "../../styles/theme";
 
-export const LoginContainer = styled.div`
+export const AuthFormContainer = styled.div`
   ${({ theme }) => css`
     font-size: ${theme.constants.titleFontSize};
-    background-color: #f2f4f6;
-    height: 100vh;
-    width: 100vw;
     display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    /* align-content: center; */
-    `}
-    `;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+  `}
+`;
 
-export const LoginBox = styled.div`
-justify-content: center;
-  background-color: white;
-  /* margin: 200px; */
-  height: 50vh;
-  width: 20vw;
-  `;
+export const AuthForm = styled.form`
+  ${({ theme }) => css`
+    width: 420px;
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    background-color: white;
+  `}
+`;
+
+export const AuthFormContent = styled.div`
+  ${({ theme }) => css`
+    padding-left: 12%;
+    padding-right: 12%;
+  `}
+`;
+
+export const AuthFormTitle = styled.h3`
+  ${({ theme }) => css`
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: 24px;
+    color: rgb(34, 34, 34);
+    font-weight: 800;
+  `}
+`;
+
+export const Label = styled.label`
+  ${({ theme }) => css`
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(34, 34, 34);
+  `}
+`;
+
+export const LoginContainer = styled.div`
+  ${({ theme }) => css``}
+`;
+
+// export const LoginContainer = styled.div`
+//   ${({ theme }) => css`
+//   font-size: ${theme.constants.titleFontSize};
+//   background-color: #f2f4f6;
+//   height: 100vh;
+//   width: 100vw;
+//   /* display: flex; */
+//   /* flex-direction: column; */
+//   /* justify-content: center; */
+//   `}
+//   `;
+
+// export const LoginBox = styled.div`
+// ${({ theme }) => css`
+//   display: flex;
+//   justify-content: center;
+//   background-color: white;
+//   margin: auto;
+//   justify-content: center;
+//   height: 50vh;
+//   /* width: 200px; */
+// `}
+// `;
