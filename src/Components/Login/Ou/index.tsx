@@ -5,7 +5,7 @@ const Login = (props: any) => {
     <div>
       <div style={{ display: "flex", alignItems: "center" }}>
         <Style.LeftLine />
-        <h2 style={{ fontSize: "10px", color: "gray" }}>OU</h2>
+        <Style.OuText>OU</Style.OuText>
         <Style.RightLine />
       </div>
     </div>
