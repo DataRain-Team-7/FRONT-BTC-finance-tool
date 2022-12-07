@@ -18,7 +18,7 @@ interface LoginData {
 const loginSchema = yup.object().shape({
   email: yup
     .string()
-    .email("Formato de email inválido")
+    .email("Email inválido")
     .required("Email obrigatório"),
   password: yup.string().min(1, "Senha obrigatória"),
 });
