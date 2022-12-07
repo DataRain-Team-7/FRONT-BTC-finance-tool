@@ -56,6 +56,8 @@ const Login = () => {
           </Style.AuthFormContainer>
         </Style.AuthFormContainer>
       ) : null}
+
+      {showRegisterForm ? (<></>) : null}
     </div>
   );
 };
