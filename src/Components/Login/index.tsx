@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Ou from "../CreateAccount";
 import * as Style from "./style";
+import Button from '@mui/material/Button';
 
 const LoginCard = () => {
 
@@ -9,51 +9,47 @@ const LoginCard = () => {
 
   return (
     <div>
-        <Style.AuthFormContainer>
-          <Style.AuthFormContainer>
-            <Style.AuthForm>
-              <Style.AuthFormContent>
-                <Style.AuthFormTitle>Login</Style.AuthFormTitle>
-                <div>
-                  <Style.Label>Email</Style.Label>
-                  <input
-                    type="email"
-                    // className="form-control mt-1"
-                    placeholder="Digite seu email"
-                  />
-                </div>
-                <div>
-                  <Style.Label>Senha</Style.Label>
-                  <input
-                    type="password"
-                    // className="form-control mt-1"
-                    placeholder="Digite sua senha"
-                  />
-                </div>
-                <p>
-                  <Style.LinkTo href="#">Esqueceu a senha?</Style.LinkTo>
-                </p>
+          <Style.LoginContainer>
+            <Style.LoginCard>
+                <Style.Title>Login</Style.Title>
+                <section>
+                    <div className="inputContainer">
+                      <Style.Label>Email</Style.Label>
+                      <input
+                        placeholder="Digite seu email"
+                      />
+                    </div>
+                    <div className="inputContainer">
+                      <Style.Label>Senha</Style.Label>
+                      <input
+                        type="password"
+                        placeholder="Digite sua senha"
+                      />
+                      <div className="forgotPassawordContainer">
+                        <Style.ForgotPassword>Esqueceu a senha?</Style.ForgotPassword>
+                        <div>
+                          <Style.RemindMe>Lembrar-me</Style.RemindMe>
+                          <input type="checkbox" checked="checked"></input>
+                        </div>
+                      </div>
+                    </div>
+                </section>
 
-                <Style.LembrarMe>Lembrar-me</Style.LembrarMe>
-                <input type={"checkbox"}></input>
+                <div className="bottonContainer">
+                  <Button variant="contained" className="buttonEnter">Entrar</Button>
 
-                <div className="d-grid gap-2 mt-3">
-                  <button
-                    type="submit"
-                  >
-                    Entrar
-                  </button>
-                  <Ou />
-                  <p>
-                    <Style.LinkTo href="#" onClick={()=>navigate('/cadastro')}>
-                      Clique aqui para criar uma nova conta
-                    </Style.LinkTo>
-                  </p>
+                  <div className="or">
+                    <Style.Line/>
+                    <p>OU</p>
+                    <Style.Line/>
+                  </div>
+
+                  <Style.NewAccount onClick={()=>navigate('/cadastro')}>
+                    Clique aqui para criar uma nova conta
+                  </Style.NewAccount>
                 </div>
-              </Style.AuthFormContent>
-            </Style.AuthForm>
-          </Style.AuthFormContainer>
-        </Style.AuthFormContainer>
+                </Style.LoginCard>
+          </Style.LoginContainer>
     </div>
   );
 };
