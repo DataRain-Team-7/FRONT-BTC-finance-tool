@@ -1,14 +1,14 @@
 import { useState } from "react";
-import Ou from "./Ou";
+import { useNavigate } from "react-router-dom";
+import Ou from "../CreateAccount";
 import * as Style from "./style";
 
-const Login = () => {
-  const [showRegisterForm, setShowRegisterForm] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(true);
+const LoginCard = () => {
+
+  const navigate= useNavigate()
 
   return (
     <div>
-      {showLoginForm ? (
         <Style.AuthFormContainer>
           <Style.AuthFormContainer>
             <Style.AuthForm>
@@ -40,13 +40,12 @@ const Login = () => {
                 <div className="d-grid gap-2 mt-3">
                   <button
                     type="submit"
-                    // className="btn btn-primary"
                   >
                     Entrar
                   </button>
                   <Ou />
                   <p>
-                    <Style.LinkTo href="#">
+                    <Style.LinkTo href="#" onClick={()=>navigate('/cadastro')}>
                       Clique aqui para criar uma nova conta
                     </Style.LinkTo>
                   </p>
@@ -55,11 +54,8 @@ const Login = () => {
             </Style.AuthForm>
           </Style.AuthFormContainer>
         </Style.AuthFormContainer>
-      ) : null}
-
-      {showRegisterForm ? (<></>) : null}
     </div>
   );
 };
 
-export default Login;
+export default LoginCard;

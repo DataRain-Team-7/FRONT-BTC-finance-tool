@@ -1,12 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-// import Login from "./Components/Login";
-import Login from "./Pages/LoginPage";
+import Login from "./Pages/Login";
+import CreateAccount from "./Pages/CreateAccount";
 
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={<h1>Home</h1>} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/cadastro" element={<CreateAccount />} />
+
     </Routes>
   );
 };
