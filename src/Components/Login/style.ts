@@ -38,7 +38,7 @@ export const LoginCard = styled.div`
       flex-direction: column;
       
 
-      input{
+      .textInput{
         width: 100%;
         all: unset;
         border: 1px solid #D1D1D1;
@@ -49,7 +49,16 @@ export const LoginCard = styled.div`
         ::-webkit-input-placeholder {
           color: ${theme.colors.inputFontColor};
         }
+      }
 
+      .checkInput{
+        height: 24px;
+        width: 24px;
+        background-color: red;
+      }
+
+      .checkInput:hover {
+        background-color: red;
       }
     }
 
@@ -65,7 +74,7 @@ export const LoginCard = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 28%;
+        width: 30%;
 
         input{
           cursor: pointer;

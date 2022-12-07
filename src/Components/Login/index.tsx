@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 
 const LoginCard = () => {
 
+  const [isChecked, setIsChecked] = useState<boolean>(true)
   const navigate= useNavigate()
 
   return (
@@ -16,12 +17,14 @@ const LoginCard = () => {
                     <div className="inputContainer">
                       <Style.Label>Email</Style.Label>
                       <input
+                        className="textInput"
                         placeholder="Digite seu email"
                       />
                     </div>
                     <div className="inputContainer">
                       <Style.Label>Senha</Style.Label>
                       <input
+                        className="textInput"
                         type="password"
                         placeholder="Digite sua senha"
                       />
@@ -29,7 +32,7 @@ const LoginCard = () => {
                         <Style.ForgotPassword>Esqueceu a senha?</Style.ForgotPassword>
                         <div>
                           <Style.RemindMe>Lembrar-me</Style.RemindMe>
-                          <input type="checkbox" checked="checked"></input>
+                          <input type="checkbox" className="checkInput" checked={isChecked} onClick={()=>setIsChecked(!isChecked)}></input>
                         </div>
                       </div>
                     </div>
