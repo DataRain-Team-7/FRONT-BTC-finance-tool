@@ -27,16 +27,23 @@ const Login = () => {
             <p>
               <Style.LinkTo href="#">Esqueceu a senha?</Style.LinkTo>
             </p>
+            
+            <Style.LembrarMe>Lembrar-me</Style.LembrarMe>
+            <input type={"checkbox"}></input>
+
             <div className="d-grid gap-2 mt-3">
-              <button type="submit"
-              // className="btn btn-primary"
+              <button
+                type="submit"
+                // className="btn btn-primary"
               >
                 Entrar
               </button>
               <Ou />
-            <p>
-              <Style.LinkTo href="#">Clique aqui para criar uma nova conta</Style.LinkTo>
-            </p>
+              <p>
+                <Style.LinkTo href="#">
+                  Clique aqui para criar uma nova conta
+                </Style.LinkTo>
+              </p>
             </div>
           </Style.AuthFormContent>
         </Style.AuthForm>

@@ -59,6 +59,15 @@ export const LinkTo = styled.a`
   `}
 `;
 
+
+export const LembrarMe = styled.h2`
+    ${({ theme }) => css`
+    font-size: ${theme.constants.fontBody};
+    color: gray;
+    `}
+`;
+
+
 // export const LoginContainer = styled.div`
 //   ${({ theme }) => css`
 //   font-size: ${theme.constants.titleFontSize};
