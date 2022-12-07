@@ -13,7 +13,7 @@ const Login = () => {
               <input
                 type="email"
                 // className="form-control mt-1"
-                placeholder="Insira o email"
+                placeholder="Digite seu email"
               />
             </div>
             <div>
@@ -21,13 +21,13 @@ const Login = () => {
               <input
                 type="password"
                 // className="form-control mt-1"
-                placeholder="Insira a senha"
+                placeholder="Digite sua senha"
               />
             </div>
             <p>
               <Style.LinkTo href="#">Esqueceu a senha?</Style.LinkTo>
             </p>
-            
+
             <Style.LembrarMe>Lembrar-me</Style.LembrarMe>
             <input type={"checkbox"}></input>
 
