@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
 
+export const OuContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
 export const LeftLine = styled.div`
   height: 0.9px;
   width: 45px;
