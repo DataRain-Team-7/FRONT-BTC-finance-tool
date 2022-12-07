@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Ou from "./Ou";
 import * as Style from "./style";
 
 const Login = () => {
@@ -34,6 +35,7 @@ const Login = () => {
               >
                 Entrar
               </button>
+              <Ou />
             <p>
               <Style.LinkTo href="#">Clique aqui para criar uma nova conta</Style.LinkTo>
             </p>
