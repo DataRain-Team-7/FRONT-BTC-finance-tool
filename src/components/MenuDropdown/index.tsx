@@ -8,6 +8,7 @@ import './style.css';
 import { BsThreeDotsVertical, BsPencil, BsTrash } from "react-icons/bs";
 import { TeamsTypes } from '../../types/interface';
 import ModalDeleteTeam from '../ModalDeleteTeam';
+import ModalEditTeam from '../ModalEditTeam';
 
 interface MenuProps {
   team: TeamsTypes;
@@ -15,6 +16,7 @@ interface MenuProps {
 
 export default function BasicMenu({team}: MenuProps) {
   const [openDeleteModal, setOpenDeleteModal] = React.useState<boolean>(false)
+  const [openEditModal, setOpenEditModal] = React.useState<boolean>(false)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,7 +46,9 @@ export default function BasicMenu({team}: MenuProps) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem selected className='MenuItem' onClick={handleClose}><BsPencil/> Editar</MenuItem>
+        <MenuItem selected className='MenuItem' onClick={()=> {
+          setOpenEditModal(!openEditModal)
+          setAnchorEl(null)}}><BsPencil/> Editar</MenuItem>
         <MenuItem className='MenuItem' onClick={() => {
           setAnchorEl(null)
           setOpenDeleteModal(!openDeleteModal)
@@ -54,6 +58,11 @@ export default function BasicMenu({team}: MenuProps) {
         openDeleteModal ? (
           <ModalDeleteTeam team={team}/>
         ) : null
+      }
+      {
+        openEditModal ? (
+          <ModalEditTeam team={team}/>
+        ): null
       }
     </div>
   );
