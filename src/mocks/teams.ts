@@ -14,4 +14,9 @@ export const teams = [
     name: "Equipe 3 Datarain",
     price: 45,
   },
+  {
+    id: 4,
+    name: "Equipe 4 Datarain",
+    price: 98,
+  },
 ];

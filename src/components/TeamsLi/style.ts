@@ -19,7 +19,7 @@ export const TeamsLi = styled.li`
   `}
 `;
 
-export const MenuDropdown = styled.button`
+export const MenuDropdownButton = styled.button`
   background-color: transparent;
   position: relative;
   border: none;
