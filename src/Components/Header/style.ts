@@ -8,11 +8,13 @@ export const HeaderContainer = styled.div`
 
 ${({theme})=>css`
     background: url(${topBar});
-    height: 3.2rem;
+    background-size: cover;
+    height: 5rem;
     display: flex;
     align-items: center;
     justify-content:center;
     user-select: none;
+
 
     section{
         width: 100%;
@@ -23,13 +25,6 @@ ${({theme})=>css`
         box-sizing: border-box;
         padding: 4rem;
 
-        
-
-        img{
-            height: 3rem;
-            filter: drop-shadow( 1px 1px 4px #fff);
-        }
-
 
         div{
         display:flex;
@@ -37,20 +32,21 @@ ${({theme})=>css`
         flex-direction:row;
         color: ${theme.colors.primaryColor};
         align-items: center;
-        width: 30%;
-        max-width: 23rem;
+        width: 50%;
+        max-width: 25rem;
 
             div{
                 display:flex;
                 flex-direction: row;
                 width: 80%;
-                max-width: 17rem;
+                max-width: 18.5rem;
             }
 
             img{
-                height: 2.5rem;
+                height: 4rem;
                 border: 2px solid white;
-                border-radius: 50%
+                border-radius: 50%;
+                margin-right: 0.5rem;
             }
 
             p{
@@ -73,12 +69,18 @@ ${({theme})=>css`
 
         input{
             width: 33%;
-            height: 1.5rem;
+            height: 2.25rem;
             outline: 0;
             border: none;
-            border-radius: 0.75rem;
+            border-radius: 1.125rem;
             text-align: center;
             margin-left: -10%;
+            font-size: ${theme.constants.buttonFontSize};
+        }
+
+        img{
+            height: 4rem;
+            filter: drop-shadow( 1px 1px 4px #fff);
         }
     }
     `}
@@ -87,10 +89,11 @@ ${({theme})=>css`
 export const bell=styled(IoMdNotificationsOutline)`
     height: 1.9rem;
     cursor: pointer;
+    margin-left: 1rem;
 `
 
 export const gear=styled(BsGear)`
     height: 1.6rem;
     cursor: pointer;
-
+    margin-left: 1rem;
 `

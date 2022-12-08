@@ -3,4 +3,5 @@ export const constants = {
     fontBody: "16px",
     titleFontSize: "28px",
     fontHeader: "20px",
+    buttonFontSize: "14px"
 }
