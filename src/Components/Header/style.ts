@@ -64,7 +64,7 @@ ${({theme})=>css`
 
     }
         .badge{
-            margin-top:0.2rem;
+          
         }
 
         input{
@@ -87,7 +87,7 @@ ${({theme})=>css`
     
     `
 export const bell=styled(IoMdNotificationsOutline)`
-    height: 1.9rem;
+    height: 2.2rem;
     cursor: pointer;
     margin-left: 1rem;
 `
