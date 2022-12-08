@@ -7,7 +7,6 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/cadastro" element={<CreateAccount />} />
-
     </Routes>
   );
 };

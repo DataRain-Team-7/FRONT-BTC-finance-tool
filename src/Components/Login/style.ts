@@ -93,7 +93,7 @@ export const LoginCard = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 30%;
+        width: 33%;
 
         input{
           cursor: pointer;
