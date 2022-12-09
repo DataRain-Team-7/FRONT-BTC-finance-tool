@@ -1,16 +1,15 @@
-import * as Style from './style'
-import TopBar from '../../components/TopBar'
-import Header from '../../components/Header'
+import * as Styled from './style'
+import Login from '../../Components/Login'
+import TopBar from '../../Components/TopBar'
 
+const LoginPage = () => {
+  return (
+    <Styled.LoginContainer>
+      <TopBar/>
+      <Login />
+      </Styled.LoginContainer>
+  )
 
-const Login = () => {
-    return (
-        <Style.LoginContainer>
-            <Header />
-            <p>Login</p>
-        
-        </Style.LoginContainer>
-    )
 }
 
-export default Login
+export default LoginPage
