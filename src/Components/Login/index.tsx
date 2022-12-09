@@ -40,11 +40,12 @@ const LoginCard = () => {
 
   const handleLogin = (data:LoginData)=>{
     if(data.email!=="" && data.password!==""){
-        return Api.post("/auth", data)
+        return Api.post("/auth/login", data)
              .then((res)=>{
-                login({token: res.data.token, user: res.data.user, isCkecked: isChecked}) 
+                login({token: res.data.token, user: res.data.user, isCkecked: isChecked});
+                console.log(res)
              })
-             .catch(()=>toast.error("Senha ou email inválidos"))
+             .catch((error)=>{toast.error("Senha ou email inválidos");console.log(error)})
     }else{
         toast.error("Insira usuário e senha")
     }
