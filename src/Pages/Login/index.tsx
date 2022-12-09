@@ -9,6 +9,7 @@ const LoginPage = () => {
       <Login />
       </Styled.LoginContainer>
   )
+
 }
 
 export default LoginPage
