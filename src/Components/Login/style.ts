@@ -154,6 +154,7 @@ export const NewAccount = styled.p`
   ${({ theme }) => css`
   color: ${theme.colors.secundaryColor};
   font-size: ${theme.constants.fontBody};
+  cursor: pointer;
   `}
 `;
 
