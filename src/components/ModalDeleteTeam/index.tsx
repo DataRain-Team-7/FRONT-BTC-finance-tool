@@ -45,7 +45,9 @@ export default function ModalDeleteTeam({ team }: ModalEditProps) {
           <Box display="flex" alignItems="center" justifyContent="center">
             <S.ButtonDropdownNo onClick={handleClose}>Não</S.ButtonDropdownNo>
             <S.ButtonDropdownYes
-              onClick={() => console.log(`Excluída equipe ${team.id}`)}
+              onClick={() => {
+                {handleClose}
+                console.log(`Excluída equipe ${team.id}`)}}
             >
               Sim
             </S.ButtonDropdownYes>

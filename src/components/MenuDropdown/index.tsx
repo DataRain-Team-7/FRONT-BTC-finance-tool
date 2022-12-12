@@ -48,9 +48,9 @@ export default function BasicMenu({team}: MenuProps) {
       >
         <MenuItem selected className='MenuItem' onClick={()=> {
           setOpenEditModal(!openEditModal)
-          setAnchorEl(null)}}><BsPencil/> Editar</MenuItem>
+          handleClose()}}><BsPencil/> Editar</MenuItem>
         <MenuItem className='MenuItem' onClick={() => {
-          setAnchorEl(null)
+          handleClose()
           setOpenDeleteModal(!openDeleteModal)
           }}><BsTrash/> Excluir</MenuItem>
       </Menu>

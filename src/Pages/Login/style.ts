@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const LoginContainer = styled.div`
-background-color: aliceblue;
-
+    padding: 0;
+    margin: 0;
+    user-select: none;
 `
