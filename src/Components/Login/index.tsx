@@ -8,9 +8,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../contexts/auth";
 import Api from "../../services/api";
-import Modal from "react-modal";
 import ForgotPassword from "../ModalForgortPassword";
-import { customStyles } from "../../styles/constants";
 
 
 
@@ -33,10 +31,6 @@ const LoginCard = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const navigate= useNavigate();
   const { login } = useAuth();
-
-  const handleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  }
 
   const {
     register,
@@ -120,13 +114,7 @@ const handleErrorMessage = () =>{
                 </Style.LoginCard>
           </Style.LoginContainer>
     </div>
-    <Modal
-      isOpen={isModalOpen}
-      onRequestClose={handleModal}
-      style={customStyles}
-      >
-      <ForgotPassword setIsModalOpen={setIsModalOpen}/>
-    </Modal>
+    <ForgotPassword setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}/>
     </>
   );
 };
