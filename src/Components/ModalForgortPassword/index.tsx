@@ -1,11 +1,20 @@
 import { Button } from "@mui/material"
+import { Dispatch, SetStateAction } from "react"
 import * as Style from "./style"
 
-const ForgotPassword = () => {
+interface ForgotPasswordProps {
+    setIsModalOpen: Dispatch<SetStateAction<boolean>>
+}
+
+const ForgotPassword = ({ setIsModalOpen }: ForgotPasswordProps) => {
+
+    const handleCloseModal = () =>{
+        setIsModalOpen(false)
+    }
     return (
         <Style.ForgotPasswordContainer>
             <div>
-                <Style.BackArrow/>
+                <Style.BackArrow onClick={handleCloseModal}/>
             </div>
             <h2>Recuperação de senha</h2>
             <section>

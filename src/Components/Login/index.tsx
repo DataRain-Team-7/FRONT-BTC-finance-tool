@@ -125,7 +125,7 @@ const handleErrorMessage = () =>{
       onRequestClose={handleModal}
       style={customStyles}
       >
-      <ForgotPassword/>
+      <ForgotPassword setIsModalOpen={setIsModalOpen}/>
     </Modal>
     </>
   );
