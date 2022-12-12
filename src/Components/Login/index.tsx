@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as Style from "./style";
+import * as Style from "./style"
 import Button from '@mui/material/Button';
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../contexts/auth";
 import Api from "../../services/api";
+import Modal from "react-modal";
+import ForgotPassword from "../ModalForgortPassword";
+import { customStyles } from "../../styles/constants";
+
 
 
 interface LoginData {
@@ -23,13 +27,16 @@ const loginSchema = yup.object().shape({
   password: yup.string().min(1, "Senha obrigatória"),
 });
 
-
 const LoginCard = () => {
 
-  const [isChecked, setIsChecked] = useState<boolean>(true)
-  const navigate= useNavigate()
+  const [isChecked, setIsChecked] = useState<boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const navigate= useNavigate();
   const { login } = useAuth();
 
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  }
 
   const {
     register,
@@ -65,6 +72,7 @@ const handleErrorMessage = () =>{
 }
 
   return (
+    <>
     <div>
           <Style.LoginContainer>
             <Style.LoginCard>
@@ -88,7 +96,7 @@ const handleErrorMessage = () =>{
                       />
                     
                       <div className="forgotPassawordContainer">
-                        <Style.ForgotPassword>Esqueceu a senha?</Style.ForgotPassword>
+                        <Style.ForgotPassword onClick={()=> setIsModalOpen(true)}>Esqueceu a senha?</Style.ForgotPassword>
                         <div>
                           <Style.RemindMe>Lembrar-me</Style.RemindMe>
                           <input type="checkbox" className="checkInput" checked={isChecked} onChange={()=>setIsChecked(!isChecked)}></input>
@@ -112,6 +120,14 @@ const handleErrorMessage = () =>{
                 </Style.LoginCard>
           </Style.LoginContainer>
     </div>
+    <Modal
+      isOpen={isModalOpen}
+      onRequestClose={handleModal}
+      style={customStyles}
+      >
+      <ForgotPassword/>
+    </Modal>
+    </>
   );
 };
 

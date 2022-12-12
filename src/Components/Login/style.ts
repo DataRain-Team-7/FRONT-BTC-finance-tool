@@ -99,7 +99,6 @@ export const LoginCard = styled.div`
           cursor: pointer;
         }
       }
-
       
     }
 
@@ -126,7 +125,6 @@ export const LoginCard = styled.div`
       
     }
     
-    
     `}
     `;
 
@@ -135,7 +133,7 @@ export const Title = styled.h3`
     text-align: start;
     padding-left: 0.5rem;
     box-sizing: border-box;
-    font-size: 2rem;
+    font-size: ${theme.constants.titleFontSize};
     color: ${theme.colors.fundamentalColor};
     font-weight: 700;
   `}
@@ -154,6 +152,7 @@ export const NewAccount = styled.p`
   ${({ theme }) => css`
   color: ${theme.colors.secundaryColor};
   font-size: ${theme.constants.fontBody};
+  cursor: pointer;
   `}
 `;
 
@@ -169,7 +168,6 @@ export const RemindMe = styled.h2`
     ${({ theme }) => css`
     font-size: ${theme.constants.fontBody};
     color: ${theme.colors.darkGrey};
-
     `}
 `;
 
@@ -182,7 +180,5 @@ export const Line = styled.div`
     margin: 0px 5px 0px 0px;
   `}
 `;
-
-
 
 
