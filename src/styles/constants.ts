@@ -1,6 +1,6 @@
 export const constants = {
     fontFamily: "Rubik, sans-serif",
-    fontBody: "16px",
+    fontBody: "20px",
     titleFontSize: "28px",
     fontHeader: "20px",
     buttonFontSize: "14px"

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as Style from "./style";
+import * as Style from './style'
 import Button from '@mui/material/Button';
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
