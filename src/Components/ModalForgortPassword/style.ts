@@ -27,10 +27,12 @@ ${({theme})=>css`
         font-size: ${theme.constants.titleFontSize};
         color: ${theme.colors.fundamentalColor};
         font-weight: 700;
+        margin-top: -2rem ;
     }
 
     section{
         width: 100%;
+        margin-top: -1rem;
 
         p{
             text-align:center;
