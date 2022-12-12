@@ -10,3 +10,9 @@ export interface User {
     createdAt?: Date;
     updatedAt?: Date;
 }
+
+export interface TeamsTypes {
+    id?: number,
+    name: string,
+    price: number,
+}
