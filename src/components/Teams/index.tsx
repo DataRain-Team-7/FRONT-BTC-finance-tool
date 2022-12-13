@@ -2,9 +2,10 @@ import Navbar from "../Navbar";
 import * as S from "./style";
 import { teams } from "../../mocks/teams";
 import TeamsLi from "../TeamsLi";
+// import { AiOutlineUsergroupAdd } from "react-icons/ai"
 
 const Teams = () => {
-
+  const user = true ;
   return (
     <>
       <Navbar />
@@ -18,11 +19,17 @@ const Teams = () => {
             <p>Valor da Hora</p>
           </S.TeamsSubTitle>
           <S.TeamsUl>
-            {
-              teams.map((element,index) => {
-                return <TeamsLi team={element} key={index}/>
-              })
-            }
+            {user ? (
+              <S.TeamMockedLi>
+                <S.TeamMockedLiContent>
+                  <span>Cadastrar outra equipe</span>
+                  <span> <S.AddTeamIcon/></span>
+                </S.TeamMockedLiContent>
+              </S.TeamMockedLi>
+            ) : null}
+            {teams.map((element, index) => {
+              return <TeamsLi team={element} key={index} />;
+            })}
           </S.TeamsUl>
         </S.TeamsContent>
       </S.TeamsContainer>

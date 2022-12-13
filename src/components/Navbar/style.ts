@@ -60,7 +60,7 @@ export const NavbarContentLi = styled.li`
     }
 
     :hover {
-      background-color: ${theme.colors.terceryColor};
+      background-color: ${theme.colors.tertiaryColor};
       color: ${theme.colors.primaryColor};
     }
   `}

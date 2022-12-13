@@ -31,6 +31,7 @@ export const LiContent = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const DropdownUl = styled.ul`
@@ -55,7 +56,7 @@ export const DropdownLi = styled.li`
     height: 45%;
 
     :hover {
-      background-color: ${theme.colors.terceryColor};
+      background-color: ${theme.colors.tertiaryColor};
     }
   `}
 `;
