@@ -62,7 +62,7 @@ export const LoginCard = styled.div`
         all: unset;
         border: 1px solid #D1D1D1;
         border-radius: 4px;
-        font-size: ${theme.constants.fontBody};
+        font-size: ${theme.constants.smallFont};
         padding: 11px 9px;
 
         ::-webkit-input-placeholder {
@@ -142,7 +142,7 @@ export const Title = styled.h3`
 export const Label = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.fundamentalColor};
-    font-size: ${theme.constants.fontBody};
+    font-size: ${theme.constants.smallFont};
     font-weight: 400;
     margin-left: 7px;
   `}
@@ -151,14 +151,14 @@ export const Label = styled.p`
 export const NewAccount = styled.p`
   ${({ theme }) => css`
   color: ${theme.colors.secundaryColor};
-  font-size: ${theme.constants.fontBody};
+  font-size: ${theme.constants.smallFont};
   cursor: pointer;
   `}
 `;
 
 export const ForgotPassword = styled.h2`
     color: ${theme.colors.secundaryColor};
-    font-size: ${theme.constants.fontBody};
+    font-size: ${theme.constants.smallFont};
     font-weight: 500;
     cursor: pointer;
 `
@@ -166,7 +166,7 @@ export const ForgotPassword = styled.h2`
 
 export const RemindMe = styled.h2`
     ${({ theme }) => css`
-    font-size: ${theme.constants.fontBody};
+    font-size: ${theme.constants.smallFont};
     color: ${theme.colors.darkGrey};
     `}
 `;

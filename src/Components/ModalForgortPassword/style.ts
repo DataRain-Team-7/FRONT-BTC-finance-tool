@@ -37,7 +37,7 @@ ${({theme})=>css`
         p{
             text-align:center;
             width: 100%;
-            font-size: ${theme.constants.fontBody};
+            font-size: ${theme.constants.smallFont};
             color: ${theme.colors.fundamentalColor};
             margin-bottom: 0.5rem;
         }
@@ -48,7 +48,7 @@ ${({theme})=>css`
             all: unset;
             border: 1px solid #D1D1D1;
             border-radius: 4px;
-            font-size: ${theme.constants.fontBody};
+            font-size: ${theme.constants.smallFont};
             padding: 11px 15px;
             box-sizing: border-box;
             width: 100%;
