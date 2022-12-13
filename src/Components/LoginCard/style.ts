@@ -16,6 +16,7 @@ export const LoginContainer = styled.div`
 export const LoginCard = styled.div`
   ${({ theme }) => css`
     width: 27.5vw;
+    max-width: 39rem;
     height: 64vh;
     box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
     padding: 2.8vw;

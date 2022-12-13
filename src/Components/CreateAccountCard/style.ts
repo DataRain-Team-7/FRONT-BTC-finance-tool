@@ -18,6 +18,7 @@ export const CreateAccountCard = styled.div`
   height: 80vh;
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
   width: 32vw;
+  max-width: 39rem;
   border-radius: 15px;
   background-color: #f8fafb;
   padding: 0;
@@ -59,6 +60,7 @@ export const UserPhotoContainer = styled.div`
 
 export const InputsContainer = styled.div`
   width: 100%;
+  /* height: 50%; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,8 +86,8 @@ export const ButtonsContainer = styled.div`
   height: 4.375rem;
   width: 100%;
   display: flex;
-  /* align-items: top; */
   justify-content: space-evenly;
+  margin-bottom: 2%;
 
   .buttonCancel{
     background-color: ${theme.colors.backgroundColor};

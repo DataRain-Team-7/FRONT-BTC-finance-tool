@@ -4,7 +4,7 @@ import theme from "../../styles/theme";
 
 export const ForgotPasswordContainer = styled.div`
 ${({theme})=>css`
-    width: 34.5rem;
+    max-width: 34.5rem;
     height: 25.5rem;
     margin: 0;
     padding: 2.8rem;
