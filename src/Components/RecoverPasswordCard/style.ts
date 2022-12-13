@@ -17,6 +17,7 @@ ${({theme})=>css`
     width: 34.5rem;
     height: 29.5rem;
     margin: 0;
+    margin-top: -2.5rem;
     padding: 3.5rem;
     box-sizing: border-box;
     background-color: white;
