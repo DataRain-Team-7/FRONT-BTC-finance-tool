@@ -1,11 +1,12 @@
 import * as Styled from './style'
-import Login from '../../Components/Login'
 import TopBar from '../../Components/TopBar'
+import RecoverPassword from '../../Components/RecoverPasswordCard'
 
 const RecoverPasswordPage = () => {
   return (
     <Styled.RecoverContainer>
       <TopBar/>
+      <RecoverPassword/>
     </Styled.RecoverContainer>
   )
 }
