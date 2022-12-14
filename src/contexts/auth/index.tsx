@@ -11,7 +11,7 @@ interface AuthProviderProps{
 interface loginParams{
     token:string,
     user:User,
-    isCkecked: Boolean,
+    isChecked: Boolean,
 }
 
 interface AuthProviderData{
@@ -47,8 +47,8 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         if(token) checkTokenExpiration();
     } , [])
 
-    const login = ({token, user, isCkecked}:loginParams) =>{
-        if(isCkecked){
+    const login = ({token, user, isChecked}:loginParams) =>{
+        if(isChecked){
             localStorage.setItem("token", token)
             localStorage.setItem("user", JSON.stringify(user))
         }

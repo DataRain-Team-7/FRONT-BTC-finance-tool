@@ -6,15 +6,18 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import Api from "../../services/api";
+import { useAuth } from "../../contexts/auth";
 
 const CreateAccountCard = () => {
 
+  const { login } = useAuth()
   const navigate = useNavigate()
 
   interface CreateAccountData {
     name: string;
     email: string;
-    phone: number;
+    phone: string;
     password: string;
     confirmPassword: string;
     role: string;
@@ -29,17 +32,44 @@ const CreateAccountCard = () => {
       .email("Email inválido")
       .required("Email obrigatório"),
     phone: yup
-      .number(),
+      .string(),
     password: yup
       .string()
       .min(1, "Senha obrigatória")
-      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!:;/\|.()])[0-9a-zA-Z$*&@#!:;/\|.()]{8,}$/),
+      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!:;/\|.()])[0-9a-zA-Z$*&@#!:;/\|.()]{8,}$/,
+      "A senha deve conter um caracter especial, um número e ao menos uma letra maiúscula"),
     confirmPassword: yup
       .string()
       .min(1, "Confirme sua senha"),
     role: yup
       .string()
+      .required("Tipo de conta obrigatório")
   })
+
+  const handleErrorMessage = () =>{
+    if(errors.name){
+      toast.error(`${errors.name?.message}`)
+      clearErrors()
+    }else if(errors.email){
+      toast.error(`${errors.email?.message}`)
+      clearErrors()
+    }else if(errors.phone){
+      toast.error(`${errors.phone?.message}`)
+      clearErrors()
+    }else
+    if(errors.password){
+      toast.error(`${errors.password?.message}`)
+      clearErrors()
+    }else if(errors.confirmPassword){
+      toast.error(`${errors.confirmPassword?.message}`)
+      clearErrors()
+    }else if(errors.role){
+      toast.error(`${errors.role?.message}`)
+      clearErrors()
+    }else{
+      clearErrors
+    }
+  }
 
   const {
     register,
@@ -49,7 +79,32 @@ const CreateAccountCard = () => {
   } = useForm<CreateAccountData>({ resolver: yupResolver(registerSchema) });
 
   const handleRegister = (data:CreateAccountData) =>{
-    console.log(data)
+    if(data.name !=="" || data.email !=="" || data.phone !=="" || data.password !=="" || data.confirmPassword !=="" || data.role !==""){
+      if(data.password === data.confirmPassword){
+        Api.post("/user", data)
+          .then((res)=>{
+            // toast.success("Cadastro bem sucedido!")
+            const loginData = {
+              email: data.email,
+              password: data.password
+            }
+            Api.post("/auth/login", loginData)
+              .then((res)=>{
+                login({token: res.data.token, user: res.data.user, isChecked: true})
+              })
+              .catch(()=>{
+                toast.error("Erro ao efetuar login")
+              })
+          })
+          .catch((error)=>{
+            toast.error("Erro ao realizar cadastro")
+          })
+      }else{
+        toast.error("As senhas não coincidem")
+      }
+    }else{
+      toast.error("Preencha todos os campos")
+    }
   }
   
   return (
@@ -70,7 +125,7 @@ const CreateAccountCard = () => {
             <Style.InputLabel>Email</Style.InputLabel>
             <Style.Inputs type="text" {...register("email")}/>
             <Style.InputLabel>Número de telefone</Style.InputLabel>
-            <Style.Inputs type="number" {...register("phone")}/>
+            <Style.Inputs type="string" {...register("phone")}/>
             <Style.InputLabel>Senha</Style.InputLabel>
             <Style.Inputs type="password" {...register("password")}/>
             <Style.InputLabel>Confirmar senha</Style.InputLabel>
@@ -80,7 +135,7 @@ const CreateAccountCard = () => {
           </Style.InputsContainer>
           <Style.ButtonsContainer>
             <Button variant="contained" className="buttonCancel" onClick={()=>navigate("/")}>Cancelar</Button>
-            <Button type="submit" variant="contained" className="buttonRegiste">Cadastrar</Button>
+            <Button type="submit" variant="contained" className="buttonRegiste" onClick={()=>handleErrorMessage()}>Cadastrar</Button>
           </Style.ButtonsContainer>
         </Style.CreateAccountCard>
       </Style.CreateAccountContainer>
