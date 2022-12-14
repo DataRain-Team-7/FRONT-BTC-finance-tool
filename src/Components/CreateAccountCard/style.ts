@@ -11,7 +11,7 @@ export const CreateAccountContainer = styled.div`
   `}
 `;
 
-export const CreateAccountCard = styled.div`
+export const CreateAccountCard = styled.form`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
