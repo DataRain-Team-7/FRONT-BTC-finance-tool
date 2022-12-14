@@ -2,7 +2,8 @@ import { Routes, Route } from "react-router-dom"
 import Teams from "./components/Teams";
 import Login from "./Pages/Login";
 import CreateAccount from "./Pages/CreateAccount";
-import RecoverPasswordPage from "./Pages/RevoverPassword";
+import RecoverPasswordPage from "./Pages/RecoverPassword";
+import { MdDesktopAccessDisabled } from "react-icons/md";
 
 const Router = () => {
   return (
@@ -16,3 +17,4 @@ const Router = () => {
 };
 
 export default Router;
+ 

@@ -26,7 +26,7 @@ const RecoverPassword = () => {
     return (
             <Style.RecoverPasswordContainer>
                 <Style.RecoverPasswordCard>
-                    <h2>Recuperação de senha</h2>
+                    <h2>Cadastre uma nova senha</h2>
                     <div>
                         <p>Nova senha</p>
                         <input type="password" onChange={(e)=> setPassword(e.target.value)}/>

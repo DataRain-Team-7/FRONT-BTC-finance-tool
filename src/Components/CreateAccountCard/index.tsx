@@ -1,8 +1,12 @@
 import * as Style from "./style";
 import defaltImage from "../../assets/images/userDefault.png"
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const CreateAccountCard = () => {
+
+  const navigate = useNavigate()
+  
   return (
     <Style.CreateAccountContainer>
         <Style.CreateAccountCard>
@@ -17,7 +21,7 @@ const CreateAccountCard = () => {
           </Style.UserPhotoContainer>
           <Style.InputsContainer>
             <Style.InputLabel>Nome completo</Style.InputLabel>
-            <Style.Inputs type="text"/>
+            <Style.Inputs type="text" />
             <Style.InputLabel>Email</Style.InputLabel>
             <Style.Inputs type="text"/>
             <Style.InputLabel>Número de telefone</Style.InputLabel>
@@ -30,7 +34,7 @@ const CreateAccountCard = () => {
             <Style.Inputs />
           </Style.InputsContainer>
           <Style.ButtonsContainer>
-            <Button variant="contained" className="buttonCancel">Cancelar</Button>
+            <Button variant="contained" className="buttonCancel" onClick={()=>navigate("/")}>Cancelar</Button>
             <Button variant="contained" className="buttonRegiste">Cadastrar</Button>
           </Style.ButtonsContainer>
         </Style.CreateAccountCard>

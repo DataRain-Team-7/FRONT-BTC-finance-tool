@@ -14,7 +14,7 @@ ${({theme})=>css`
 
 export const RecoverPasswordCard = styled.div`
 ${({theme})=>css`
-    max-width: 34.5rem;
+    max-width: 38.5rem;
     height: 25.5rem;
     margin: 0;
     margin-top: -2.5rem;
