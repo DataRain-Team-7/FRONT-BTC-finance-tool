@@ -4,6 +4,7 @@ import Login from "./Pages/Login";
 import CreateAccount from "./Pages/CreateAccount";
 import RecoverPasswordPage from "./Pages/RecoverPassword";
 import { MdDesktopAccessDisabled } from "react-icons/md";
+import FormPage from "./Pages/Form";
 
 const Router = () => {
   return (
@@ -12,6 +13,7 @@ const Router = () => {
       <Route path="/cadastro" element={<CreateAccount />} />
       <Route path="/teams" element={<Teams />} />
       <Route path="/novasenha/:param" element={<RecoverPasswordPage/>}/>
+      <Route path={"/form"} element={<FormPage/>}/>
     </Routes>
   );
 };
