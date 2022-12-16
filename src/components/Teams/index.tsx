@@ -2,7 +2,8 @@ import Navbar from "../Navbar";
 import * as S from "./style";
 import { teams } from "../../mocks/teams";
 import TeamsLi from "../TeamsLi";
-// import { AiOutlineUsergroupAdd } from "react-icons/ai"
+import toast from "react-hot-toast";
+
 
 const Teams = () => {
   const user = true ;
@@ -23,7 +24,7 @@ const Teams = () => {
               <S.TeamMockedLi>
                 <S.TeamMockedLiContent>
                   <span>Cadastrar outra equipe</span>
-                  <span> <S.AddTeamIcon/></span>
+                  <span> <S.AddTeamIcon onClick={() => toast.error("Seção em desenvolvimento")}/></span>
                 </S.TeamMockedLiContent>
               </S.TeamMockedLi>
             ) : null}
