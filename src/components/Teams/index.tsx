@@ -3,12 +3,14 @@ import * as S from "./style";
 import { teams } from "../../mocks/teams";
 import TeamsLi from "../TeamsLi";
 import toast from "react-hot-toast";
+import Header from "../Header";
 
 
 const Teams = () => {
   const user = true ;
   return (
     <>
+     <Header/>
       <Navbar />
       <S.TeamsContainer>
         <S.TeamsHeader>

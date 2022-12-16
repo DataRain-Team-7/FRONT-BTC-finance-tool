@@ -1,13 +1,14 @@
 import styled, { css } from "styled-components";
 
 export const NavbarContainer = styled.div`
+
   display: flex;
   flex-direction: column;
   width: 25vw;
-  position: fixed;
-  top: 0;
+  position: absolute;
   background-attachment: scroll;
   background-color: #f2f4f6;
+  height: 100vh;
 `;
 
 export const NavbarWrapper = styled.div`
