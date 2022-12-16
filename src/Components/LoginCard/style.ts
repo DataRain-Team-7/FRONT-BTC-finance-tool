@@ -9,16 +9,18 @@ export const LoginContainer = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(100vh - 5rem);
+    height: calc(100vh - 5.3rem);
   `}
 `;
 
 export const LoginCard = styled.div`
   ${({ theme }) => css`
-    width: 33rem;
-    height: 37.5rem;
+    width: 27.5vw;
+    max-width: 39rem;
+    height: 64vh;
     box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
-    padding: 3.5rem;
+    padding: 2.8vw;
+    margin-top: -2.5rem;
     border-radius: 16px;
     background-color: white;
     box-sizing: border-box;
@@ -58,11 +60,12 @@ export const LoginCard = styled.div`
       
 
       .textInput{
+        
         width: 100%;
         all: unset;
         border: 1px solid #D1D1D1;
         border-radius: 4px;
-        font-size: ${theme.constants.fontBody};
+        font-size: ${theme.constants.smallFont};
         padding: 11px 9px;
 
         ::-webkit-input-placeholder {
@@ -85,7 +88,7 @@ export const LoginCard = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 9px;
+      padding: 0 0.5vw;
       box-sizing: border-box;
       margin-top: 3%;
 
@@ -93,7 +96,7 @@ export const LoginCard = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 33%;
+        width: 6.9vw;
 
         input{
           cursor: pointer;
@@ -142,32 +145,35 @@ export const Title = styled.h3`
 export const Label = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.fundamentalColor};
-    font-size: ${theme.constants.fontBody};
+    font-size: ${theme.constants.smallFont};
     font-weight: 400;
     margin-left: 7px;
+    margin-top: 1%;
   `}
 `;
 
 export const NewAccount = styled.p`
   ${({ theme }) => css`
   color: ${theme.colors.secundaryColor};
-  font-size: ${theme.constants.fontBody};
+  font-size: ${theme.constants.smallFont};
   cursor: pointer;
   `}
 `;
 
 export const ForgotPassword = styled.h2`
     color: ${theme.colors.secundaryColor};
-    font-size: ${theme.constants.fontBody};
+    font-size: ${theme.constants.smallFont};
     font-weight: 500;
+    width: 56%;
     cursor: pointer;
 `
 
 
 export const RemindMe = styled.h2`
     ${({ theme }) => css`
-    font-size: ${theme.constants.fontBody};
+    font-size: ${theme.constants.smallFont};
     color: ${theme.colors.darkGrey};
+    font-weight: 500;
     `}
 `;
 

@@ -1,15 +1,14 @@
-import * as Styled from './style'
-import TopBar from '../../Components/TopBar'
-import CreateAccountCard from '../../Components/CreateAccount'
-
+import * as Styled from "./style";
+import TopBar from "../../Components/TopBar";
+import CreateAccountCard from "../../Components/CreateAccountCard";
 
 const CreateAccount = () => {
   return (
     <Styled.CreateAccountContainer>
-      <TopBar/>
-      <CreateAccountCard />
-      </Styled.CreateAccountContainer>
-  )
-}
+      <TopBar />
+      <CreateAccountCard/>
+    </Styled.CreateAccountContainer>
+  );
+};
 
-export default CreateAccount
+export default CreateAccount;
