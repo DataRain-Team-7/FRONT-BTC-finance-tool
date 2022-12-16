@@ -1,12 +1,12 @@
 import * as Styled from './style'
-import Login from '../../Components/Login'
+import LoginCard from '../../Components/LoginCard'
 import TopBar from '../../Components/TopBar'
 
 const LoginPage = () => {
   return (
     <Styled.LoginContainer>
       <TopBar/>
-      <Login />
+      <LoginCard />
       </Styled.LoginContainer>
   )
 
