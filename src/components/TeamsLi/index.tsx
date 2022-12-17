@@ -1,7 +1,7 @@
 import * as S from "./style";
 
 import { TeamsTypes } from "../../types/interface";
-import MenuDropdown from "../MenuDropdown";
+import MenuDropdown from "../MenuDropdownTeams";
 
 interface MocksInterface {
   team: TeamsTypes;

@@ -10,8 +10,10 @@ import {
 import { GiRotaryPhone } from "react-icons/gi";
 import { MdAttachMoney } from "react-icons/md";
 import { BsGraphUp } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate()
   return (
     <S.NavbarContainer>
       <S.NavbarWrapper>
@@ -26,13 +28,13 @@ const Navbar = () => {
               </span>
               Início
             </S.NavbarContentLi>
-            <S.NavbarContentLi>
+            <S.NavbarContentLi onClick={()=> navigate("/users")}>
               <span>
                 <AiOutlineUser />
               </span>
               Usuários
             </S.NavbarContentLi>
-            <S.NavbarContentLi>
+            <S.NavbarContentLi onClick={()=> navigate("/teams")}>
               <span>
                 <AiOutlineTeam />
               </span>

@@ -1,5 +1,6 @@
 import Header from "../Header";
 import Navbar from "../Navbar";
+import UserCard from "../UserCard/indext";
 import * as S from "./style";
 const UsersPage = () => {
   return (
@@ -10,7 +11,9 @@ const UsersPage = () => {
         <S.UsersPageHeader>
           <S.UsersPageTitle>Central de Controle - Usuários</S.UsersPageTitle>
         </S.UsersPageHeader>
-        <S.UsersPageContent></S.UsersPageContent>
+        <S.UsersPageContent>
+          <UserCard/>
+        </S.UsersPageContent>
       </S.UsersPageContainer>
     </>
   );
