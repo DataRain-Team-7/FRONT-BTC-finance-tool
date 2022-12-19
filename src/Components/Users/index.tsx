@@ -7,7 +7,10 @@ const UsersPage = () => {
   return (
     <>
       <Header />
-      <Navbar />
+      <S.UserAllContent>
+      <S.UserNavbar>
+        <Navbar />
+      </S.UserNavbar>
       <S.UsersPageContainer>
         <S.UsersPageHeader>
           <S.UsersPageTitle>Central de Controle - Usuários</S.UsersPageTitle>
@@ -18,6 +21,7 @@ const UsersPage = () => {
           })}
         </S.UsersPageContent>
       </S.UsersPageContainer>
+      </S.UserAllContent>
     </>
   );
 };

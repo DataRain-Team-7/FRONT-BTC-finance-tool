@@ -9,6 +9,7 @@ import { BsThreeDotsVertical, BsPencil, BsTrash } from "react-icons/bs";
 import { User } from '../../types/interface';
 import ModalDeleteTeam from '../ModalDeleteTeam';
 import ModalEditTeam from '../ModalEditTeam';
+import ModalDeleteUser from '../ModalDeleteUser';
 
 interface MenuProps {
   user: User;
@@ -54,16 +55,16 @@ export default function BasicMenu({user}: MenuProps) {
           setOpenDeleteModal(!openDeleteModal)
           }}><BsTrash/> Excluir</MenuItem>
       </Menu>
-      {/* {
+      { 
         openDeleteModal ? (
-          <ModalDeleteTeam user={user}/>
+          <ModalDeleteUser user={user}/>
         ) : null
       }
-      {
+      {/* {
         openEditModal ? (
           <ModalEditTeam user={user}/>
         ): null
-      } */}
+      }  */}
     </div>
   );
 }

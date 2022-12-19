@@ -11,6 +11,7 @@ export const CardContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   align-items: center;
+  margin-top: 20px;
   `}
 `;
 
@@ -19,14 +20,19 @@ export const CardHeader = styled.div`
   justify-content: space-between;
   width: 100%;
   margin: 20px 0;
+
 `;
 
 export const CardFunction = styled.p`
   ${({ theme }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: ${theme.colors.secundaryColor};
     color: ${theme.colors.primaryColor};
     border-radius: 5px;
     margin-left: 5px;
+    padding: 5px;
   `}
 `;
 

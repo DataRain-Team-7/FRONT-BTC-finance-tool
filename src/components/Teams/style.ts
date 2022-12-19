@@ -1,15 +1,23 @@
 import styled, { css } from "styled-components";
 import { AiOutlineUsergroupAdd } from "react-icons/ai"
 
+export const TeamsAllContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+`;
+
+export const TeamsNavbar = styled.div`
+  width: 25%;
+`
+
 export const TeamsContainer = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.backgroundColor};
     display: flex;
     flex-direction: column;
-    width: 75vw;
+    width: 75%;
     height: 100vh;
-    margin-left: 25vw;
-    flex: 1;
     position: relative;
   `}
 `;

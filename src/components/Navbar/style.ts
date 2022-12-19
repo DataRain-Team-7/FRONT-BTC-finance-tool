@@ -1,14 +1,13 @@
 import styled, { css } from "styled-components";
 
 export const NavbarContainer = styled.div`
-
   display: flex;
   flex-direction: column;
-  width: 25vw;
-  position: absolute;
+  width: 100%;
   background-attachment: scroll;
   background-color: #f2f4f6;
-  height: 100vh;
+  height: 100%;
+  /* position: relative; */
 `;
 
 export const NavbarWrapper = styled.div`
@@ -33,6 +32,7 @@ export const NavbarContent = styled.div`
   position: relative;
   height: calc(100vh - 70px);
   padding: 10px 0;
+  width: 100%;
 `;
 
 export const NavbarContentUl = styled.ul`
