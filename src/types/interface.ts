@@ -1,10 +1,10 @@
 export interface User {
-    id?: string,
+    id?: number,
     name: string,
     email:string,
-    password:string,
-    confirmPassword: string,
-    phone: number,
+    password?:string,
+    confirmPassword?: string,
+    // phone: number,
     role: string,
     image: string,
     createdAt?: Date;

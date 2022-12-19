@@ -29,7 +29,10 @@ export const UsersPageTitle = styled.p`
 `;
 
 export const UsersPageContent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   width: 80%;
   height: 80%;
   margin-left: 50px;
+  gap: 5%;
 `;

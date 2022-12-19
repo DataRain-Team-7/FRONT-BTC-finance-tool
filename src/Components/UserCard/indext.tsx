@@ -1,18 +1,25 @@
-import * as S from "./style"
-import Vini from "../../assets/images/vini.png"
+import * as S from "./style";
+import MenuDropdownUser from "../MenuDropdownUser";
+import { User } from "../../types/interface";
 
-const UserCard = () => {
-    return(
-        <S.CardContainer>
-            <S.CardHeader>
-                <S.CardFunction>Administrador</S.CardFunction>
-                <div>...</div>
-            </S.CardHeader>
-            <S.CardImage src={Vini} alt="Imagem perfil"/>
-            <S.CardName>Vini</S.CardName>
-            <S.CardEmail>vini@blue.com</S.CardEmail>
-        </S.CardContainer>
-    )
+interface MocksUser {
+  user: User;
 }
+
+const UserCard = ({ user }: MocksUser) => {
+  return (
+    <S.CardContainer>
+      <S.CardHeader>
+        <S.CardFunction>{user.role}</S.CardFunction>
+        <div>
+          <MenuDropdownUser user={user} />
+        </div>
+      </S.CardHeader>
+      <S.CardImage src={user.image} alt="Imagem perfil" />
+      <S.CardName>{user.name}</S.CardName>
+      <S.CardEmail>{user.email}</S.CardEmail>
+    </S.CardContainer>
+  );
+};
 
 export default UserCard;
