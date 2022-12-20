@@ -2,10 +2,6 @@ import * as Style from "./style"
 import { Dispatch, SetStateAction, useState } from "react";
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 
-interface FirstPageProp {
-    setStepNumber: Dispatch<SetStateAction<number>>
-}
-
 const questions:any = [
     {
         id:"4545956",
@@ -54,11 +50,30 @@ const questions:any = [
 
 ]
 
- 
+interface FirstPageProp {
+    setStepNumber: Dispatch<SetStateAction<number>>
+}
 
 const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
 
     const [ count, setCount] = useState<number>(0)
+
+    const handleBack = () =>{
+        if(count === 0){
+            setStepNumber(0)
+        }else{
+            setCount(count - 1)
+        }
+    }
+
+    const handleNext = () =>{
+        if(count === questions.length-1){
+            setStepNumber(3)
+        }else{
+            setCount(count + 1)
+        }
+    }
+     
 
     return(
         <Style.SecondPageCard>
@@ -73,17 +88,11 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
                 </FormControl>
                 <textarea wrap="hard" placeholder="Comentário adicional"></textarea>
                 {/* <div onClick={()=>console.log(questions[count].alternatives.map((e:any)=>{return e.description}))}>Botaão louco</div> */}
-                <div className="questionButtons">
-                    <Button size="small" color="inherit" variant="contained" className="buttonEnter" onClick={()=>{setCount(count-1)}}>Anterior</Button>
-                    <Button size="small" color="inherit" variant="contained" className="buttonEnter" onClick={()=>{setCount(count+1)}}>Próxima</Button>
-                </div>
             </section>
-
             <div className="pageButtons">
-                <Button variant="contained" className="buttonBack" onClick={()=>{setStepNumber(0)}}>Voltar</Button>
-                <Button variant="contained" className="buttonNext" onClick={()=>{}}>Próximo</Button>
+                <Button variant="contained" className="buttonBack" onClick={()=>handleBack()}>Voltar</Button>
+                <Button variant="contained" className="buttonNext" onClick={()=>handleNext()}>Próximo</Button>
             </div>
-
         </Style.SecondPageCard>
     )
 }

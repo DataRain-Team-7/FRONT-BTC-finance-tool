@@ -5,6 +5,7 @@ import StepLabel from '@mui/material/StepLabel';
 import { useState } from "react";
 import FirstPageCard from "./FirstPage";
 import SecondPageCard from "./SecondPage";
+import ThirdPageCard from "./ThirdPage";
 
 const steps = [ 
     "Contato", "Formulário", "Detalhes"
@@ -16,7 +17,7 @@ const handleTitle = (prop:number) =>{
             return "Contato"
         }else if(prop===1){
             return "Formulário"
-        }else if(prop===1){
+        }else if(prop > 1){
             return "Detalhes"
         }
     }
@@ -37,8 +38,9 @@ const FormCard = () =>{
                         </Step>
                     ))}
                 </Stepper>
-                {(stepNumber===0) && <FirstPageCard setStepNumber={setStepNumber}/>}
-                {(stepNumber===1) && <SecondPageCard setStepNumber={setStepNumber}/>}
+                {(stepNumber === 0) && <FirstPageCard setStepNumber={setStepNumber}/>}
+                {(stepNumber === 1) && <SecondPageCard setStepNumber={setStepNumber}/>}
+                {(stepNumber > 1) && <ThirdPageCard/>}
 
 
             </Style.FormCard>
