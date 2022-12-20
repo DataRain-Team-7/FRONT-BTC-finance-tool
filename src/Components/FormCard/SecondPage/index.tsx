@@ -1,6 +1,7 @@
 import * as Style from "./style"
 import { Dispatch, SetStateAction, useState } from "react";
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import FormModal from "../FormModal";
 
 const questions:any = [
     {
@@ -68,11 +69,13 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
 
     const handleNext = () =>{
         if(count === questions.length-1){
-            setStepNumber(3)
+            setIsModalOpen(true)
         }else{
             setCount(count + 1)
         }
     }
+
+    const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
      
 
     return(
@@ -93,6 +96,7 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
                 <Button variant="contained" className="buttonBack" onClick={()=>handleBack()}>Voltar</Button>
                 <Button variant="contained" className="buttonNext" onClick={()=>handleNext()}>Próximo</Button>
             </div>
+            {isModalOpen && <FormModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setStepNumber={setStepNumber}/>}
         </Style.SecondPageCard>
     )
 }
