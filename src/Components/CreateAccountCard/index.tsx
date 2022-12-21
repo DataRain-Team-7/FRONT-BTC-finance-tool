@@ -37,7 +37,7 @@ const CreateAccountCard = () => {
       .string()
       .min(1, "Senha obrigatória")
       .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!:;/\|.()])[0-9a-zA-Z$*&@#!:;/\|.()]{8,}$/,
-      "A senha deve conter um caracter especial, um número e ao menos uma letra maiúscula"),
+      "A senha deve conter um carácter especial, um número e ao menos uma letra maiúscula"),
     confirmPassword: yup
       .string()
       .min(1, "Confirme sua senha"),
@@ -135,7 +135,7 @@ const CreateAccountCard = () => {
           </Style.InputsContainer>
           <Style.ButtonsContainer>
             <Button variant="contained" className="buttonCancel" onClick={()=>navigate("/")}>Cancelar</Button>
-            <Button type="submit" variant="contained" className="buttonRegiste" onClick={()=>handleErrorMessage()}>Cadastrar</Button>
+            <Button type="submit" variant="contained" className="buttonRegister" onClick={()=>handleErrorMessage()}>Cadastrar</Button>
           </Style.ButtonsContainer>
         </Style.CreateAccountCard>
       </Style.CreateAccountContainer>

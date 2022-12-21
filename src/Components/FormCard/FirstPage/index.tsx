@@ -13,7 +13,7 @@ interface FirstPageProp {
 const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
 
     return(
-        <Style.FirtPageCard>
+        <Style.FirstPageCard>
                     <section>
                         <label>Nome Completo</label>
                         <input></input>
@@ -37,7 +37,7 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
                     <div className="buttonDiv">
                         <Button type="submit" variant="contained" className="buttonEnter" onClick={()=>setStepNumber(1)}>Iniciar</Button>
                     </div>
-        </Style.FirtPageCard>
+        </Style.FirstPageCard>
     )
 }
 

@@ -101,14 +101,14 @@ export const ButtonsContainer = styled.div`
           background-color: ${theme.colors.backgroundColor};
   }
 
-  .buttonRegiste{
+  .buttonRegister{
       background-color: ${theme.colors.tertiaryColor};
       height: 5vh;
       width: 30%;
       font-weight: 700;
       font-size: ${theme.constants.buttonFontSize};
       }
-        .buttonRegiste:hover{
+        .buttonRegister:hover{
           background-color: ${theme.colors.tertiaryColor};
   }
 

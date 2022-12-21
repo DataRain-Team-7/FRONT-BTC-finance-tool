@@ -1,6 +1,6 @@
 import styled,{css} from "styled-components";
 
-export const FirtPageCard = styled.form`
+export const FirstPageCard = styled.form`
     ${({theme})=>css`
         
             padding: 0;
