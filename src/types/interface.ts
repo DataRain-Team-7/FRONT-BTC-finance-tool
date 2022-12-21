@@ -2,9 +2,7 @@ export interface User {
     id?: string,
     name: string,
     email:string,
-    password:string,
-    confirmPassword: string,
-    phone: number,
+    password?:string,
     role: string,
     image: string,
     createdAt?: Date;

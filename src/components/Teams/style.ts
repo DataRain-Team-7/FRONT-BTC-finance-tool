@@ -1,14 +1,23 @@
 import styled, { css } from "styled-components";
+import { AiOutlineUsergroupAdd } from "react-icons/ai"
+
+export const TeamsAllContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+`;
+
+export const TeamsNavbar = styled.div`
+  width: 25%;
+`
 
 export const TeamsContainer = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.backgroundColor};
     display: flex;
     flex-direction: column;
-    width: 75vw;
+    width: 75%;
     height: 100vh;
-    margin-left: 25vw;
-    flex: 1;
     position: relative;
   `}
 `;
@@ -49,5 +58,35 @@ export const TeamsUl = styled.ul`
   display: block;
 `;
 
+export const TeamMockedLi = styled.li`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 90%;
+    height: 50px;
+    border-radius: 8px;
+    background-color: ${theme.colors.primaryColor};
+    font-size: ${theme.constants.fontBody};
 
+    span {
+      margin-left: 20%;
+    }
+  `}
+`;
 
+export const TeamMockedLiContent = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const AddTeamIcon =  styled(AiOutlineUsergroupAdd)`
+  width: 2rem;
+  height: 2.2rem;
+  cursor: pointer;
+  margin-right: 15px
+`;

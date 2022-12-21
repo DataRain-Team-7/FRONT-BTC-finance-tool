@@ -1,14 +1,19 @@
 import styled, { css } from "styled-components";
+import { GrProjects } from "react-icons/gr"
 
 export const NavbarContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 25vw;
-  position: fixed;
-  top: 0;
+  width: 100%;
   background-attachment: scroll;
   background-color: #f2f4f6;
+  height: 100%;
+  /* position: relative; */
 `;
+
+export const ProjectIcon = styled(GrProjects)`
+
+`
 
 export const NavbarWrapper = styled.div`
   display: block;
@@ -32,6 +37,7 @@ export const NavbarContent = styled.div`
   position: relative;
   height: calc(100vh - 70px);
   padding: 10px 0;
+  width: 100%;
 `;
 
 export const NavbarContentUl = styled.ul`
@@ -60,7 +66,7 @@ export const NavbarContentLi = styled.li`
     }
 
     :hover {
-      background-color: ${theme.colors.terceryColor};
+      background-color: ${theme.colors.tertiaryColor};
       color: ${theme.colors.primaryColor};
     }
   `}
