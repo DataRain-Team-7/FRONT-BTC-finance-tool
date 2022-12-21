@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { GrProjects } from "react-icons/gr"
 
 export const NavbarContainer = styled.div`
   display: flex;
@@ -9,6 +10,10 @@ export const NavbarContainer = styled.div`
   height: 100%;
   /* position: relative; */
 `;
+
+export const ProjectIcon = styled(GrProjects)`
+
+`
 
 export const NavbarWrapper = styled.div`
   display: block;

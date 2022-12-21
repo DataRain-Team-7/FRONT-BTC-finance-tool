@@ -66,5 +66,5 @@ export const UsersPageContent = styled.div`
   margin-left: 50px;
   gap: 5%;
   overflow-y: scroll;
-  overflow-x: hidden;
+  padding-bottom: 15px;
 `;

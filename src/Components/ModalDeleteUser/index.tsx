@@ -39,7 +39,7 @@ export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
       >
         <Box display="flex" flexDirection="column" sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Dejesa excluir o usuário {user.name}?
+            Deseja excluir o usuário {user.name}?
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
           <Box display="flex" alignItems="center" justifyContent="center">

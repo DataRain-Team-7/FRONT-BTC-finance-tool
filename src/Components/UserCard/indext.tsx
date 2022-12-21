@@ -7,13 +7,19 @@ interface MocksUser {
 }
 
 const UserCard = ({ user }: MocksUser) => {
+
+  const privilege = true;
   return (
     <S.CardContainer>
       <S.CardHeader>
         <S.CardFunction>{user.role}</S.CardFunction>
-        <div>
-          <MenuDropdownUser user={user} />
-        </div>
+        {
+          privilege ? (
+          <div>
+            <MenuDropdownUser user={user} />
+          </div>
+          ) : null
+        }
       </S.CardHeader>
       <S.CardImage src={user.image} alt="Imagem perfil" />
       <S.CardName>{user.name}</S.CardName>

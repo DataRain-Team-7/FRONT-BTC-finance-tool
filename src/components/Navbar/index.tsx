@@ -48,6 +48,12 @@ const Navbar = () => {
             </S.NavbarContentLi>
             <S.NavbarContentLi>
               <span>
+                <S.ProjectIcon />
+              </span>
+              Projetos
+            </S.NavbarContentLi>
+            <S.NavbarContentLi>
+              <span>
                 <GiRotaryPhone />
               </span>
               Pré Venda
