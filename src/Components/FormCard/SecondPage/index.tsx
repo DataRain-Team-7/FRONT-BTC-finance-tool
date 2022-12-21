@@ -81,7 +81,7 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
     return(
         <Style.SecondPageCard>
             <section >
-                    <h3>{questions[count].description}</h3>
+                    <h3>{`${count+1}- ${questions[count].description}`}</h3>
                 <FormControl className="FormControl">
                     <RadioGroup onChange={()=>{}}>
                         {questions[count].alternatives.map((e:any)=>{                    
