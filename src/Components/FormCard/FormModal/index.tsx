@@ -3,9 +3,10 @@ import { Dispatch, SetStateAction } from "react"
 import * as Style from "./style"
 import Modal from "react-modal";
 
-interface ForgotPasswordProps {
+interface FormModalProps {
     isModalOpen: boolean;
     setIsModalOpen: Dispatch<SetStateAction<boolean>>
+    setStepNumber: Dispatch<SetStateAction<number>>
 }
 
 export const customStyles = {
@@ -23,31 +24,33 @@ export const customStyles = {
     }
   }
 
-const ForgotPassword = ({ isModalOpen, setIsModalOpen }: ForgotPasswordProps) => {
+const FormModal = ({ isModalOpen, setIsModalOpen, setStepNumber }: FormModalProps) => {
 
     const handleCloseModal = () =>{
         setIsModalOpen(false)
     }
 
+    const handleFinish = () =>{
+        setStepNumber(3)
+    }
+    
     return (
         <Modal
             isOpen={isModalOpen}
             onRequestClose={handleCloseModal}
             style={customStyles}
             >
-            <Style.ForgotPasswordContainer>
+            <Style.FormModalContainer>
                 <div>
                     <Style.BackArrow onClick={handleCloseModal}/>
                 </div>
-                <h2>Recuperação de senha</h2>
-                <section>
-                    <p>Enviaremos um email para que possa concluir a ação</p>
-                    <input placeholder="Digite o email para recuperação"/>
-                </section>
-                <Button variant="contained" className="buttonEnter">Enviar</Button>
-            </Style.ForgotPasswordContainer>
+                <p>
+                    Formulário preenchido com sucesso!
+                </p>
+                <Button variant="contained" className="buttonEnter" onClick={()=>handleFinish()}>Concluir</Button>
+            </Style.FormModalContainer>
         </Modal>
     )
 }
 
-export default ForgotPassword
+export default FormModal
