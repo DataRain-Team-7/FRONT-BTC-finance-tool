@@ -4,20 +4,21 @@ import { User } from "../../types/interface";
 
 interface MocksUser {
   user: User;
+  className?: string;
 }
 
-const UserCard = ({ user }: MocksUser) => {
+const UserCard = ({ user, className }: MocksUser) => {
 
   const privilege = true;
   return (
-    <S.CardContainer>
+    <S.CardContainer className={className}>
       <S.CardHeader>
         <S.CardFunction>{user.role}</S.CardFunction>
         {
           privilege ? (
-          <div>
+          <span>
             <MenuDropdownUser user={user} />
-          </div>
+          </span>
           ) : null
         }
       </S.CardHeader>

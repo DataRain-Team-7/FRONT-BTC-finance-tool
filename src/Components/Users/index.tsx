@@ -3,6 +3,8 @@ import Navbar from "../Navbar";
 import { users } from "../../mocks/users";
 import * as S from "./style";
 import UserCard from "../UserCard/indext";
+
+
 const UsersPage = () => {
   return (
     <>
