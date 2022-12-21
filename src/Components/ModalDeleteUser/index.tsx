@@ -2,11 +2,11 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { TeamsTypes } from "../../types/interface";
+import { User } from "../../types/interface";
 import * as S from "./style";
 
 interface ModalDeleteProps {
-  team: TeamsTypes;
+  user: User;
 }
 
 const style = {
@@ -23,7 +23,7 @@ const style = {
   p: 4,
 };
 
-export default function ModalDeleteTeam({ team }: ModalDeleteProps) {
+export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
   const [open, setOpen] = React.useState(true);
   //   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -39,7 +39,7 @@ export default function ModalDeleteTeam({ team }: ModalDeleteProps) {
       >
         <Box display="flex" flexDirection="column" sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Deseja excluir a {team.name}?
+            Deseja excluir o usuário {user.name}?
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
           <Box display="flex" alignItems="center" justifyContent="center">
@@ -47,7 +47,7 @@ export default function ModalDeleteTeam({ team }: ModalDeleteProps) {
             <S.ButtonDropdownYes
               onClick={() => {
                 {handleClose}
-                console.log(`Excluída equipe ${team.id}`)}}
+                console.log(`Excluída equipe ${user.id}`)}}
             >
               Sim
             </S.ButtonDropdownYes>

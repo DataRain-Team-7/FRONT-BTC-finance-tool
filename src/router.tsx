@@ -3,8 +3,9 @@ import Teams from "./components/Teams";
 import Login from "./Pages/Login";
 import CreateAccount from "./Pages/CreateAccount";
 import RecoverPasswordPage from "./Pages/RecoverPassword";
-import { MdDesktopAccessDisabled } from "react-icons/md";
 import FormPage from "./Pages/Form";
+import UsersPage from "./components/Users";
+
 
 const Router = () => {
   return (
@@ -12,8 +13,9 @@ const Router = () => {
       <Route path="/" element={<Login />} />
       <Route path="/cadastro" element={<CreateAccount />} />
       <Route path="/teams" element={<Teams />} />
+      <Route path="/users" element={<UsersPage/>} />
       <Route path="/novasenha/:param" element={<RecoverPasswordPage/>}/>
-      <Route path={"/form"} element={<FormPage/>}/>
+      <Route path="/form" element={<FormPage/>}/>
     </Routes>
   );
 };

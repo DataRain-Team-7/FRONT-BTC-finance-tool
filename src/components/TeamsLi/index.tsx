@@ -1,15 +1,13 @@
 import * as S from "./style";
 
 import { TeamsTypes } from "../../types/interface";
-import { useState } from "react";
-import MenuDropdown from "../MenuDropdown";
+import MenuDropdown from "../MenuDropdownTeams";
 
 interface MocksInterface {
   team: TeamsTypes;
 }
 
 const TeamsLi = ({ team }: MocksInterface) => {
-  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <S.TeamsLi>
