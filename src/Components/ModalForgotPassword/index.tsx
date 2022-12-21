@@ -28,7 +28,7 @@ const ForgotPassword = ({ isModalOpen, setIsModalOpen }: ForgotPasswordProps) =>
     const handleCloseModal = () =>{
         setIsModalOpen(false)
     }
-    
+
     return (
         <Modal
             isOpen={isModalOpen}

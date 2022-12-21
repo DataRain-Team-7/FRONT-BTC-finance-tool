@@ -17,7 +17,7 @@ export const users = [
     id: "3",
     name: "Lucas",
     email: "lucas@blue.com",
-    role: "Mannager",
+    role: "Manager",
     image: "https://avatars.githubusercontent.com/u/76230078?v=4",
   },
   {

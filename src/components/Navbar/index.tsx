@@ -46,7 +46,7 @@ const Navbar = () => {
               </span>
               Mensagens
             </S.NavbarContentLi>
-            <S.NavbarContentLi>
+            <S.NavbarContentLi onClick={()=> navigate("/projects")}>
               <span>
                 <S.ProjectIcon />
               </span>
