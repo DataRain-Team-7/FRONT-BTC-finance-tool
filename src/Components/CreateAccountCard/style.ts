@@ -11,7 +11,7 @@ export const CreateAccountContainer = styled.div`
   `}
 `;
 
-export const CreateAccountCard = styled.div`
+export const CreateAccountCard = styled.form`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -101,14 +101,14 @@ export const ButtonsContainer = styled.div`
           background-color: ${theme.colors.backgroundColor};
   }
 
-  .buttonRegiste{
+  .buttonRegister{
       background-color: ${theme.colors.tertiaryColor};
       height: 5vh;
       width: 30%;
       font-weight: 700;
       font-size: ${theme.constants.buttonFontSize};
       }
-        .buttonRegiste:hover{
+        .buttonRegister:hover{
           background-color: ${theme.colors.tertiaryColor};
   }
 

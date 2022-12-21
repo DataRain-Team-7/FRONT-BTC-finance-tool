@@ -4,7 +4,6 @@ import theme from "../../styles/theme";
 
 export const LoginContainer = styled.div`
   ${({ theme }) => css`
-    font-size: ${theme.constants.titleFontSize};
     display: flex;
     justify-content: center;
     align-items: center;

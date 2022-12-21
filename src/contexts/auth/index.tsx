@@ -11,7 +11,7 @@ interface AuthProviderProps{
 interface loginParams{
     token:string,
     user:User,
-    isCkecked: Boolean,
+    isChecked: Boolean,
 }
 
 interface AuthProviderData{
@@ -24,7 +24,7 @@ const AuthContext = createContext<AuthProviderData>({} as AuthProviderData)
 
 export const AuthProvider = ({children}:AuthProviderProps)=>{
     
-    const navegate = useNavigate();
+    const navigate = useNavigate();
     const [logged, setLogged] = useState<boolean>(false);
 
     const checkTokenExpiration = ()=>{
@@ -47,20 +47,20 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         if(token) checkTokenExpiration();
     } , [])
 
-    const login = ({token, user, isCkecked}:loginParams) =>{
-        if(isCkecked){
+    const login = ({token, user, isChecked}:loginParams) =>{
+        if(isChecked){
             localStorage.setItem("token", token)
             localStorage.setItem("user", JSON.stringify(user))
         }
         setLogged(true);
-        // navegate("/")    COLOCAR ROTA CORRETA AQUI
-        toast.success("login bem sucedido")
+        // navigate("/novasenha/5641565")
+        toast.success("Login bem sucedido")
     }
 
     const logout = () =>{
         localStorage.clear();
         setLogged(false);  
-        navegate("/");
+        navigate("/");
     }
 
     return <AuthContext.Provider value={{logged, login, logout}}>{children}</AuthContext.Provider>
