@@ -1,10 +1,10 @@
 import { Button } from "@mui/material"
 import * as Styled from "./style"
 
-const PreSaleBudgetCard = () =>{
+const FinancialBudgetCard = () =>{
 
     return(
-        <Styled.PreSaleBudgetContainer>
+        <Styled.FinancialBudgetContainer>
             <section className="client">
                 <div>
                     <p>Cliente</p>
@@ -99,18 +99,18 @@ const PreSaleBudgetCard = () =>{
             </section>
             <section className="details">
                 <h2>Nota sobre o orçamento</h2>
-                <textarea wrap="hard" placeholder="Comentário adicional"></textarea>
+                <textarea wrap="hard" placeholder="Não foi descrito nenhum comentário sobre o orçamento em questão."></textarea>
                 <div className="extract">
                     <p>Horas Totais = 194hr</p>
                     <p>Valor Total = R$ 39.509,50</p>
                 </div>
             </section>
             <section className="botton">
-                <Button type="submit" variant="contained" className="buttonEnter">Finalizar Orçamento</Button>
+                <Button type="submit" variant="contained" className="buttonEnter">Aprovar Orçamento</Button>
             </section>
    
-        </Styled.PreSaleBudgetContainer>
+        </Styled.FinancialBudgetContainer>
     )
 }
 
-export default PreSaleBudgetCard
+export default FinancialBudgetCard

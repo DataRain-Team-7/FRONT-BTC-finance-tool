@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 
-export const PreSaleBudgetContainer = styled.div`
+export const FinancialBudgetContainer = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
