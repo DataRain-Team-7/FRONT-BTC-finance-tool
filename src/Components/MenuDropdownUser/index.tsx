@@ -7,9 +7,8 @@ import MenuItem from '@mui/material/MenuItem';
 
 import { BsThreeDotsVertical, BsPencil, BsTrash } from "react-icons/bs";
 import { UserTypes } from '../../types/interface';
-import ModalDeleteTeam from '../ModalDeleteTeam';
-import ModalEditTeam from '../ModalEditTeam';
 import ModalDeleteUser from '../ModalDeleteUser';
+import ModalEditUser from '../ModalEditUser';
 
 interface MenuProps {
   user: UserTypes;
@@ -60,11 +59,11 @@ export default function BasicMenu({user}: MenuProps) {
           <ModalDeleteUser user={user}/>
         ) : null
       }
-      {/* {
+      {
         openEditModal ? (
-          <ModalEditTeam user={user}/>
+          <ModalEditUser user={user}/>
         ): null
-      }  */}
+      } 
     </div>
   );
 }
