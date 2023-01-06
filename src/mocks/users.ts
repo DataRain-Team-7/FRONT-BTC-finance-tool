@@ -3,14 +3,14 @@ export const users = [
     id: "1",
     name: "Vini",
     email: "vini@blue.com",
-    role: "PS",
+    roleName: "PS",
     image: "https://avatars.githubusercontent.com/u/17714550?v=4",
   },
   {
     id: "2",
     name: "Mathias",
     email: "mathias@blue.com",
-    role: "Administrador",
+    roleName: "Administrador",
     image: "https://avatars.githubusercontent.com/u/99908779?v=4",
   },
   {

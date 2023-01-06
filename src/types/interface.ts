@@ -1,12 +1,12 @@
-export interface User {
+export interface UserTypes {
     id?: string,
     name: string,
     email:string,
     password?:string,
-    role: string,
-    image: string,
-    createdAt?: Date;
-    updatedAt?: Date;
+    roleName?: string,
+    position: string,
+    imageUrl?: string,
+    billable?: string,
 }
 
 export interface TeamsTypes {

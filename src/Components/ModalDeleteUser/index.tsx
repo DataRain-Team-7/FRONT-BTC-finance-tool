@@ -2,11 +2,12 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { User } from "../../types/interface";
+import { UserTypes } from "../../types/interface";
 import * as S from "./style";
+import UserService from "../../services/user-service";
 
 interface ModalDeleteProps {
-  user: User;
+  user: UserTypes;
 }
 
 const style = {
@@ -25,8 +26,11 @@ const style = {
 
 export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
   const [open, setOpen] = React.useState(true);
-  //   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const delUser = (id:any) => {
+    UserService.deleteUser(id);
+  }
 
   return (
     <div>
@@ -46,6 +50,7 @@ export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
             <S.ButtonDropdownNo onClick={handleClose}>Não</S.ButtonDropdownNo>
             <S.ButtonDropdownYes
               onClick={() => {
+                delUser(user.id)
                 {handleClose}
                 console.log(`Excluída equipe ${user.id}`)}}
             >

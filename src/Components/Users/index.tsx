@@ -3,9 +3,22 @@ import Navbar from "../Navbar";
 import { users } from "../../mocks/users";
 import * as S from "./style";
 import UserCard from "../UserCard/indext";
+import { useEffect, useState } from "react";
+import { UserTypes } from "../../types/interface";
+import UserService from "../../services/user-service";
 
 
 const UsersPage = () => {
+  const[values, setValues] = useState<UserTypes[]>([])
+
+  useEffect(() => {
+    getAllUsers()
+  },[])
+
+  const getAllUsers = async () => {
+    const res: any = await UserService.findAllUsers() ;
+    setValues([...res.data]);
+  };
   return (
     <>
       <Header />
@@ -18,7 +31,7 @@ const UsersPage = () => {
           <S.UsersPageTitle>Central de Controle - Usuários</S.UsersPageTitle>
         </S.UsersPageHeader>
         <S.UsersPageContent>
-          {users.map((element, index) => {
+          {values.map((element, index) => {
             return <UserCard user={element} key={element.id} />;
           })}
         </S.UsersPageContent>
