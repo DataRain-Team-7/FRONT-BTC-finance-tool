@@ -61,7 +61,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
     const login = ({token, user, isChecked}:loginParams) =>{
         if(isChecked){
             localStorage.setItem("token", token)
-            localStorage.setItem("user", JSON.stringify(user))
+            setUser(user)
         }
         setLogged(true);
         // navigate("/novasenha/5641565")
