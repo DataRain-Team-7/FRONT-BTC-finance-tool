@@ -51,9 +51,9 @@ export const PreSaleBudgetContainer = styled.div`
                 background: ${theme.colors.tertiaryColor};
                 border-radius:5px;
             }
-            /* ::-webkit-scrollbar-thumb:hover {
-                background: #555;
-            } */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #ED8107;
+            }
             
 
 

@@ -3,8 +3,11 @@ export interface User {
     name: string,
     email:string,
     password?:string,
-    role: string,
-    image: string,
+    imageUrl: string,
+    position: string,
+    roleName: string,
+    billable?: string,
+    allocated?: string,
     createdAt?: Date;
     updatedAt?: Date;
 }
