@@ -8,7 +8,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../contexts/auth";
 import Api from "../../services/api";
-import ForgotPassword from "../ModalForgortPassword";
+import ForgotPassword from "../ModalForgotPassword";
 
 
 
