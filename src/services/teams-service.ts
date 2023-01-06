@@ -20,4 +20,4 @@ const TeamService ={
     }
 }
 
-export default TeamService;
+export default TeamService

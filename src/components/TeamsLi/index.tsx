@@ -13,7 +13,7 @@ const TeamsLi = ({ team }: MocksInterface) => {
     <S.TeamsLi>
       <S.LiContent>
         <span>{team.name}</span>
-        <span>R$: {team.price.toFixed(2)}</span>
+        <span>R$: {team.valuePerHour}</span>
         <MenuDropdown team={team}/>
       </S.LiContent>
     </S.TeamsLi>

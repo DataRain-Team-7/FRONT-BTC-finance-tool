@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TeamsTypes } from "../../types/interface";
 import * as S from "./style";
+import TeamService from "../../services/teams-service";
 
 interface ModalDeleteProps {
   team: TeamsTypes;
@@ -28,6 +29,11 @@ export default function ModalDeleteTeam({ team }: ModalDeleteProps) {
   //   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const deleteTeam = (id: any)=> {
+    TeamService.deleteTeam(id)
+    handleClose()
+  }
+
   return (
     <div>
       {/* <Button onClick={handleOpen}>Open modal</Button> */}
@@ -46,8 +52,7 @@ export default function ModalDeleteTeam({ team }: ModalDeleteProps) {
             <S.ButtonDropdownNo onClick={handleClose}>Não</S.ButtonDropdownNo>
             <S.ButtonDropdownYes
               onClick={() => {
-                {handleClose}
-                console.log(`Excluída equipe ${team.id}`)}}
+                deleteTeam(team.id)}}
             >
               Sim
             </S.ButtonDropdownYes>

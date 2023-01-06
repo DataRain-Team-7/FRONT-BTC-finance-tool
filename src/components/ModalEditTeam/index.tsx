@@ -1,13 +1,30 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
 import { TeamsTypes } from "../../types/interface";
 import * as S from "./style";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import TeamService from "../../services/teams-service";
 
 interface ModalEditProps {
   team: TeamsTypes;
 }
+
+interface EditTeamData {
+  id?: string;
+  name: string;
+  valuePerHour: number;
+}
+
+const updateTeamSchema = yup.object().shape({
+  name: yup.string().required("Nome da equipe obrigatória"),
+
+  valuePerHour: yup.number().required("Campo obrigatório"),
+});
 
 const style = {
   position: "absolute" as "absolute",
@@ -26,6 +43,17 @@ const style = {
 export default function ModalEditTeam({ team }: ModalEditProps) {
   const [open, setOpen] = React.useState(true);
   const handleClose = () => setOpen(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<EditTeamData>({ resolver: yupResolver(updateTeamSchema) });
+
+  const handleEditTeam = (values: EditTeamData) => {
+    const teamId = team.id || "";
+    TeamService.editTeam(teamId, values);
+  };
 
   return (
     <div>
@@ -46,27 +74,38 @@ export default function ModalEditTeam({ team }: ModalEditProps) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Editar Equipe
           </Typography>
-          <S.FormEdit>
-            <S.LabelEdit htmlFor="name"> Equipe:
-            <S.InputEditTeam defaultValue={team.name} type="text" name="name"/>
+          <S.FormEdit onSubmit={handleSubmit(handleEditTeam)}>
+            <S.LabelEdit htmlFor="name">
+              {" "}
+              Equipe:
+              <S.InputEditTeam
+                defaultValue={team.name}
+                type="text"
+                {...register("name")}
+              />
             </S.LabelEdit>
 
-
-            <S.LabelEdit htmlFor="price"> R$:
-            <S.InputEditTeam defaultValue={team.price} type="number" name="price" />
+            <S.LabelEdit htmlFor="valuePerHour">
+              {" "}
+              R$:
+              <S.InputEditTeam
+                defaultValue={team.valuePerHour}
+                type="number"
+                {...register("valuePerHour")}
+              />
             </S.LabelEdit>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              width="100%"
+            >
+              <S.ButtonCancel onClick={handleClose}>Cancelar</S.ButtonCancel>
+              <S.ButtonEdit type="submit">
+                Editar
+              </S.ButtonEdit>
+            </Box>
           </S.FormEdit>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            width="100%"
-          >
-            <S.ButtonCancel onClick={handleClose}>Cancelar</S.ButtonCancel>
-            <S.ButtonEdit onClick={() => console.log(`Editada ${team.id}`)}>
-              Editar
-            </S.ButtonEdit>
-          </Box>
         </Box>
       </Modal>
     </div>

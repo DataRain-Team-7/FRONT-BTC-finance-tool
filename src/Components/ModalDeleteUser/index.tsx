@@ -30,6 +30,7 @@ export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
 
   const delUser = (id:any) => {
     UserService.deleteUser(id);
+    handleClose()
   }
 
   return (
