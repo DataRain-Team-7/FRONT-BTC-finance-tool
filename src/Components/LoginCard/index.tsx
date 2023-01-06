@@ -22,7 +22,9 @@ const loginSchema = yup.object().shape({
     .string()
     .email("Email inválido")
     .required("Email obrigatório"),
-  password: yup.string().min(1, "Senha obrigatória"),
+  password: yup
+    .string()
+    .min(1, "Senha obrigatória"),
 });
 
 const LoginCard = () => {
@@ -43,10 +45,9 @@ const LoginCard = () => {
     if(data.email!=="" && data.password!==""){
         return Api.post("/auth/login", data)
              .then((res)=>{
-                login({token: res.data.token, user: res.data.user, isCkecked: isChecked});
-                console.log(res)
+                login({token: res.data.token, user: res.data.user, isChecked: isChecked});
              })
-             .catch((error)=>{toast.error("Senha ou email inválidos");console.log(error)})
+             .catch((error)=>toast.error("Senha ou email inválidos"))
     }else{
         toast.error("Insira usuário e senha")
     }
