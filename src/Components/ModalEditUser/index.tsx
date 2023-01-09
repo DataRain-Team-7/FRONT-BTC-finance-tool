@@ -60,6 +60,7 @@ export default function ModalEditUser({ user }: ModalEditProps) {
   const handleEditUser = (values: EditUserData) => {
     const userId = user.id || "";
     UserService.editUser(userId, values);
+    UserService.findAllUsers()
   };
 
   return (

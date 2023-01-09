@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import { UserTypes } from "../../types/interface";
 import * as S from "./style";
 import UserService from "../../services/user-service";
+import { useEffect } from "react";
 
 interface ModalDeleteProps {
   user: UserTypes;
@@ -31,7 +32,13 @@ export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
   const delUser = (id:any) => {
     UserService.deleteUser(id);
     handleClose()
+    getUsers()
   }
+
+  const getUsers = () =>{
+    UserService.findAllUsers()
+  }
+
 
   return (
     <div>

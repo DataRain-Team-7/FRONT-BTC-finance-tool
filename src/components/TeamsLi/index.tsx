@@ -9,12 +9,19 @@ interface MocksInterface {
 
 const TeamsLi = ({ team }: MocksInterface) => {
 
+   const userStorage = JSON.parse(localStorage.getItem('user') || "{}")
+
+
+   
+
   return (
     <S.TeamsLi>
       <S.LiContent>
         <span>{team.name}</span>
         <span>R$: {team.valuePerHour}</span>
-        <MenuDropdown team={team}/>
+        {
+          userStorage.roleName === "admin" ? <MenuDropdown team={team}/> : null
+        }
       </S.LiContent>
     </S.TeamsLi>
   );

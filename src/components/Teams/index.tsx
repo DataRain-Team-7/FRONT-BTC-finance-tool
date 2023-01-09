@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import TeamService from "../../services/teams-service";
 import { TeamsTypes } from "../../types/interface";
 import Header from "../Header";
+import ModalCreateTeam from "../ModalCreateTeam";
 import Navbar from "../Navbar";
 import TeamsLi from "../TeamsLi";
 import * as S from "./style";
@@ -10,6 +11,7 @@ import * as S from "./style";
 const Teams = () => {
 
   const[values, setValues] = useState<TeamsTypes[]>([])
+  const [openCreateModal, setOpenCreateModal] = useState<boolean>(false)
 
   useEffect(() => {
     getAllTeams()
@@ -40,15 +42,21 @@ const Teams = () => {
             </S.TeamsSubTitle>
             <S.TeamsUl>
               {user ? (
-                <S.TeamMockedLi>
+                <S.TeamMockedLi>  
                   <S.TeamMockedLiContent>
                     <span>Cadastrar outra equipe</span>
                     <span>
                       {" "}
                       <S.AddTeamIcon
-                        onClick={() => toast.error("Seção em desenvolvimento")}
+                        onClick={() => {setOpenCreateModal(true)
+                          setOpenCreateModal(!openCreateModal)
+                          console.log(openCreateModal)
+                        } }
                       />
                     </span>
+                    {
+                      openCreateModal ? <ModalCreateTeam/> : null
+                    }
                   </S.TeamMockedLiContent>
                 </S.TeamMockedLi>
               ) : null}

@@ -1,22 +1,22 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import './style.css';
-
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import "./style.css";
 
 import { BsThreeDotsVertical, BsPencil, BsTrash } from "react-icons/bs";
-import { TeamsTypes } from '../../types/interface';
-import ModalDeleteTeam from '../ModalDeleteTeam';
-import ModalEditTeam from '../ModalEditTeam';
+import { TeamsTypes } from "../../types/interface";
+import ModalDeleteTeam from "../ModalDeleteTeam";
+import ModalEditTeam from "../ModalEditTeam";
+import ModalCreateTeam from "../ModalCreateTeam";
 
 interface MenuProps {
   team: TeamsTypes;
 }
 
-export default function BasicMenu({team}: MenuProps) {
-  const [openDeleteModal, setOpenDeleteModal] = React.useState<boolean>(false)
-  const [openEditModal, setOpenEditModal] = React.useState<boolean>(false)
+export default function BasicMenu({ team }: MenuProps) {
+  const [openDeleteModal, setOpenDeleteModal] = React.useState<boolean>(false);
+  const [openEditModal, setOpenEditModal] = React.useState<boolean>(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -30,12 +30,12 @@ export default function BasicMenu({team}: MenuProps) {
     <div>
       <Button
         id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
+        aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
+        aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <BsThreeDotsVertical/>
+        <BsThreeDotsVertical />
       </Button>
       <Menu
         id="basic-menu"
@@ -43,27 +43,31 @@ export default function BasicMenu({team}: MenuProps) {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem selected className='MenuItem' onClick={()=> {
-          setOpenEditModal(!openEditModal)
-          handleClose()}}><BsPencil/> Editar</MenuItem>
-        <MenuItem className='MenuItem' onClick={() => {
-          handleClose()
-          setOpenDeleteModal(!openDeleteModal)
-          }}><BsTrash/> Excluir</MenuItem>
+        <MenuItem
+          selected
+          className="MenuItem"
+          onClick={() => {
+            setOpenEditModal(!openEditModal);
+            handleClose();
+          }}
+        >
+          <BsPencil /> Editar
+        </MenuItem>
+        <MenuItem
+          className="MenuItem"
+          onClick={() => {
+            handleClose();
+            setOpenDeleteModal(!openDeleteModal);
+          }}
+        >
+          <BsTrash /> Excluir
+        </MenuItem>
       </Menu>
-      {
-        openDeleteModal ? (
-          <ModalDeleteTeam team={team}/>
-        ) : null
-      }
-      {
-        openEditModal ? (
-          <ModalEditTeam team={team}/>
-        ): null
-      }
+      {openDeleteModal ? <ModalDeleteTeam team={team} /> : null}
+      {openEditModal ? <ModalEditTeam team={team} /> : null}
     </div>
   );
 }

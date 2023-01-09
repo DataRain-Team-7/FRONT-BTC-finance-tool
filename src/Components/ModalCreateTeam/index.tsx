@@ -9,19 +9,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import TeamService from "../../services/teams-service";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-interface ModalEditProps {
+interface ModalCreateProps {
   team: TeamsTypes;
 }
 
-interface EditTeamData {
+interface CreateTeamData {
   id?: string;
   name: string;
   valuePerHour: number;
 }
 
-const updateTeamSchema = yup.object().shape({
+const createTeamSchema = yup.object().shape({
   name: yup.string().required("Nome da equipe obrigatória"),
 
   valuePerHour: yup.number().required("Campo obrigatório"),
@@ -41,30 +41,21 @@ const style = {
   p: 4,
 };
 
-export default function ModalEditTeam({ team }: ModalEditProps) {
+export default function ModalCreateTeam() {
   const [open, setOpen] = React.useState(true);
   const handleClose = () => setOpen(false);
+
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EditTeamData>({ resolver: yupResolver(updateTeamSchema) });
+  } = useForm<CreateTeamData>({ resolver: yupResolver(createTeamSchema) });
 
-  const handleEditTeam = (values: EditTeamData) => {
-    const teamId = team.id || "";
-    TeamService.editTeam(teamId, values);
-    handleClose();
-    getAll();
-  };
-
-  const getAll = () => {
-    TeamService.findAllTeams();
-  };
-
-  useEffect(() => {
-    getAll();
-  }, []);
+const handleCreateTeam = (data: CreateTeamData) =>{
+  TeamService.createTeam(data)
+  handleClose()
+}
 
   return (
     <div>
@@ -83,28 +74,26 @@ export default function ModalEditTeam({ team }: ModalEditProps) {
           sx={style}
         >
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Editar Equipe
+            Criar Equipe
           </Typography>
-          <S.FormEdit onSubmit={handleSubmit(handleEditTeam)}>
-            <S.LabelEdit htmlFor="name">
+          <S.FormCreate onSubmit={handleSubmit(handleCreateTeam)}>
+            <S.LabelCreate htmlFor="name">
               {" "}
-              Equipe:
-              <S.InputEditTeam
-                defaultValue={team.name}
+              Nome da Equipe:
+              <S.InputCreateTeam
                 type="text"
                 {...register("name")}
               />
-            </S.LabelEdit>
+            </S.LabelCreate>
 
-            <S.LabelEdit htmlFor="valuePerHour">
+            <S.LabelCreate htmlFor="valuePerHour">
               {" "}
-              R$:
-              <S.InputEditTeam
-                defaultValue={team.valuePerHour}
+              Valor hora R$:
+              <S.InputCreateTeam
                 type="number"
                 {...register("valuePerHour")}
               />
-            </S.LabelEdit>
+            </S.LabelCreate>
             <Box
               display="flex"
               alignItems="center"
@@ -112,9 +101,9 @@ export default function ModalEditTeam({ team }: ModalEditProps) {
               width="100%"
             >
               <S.ButtonCancel onClick={handleClose}>Cancelar</S.ButtonCancel>
-              <S.ButtonEdit type="submit">Editar</S.ButtonEdit>
+              <S.ButtonCreate type="submit">Criar</S.ButtonCreate>
             </Box>
-          </S.FormEdit>
+          </S.FormCreate>
         </Box>
       </Modal>
     </div>
