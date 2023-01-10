@@ -8,19 +8,15 @@ interface MocksUser {
 }
 
 const UserCard = ({ user, className }: MocksUser) => {
-
-  const privilege = true;
+  const userPrivilege = JSON.parse(localStorage.getItem("user") || "{}");
   return (
     <S.CardContainer className={className}>
       <S.CardHeader>
         <S.CardFunction>{user.roleName}</S.CardFunction>
-        {
-          privilege ? (
-          <span>
-            <MenuDropdownUser user={user} />
-          </span>
-          ) : null
-        }
+
+        <span>
+          <MenuDropdownUser user={user} />
+        </span>
       </S.CardHeader>
       <S.CardImage src={user.imageUrl} alt="Imagem perfil" />
       <S.CardName>{user.name}</S.CardName>

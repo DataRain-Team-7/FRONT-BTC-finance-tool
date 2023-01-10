@@ -1,11 +1,10 @@
+import { useEffect, useState } from "react";
+import UserService from "../../services/user-service";
+import { UserTypes } from "../../types/interface";
 import Header from "../Header";
 import Navbar from "../Navbar";
-import { users } from "../../mocks/users";
-import * as S from "./style";
 import UserCard from "../UserCard/indext";
-import { useEffect, useState } from "react";
-import { UserTypes } from "../../types/interface";
-import UserService from "../../services/user-service";
+import * as S from "./style";
 
 
 const UsersPage = () => {
@@ -14,6 +13,7 @@ const UsersPage = () => {
   useEffect(() => {
     getAllUsers()
   },[])
+
 
   const getAllUsers = async () => {
     const res: any = await UserService.findAllUsers() ;

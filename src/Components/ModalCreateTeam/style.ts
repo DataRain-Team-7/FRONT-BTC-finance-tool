@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FormEdit = styled.form`
+export const FormCreate = styled.form`
   display: flex;
   width: 90%;
   height: 80%;
@@ -8,7 +8,7 @@ export const FormEdit = styled.form`
   align-items: center;
 `;
 
-export const LabelEdit =styled.label`
+export const LabelCreate =styled.label`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,7 +17,7 @@ export const LabelEdit =styled.label`
     margin-right: 10px;
 `;
 
-export const InputEditTeam = styled.input`
+export const InputCreateTeam = styled.input`
   width: 70%;
   height: 40px;
   font-size: 20px;
@@ -45,7 +45,7 @@ export const ButtonCancel = styled.button`
   }
 `;
 
-export const ButtonEdit = styled.button`
+export const ButtonCreate = styled.button`
   font-size: 20px;
   background-color: #fff;
   border: none;

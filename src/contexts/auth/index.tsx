@@ -2,7 +2,7 @@ import { createContext, useContext, ReactNode, useState, useEffect } from "react
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Api from "../../services/api";
-import { User } from "../../types/interface";
+import { UserTypes } from "../../types/interface";
 
 interface AuthProviderProps{
     children: ReactNode
@@ -10,7 +10,7 @@ interface AuthProviderProps{
 
 interface loginParams{
     token:string,
-    user:User,
+    user:UserTypes | null,
     isChecked: Boolean,
 }
 

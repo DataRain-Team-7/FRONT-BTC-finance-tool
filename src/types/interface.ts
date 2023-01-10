@@ -10,7 +10,7 @@ export interface UserTypes {
 }
 
 export interface TeamsTypes {
-    id?: number,
+    id?: string,
     name: string,
-    price: number,
+    valuePerHour: number,
 }
