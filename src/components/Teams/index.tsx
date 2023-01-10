@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import TeamService from "../../services/teams-service";
 import { TeamsTypes } from "../../types/interface";
 import Header from "../Header";
@@ -9,19 +8,20 @@ import TeamsLi from "../TeamsLi";
 import * as S from "./style";
 
 const Teams = () => {
+  const [values, setValues] = useState<TeamsTypes[]>([]);
+  const [openCreateModal, setOpenCreateModal] = useState<boolean>(false);
 
-  const[values, setValues] = useState<TeamsTypes[]>([])
-  const [openCreateModal, setOpenCreateModal] = useState<boolean>(false)
+  console.log(openCreateModal);
+
+  const getAllTeams = async () => {
+    const res = await TeamService.findAllTeams();
+    setValues(res.data);
+  };
 
   useEffect(() => {
-    getAllTeams()
-  },[])
-
-  const getAllTeams = async () =>{
-    const res = await TeamService.findAllTeams()
-    setValues([...res.data]);
-  }
-
+    getAllTeams();
+    console.log(values);
+  }, []);
 
   const user = true;
   return (
@@ -42,21 +42,18 @@ const Teams = () => {
             </S.TeamsSubTitle>
             <S.TeamsUl>
               {user ? (
-                <S.TeamMockedLi>  
+                <S.TeamMockedLi>
                   <S.TeamMockedLiContent>
                     <span>Cadastrar outra equipe</span>
                     <span>
                       {" "}
                       <S.AddTeamIcon
-                        onClick={() => {setOpenCreateModal(true)
-                          setOpenCreateModal(!openCreateModal)
-                          console.log(openCreateModal)
-                        } }
+                        onClick={() => {
+                          setOpenCreateModal(!openCreateModal);
+                        }}
                       />
                     </span>
-                    {
-                      openCreateModal ? <ModalCreateTeam/> : null
-                    }
+                    {openCreateModal ? <ModalCreateTeam setOpenCreateModal={setOpenCreateModal} openCreateModal={openCreateModal} /> : ""}
                   </S.TeamMockedLiContent>
                 </S.TeamMockedLi>
               ) : null}

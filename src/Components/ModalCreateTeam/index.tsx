@@ -41,9 +41,14 @@ const style = {
   p: 4,
 };
 
-export default function ModalCreateTeam() {
-  const [open, setOpen] = React.useState(true);
-  const handleClose = () => setOpen(false);
+interface ModalProps {
+  openCreateModal: boolean;
+  setOpenCreateModal: ({props}:any) => void;
+}
+
+export default function ModalCreateTeam({setOpenCreateModal, openCreateModal}:ModalProps) {
+  const handleClose = () => setOpenCreateModal(!openCreateModal);
+  
 
 
   const {
@@ -55,13 +60,15 @@ export default function ModalCreateTeam() {
 const handleCreateTeam = (data: CreateTeamData) =>{
   TeamService.createTeam(data)
   handleClose()
+  TeamService.findAllTeams()
 }
 
   return (
     <div>
       <Modal
-        open={open}
+        // open={open}
         onClose={handleClose}
+        open={openCreateModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -90,7 +97,7 @@ const handleCreateTeam = (data: CreateTeamData) =>{
               {" "}
               Valor hora R$:
               <S.InputCreateTeam
-                type="number"
+                type="text"
                 {...register("valuePerHour")}
               />
             </S.LabelCreate>

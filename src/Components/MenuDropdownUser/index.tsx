@@ -24,9 +24,7 @@ export default function BasicMenu({ user }: MenuProps) {
     setAnchorEl(null);
   };
 
-  const userRole = localStorage.getItem("user")
-
- 
+  const userPrivilege = JSON.parse(localStorage.getItem("user") || "{}");
 
   return (
     <div>
@@ -48,30 +46,31 @@ export default function BasicMenu({ user }: MenuProps) {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem
-          selected
-          className="MenuItem"
-          onClick={() => {
-            setOpenEditModal(!openEditModal);
-            handleClose();
-          }}
-        >
-          <BsPencil /> Editar
-        </MenuItem>
-        <MenuItem
-          className="MenuItem"
-          onClick={() => {
-            handleClose();
-            setOpenDeleteModal(!openDeleteModal);
-          }}
-        >
-          <BsTrash /> Excluir
-        </MenuItem>
+        {userPrivilege.roleName === "admin" ? (
+          <MenuItem
+            className="MenuItem"
+            onClick={() => {
+              handleClose();
+              setOpenDeleteModal(!openDeleteModal);
+            }}
+          >
+            <BsTrash /> Excluir
+          </MenuItem>
+        ) : (
+          <MenuItem
+            selected
+            className="MenuItem"
+            onClick={() => {
+              setOpenEditModal(!openEditModal);
+              handleClose();
+            }}
+          >
+            <BsPencil /> Editar
+          </MenuItem>
+        )}
       </Menu>
 
-      { 
-      openDeleteModal ? <ModalDeleteUser user={user} /> : null
-      }
+      {openDeleteModal ? <ModalDeleteUser user={user} /> : null}
 
       {openEditModal ? <ModalEditUser user={user} /> : null}
     </div>

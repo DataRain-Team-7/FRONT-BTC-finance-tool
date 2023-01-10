@@ -1,18 +1,19 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
 import { TeamsTypes } from "../../types/interface";
 import * as S from "./style";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import TeamService from "../../services/teams-service";
-import { useEffect } from "react";
 
 interface ModalEditProps {
   team: TeamsTypes;
+  openEditModal: boolean;
+  setOpenEditModal: ({props}: any) => void
 }
 
 interface EditTeamData {
@@ -41,9 +42,8 @@ const style = {
   p: 4,
 };
 
-export default function ModalEditTeam({ team }: ModalEditProps) {
-  const [open, setOpen] = React.useState(true);
-  const handleClose = () => setOpen(false);
+export default function ModalEditTeam({ team, openEditModal, setOpenEditModal }: ModalEditProps) {
+  const handleClose = () => setOpenEditModal(!openEditModal);
 
   const {
     register,
@@ -69,7 +69,7 @@ export default function ModalEditTeam({ team }: ModalEditProps) {
   return (
     <div>
       <Modal
-        open={open}
+        open={openEditModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

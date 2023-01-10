@@ -8,6 +8,8 @@ import TeamService from "../../services/teams-service";
 
 interface ModalDeleteProps {
   team: TeamsTypes;
+  openDeleteModal: boolean;
+  setOpenDeleteModal: ({props}:any) => void;
 }
 
 const style = {
@@ -24,21 +26,21 @@ const style = {
   p: 4,
 };
 
-export default function ModalDeleteTeam({ team }: ModalDeleteProps) {
-  const [open, setOpen] = React.useState(true);
-  //   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function ModalDeleteTeam({ team, openDeleteModal, setOpenDeleteModal }: ModalDeleteProps) {
+  const handleClose = () => setOpenDeleteModal(!openDeleteModal);
+ 
 
   const deleteTeam = (id: any)=> {
     TeamService.deleteTeam(id)
     handleClose()
+    TeamService.findAllTeams()
   }
 
   return (
     <div>
       {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
-        open={open}
+        open={openDeleteModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

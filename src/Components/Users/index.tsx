@@ -14,6 +14,7 @@ const UsersPage = () => {
     getAllUsers()
   },[])
 
+
   const getAllUsers = async () => {
     const res: any = await UserService.findAllUsers() ;
     setValues([...res.data]);

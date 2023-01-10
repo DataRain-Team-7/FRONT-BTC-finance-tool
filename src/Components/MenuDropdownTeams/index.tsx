@@ -66,8 +66,8 @@ export default function BasicMenu({ team }: MenuProps) {
           <BsTrash /> Excluir
         </MenuItem>
       </Menu>
-      {openDeleteModal ? <ModalDeleteTeam team={team} /> : null}
-      {openEditModal ? <ModalEditTeam team={team} /> : null}
+      {openDeleteModal ? <ModalDeleteTeam team={team} openDeleteModal={openDeleteModal} setOpenDeleteModal={setOpenDeleteModal} /> : null}
+      {openEditModal ? <ModalEditTeam team={team} openEditModal={openEditModal} setOpenEditModal={setOpenEditModal} /> : null}
     </div>
   );
 }
