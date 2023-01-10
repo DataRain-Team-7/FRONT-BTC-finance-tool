@@ -62,6 +62,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         if(isChecked){
             localStorage.setItem("token", token)
             setUser(user)
+            navigate("/home")
         }
         setLogged(true);
         // navigate("/novasenha/5641565")

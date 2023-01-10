@@ -12,8 +12,9 @@ import { MdAttachMoney } from "react-icons/md";
 import { BsGraphUp } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const AsideBar = () => {
   const navigate = useNavigate()
+
   return (
     <S.NavbarContainer>
       <S.NavbarWrapper>
@@ -22,7 +23,7 @@ const Navbar = () => {
         </S.NavbarLogo>
         <S.NavbarContent>
           <S.NavbarContentUl>
-            <S.NavbarContentLi onClick={()=> navigate("/home")}>
+            <S.NavbarContentLi>
               <span>
                 <AiOutlineHome />
               </span>
@@ -77,4 +78,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AsideBar;

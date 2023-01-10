@@ -14,7 +14,7 @@ ${({theme})=>css`
     align-items: center;
     justify-content:center;
     user-select: none;
-    width: 100vw;
+    width: 100%;
 
 
     section{
