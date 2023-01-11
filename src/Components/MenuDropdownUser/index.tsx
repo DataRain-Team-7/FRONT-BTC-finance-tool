@@ -7,6 +7,7 @@ import { BsThreeDotsVertical, BsPencil, BsTrash } from "react-icons/bs";
 import { UserTypes } from "../../types/interface";
 import ModalDeleteUser from "../ModalDeleteUser";
 import ModalEditUser from "../ModalEditUser";
+import { useAuth } from "../../contexts/auth";
 
 interface MenuProps {
   user: UserTypes;
@@ -23,8 +24,8 @@ export default function BasicMenu({ user }: MenuProps) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const { userStorage } = useAuth()
 
-  const userPrivilege = JSON.parse(localStorage.getItem("user") || "{}");
 
   return (
     <div>
@@ -46,7 +47,7 @@ export default function BasicMenu({ user }: MenuProps) {
           "aria-labelledby": "basic-button",
         }}
       >
-        {userPrivilege.roleName === "admin" ? (
+        {userStorage.roleName === "admin" ? (
           <MenuItem
             className="MenuItem"
             onClick={() => {

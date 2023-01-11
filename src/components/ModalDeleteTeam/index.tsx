@@ -5,6 +5,10 @@ import Modal from "@mui/material/Modal";
 import { TeamsTypes } from "../../types/interface";
 import * as S from "./style";
 import TeamService from "../../services/teams-service";
+import { useTeam } from "../../contexts/teamContext";
+import { BsHandIndexThumbFill } from "react-icons/bs";
+import Api from "../../services/api";
+import toast from "react-hot-toast";
 
 interface ModalDeleteProps {
   team: TeamsTypes;
@@ -28,12 +32,19 @@ const style = {
 
 export default function ModalDeleteTeam({ team, openDeleteModal, setOpenDeleteModal }: ModalDeleteProps) {
   const handleClose = () => setOpenDeleteModal(!openDeleteModal);
+  const { handleGetTeam } = useTeam()
  
 
-  const deleteTeam = (id: any)=> {
-    TeamService.deleteTeam(id)
-    handleClose()
-    TeamService.findAllTeams()
+  const deleteTeam = (id:any) => {
+    Api.delete(`team/${id}`)
+    .then((res) => {
+      toast.success("Equipe deletada"), res;
+      handleClose()
+      handleGetTeam()
+    })
+    .catch((error) => {
+      toast.error("Falha ao deletar equipe"), error;
+    });
   }
 
   return (

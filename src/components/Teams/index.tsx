@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import TeamService from "../../services/teams-service";
-import { TeamsTypes } from "../../types/interface";
+import { useTeam } from "../../contexts/teamContext";
 import Header from "../Header";
 import ModalCreateTeam from "../ModalCreateTeam";
 import Navbar from "../Navbar";
@@ -8,20 +7,12 @@ import TeamsLi from "../TeamsLi";
 import * as S from "./style";
 
 const Teams = () => {
-  const [values, setValues] = useState<TeamsTypes[]>([]);
+  const { handleGetTeam, team } = useTeam()
   const [openCreateModal, setOpenCreateModal] = useState<boolean>(false);
 
-  console.log(openCreateModal);
-
-  const getAllTeams = async () => {
-    const res = await TeamService.findAllTeams();
-    setValues(res.data);
-  };
-
-  useEffect(() => {
-    getAllTeams();
-    console.log(values);
-  }, []);
+  useEffect(() =>{
+    handleGetTeam()
+  },[])
 
   const user = true;
   return (
@@ -57,7 +48,7 @@ const Teams = () => {
                   </S.TeamMockedLiContent>
                 </S.TeamMockedLi>
               ) : null}
-              {values.map((element, index) => {
+              {team.map((element, index) => {
                 return <TeamsLi team={element} key={index} />;
               })}
             </S.TeamsUl>
