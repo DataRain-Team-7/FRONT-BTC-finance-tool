@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import UserService from "../../services/user-service";
-import { UserTypes } from "../../types/interface";
+import { useEffect } from "react";
+import { useUsers } from "../../contexts/userContext";
 import Header from "../Header";
 import Navbar from "../Navbar";
 import UserCard from "../UserCard/indext";
@@ -8,17 +7,11 @@ import * as S from "./style";
 
 
 const UsersPage = () => {
-  const[values, setValues] = useState<UserTypes[]>([])
+const { handleGetUsers, user } = useUsers()
 
   useEffect(() => {
-    getAllUsers()
+    handleGetUsers()
   },[])
-
-
-  const getAllUsers = async () => {
-    const res: any = await UserService.findAllUsers() ;
-    setValues([...res.data]);
-  };
   return (
     <>
       <Header />
@@ -31,7 +24,7 @@ const UsersPage = () => {
           <S.UsersPageTitle>Central de Controle - Usuários</S.UsersPageTitle>
         </S.UsersPageHeader>
         <S.UsersPageContent>
-          {values.map((element, index) => {
+          {user.map((element, index) => {
             return <UserCard user={element} key={element.id} />;
           })}
         </S.UsersPageContent>

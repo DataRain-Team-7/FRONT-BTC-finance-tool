@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { TeamsTypes } from "../types/interface";
 import Api from "./api";
 
+
 const TeamService = {
   findAllTeams: async () => {
     return Api.get("/team")
