@@ -18,7 +18,7 @@ interface AuthProviderData{
     logged:boolean,
     login: (param:loginParams)=> void,
     logout: ()=> void,
-    user: UserTypes,
+    userStorage: UserTypes,
 }
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData)
@@ -27,7 +27,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
     
     const navigate = useNavigate();
     const [logged, setLogged] = useState<boolean>(false);
-    const [user , setUser] = useState<UserTypes>({
+    const [userStorage , setUserStorage] = useState<UserTypes>({
         id: "",
         name: "",
         email:"",
@@ -43,7 +43,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
 
         Api.get("/user/myself")
             .then((res)=>{
-                setUser(res.data)
+                setUserStorage(res.data)
                 setLogged(true);
              // navegate("/inicio")    COLOCAR ROTA CORRETA AQUI
             })
@@ -60,23 +60,23 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
 
     const login = ({token, user, isChecked}:loginParams) =>{
         if(isChecked){
-
             localStorage.setItem("token", token)
-            user&&setUser(user)
-            navigate("/home")
         }
+        sessionStorage.setItem("token", token)
         setLogged(true);
-        // navigate("/novasenha/5641565")
+        user&&setUserStorage(user)
+        navigate("/home")
         toast.success("Login bem sucedido")
     }
 
     const logout = () =>{
         localStorage.clear();
-        setLogged(false);  
+        sessionStorage.clear();
+        setLogged(false);
         navigate("/");
     }
 
-    return <AuthContext.Provider value={{logged, login, logout, user}}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{logged, login, logout, userStorage}}>{children}</AuthContext.Provider>
 }
 
 export const useAuth = ()=> useContext(AuthContext)
