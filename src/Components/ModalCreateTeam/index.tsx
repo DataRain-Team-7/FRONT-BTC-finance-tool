@@ -10,6 +10,9 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import TeamService from "../../services/teams-service";
 import { useEffect, useState } from "react";
+import { useTeam } from "../../contexts/teamContext";
+import Api from "../../services/api";
+import toast from "react-hot-toast";
 
 interface ModalCreateProps {
   team: TeamsTypes;
@@ -48,6 +51,7 @@ interface ModalProps {
 
 export default function ModalCreateTeam({setOpenCreateModal, openCreateModal}:ModalProps) {
   const handleClose = () => setOpenCreateModal(!openCreateModal);
+  const { handleGetTeam } = useTeam()
   
 
 
@@ -58,9 +62,18 @@ export default function ModalCreateTeam({setOpenCreateModal, openCreateModal}:Mo
   } = useForm<CreateTeamData>({ resolver: yupResolver(createTeamSchema) });
 
 const handleCreateTeam = (data: CreateTeamData) =>{
-  TeamService.createTeam(data)
+  Api.post("team", data)
+  .then((res) => {
+    res;
+    toast.success("Time criado com sucesso");
+    handleClose()
+    handleGetTeam()
+  })
+  .catch((error) => {
+    error;
+    toast.error("Falha ao criar time");
+  });
   handleClose()
-  TeamService.findAllTeams()
 }
 
   return (

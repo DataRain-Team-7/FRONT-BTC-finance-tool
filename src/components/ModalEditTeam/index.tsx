@@ -5,10 +5,11 @@ import { TeamsTypes } from "../../types/interface";
 import * as S from "./style";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import * as yup from "yup";
-import TeamService from "../../services/teams-service";
+import { useTeam } from "../../contexts/teamContext";
+import Api from "../../services/api";
 
 interface ModalEditProps {
   team: TeamsTypes;
@@ -44,6 +45,7 @@ const style = {
 
 export default function ModalEditTeam({ team, openEditModal, setOpenEditModal }: ModalEditProps) {
   const handleClose = () => setOpenEditModal(!openEditModal);
+  const { handleGetTeam } = useTeam()
 
   const {
     register,
@@ -53,18 +55,16 @@ export default function ModalEditTeam({ team, openEditModal, setOpenEditModal }:
 
   const handleEditTeam = (values: EditTeamData) => {
     const teamId = team.id || "";
-    TeamService.editTeam(teamId, values);
+    Api.patch(`team/${teamId}`, values)
+      .then((res) => {
+        toast.success("Equipe editada com sucesso"), res;
+        handleGetTeam();
+      })
+      .catch((error) => {
+        toast.error("Falha ao atualizar equipe"), error;
+      });
     handleClose();
-    getAll();
   };
-
-  const getAll = () => {
-    TeamService.findAllTeams();
-  };
-
-  useEffect(() => {
-    getAll();
-  }, []);
 
   return (
     <div>
@@ -101,7 +101,7 @@ export default function ModalEditTeam({ team, openEditModal, setOpenEditModal }:
               R$:
               <S.InputEditTeam
                 defaultValue={team.valuePerHour}
-                type="number"
+                type="text"
                 {...register("valuePerHour")}
               />
             </S.LabelEdit>

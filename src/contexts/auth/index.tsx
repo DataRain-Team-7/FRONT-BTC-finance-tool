@@ -18,7 +18,7 @@ interface AuthProviderData{
     logged:boolean,
     login: (param:loginParams)=> void,
     logout: ()=> void,
-    user: UserTypes,
+    userStorage: UserTypes,
 }
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData)
@@ -27,7 +27,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
     
     const navigate = useNavigate();
     const [logged, setLogged] = useState<boolean>(false);
-    const [user , setUser] = useState<UserTypes>({
+    const [userStorage , setUserStorage] = useState<UserTypes>({
         id: "",
         name: "",
         email:"",
@@ -38,12 +38,11 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
     })
 
     const checkTokenExpiration = ()=>{
-        // const user = JSON.parse(localStorage.getItem("user") || "")
         const token = localStorage.getItem("token")
 
         Api.get("/user/myself")
             .then((res)=>{
-                setUser(res.data)
+                setUserStorage(res.data)
                 setLogged(true);
              // navegate("/inicio")    COLOCAR ROTA CORRETA AQUI
             })
@@ -62,7 +61,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         if(isChecked){
 
             localStorage.setItem("token", token)
-            user&&setUser(user)
+            user&&setUserStorage(user)
             navigate("/home")
         }
         setLogged(true);
@@ -76,7 +75,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         navigate("/");
     }
 
-    return <AuthContext.Provider value={{logged, login, logout, user}}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{logged, login, logout, userStorage}}>{children}</AuthContext.Provider>
 }
 
 export const useAuth = ()=> useContext(AuthContext)

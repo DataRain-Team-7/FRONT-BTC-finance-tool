@@ -2,14 +2,14 @@ import * as S from "./style";
 
 import { TeamsTypes } from "../../types/interface";
 import MenuDropdown from "../MenuDropdownTeams";
+import { useAuth } from "../../contexts/auth";
 
 interface MocksInterface {
   team: TeamsTypes;
 }
 
 const TeamsLi = ({ team }: MocksInterface) => {
-
-   const userStorage = JSON.parse(localStorage.getItem('user') || "{}")
+  const { userStorage } = useAuth()
 
 
    
