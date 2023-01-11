@@ -38,14 +38,15 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
     })
 
     const checkTokenExpiration = ()=>{
-        // const user = JSON.parse(localStorage.getItem("user") || "")
-        const token = localStorage.getItem("token")
 
+        const token = localStorage.getItem("token");
+        token && sessionStorage.setItem("token", token);
+        
         Api.get("/user/myself")
             .then((res)=>{
                 setUserStorage(res.data)
                 setLogged(true);
-             // navegate("/inicio")    COLOCAR ROTA CORRETA AQUI
+                navigate("/home")
             })
             .catch(()=>{
                 logout();
@@ -64,7 +65,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         }
         sessionStorage.setItem("token", token)
         setLogged(true);
-        user&&setUserStorage(user)
+        user && setUserStorage(user)
         navigate("/home")
         toast.success("Login bem sucedido")
     }
