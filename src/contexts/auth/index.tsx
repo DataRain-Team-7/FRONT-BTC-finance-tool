@@ -2,7 +2,7 @@ import { createContext, useContext, ReactNode, useState, useEffect } from "react
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Api from "../../services/api";
-import { User } from "../../types/interface";
+import { UserTypes } from "../../types/interface";
 
 interface AuthProviderProps{
     children: ReactNode
@@ -10,7 +10,7 @@ interface AuthProviderProps{
 
 interface loginParams{
     token:string,
-    user:User,
+    user:UserTypes | null,
     isChecked: Boolean,
 }
 
@@ -18,7 +18,7 @@ interface AuthProviderData{
     logged:boolean,
     login: (param:loginParams)=> void,
     logout: ()=> void,
-    user: User,
+    user: UserTypes,
 }
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData)
@@ -27,7 +27,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
     
     const navigate = useNavigate();
     const [logged, setLogged] = useState<boolean>(false);
-    const [user , setUser] = useState<User>({
+    const [user , setUser] = useState<UserTypes>({
         id: "",
         name: "",
         email:"",
@@ -60,8 +60,9 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
 
     const login = ({token, user, isChecked}:loginParams) =>{
         if(isChecked){
+
             localStorage.setItem("token", token)
-            setUser(user)
+            user&&setUser(user)
             navigate("/home")
         }
         setLogged(true);

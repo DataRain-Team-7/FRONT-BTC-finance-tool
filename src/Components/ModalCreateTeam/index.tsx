@@ -1,28 +1,27 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
+import * as React from "react";
 import { TeamsTypes } from "../../types/interface";
 import * as S from "./style";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import TeamService from "../../services/teams-service";
+import { useEffect, useState } from "react";
 
-interface ModalEditProps {
+interface ModalCreateProps {
   team: TeamsTypes;
-  openEditModal: boolean;
-  setOpenEditModal: ({props}: any) => void
 }
 
-interface EditTeamData {
+interface CreateTeamData {
   id?: string;
   name: string;
   valuePerHour: number;
 }
 
-const updateTeamSchema = yup.object().shape({
+const createTeamSchema = yup.object().shape({
   name: yup.string().required("Nome da equipe obrigatória"),
 
   valuePerHour: yup.number().required("Campo obrigatório"),
@@ -42,35 +41,34 @@ const style = {
   p: 4,
 };
 
-export default function ModalEditTeam({ team, openEditModal, setOpenEditModal }: ModalEditProps) {
-  const handleClose = () => setOpenEditModal(!openEditModal);
+interface ModalProps {
+  openCreateModal: boolean;
+  setOpenCreateModal: ({props}:any) => void;
+}
+
+export default function ModalCreateTeam({setOpenCreateModal, openCreateModal}:ModalProps) {
+  const handleClose = () => setOpenCreateModal(!openCreateModal);
+  
+
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EditTeamData>({ resolver: yupResolver(updateTeamSchema) });
+  } = useForm<CreateTeamData>({ resolver: yupResolver(createTeamSchema) });
 
-  const handleEditTeam = (values: EditTeamData) => {
-    const teamId = team.id || "";
-    TeamService.editTeam(teamId, values);
-    handleClose();
-    getAll();
-  };
-
-  const getAll = () => {
-    TeamService.findAllTeams();
-  };
-
-  useEffect(() => {
-    getAll();
-  }, []);
+const handleCreateTeam = (data: CreateTeamData) =>{
+  TeamService.createTeam(data)
+  handleClose()
+  TeamService.findAllTeams()
+}
 
   return (
     <div>
       <Modal
-        open={openEditModal}
+        // open={open}
         onClose={handleClose}
+        open={openCreateModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -83,28 +81,26 @@ export default function ModalEditTeam({ team, openEditModal, setOpenEditModal }:
           sx={style}
         >
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Editar Equipe
+            Criar Equipe
           </Typography>
-          <S.FormEdit onSubmit={handleSubmit(handleEditTeam)}>
-            <S.LabelEdit htmlFor="name">
+          <S.FormCreate onSubmit={handleSubmit(handleCreateTeam)}>
+            <S.LabelCreate htmlFor="name">
               {" "}
-              Equipe:
-              <S.InputEditTeam
-                defaultValue={team.name}
+              Nome da Equipe:
+              <S.InputCreateTeam
                 type="text"
                 {...register("name")}
               />
-            </S.LabelEdit>
+            </S.LabelCreate>
 
-            <S.LabelEdit htmlFor="valuePerHour">
+            <S.LabelCreate htmlFor="valuePerHour">
               {" "}
-              R$:
-              <S.InputEditTeam
-                defaultValue={team.valuePerHour}
-                type="number"
+              Valor hora R$:
+              <S.InputCreateTeam
+                type="text"
                 {...register("valuePerHour")}
               />
-            </S.LabelEdit>
+            </S.LabelCreate>
             <Box
               display="flex"
               alignItems="center"
@@ -112,9 +108,9 @@ export default function ModalEditTeam({ team, openEditModal, setOpenEditModal }:
               width="100%"
             >
               <S.ButtonCancel onClick={handleClose}>Cancelar</S.ButtonCancel>
-              <S.ButtonEdit type="submit">Editar</S.ButtonEdit>
+              <S.ButtonCreate type="submit">Criar</S.ButtonCreate>
             </Box>
-          </S.FormEdit>
+          </S.FormCreate>
         </Box>
       </Modal>
     </div>

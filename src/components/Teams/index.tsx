@@ -1,11 +1,28 @@
-import Navbar from "../Navbar";
-import * as S from "./style";
-import { teams } from "../../mocks/teams";
-import TeamsLi from "../TeamsLi";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
+import TeamService from "../../services/teams-service";
+import { TeamsTypes } from "../../types/interface";
 import Header from "../Header";
+import ModalCreateTeam from "../ModalCreateTeam";
+import Navbar from "../Navbar";
+import TeamsLi from "../TeamsLi";
+import * as S from "./style";
 
 const Teams = () => {
+  const [values, setValues] = useState<TeamsTypes[]>([]);
+  const [openCreateModal, setOpenCreateModal] = useState<boolean>(false);
+
+  console.log(openCreateModal);
+
+  const getAllTeams = async () => {
+    const res = await TeamService.findAllTeams();
+    setValues(res.data);
+  };
+
+  useEffect(() => {
+    getAllTeams();
+    console.log(values);
+  }, []);
+
   const user = true;
   return (
     <>
@@ -31,13 +48,16 @@ const Teams = () => {
                     <span>
                       {" "}
                       <S.AddTeamIcon
-                        onClick={() => toast.error("Seção em desenvolvimento")}
+                        onClick={() => {
+                          setOpenCreateModal(!openCreateModal);
+                        }}
                       />
                     </span>
+                    {openCreateModal ? <ModalCreateTeam setOpenCreateModal={setOpenCreateModal} openCreateModal={openCreateModal} /> : ""}
                   </S.TeamMockedLiContent>
                 </S.TeamMockedLi>
               ) : null}
-              {teams.map((element, index) => {
+              {values.map((element, index) => {
                 return <TeamsLi team={element} key={index} />;
               })}
             </S.TeamsUl>

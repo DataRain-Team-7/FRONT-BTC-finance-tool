@@ -1,28 +1,24 @@
 import * as S from "./style";
 import MenuDropdownUser from "../MenuDropdownUser";
-import { User } from "../../types/interface";
+import { UserTypes } from "../../types/interface";
 
 interface MocksUser {
-  user: User;
+  user: UserTypes;
   className?: string;
 }
 
 const UserCard = ({ user, className }: MocksUser) => {
-
-  const privilege = true;
+  const userPrivilege = JSON.parse(localStorage.getItem("user") || "{}");
   return (
     <S.CardContainer className={className}>
       <S.CardHeader>
-        <S.CardFunction>{user.role}</S.CardFunction>
-        {
-          privilege ? (
-          <span>
-            <MenuDropdownUser user={user} />
-          </span>
-          ) : null
-        }
+        <S.CardFunction>{user.roleName}</S.CardFunction>
+
+        <span>
+          <MenuDropdownUser user={user} />
+        </span>
       </S.CardHeader>
-      <S.CardImage src={user.image} alt="Imagem perfil" />
+      <S.CardImage src={user.imageUrl} alt="Imagem perfil" />
       <S.CardName>{user.name}</S.CardName>
       <S.CardEmail>{user.email}</S.CardEmail>
     </S.CardContainer>

@@ -17,7 +17,7 @@ export const LabelEdit =styled.label`
     margin-right: 10px;
 `;
 
-export const InputEditTeam = styled.input`
+export const InputEditUser = styled.input`
   width: 70%;
   height: 40px;
   font-size: 20px;

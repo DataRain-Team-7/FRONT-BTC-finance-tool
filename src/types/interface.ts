@@ -1,4 +1,4 @@
-export interface User {
+export interface UserTypes {
     id?: string,
     name: string,
     email:string,
@@ -13,7 +13,7 @@ export interface User {
 }
 
 export interface TeamsTypes {
-    id?: number,
+    id?: string,
     name: string,
-    price: number,
+    valuePerHour: number,
 }
