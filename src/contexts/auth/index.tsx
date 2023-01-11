@@ -18,6 +18,7 @@ interface AuthProviderData{
     logged:boolean,
     login: (param:loginParams)=> void,
     logout: ()=> void,
+    user: UserTypes,
 }
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData)
@@ -26,20 +27,30 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
     
     const navigate = useNavigate();
     const [logged, setLogged] = useState<boolean>(false);
+    const [user , setUser] = useState<UserTypes>({
+        id: "",
+        name: "",
+        email:"",
+        password:"",
+        imageUrl: "",
+        position: "",
+        roleName: "",
+    })
 
     const checkTokenExpiration = ()=>{
-        const user = JSON.parse(localStorage.getItem("user") || "")
+        // const user = JSON.parse(localStorage.getItem("user") || "")
         const token = localStorage.getItem("token")
 
-        
-        Api.get(`/user/${user.id}`)
-            .then(()=>{
+        Api.get("/user/myself")
+            .then((res)=>{
+                setUser(res.data)
                 setLogged(true);
-                // navegate("/")    COLOCAR ROTA CORRETA AQUI
-        }).catch(()=>{
-            logout();
-            toast.error("Login necessário")
-        })
+             // navegate("/inicio")    COLOCAR ROTA CORRETA AQUI
+            })
+            .catch(()=>{
+                logout();
+                toast.error("Login necessário")
+            })
     }
 
     useEffect(()=>{
@@ -49,8 +60,10 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
 
     const login = ({token, user, isChecked}:loginParams) =>{
         if(isChecked){
+
             localStorage.setItem("token", token)
-            localStorage.setItem("user", JSON.stringify(user))
+            user&&setUser(user)
+            navigate("/home")
         }
         setLogged(true);
         // navigate("/novasenha/5641565")
@@ -63,7 +76,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         navigate("/");
     }
 
-    return <AuthContext.Provider value={{logged, login, logout}}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{logged, login, logout, user}}>{children}</AuthContext.Provider>
 }
 
 export const useAuth = ()=> useContext(AuthContext)

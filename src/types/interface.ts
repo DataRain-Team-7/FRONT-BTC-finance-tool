@@ -3,10 +3,13 @@ export interface UserTypes {
     name: string,
     email:string,
     password?:string,
-    roleName?: string,
+    imageUrl: string,
     position: string,
-    imageUrl?: string,
+    roleName: string,
     billable?: string,
+    allocated?: string,
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export interface TeamsTypes {

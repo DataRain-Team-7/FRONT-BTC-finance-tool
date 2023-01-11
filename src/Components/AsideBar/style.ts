@@ -7,7 +7,7 @@ export const NavbarContainer = styled.div`
   width: 100%;
   background-attachment: scroll;
   background-color: #f2f4f6;
-  height: 100%;
+  height: calc(100vh - 5rem);
   /* position: relative; */
 `;
 
@@ -35,7 +35,7 @@ export const NavbarImg = styled.img`
 
 export const NavbarContent = styled.div`
   position: relative;
-  height: calc(100vh - 70px);
+  /* height: calc(100vh - 70px); */
   padding: 10px 0;
   width: 100%;
 `;
@@ -60,6 +60,7 @@ export const NavbarContentLi = styled.li`
     font-size: ${theme.constants.fontBody};
     transition: 0.3s ease-in-out;
     background-color: ${theme.colors.primaryColor};
+    box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px;
 
     span {
       margin-left: 20px;

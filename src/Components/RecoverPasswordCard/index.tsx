@@ -3,12 +3,15 @@ import { Dispatch, SetStateAction, useState } from "react"
 import * as Style from "./style"
 import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
+import Api from "../../services/api";
+import { useAuth } from "../../contexts/auth";
 
 const RecoverPassword = () => {
 
     const { param } = useParams();
     const [ password, setPassword] = useState<string>("")
     const [ confirmPassword, setConfirmPassword] = useState<string>("")
+    const { login } = useAuth()
 
 
     const handleConfirm = () => {
@@ -16,11 +19,28 @@ const RecoverPassword = () => {
         if(password !== "" && confirmPassword !== ""){
             if(password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!:;/\|.()])[0-9a-zA-Z$*&@#!:;/\|.()]{8,}$/)){
                 if(password === confirmPassword){
-                    toast.success("Nova senha cadastrada")
-                    console.log(param)
+                    toast.success("Nova senha cadastrada");
+                    handleNewPassword();
                 }else{toast.error("As senhas devem coincidir")}
             }else{toast.error("A senha deve conter um caracter especial, um número e ao menos uma letra maiúscula")}
         }else{toast.error("Preencha todos os campos")}
+    }
+
+    const handleNewPassword = () =>{
+        const data= {
+            password: password,
+            confirmPassword: confirmPassword
+        }
+        Api.patch(`/auth/first-access/${param}`, data)
+            .then((res)=>{
+                toast.success("Conta validada")
+                login({token: res.data.token, user: res.data.user, isChecked: true})
+                console.log(res)
+            })
+            .catch((err)=>{
+                toast.error("Erro ao validar conta")
+                console.log(err)
+            })
     }
     
     return (

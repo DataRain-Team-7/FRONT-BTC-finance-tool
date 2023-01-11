@@ -6,6 +6,9 @@ import RecoverPasswordPage from "./Pages/RecoverPassword";
 import FormPage from "./Pages/Form";
 import UsersPage from "./components/Users";
 import ProjectPage from "./components/ProjectPage";
+import PreSaleBudget from "./Pages/PreSaleBudget";
+import FinancialBudget from "./Pages/FinancialBudget";
+import HomePage from "./Pages/Home";
 
 
 const Router = () => {
@@ -16,8 +19,12 @@ const Router = () => {
       <Route path="/teams" element={<Teams />} />
       <Route path="/users" element={<UsersPage/>} />
       <Route path="/projects" element={<ProjectPage/>} />
-      <Route path="/novasenha/:param" element={<RecoverPasswordPage/>}/>
-      <Route path="/form" element={<FormPage/>}/>
+      <Route path="/novasenha/:param" element={<RecoverPasswordPage/>} />
+      <Route path="/form" element={<FormPage/>} />
+      <Route path="/prevenda" element={<PreSaleBudget/>} />
+      <Route path="/financeiro" element={<FinancialBudget/>} />
+      <Route path="/home" element={<HomePage/>} />
+
     </Routes>
   );
 };
