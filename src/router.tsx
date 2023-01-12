@@ -9,6 +9,7 @@ import ProjectPage from "./components/ProjectPage";
 import PreSaleBudget from "./Pages/PreSaleBudget";
 import FinancialBudget from "./Pages/FinancialBudget";
 import HomePage from "./Pages/Home";
+import QuestionsPage from "./Pages/QuestionsPage";
 
 
 const Router = () => {
@@ -24,8 +25,10 @@ const Router = () => {
       <Route path="/prevenda" element={<PreSaleBudget/>} />
       <Route path="/financeiro" element={<FinancialBudget/>} />
       <Route path="/home" element={<HomePage/>} />
+      <Route path="/questoes" element={<QuestionsPage/>} />
 
     </Routes>
+
   );
 };
 

@@ -64,11 +64,11 @@ const Navbar = () => {
               </span>
               Financeiro
             </S.NavbarContentLi>
-            <S.NavbarContentLi>
+            <S.NavbarContentLi onClick={()=> navigate("/questoes")}>
               <span>
                 <BsGraphUp />
               </span>
-              Resumo de Orçamentos
+              Questionário
             </S.NavbarContentLi>
           </S.NavbarContentUl>
         </S.NavbarContent>
