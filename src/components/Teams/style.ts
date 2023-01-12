@@ -70,18 +70,17 @@ export const TeamMockedLi = styled.li`
     border-radius: 8px;
     background-color: ${theme.colors.primaryColor};
     font-size: ${theme.constants.fontBody};
-
-    span {
-      margin-left: 20%;
-    }
   `}
 `;
 
 export const TeamMockedLiContent = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  span {
+      margin-left: 10px;
+    }
 `;
 
 export const AddTeamIcon =  styled(AiOutlineUsergroupAdd)`

@@ -9,7 +9,7 @@ import { useAuth } from '../../contexts/auth';
 
 const Header = () => {
 
-    const { user } = useAuth()
+    const { userStorage } = useAuth()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {

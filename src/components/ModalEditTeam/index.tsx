@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import * as yup from "yup";
 import { useTeam } from "../../contexts/teamContext";
 import Api from "../../services/api";
+import TeamService from "../../services/teams-service";
 
 interface ModalEditProps {
   team: TeamsTypes;
@@ -65,6 +66,12 @@ export default function ModalEditTeam({ team, openEditModal, setOpenEditModal }:
       });
     handleClose();
   };
+
+  // const handleEditTeam = (data:EditTeamData) => {
+  //   const teamId =  team.id || "";
+  //   TeamService.editTeam(teamId, data)
+  //   console.log(tem)
+  // }
 
   return (
     <div>
