@@ -17,8 +17,10 @@ const TeamsLi = ({ team }: MocksInterface) => {
   return (
     <S.TeamsLi>
       <S.LiContent>
-        <span>{team.name}</span>
-        <span>R$: {team.valuePerHour}</span>
+        <S.DivContent>
+          <span>{team.name}</span>
+          <span>R$: {team.valuePerHour}</span>
+        </S.DivContent>
         {
           userStorage.roleName === "admin" ? <MenuDropdown team={team}/> : null
         }
