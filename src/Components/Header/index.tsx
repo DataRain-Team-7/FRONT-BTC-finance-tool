@@ -1,11 +1,11 @@
-import * as Style from './style'
-import user_default from '../../assets/images/user_default.png'
-import logo from '../../assets/images/logo.png'
 import { Badge } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import React from 'react';
+import logo from '../../assets/images/logo.png';
+import user_default from '../../assets/images/user_default.png';
 import { useAuth } from '../../contexts/auth';
+import * as Style from './style';
 
 const Header = () => {
 

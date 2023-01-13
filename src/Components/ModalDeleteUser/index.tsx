@@ -1,17 +1,16 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { UserTypes } from "../../types/interface";
-import * as S from "./style";
-import UserService from "../../services/user-service";
-import { useEffect } from "react";
-import Api from "../../services/api";
+import Typography from "@mui/material/Typography";
 import toast from "react-hot-toast";
 import { useUsers } from "../../contexts/userContext";
+import Api from "../../services/api";
+import { UserTypes } from "../../types/interface";
+import * as S from "./style";
 
 interface ModalDeleteProps {
   user: UserTypes;
+  openDeleteModal: boolean;
+  setOpenDeleteModal: ({props}:any) => void;
 }
 
 const style = {
@@ -28,9 +27,8 @@ const style = {
   p: 4,
 };
 
-export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
-  const [open, setOpen] = React.useState(true);
-  const handleClose = () => setOpen(false);
+export default function ModalDeleteUser({ user, openDeleteModal, setOpenDeleteModal }: ModalDeleteProps) {
+  const handleClose = () => setOpenDeleteModal(!openDeleteModal);
   const{ handleGetUsers } = useUsers()
 
   const deleteUser = (id:any) =>{
@@ -47,7 +45,7 @@ export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
   return (
     <div>
       <Modal
-        open={open}
+        open={openDeleteModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

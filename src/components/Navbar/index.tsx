@@ -11,8 +11,11 @@ import { GiRotaryPhone } from "react-icons/gi";
 import { MdAttachMoney } from "react-icons/md";
 import { BsGraphUp } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/auth";
+import { toast } from "react-hot-toast";
 
 const Navbar = () => {
+  const { userStorage } = useAuth()
   const navigate = useNavigate()
   return (
     <S.NavbarContainer>
@@ -28,7 +31,10 @@ const Navbar = () => {
               </span>
               Início
             </S.NavbarContentLi>
-            <S.NavbarContentLi onClick={()=> navigate("/users")}>
+            <S.NavbarContentLi
+            onClick={() => userStorage.roleName === "admin" ? ( ()=> navigate("/users")) : 
+            toast.error("Você não tem permissão para acessar")
+            }>
               <span>
                 <AiOutlineUser />
               </span>
@@ -40,11 +46,11 @@ const Navbar = () => {
               </span>
               Equipes
             </S.NavbarContentLi>
-            <S.NavbarContentLi>
+            <S.NavbarContentLi onClick={() => navigate("/profile")}>
               <span>
                 <AiOutlineMessage />
               </span>
-              Mensagens
+              Perfil
             </S.NavbarContentLi>
             <S.NavbarContentLi onClick={()=> navigate("/projects")}>
               <span>

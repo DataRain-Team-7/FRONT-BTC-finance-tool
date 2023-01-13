@@ -45,7 +45,7 @@ const AsideBar = () => {
               <span>
                 <AiOutlineMessage />
               </span>
-              Mensagens
+              Perfil  
             </S.NavbarContentLi>
             <S.NavbarContentLi onClick={()=> navigate("/projects")}>
               <span>

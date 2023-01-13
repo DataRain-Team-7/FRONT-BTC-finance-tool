@@ -1,29 +1,34 @@
+import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import MockedUserCard from "../MockedUserCard";
 import UserCard from "../UserCard/indext";
 import * as S from "./style";
 const ProjectPage = () => {
+  const navigate = useNavigate();
   const users = [
     {
       id: "1",
       name: "Vini",
       email: "vini@blue.com",
-      role: "Manager",
-      image: "https://avatars.githubusercontent.com/u/17714550?v=4",
+      roleName: "Manager",
+      imageUrl: "https://avatars.githubusercontent.com/u/17714550?v=4",
+      position: "",
     },
     {
       id: "2",
       name: "Mathias",
       email: "mathias@blue.com",
-      role: "PS",
-      image: "https://avatars.githubusercontent.com/u/99908779?v=4",
+      roleName: "PS",
+      imageUrl: "https://avatars.githubusercontent.com/u/99908779?v=4",
+      position: "",
     },
     {
       id: "3",
       name: "Lucas",
       email: "lucas@blue.com",
-      role: "PS",
-      image: "https://avatars.githubusercontent.com/u/76230078?v=4",
+      roleName: "PS",
+      imageUrl: "https://avatars.githubusercontent.com/u/76230078?v=4",
+      position: "",
     },
   ];
   return (
@@ -33,7 +38,7 @@ const ProjectPage = () => {
         <S.ProjectPageContainer>
           <S.ProjectPageReturn>
             {" "}
-            <S.BackIcon />{" "}
+            <S.BackIcon onClick={() => navigate("/home")} />{" "}
           </S.ProjectPageReturn>
           <S.ProjectPageHeader>
             <div>

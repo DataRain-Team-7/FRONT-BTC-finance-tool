@@ -23,7 +23,7 @@ export const TeamsContainer = styled.div`
 `;
 export const TeamsHeader = styled.div`
   display: flex;
-  justify-content: f;
+  justify-content: flex-start;
 `;
 
 export const TeamsTitle = styled.p`
