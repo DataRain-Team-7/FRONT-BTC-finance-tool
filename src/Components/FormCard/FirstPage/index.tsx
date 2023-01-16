@@ -15,13 +15,13 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
     return(
         <Style.FirstPageCard>
                     <section>
-                        <label>Nome Completo</label>
+                        <label>Contato Principal *</label>
                         <input></input>
-                        <label>Nome da empresa</label>
+                        <label>Contato Técnico</label>
                         <input></input>
-                        <label>Telefone para contato</label>
+                        <label>Email *</label>
                         <input></input>
-                        <label>Email</label>
+                        <label>Telefone *</label>
                         <input></input>
                     </section>
                     <div>
