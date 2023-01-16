@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { AiOutlineSetting } from "react-icons/ai";
+import theme from "../../styles/theme";
 
 export const ALlProfilePageContainer = styled.div`
   width: 100vw;
@@ -61,6 +62,8 @@ export const ProfileCardImage = styled.img`
   height: 72px;
   border-radius: 50px;
   margin-bottom: 20px;
+  cursor: pointer;
+  background-color: #c3c3c3;
 `;
 export const ProfileCardName = styled.p`
   font-size: 2rem;
@@ -90,5 +93,30 @@ export const ProfileSettings = styled(AiOutlineSetting)`
     cursor: pointer;
     margin-left: 1rem;
     color: ${theme.colors.secundaryColor};
+  `}
+`;
+export const DivUpload = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const UploadImgButton = styled.button`
+  ${({ theme }) => css`
+  width: 92px;
+  height: 52px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  margin: 10px;
+  background-color: ${theme.colors.secundaryColor};
+  color: ${theme.colors.tertiaryColor};
+  transition: 0.3s ease-in-out;
+  &:hover{
+    background-color: ${theme.colors.tertiaryColor};
+    color: ${theme.colors.secundaryColor}
+  }
   `}
 `;

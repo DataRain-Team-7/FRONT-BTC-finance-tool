@@ -73,7 +73,7 @@ export default function BasicMenu({ user }: MenuProps) {
 
       {openDeleteModal ? <ModalDeleteUser user={user} openDeleteModal={openDeleteModal} setOpenDeleteModal={setOpenDeleteModal} /> : null}
 
-      {openEditModal ? <ModalEditUser user={user} /> : null}
+      {openEditModal ? <ModalEditUser userStorage={user} openModal={openEditModal} setOpenModal={setOpenEditModal} /> : null}
     </div>
   );
 }

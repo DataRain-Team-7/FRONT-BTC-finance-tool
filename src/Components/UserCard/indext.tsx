@@ -3,12 +3,12 @@ import MenuDropdownUser from "../MenuDropdownUser";
 import { UserTypes } from "../../types/interface";
 import userDefault from "../../assets/images/default.png";
 
-interface MocksUser {
+interface UserProps {
   user: UserTypes;
   className?: string;
 }
 
-const UserCard = ({ user, className }: MocksUser) => {
+const UserCard = ({ user, className }: UserProps) => {
   return (
     <S.CardContainer className={className}>
       <S.CardHeader>
@@ -20,7 +20,7 @@ const UserCard = ({ user, className }: MocksUser) => {
       {user.imageUrl === null ? (
         <S.CardImage src={userDefault} alt="Imagem perfil" />
       ) : (
-        <S.CardImage src={user.imageUrl} alt="Imagem perfil" />
+        <S.CardImage src={`https://back-btc-finance-tool-production.up.railway.app/${user.imageUrl}`} alt="Imagem perfil" />
       )}
 
       <S.CardName>{user.name}</S.CardName>

@@ -1,18 +1,17 @@
-import * as S from "./style";
 import Logo from "../../assets/img/logo.svg";
+import * as S from "./style";
 //icons
+import { toast } from "react-hot-toast";
 import {
-  AiOutlineHome,
-  AiOutlineUser,
-  AiOutlineTeam,
-  AiOutlineMessage,
+  AiOutlineHome, AiOutlineTeam
 } from "react-icons/ai";
+import { FaUsers } from "react-icons/fa"
+import { BsGraphUp } from "react-icons/bs";
+import { CgProfile } from "react-icons/cg";
 import { GiRotaryPhone } from "react-icons/gi";
 import { MdAttachMoney } from "react-icons/md";
-import { BsGraphUp } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth";
-import { toast } from "react-hot-toast";
 
 const Navbar = () => {
   const { userStorage } = useAuth()
@@ -36,7 +35,7 @@ const Navbar = () => {
             toast.error("Você não tem permissão para acessar")
             }>
               <span>
-                <AiOutlineUser />
+                <FaUsers />
               </span>
               Usuários
             </S.NavbarContentLi>
@@ -48,7 +47,7 @@ const Navbar = () => {
             </S.NavbarContentLi>
             <S.NavbarContentLi onClick={() => navigate("/profile")}>
               <span>
-                <AiOutlineMessage />
+                <CgProfile />
               </span>
               Perfil
             </S.NavbarContentLi>

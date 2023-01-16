@@ -9,6 +9,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import Api from "../../services/api";
 import { toast } from "react-hot-toast";
+import { useAuth } from "../../contexts/auth";
+import { Button } from "@mui/material";
 
 interface ModalEditUserProps {
   userStorage: UserTypes;
@@ -19,9 +21,9 @@ interface ModalEditUserProps {
 interface EditUserData {
   name: string;
   email: string;
-  currentPassword: string;
-  password: string;
-  confirmPassword: string;
+  currentPassword?: string;
+  password?: string;
+  confirmPassword?: string;
 }
 
 const style = {
@@ -45,15 +47,14 @@ const updateUserSchema = yup.object().shape({
     .string()
     .email("Formato de e-mail inválido")
     .required("E-mail obrigatório"),
-  currentPassword: yup.string().min(1, "Antiga senha obrigatória"),
+  currentPassword: yup.string().required("Senha atual obrigatória"),
   password: yup
     .string()
-    .min(1, "Digite a nova senha")
     .matches(
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!:;/\|.()])[0-9a-zA-Z$*&@#!:;/\|.()]{8,}$/,
       "A senha deve conter um carácter especial, um número e ao menos uma letra maiúscula"
     ),
-  confirmPassword: yup.string().min(1, "Confirme sua senha"),
+  confirmPassword: yup.string().required("Confirmação da senha obrigatória"),
 });
 
 export default function ModalEditUser({
@@ -63,11 +64,18 @@ export default function ModalEditUser({
 }: ModalEditUserProps) {
   const handleClose = () => setOpenModal(!openModal);
 
+  const { getUserByToken } = useAuth();
+
   const {
     register,
     handleSubmit,
+    clearErrors,
     formState: { errors },
   } = useForm<EditUserData>({ resolver: yupResolver(updateUserSchema) });
+
+  const onError = (error: any) => {
+    console.log("Erro", error);
+  };
 
   const handleEdit = (data: EditUserData) => {
     const token = localStorage.getItem("token");
@@ -77,21 +85,40 @@ export default function ModalEditUser({
         Authorization: `Bearer ${token}`,
       },
     };
+    if(data.password === data.confirmPassword){
+      Api.patch("/user", data, headers)
+      .then((res) => {
+        res;
+        toast.success("Usuário editado");
+        getUserByToken();
+      })
+      .catch((error) => {
+        error;
+        toast.error("Erro ao editar usuário");
+      });
+    handleClose();
+    } else( toast.error("As senhas não são iguais"))
 
-    if (data.currentPassword !== "") {
-      if (data.password === data.confirmPassword) {
-        Api.patch("/user", data, headers)
-          .then((res) => {
-            res;
-            toast.success("Usuário editado");
-          })
-          .catch((error) => {
-            error;
-            toast.error("Falha ao editar usuário");
-          });
-         handleClose() 
-      } else( toast.error("As senhas não coincidem"))
-    } else( toast.error("Preencha o campo senha"))
+   
+  };
+
+  const handleErrorMessage = () => {
+    if (errors.name) {
+      toast.error(`${errors.name?.message}`);
+      clearErrors();
+    } else if (errors.email) {
+      toast.error(`${errors.email?.message}`);
+      clearErrors();
+    } else if (errors.currentPassword) {
+      toast.error(`${errors.currentPassword?.message}`);
+      clearErrors();
+    } else if (errors.password) {
+      toast.error(`${errors.password?.message}`);
+      clearErrors();
+    } else if (errors.confirmPassword) {
+      toast.error(`${errors.confirmPassword?.message}`);
+      clearErrors();
+    }
   };
 
   return (
@@ -137,7 +164,10 @@ export default function ModalEditUser({
             <S.LabelEdit htmlFor="currentPassword">
               {" "}
               Senha Atual:
-              <S.InputEditUser type="password" {...register("currentPassword")} />
+              <S.InputEditUser
+                type="password"
+                {...register("currentPassword")}
+              />
             </S.LabelEdit>
             <S.LabelEdit htmlFor="password">
               {" "}
@@ -158,8 +188,10 @@ export default function ModalEditUser({
               justifyContent="center"
               width="100%"
             >
-              <S.ButtonCancel onClick={handleClose}>Cancelar</S.ButtonCancel>
-              <S.ButtonEdit type="submit">Editar</S.ButtonEdit>
+              <S.ButtonsContainer>
+              <Button className="buttonCancel" variant="contained" onClick={handleClose}>Cancelar</Button>
+              <Button type="submit" variant="contained" className="buttonSave" onClick={() => handleErrorMessage()}>Editar</Button>
+              </S.ButtonsContainer>
             </Box>
           </S.FormEdit>
         </Box>

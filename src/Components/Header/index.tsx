@@ -25,7 +25,7 @@ const Header = () => {
                 <div className='animate__animated animate__fadeInLeftBig animate__delay-1s'>
                     <div>
                         <img src={user_default}></img>
-                        <p>ViniBlue</p>
+                        <p>{userStorage.name}</p>
                         <p className='secondColorElement'>(Admin)</p>
                         <p className='secondColorElement getOut'>| SAIR</p>
                     </div>
