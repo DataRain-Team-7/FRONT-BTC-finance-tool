@@ -18,17 +18,15 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
     const [ technicalContact, setTechnicalContact ] = useState<string>("");
     const [ email, setEmail ] = useState<string>("");
     const [ phone, setPhone ] = useState<string>("");
-    const [ oldClient, setOldClient ] = useState<any>({
-        mainContact:"",
-        technicalContact:"",
-        email:"",
-        phone:""
-    }) 
 
     useEffect(()=>{
-        const localClient = JSON.parse(sessionStorage.getItem("client") || "")
-        if(localClient){ setOldClient(localClient)}
+        const localClient = JSON.parse(sessionStorage.getItem("client") || "[]")
+        setMainContact(localClient.name);
+        setTechnicalContact(localClient.companyName);
+        setEmail(localClient.email);
+        setPhone(localClient.phone);
     },[])
+
     
     const handleNewClient = () =>{
         const client = { 
@@ -39,14 +37,19 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
     }
         
         if(mainContact !== "" && email !== "" && phone !== ""){
-            if(email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
-                Api.post("/client", client)
-                .then((res)=>{
-                    console.log("Deu certo");
-                    setStepNumber(1)
-                    sessionStorage.setItem("client", JSON.stringify(client))
-                })
-                .catch(()=> console.log("Falha ao cadastrar"))
+            if(email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-z]+)?$/i)){
+                if(phone.length > 7){
+                    Api.post("/client", client)
+                    .then((res)=>{
+                        console.log(res);
+                        setStepNumber(1)
+                        sessionStorage.setItem("client", JSON.stringify(client))
+                        sessionStorage.setItem("clientId", res.data.id)
+                    })
+                    .catch(()=> toast.error("Dados de usuário inválido"))
+                }else{
+                    toast.error("Numero de telefone inválido")
+                }
             }else{
                 toast.error("Email inválido")
             }
@@ -59,13 +62,13 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
         <Style.FirstPageCard>
                     <section>
                         <label>Contato Principal *</label>
-                        <input type="text" placeholder={oldClient.mainContact} onChange={(e)=> setMainContact(e.target.value)}></input>
+                        <input type="text" value={mainContact} onChange={(e)=> setMainContact(e.target.value)}></input>
                         <label>Contato Técnico</label>
-                        <input type="text" placeholder={oldClient.technicalContact} onChange={(e)=> setTechnicalContact(e.target.value)}></input>
+                        <input type="text" value={technicalContact} onChange={(e)=> setTechnicalContact(e.target.value)}></input>
                         <label>Email *</label>
-                        <input type="email" placeholder={oldClient.email} onChange={(e)=> setEmail(e.target.value)}></input>
+                        <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)}></input>
                         <label>Telefone *</label>
-                        <input type="number" placeholder={oldClient.phone} onChange={(e)=> setPhone(e.target.value)}></input>
+                        <input type="number" value={phone} onChange={(e)=> setPhone(e.target.value)}></input>
                     </section>
                     <div>
                         {/* <p>Utilizar calculadora personalizada?</p> */}
