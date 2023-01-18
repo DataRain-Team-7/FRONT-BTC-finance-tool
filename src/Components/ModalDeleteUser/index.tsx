@@ -6,6 +6,9 @@ import { UserTypes } from "../../types/interface";
 import * as S from "./style";
 import UserService from "../../services/user-service";
 import { useEffect } from "react";
+import Api from "../../services/api";
+import toast from "react-hot-toast";
+import { useUsers } from "../../contexts/userContext";
 
 interface ModalDeleteProps {
   user: UserTypes;
@@ -28,21 +31,21 @@ const style = {
 export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
   const [open, setOpen] = React.useState(true);
   const handleClose = () => setOpen(false);
+  const{ handleGetUsers } = useUsers()
 
-  const delUser = (id:any) => {
-    UserService.deleteUser(id);
-    handleClose()
-    getUsers()
-  }
-
-  const getUsers = () =>{
-    UserService.findAllUsers()
-  }
+  const deleteUser = (id:any) =>{
+    Api.delete(`user/${id}`).
+        then((res) => {
+          toast.success("Usuário deletado"), res;
+          handleClose();
+          handleGetUsers()
+        }).
+        catch((error) => {toast.error("Falha ao deletar usuário"), error})
+  } 
 
 
   return (
     <div>
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -58,9 +61,8 @@ export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
             <S.ButtonDropdownNo onClick={handleClose}>Não</S.ButtonDropdownNo>
             <S.ButtonDropdownYes
               onClick={() => {
-                delUser(user.id)
-                {handleClose}
-                console.log(`Excluída equipe ${user.id}`)}}
+                deleteUser(user.id)
+                {handleClose}}}
             >
               Sim
             </S.ButtonDropdownYes>

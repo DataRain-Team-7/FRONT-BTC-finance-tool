@@ -8,7 +8,6 @@ interface MocksUser {
 }
 
 const UserCard = ({ user, className }: MocksUser) => {
-  const userPrivilege = JSON.parse(localStorage.getItem("user") || "{}");
   return (
     <S.CardContainer className={className}>
       <S.CardHeader>

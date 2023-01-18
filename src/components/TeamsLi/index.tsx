@@ -2,14 +2,14 @@ import * as S from "./style";
 
 import { TeamsTypes } from "../../types/interface";
 import MenuDropdown from "../MenuDropdownTeams";
+import { useAuth } from "../../contexts/auth";
 
 interface MocksInterface {
   team: TeamsTypes;
 }
 
 const TeamsLi = ({ team }: MocksInterface) => {
-
-   const userStorage = JSON.parse(localStorage.getItem('user') || "{}")
+  const { userStorage } = useAuth()
 
 
    
@@ -17,8 +17,10 @@ const TeamsLi = ({ team }: MocksInterface) => {
   return (
     <S.TeamsLi>
       <S.LiContent>
-        <span>{team.name}</span>
-        <span>R$: {team.valuePerHour}</span>
+        <S.DivContent>
+          <span>{team.name}</span>
+          <span>R$: {team.valuePerHour}</span>
+        </S.DivContent>
         {
           userStorage.roleName === "admin" ? <MenuDropdown team={team}/> : null
         }

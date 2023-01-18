@@ -5,6 +5,7 @@ import theme from "../styles/theme";
 import { AuthProvider } from "./auth";
 import { QuestionsProvider } from "./questions";
 import { TeamProvider } from "./teamContext";
+import { UserProvider } from "./userContext";
 
 interface ProviderProps {
   children: ReactNode;
@@ -15,9 +16,11 @@ const Providers = ({ children }: ProviderProps) => {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <AuthProvider>
-        <QuestionsProvider>
-          <TeamProvider>{children}</TeamProvider>
-        </QuestionsProvider>
+          <UserProvider>
+          <QuestionsProvider>
+            <TeamProvider>{children}</TeamProvider>
+          </QuestionsProvider>
+          </UserProvider>
         </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>

@@ -4,7 +4,6 @@ export const TeamsLi = styled.li`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 10px;
     margin-bottom: 20px;
     width: 90%;
@@ -14,7 +13,7 @@ export const TeamsLi = styled.li`
     font-size: ${theme.constants.fontBody};
 
     span {
-      margin-left: 20%;
+      /* margin-left: 20%; */
     }
   `}
 `;
@@ -32,7 +31,17 @@ export const LiContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  span{
+    margin-left: 10px;
+  }
 `;
+
+export const DivContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+`
 
 export const DropdownUl = styled.ul`
   position: fixed;
