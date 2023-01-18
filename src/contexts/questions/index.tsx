@@ -19,7 +19,7 @@ export const QuestionsProvider = ({children}:QuestionsProviderProps)=>{
     const updateQuestion = () =>{
         Api.get("/question")
         .then((res)=> {
-            setQuestions(res.data); 
+            setQuestions(res.data);
             // console.log(res.data[0].alternatives[0].description)
             // console.log(res.data[0].description)
         })

@@ -164,6 +164,10 @@ export const QuestionsContainer = styled.div`
             .newHour{
               background-color: #d2d2d2;
             }
+
+            input{
+              text-align: center;
+            }
         }
       }
     }
