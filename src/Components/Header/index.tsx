@@ -9,7 +9,7 @@ import { useAuth } from '../../contexts/auth';
 
 const Header = () => {
 
-    const { userStorage } = useAuth()
+    const { userStorage, logout } = useAuth()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -27,7 +27,7 @@ const Header = () => {
                         <img src={user_default}></img>
                         <p>ViniBlue</p>
                         <p className='secondColorElement'>(Admin)</p>
-                        <p className='secondColorElement getOut'>| SAIR</p>
+                        <p className='secondColorElement getOut' onClick={()=>logout()}>| SAIR</p>
                     </div>
                     <Badge badgeContent={2} color="warning" className='badge'>
                         <Style.bell/>{" "}

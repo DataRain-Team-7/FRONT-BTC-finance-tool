@@ -38,13 +38,15 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
     })
 
     const checkTokenExpiration = ()=>{
-        const token = localStorage.getItem("token")
 
+        const token = localStorage.getItem("token");
+        token && sessionStorage.setItem("token", token);
+        
         Api.get("/user/myself")
             .then((res)=>{
                 setUserStorage(res.data)
                 setLogged(true);
-             // navegate("/inicio")    COLOCAR ROTA CORRETA AQUI
+                navigate("/home")
             })
             .catch(()=>{
                 logout();
@@ -59,19 +61,19 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
 
     const login = ({token, user, isChecked}:loginParams) =>{
         if(isChecked){
-
             localStorage.setItem("token", token)
-            user&&setUserStorage(user)
-            navigate("/home")
         }
+        sessionStorage.setItem("token", token)
         setLogged(true);
-        // navigate("/novasenha/5641565")
+        user && setUserStorage(user)
+        navigate("/home")
         toast.success("Login bem sucedido")
     }
 
     const logout = () =>{
         localStorage.clear();
-        setLogged(false);  
+        sessionStorage.clear();
+        setLogged(false);
         navigate("/");
     }
 

@@ -4,7 +4,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Radio from '@mui/material/Radio';
 import { Button } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import Api from "../../../services/api";
+import { toast } from "react-hot-toast";
 
 interface FirstPageProp {
     setStepNumber: Dispatch<SetStateAction<number>>
@@ -12,17 +14,61 @@ interface FirstPageProp {
 
 const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
 
+    const [ mainContact, setMainContact ] = useState<string>("");
+    const [ technicalContact, setTechnicalContact ] = useState<string>("");
+    const [ email, setEmail ] = useState<string>("");
+    const [ phone, setPhone ] = useState<string>("");
+
+    useEffect(()=>{
+        const localClient = JSON.parse(sessionStorage.getItem("client") || "[]")
+        setMainContact(localClient.name);
+        setTechnicalContact(localClient.companyName);
+        setEmail(localClient.email);
+        setPhone(localClient.phone);
+    },[])
+
+    
+    const handleNewClient = () =>{
+        const client = { 
+            name: mainContact,
+            companyName: technicalContact,
+            email: email,
+            phone: phone
+    }
+        
+        if(mainContact !== "" && email !== "" && phone !== ""){
+            if(email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-z]+)?$/i)){
+                if(phone.length > 7){
+                    Api.post("/client", client)
+                    .then((res)=>{
+                        console.log(res);
+                        setStepNumber(1)
+                        sessionStorage.setItem("client", JSON.stringify(client))
+                        sessionStorage.setItem("clientId", res.data.id)
+                    })
+                    .catch(()=> toast.error("Dados de usuário inválido"))
+                }else{
+                    toast.error("Numero de telefone inválido")
+                }
+            }else{
+                toast.error("Email inválido")
+            }
+        }else{
+            toast.error("Preencha os campos obrigatórios")
+        }
+    }
+
     return(
         <Style.FirstPageCard>
                     <section>
-                        <label>Nome Completo</label>
-                        <input></input>
-                        <label>Nome da empresa</label>
-                        <input></input>
-                        <label>Telefone para contato</label>
-                        <input></input>
-                        <label>Email</label>
-                        <input></input>
+                        <label>Contato Principal *</label>
+                        <input type="text" value={mainContact} onChange={(e)=> setMainContact(e.target.value)}></input>
+                        <label>Contato Técnico</label>
+                        <input type="text" value={technicalContact} onChange={(e)=> setTechnicalContact(e.target.value)}></input>
+                        <label>Email *</label>
+                        <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)}></input>
+                        <label>Telefone *</label>
+                        <input type="number" value={phone} onChange={(e)=> setPhone(e.target.value)}></input>
                     </section>
                     <div>
                         {/* <p>Utilizar calculadora personalizada?</p> */}
@@ -35,7 +81,7 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
                         </FormControl>
                     </div>
                     <div className="buttonDiv">
-                        <Button type="submit" variant="contained" className="buttonEnter" onClick={()=>setStepNumber(1)}>Iniciar</Button>
+                        <Button variant="contained" className="buttonEnter" onClick={()=> handleNewClient()}>Iniciar</Button>
                     </div>
         </Style.FirstPageCard>
     )

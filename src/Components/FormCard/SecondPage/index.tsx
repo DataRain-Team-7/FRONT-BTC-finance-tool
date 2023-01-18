@@ -2,54 +2,8 @@ import * as Style from "./style"
 import { Dispatch, SetStateAction, useState } from "react";
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import FormModal from "../FormModal";
+import { useQuestions } from "../../../contexts/questions";
 
-const questions:any = [
-    {
-        id:"4545956",
-        description: "Quem veio primeiro, o ovo ou a galinha?",
-        alternatives:[
-            {
-                id:"56156156",
-                description:"A galinha veio primeiro"
-            },
-            {
-                id:"56198561",
-                description:"O ovo veio primeiro"
-            },
-            {
-                id:"97156156",
-                description:"Os dois vieram juntos"
-            },
-            {
-                id:"56156696",
-                description:"Nenhuma das alternativas"
-            }
-        ]
-    },
-    {
-        id:"5964196",
-        description: "Com quantos paus se faz uma canoa?",
-        alternatives:[
-            {
-                id:"98915216",
-                description:"Com apenas um pau"
-            },
-            {
-                id:"41564532",
-                description:"Depende do tamando da canoa"
-            },
-            {
-                id:"567489602",
-                description:"Canoa nao se faz com pau"
-            },
-            {
-                id:"056159645",
-                description:"Muitos paus são necessários"
-            }
-        ]
-    },
-
-]
 
 interface FirstPageProp {
     setStepNumber: Dispatch<SetStateAction<number>>
@@ -70,12 +24,16 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
     const handleNext = () =>{
         if(count === questions.length-1){
             setIsModalOpen(true)
+            //aqui o questionario foi preenchido
         }else{
             setCount(count + 1)
+            //aqui deve ser adicionado cada resposta nova no objeto
         }
     }
 
     const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
+    const { questions } = useQuestions()
+    console.log(questions)
      
 
     return(
