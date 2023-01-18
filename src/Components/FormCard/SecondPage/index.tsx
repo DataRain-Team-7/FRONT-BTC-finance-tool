@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import FormModal from "../FormModal";
 import { useQuestions } from "../../../contexts/questions";
+// import React from 'react';
 
 
 interface FirstPageProp {
@@ -11,7 +12,24 @@ interface FirstPageProp {
 
 const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
 
+    const idClient = sessionStorage.getItem("clientId")
     const [ count, setCount] = useState<number>(0)
+    const [ answers, setAnswers ] =useState<any>()
+    const [ value, setValue ] = useState<string>()
+    const [ text, setText ] = useState<string>()
+
+    const data = {
+        clientId: idClient,
+        responses: answers
+    }
+
+    // [
+    //     {
+    //     "questionId": "ac06f36e-4b61-4fe8-8fd6-6ad807ac6282",
+    //     "alternativeId": "ac06f36e-4b61-4fe8-8fd6-6ad807ac6282",
+    //     "responseDetails": "Preciso que tenham estes detalhes..."
+    //     }
+    // ]
 
     const handleBack = () =>{
         if(count === 0){
@@ -33,7 +51,6 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
 
     const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
     const { questions } = useQuestions()
-    console.log(questions)
      
 
     return(
@@ -41,13 +58,13 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
             <section >
                     <h3>{`${count+1}- ${questions[count].description}`}</h3>
                 <FormControl className="FormControl">
-                    <RadioGroup onChange={()=>{}}>
+                    <RadioGroup value={value} onChange={(e)=>setValue(e.target.value)}>
                         {questions[count].alternatives.map((e:any)=>{                    
-                            return <FormControlLabel value={e.id} control={<Radio />} label={e.description} />
+                            return <FormControlLabel value={e.id} control={<Radio />} label={e.description}/>
                         })}
                     </RadioGroup>                   
                 </FormControl>
-                <textarea wrap="hard" placeholder="Comentário adicional"></textarea>
+                <textarea onChange={(e)=>setText(e.target.value)} wrap="hard" placeholder="Comentário adicional"></textarea>
                 {/* <div onClick={()=>console.log(questions[count].alternatives.map((e:any)=>{return e.description}))}>Botaão louco</div> */}
             </section>
             <div className="pageButtons">

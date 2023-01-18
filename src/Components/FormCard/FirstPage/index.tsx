@@ -41,7 +41,6 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
                 if(phone.length > 7){
                     Api.post("/client", client)
                     .then((res)=>{
-                        console.log(res);
                         setStepNumber(1)
                         sessionStorage.setItem("client", JSON.stringify(client))
                         sessionStorage.setItem("clientId", res.data.id)
