@@ -15,6 +15,8 @@ import { useAuth } from "../../contexts/auth";
 
 const Navbar = () => {
   const { userStorage } = useAuth()
+
+  // console.log(userStorage)
   const navigate = useNavigate()
   return (
     <S.NavbarContainer>
@@ -31,7 +33,7 @@ const Navbar = () => {
               Início
             </S.NavbarContentLi>
             <S.NavbarContentLi
-            onClick={() => userStorage.roleName === "admin" ? ( ()=> navigate("/users")) : 
+            onClick={() => userStorage.roleName === "admin" ?  ()=> navigate("/users") : 
             toast.error("Você não tem permissão para acessar")
             }>
               <span>
@@ -69,11 +71,11 @@ const Navbar = () => {
               </span>
               Financeiro
             </S.NavbarContentLi>
-            <S.NavbarContentLi>
+            <S.NavbarContentLi onClick={()=> navigate("/questoes")}>
               <span>
                 <BsGraphUp />
               </span>
-              Resumo de Orçamentos
+              Questionário
             </S.NavbarContentLi>
           </S.NavbarContentUl>
         </S.NavbarContent>

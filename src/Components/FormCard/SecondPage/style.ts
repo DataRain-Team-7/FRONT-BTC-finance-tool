@@ -50,6 +50,7 @@ export const SecondPageCard = styled.div`
 
                 textarea{
                     margin-left: 1px;
+                    margin-bottom: 3vh;
                     resize: none;
                     width: 100%;
                     height: 12vh;
