@@ -29,31 +29,3 @@ export const InputCreateTeam = styled.input`
   outline: none;
   padding: 5px;
 `;
-
-
-export const ButtonCancel = styled.button`
-  font-size: 20px;
-  border: 1px solid #0D78A0;
-  background-color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 30%;
-  height: 30px;
-  :hover {
-    background-color: red;
-  }
-`;
-
-export const ButtonCreate = styled.button`
-  font-size: 20px;
-  background-color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 30%;
-  height: 30px;
-  :hover {
-    background-color: green;
-  }
-`;

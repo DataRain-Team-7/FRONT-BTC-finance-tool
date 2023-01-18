@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import theme from "../styles/theme";
 
+
 export const ButtonsContainer = styled.div`
   height: 4.375rem;
   width: 100%;
