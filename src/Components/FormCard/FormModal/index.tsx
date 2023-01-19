@@ -2,9 +2,12 @@ import { Button } from "@mui/material"
 import { Dispatch, SetStateAction } from "react"
 import * as Style from "./style"
 import Modal from "react-modal";
+import Api from "../../../services/api";
+import { toast } from "react-hot-toast";
 
 interface FormModalProps {
     isModalOpen: boolean;
+    data:any;
     setIsModalOpen: Dispatch<SetStateAction<boolean>>
     setStepNumber: Dispatch<SetStateAction<number>>
 }
@@ -24,7 +27,7 @@ export const customStyles = {
     }
   }
 
-const FormModal = ({ isModalOpen, setIsModalOpen, setStepNumber }: FormModalProps) => {
+const FormModal = ({ isModalOpen, data, setIsModalOpen, setStepNumber }: FormModalProps) => {
 
     const handleCloseModal = () =>{
         setIsModalOpen(false)
@@ -32,6 +35,9 @@ const FormModal = ({ isModalOpen, setIsModalOpen, setStepNumber }: FormModalProp
 
     const handleFinish = () =>{
         setStepNumber(3)
+        Api.post("/budget-request", data)
+            .then(()=>toast.success("Deu certoooo"))
+            .catch((error)=>console.log(error))
     }
     
     return (

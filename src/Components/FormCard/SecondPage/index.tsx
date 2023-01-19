@@ -26,13 +26,6 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
         responses: answers
     }
 
-    // let teste2 = [
-    //     {
-    //     questionId: questions[count].id,
-    //     alternativeId: value,
-    //     responseDetails: text,
-    //     }
-    // ]
 
     const handleCurrentQuestion = () =>{
         let content = answers
@@ -42,7 +35,7 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
             responseDetails: text,
         }
         setAnswers(content)
-        setValue(undefined)
+        setValue("")
         setText("")
         console.log(answers)
     }
@@ -57,37 +50,34 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
     }
 
     const handleNext = () =>{
-        if(value !== undefined)setOldValue(value)      
+        if(value !== "")setOldValue(value)     
         if(count === questions.length-1){
             setIsModalOpen(true)
-            //aqui o questionario foi preenchido
+            handleCurrentQuestion()
         }else{
             handleCurrentQuestion()
             setCount(count + 1)
-            console.log(answers)
-            //aqui deve ser adicionado cada resposta nova no objeto
         }
     }
 
     return(
         <Style.SecondPageCard>
             <section >
-                    <h3>{`${count+1}- ${questions[count].description}`}</h3>
+                    <h3 onClick={()=>(console.log(data))}>{`${count+1}- ${questions[count].description}`}</h3>
                 <FormControl className="FormControl">
-                    <RadioGroup defaultValue={value} onChange={(e)=>setValue(e.target.value)}>
+                    <RadioGroup className="RadioGroup" defaultValue={value} onChange={(e)=>setValue(e.target.value)}>
                         {questions[count].alternatives.map((e:any)=>{                    
                             return <FormControlLabel key={e.id} value={e.id} control={<Radio />} label={e.description}/>
                         })}
                     </RadioGroup>                   
                 </FormControl>
                 <textarea value={text} onChange={(e)=>setText(e.target.value)} wrap="hard" placeholder="Comentário adicional"></textarea>
-                {/* <div onClick={()=>console.log(questions[count].alternatives.map((e:any)=>{return e.description}))}>Botaão louco</div> */}
             </section>
             <div className="pageButtons">
                 <Button variant="contained" className="buttonBack" onClick={()=>handleBack()}>Voltar</Button>
                 <Button variant="contained" className="buttonNext" onClick={()=>handleNext()}>Próximo</Button>
             </div>
-            {isModalOpen && <FormModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setStepNumber={setStepNumber}/>}
+            {isModalOpen && <FormModal isModalOpen={isModalOpen} data={data} setIsModalOpen={setIsModalOpen} setStepNumber={setStepNumber}/>}
         </Style.SecondPageCard>
     )
 }
