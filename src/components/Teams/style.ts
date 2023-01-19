@@ -2,13 +2,13 @@ import styled, { css } from "styled-components";
 import { AiOutlineUsergroupAdd } from "react-icons/ai"
 
 export const TeamsAllContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
 `;
 
 export const TeamsNavbar = styled.div`
-  width: 25%;
+  width: 25vw;
 `
 
 export const TeamsContainer = styled.div`
@@ -16,10 +16,26 @@ export const TeamsContainer = styled.div`
     background-color: ${theme.colors.backgroundColor};
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 75vw;
     height: 100vh;
     position: relative;
   `}
+
+  *::-webkit-scrollbar {
+    height: 95vh;
+    width: 10px;
+    border-radius: 20px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #d1d1d1; // cor de fundo do scrol
+    border-radius: 20px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #ef8e1c; // cor do scroll
+    border-radius: 20px;
+  }
 `;
 export const TeamsHeader = styled.div`
   display: flex;
@@ -40,6 +56,7 @@ export const TeamsContent = styled.div`
   width: 80%;
   height: 80%;
   margin-left: 50px;
+  overflow-y: scroll;
 `;
 
 export const TeamsSubTitle = styled.div`

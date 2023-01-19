@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
@@ -5,12 +6,13 @@ import toast from "react-hot-toast";
 import { useUsers } from "../../contexts/userContext";
 import Api from "../../services/api";
 import { UserTypes } from "../../types/interface";
+import { ButtonsContainer } from "../../utils/globalStyles";
 import * as S from "./style";
 
 interface ModalDeleteProps {
   user: UserTypes;
   openDeleteModal: boolean;
-  setOpenDeleteModal: ({props}:any) => void;
+  setOpenDeleteModal: ({ props }: any) => void;
 }
 
 const style = {
@@ -23,24 +25,29 @@ const style = {
   bgcolor: "background.paper",
   border: "0",
   boxShadow: 24,
-  borderRadius:6,
+  borderRadius: 6,
   p: 4,
 };
 
-export default function ModalDeleteUser({ user, openDeleteModal, setOpenDeleteModal }: ModalDeleteProps) {
+export default function ModalDeleteUser({
+  user,
+  openDeleteModal,
+  setOpenDeleteModal,
+}: ModalDeleteProps) {
   const handleClose = () => setOpenDeleteModal(!openDeleteModal);
-  const{ handleGetUsers } = useUsers()
+  const { handleGetUsers } = useUsers();
 
-  const deleteUser = (id:any) =>{
-    Api.delete(`user/${id}`).
-        then((res) => {
-          toast.success("Usuário deletado"), res;
-          handleClose();
-          handleGetUsers()
-        }).
-        catch((error) => {toast.error("Falha ao deletar usuário"), error})
-  } 
-
+  const deleteUser = (id: any) => {
+    Api.delete(`user/${id}`)
+      .then((res) => {
+        toast.success("Usuário deletado"), res;
+        handleClose();
+        handleGetUsers();
+      })
+      .catch((error) => {
+        toast.error("Falha ao deletar usuário"), error;
+      });
+  };
 
   return (
     <div>
@@ -56,14 +63,27 @@ export default function ModalDeleteUser({ user, openDeleteModal, setOpenDeleteMo
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
           <Box display="flex" alignItems="center" justifyContent="center">
-            <S.ButtonDropdownNo onClick={handleClose}>Não</S.ButtonDropdownNo>
-            <S.ButtonDropdownYes
-              onClick={() => {
-                deleteUser(user.id)
-                {handleClose}}}
-            >
-              Sim
-            </S.ButtonDropdownYes>
+            <ButtonsContainer>
+              <Button
+                className="buttonCancel"
+                variant="contained"
+                onClick={handleClose}
+              >
+                Não
+              </Button>
+              <Button
+                className="buttonSave"
+                variant="contained"
+                onClick={() => {
+                  deleteUser(user.id);
+                  {
+                    handleClose;
+                  }
+                }}
+              >
+                Sim
+              </Button>
+            </ButtonsContainer>
           </Box>
         </Box>
       </Modal>

@@ -1,9 +1,8 @@
-import styled, { css } from "styled-components";
 import { AiOutlineSetting } from "react-icons/ai";
-import theme from "../../styles/theme";
+import styled, { css } from "styled-components";
 
 export const ALlProfilePageContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
 `;

@@ -11,11 +11,13 @@ import * as yup from "yup";
 import { useTeam } from "../../contexts/teamContext";
 import Api from "../../services/api";
 import TeamService from "../../services/teams-service";
+import { ButtonsContainer } from "../../utils/globalStyles";
+import { Button } from "@mui/material";
 
 interface ModalEditProps {
   team: TeamsTypes;
   openEditModal: boolean;
-  setOpenEditModal: ({props}: any) => void
+  setOpenEditModal: ({ props }: any) => void;
 }
 
 interface EditTeamData {
@@ -44,9 +46,13 @@ const style = {
   p: 4,
 };
 
-export default function ModalEditTeam({ team, openEditModal, setOpenEditModal }: ModalEditProps) {
+export default function ModalEditTeam({
+  team,
+  openEditModal,
+  setOpenEditModal,
+}: ModalEditProps) {
   const handleClose = () => setOpenEditModal(!openEditModal);
-  const { handleGetTeam } = useTeam()
+  const { handleGetTeam } = useTeam();
 
   const {
     register,
@@ -66,12 +72,6 @@ export default function ModalEditTeam({ team, openEditModal, setOpenEditModal }:
       });
     handleClose();
   };
-
-  // const handleEditTeam = (data:EditTeamData) => {
-  //   const teamId =  team.id || "";
-  //   TeamService.editTeam(teamId, data)
-  //   console.log(tem)
-  // }
 
   return (
     <div>
@@ -118,8 +118,22 @@ export default function ModalEditTeam({ team, openEditModal, setOpenEditModal }:
               justifyContent="center"
               width="100%"
             >
-              <S.ButtonCancel onClick={handleClose}>Cancelar</S.ButtonCancel>
-              <S.ButtonEdit type="submit">Editar</S.ButtonEdit>
+              <ButtonsContainer>
+                <Button
+                  className="buttonCancel"
+                  variant="contained"
+                  onClick={handleClose}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  className="buttonSave"
+                  variant="contained"
+                  type="submit"
+                >
+                  Editar
+                </Button>
+              </ButtonsContainer>
             </Box>
           </S.FormEdit>
         </Box>

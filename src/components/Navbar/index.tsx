@@ -2,10 +2,8 @@ import Logo from "../../assets/img/logo.svg";
 import * as S from "./style";
 //icons
 import { toast } from "react-hot-toast";
-import {
-  AiOutlineHome, AiOutlineTeam
-} from "react-icons/ai";
-import { FaUsers } from "react-icons/fa"
+import { AiOutlineHome, AiOutlineTeam, AiOutlineUserAdd } from "react-icons/ai";
+import { FaUsers } from "react-icons/fa";
 import { BsGraphUp } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { GiRotaryPhone } from "react-icons/gi";
@@ -14,10 +12,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth";
 
 const Navbar = () => {
-  const { userStorage } = useAuth()
+  const { userStorage } = useAuth();
 
-  // console.log(userStorage)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <S.NavbarContainer>
       <S.NavbarWrapper>
@@ -26,22 +23,23 @@ const Navbar = () => {
         </S.NavbarLogo>
         <S.NavbarContent>
           <S.NavbarContentUl>
-            <S.NavbarContentLi onClick={()=> navigate("/home")}>
+            <S.NavbarContentLi onClick={() => navigate("/home")}>
               <span>
                 <AiOutlineHome />
               </span>
               Início
             </S.NavbarContentLi>
-            <S.NavbarContentLi
-            onClick={() => userStorage.roleName === "admin" ?  ()=> navigate("/users") : 
-            toast.error("Você não tem permissão para acessar")
-            }>
+            {
+                userStorage.roleName === "admin" ? (
+            <S.NavbarContentLi onClick={() => navigate("/users")}
+            >
               <span>
                 <FaUsers />
               </span>
               Usuários
-            </S.NavbarContentLi>
-            <S.NavbarContentLi onClick={()=> navigate("/teams")}>
+            </S.NavbarContentLi>) : null
+            }
+            <S.NavbarContentLi onClick={() => navigate("/teams")}>
               <span>
                 <AiOutlineTeam />
               </span>
@@ -53,13 +51,13 @@ const Navbar = () => {
               </span>
               Perfil
             </S.NavbarContentLi>
-            <S.NavbarContentLi onClick={()=> navigate("/projects")}>
+            <S.NavbarContentLi onClick={() => navigate("/projects")}>
               <span>
                 <S.ProjectIcon />
               </span>
               Projetos
             </S.NavbarContentLi>
-            <S.NavbarContentLi>
+            {/* <S.NavbarContentLi>
               <span>
                 <GiRotaryPhone />
               </span>
@@ -70,12 +68,18 @@ const Navbar = () => {
                 <MdAttachMoney />
               </span>
               Financeiro
-            </S.NavbarContentLi>
-            <S.NavbarContentLi onClick={()=> navigate("/questoes")}>
+            </S.NavbarContentLi> */}
+            <S.NavbarContentLi onClick={() => navigate("/questoes")}>
               <span>
                 <BsGraphUp />
               </span>
               Questionário
+            </S.NavbarContentLi>
+            <S.NavbarContentLi onClick={() => navigate("/new-user")}>
+              <span>
+                <AiOutlineUserAdd />
+              </span>
+              Cadastrar Usuário
             </S.NavbarContentLi>
           </S.NavbarContentUl>
         </S.NavbarContent>
