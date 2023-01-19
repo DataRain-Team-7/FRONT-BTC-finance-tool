@@ -1,17 +1,18 @@
-import * as React from "react";
+import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { UserTypes } from "../../types/interface";
-import * as S from "./style";
-import UserService from "../../services/user-service";
-import { useEffect } from "react";
-import Api from "../../services/api";
+import Typography from "@mui/material/Typography";
 import toast from "react-hot-toast";
 import { useUsers } from "../../contexts/userContext";
+import Api from "../../services/api";
+import { UserTypes } from "../../types/interface";
+import { ButtonsContainer } from "../../utils/globalStyles";
+import * as S from "./style";
 
 interface ModalDeleteProps {
   user: UserTypes;
+  openDeleteModal: boolean;
+  setOpenDeleteModal: ({ props }: any) => void;
 }
 
 const style = {
@@ -24,30 +25,34 @@ const style = {
   bgcolor: "background.paper",
   border: "0",
   boxShadow: 24,
-  borderRadius:6,
+  borderRadius: 6,
   p: 4,
 };
 
-export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
-  const [open, setOpen] = React.useState(true);
-  const handleClose = () => setOpen(false);
-  const{ handleGetUsers } = useUsers()
+export default function ModalDeleteUser({
+  user,
+  openDeleteModal,
+  setOpenDeleteModal,
+}: ModalDeleteProps) {
+  const handleClose = () => setOpenDeleteModal(!openDeleteModal);
+  const { handleGetUsers } = useUsers();
 
-  const deleteUser = (id:any) =>{
-    Api.delete(`user/${id}`).
-        then((res) => {
-          toast.success("Usuário deletado"), res;
-          handleClose();
-          handleGetUsers()
-        }).
-        catch((error) => {toast.error("Falha ao deletar usuário"), error})
-  } 
-
+  const deleteUser = (id: any) => {
+    Api.delete(`user/${id}`)
+      .then((res) => {
+        toast.success("Usuário deletado"), res;
+        handleClose();
+        handleGetUsers();
+      })
+      .catch((error) => {
+        toast.error("Falha ao deletar usuário"), error;
+      });
+  };
 
   return (
     <div>
       <Modal
-        open={open}
+        open={openDeleteModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -58,14 +63,27 @@ export default function ModalDeleteTeam({ user }: ModalDeleteProps) {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
           <Box display="flex" alignItems="center" justifyContent="center">
-            <S.ButtonDropdownNo onClick={handleClose}>Não</S.ButtonDropdownNo>
-            <S.ButtonDropdownYes
-              onClick={() => {
-                deleteUser(user.id)
-                {handleClose}}}
-            >
-              Sim
-            </S.ButtonDropdownYes>
+            <ButtonsContainer>
+              <Button
+                className="buttonCancel"
+                variant="contained"
+                onClick={handleClose}
+              >
+                Não
+              </Button>
+              <Button
+                className="buttonSave"
+                variant="contained"
+                onClick={() => {
+                  deleteUser(user.id);
+                  {
+                    handleClose;
+                  }
+                }}
+              >
+                Sim
+              </Button>
+            </ButtonsContainer>
           </Box>
         </Box>
       </Modal>

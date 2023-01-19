@@ -1,36 +1,35 @@
-import { Routes, Route } from "react-router-dom"
-import Teams from "./components/Teams";
-import Login from "./Pages/Login";
-import CreateAccount from "./Pages/CreateAccount";
-import RecoverPasswordPage from "./Pages/RecoverPassword";
-import FormPage from "./Pages/Form";
-import UsersPage from "./components/Users";
+import { Route, Routes } from "react-router-dom";
+import Profile from "./components/Profile";
 import ProjectPage from "./components/ProjectPage";
-import PreSaleBudget from "./Pages/PreSaleBudget";
+import Teams from "./components/Teams";
+import UsersPage from "./components/Users";
+import CreateAccount from "./Pages/CreateAccount";
 import FinancialBudget from "./Pages/FinancialBudget";
+import FormPage from "./Pages/Form";
 import HomePage from "./Pages/Home";
+import Login from "./Pages/Login";
+import PreSaleBudget from "./Pages/PreSaleBudget";
 import QuestionsPage from "./Pages/QuestionsPage";
-
+import RecoverPasswordPage from "./Pages/RecoverPassword";
 
 const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/cadastro" element={<CreateAccount />} />
+      <Route path="/new-user" element={<CreateAccount />} />
       <Route path="/teams" element={<Teams />} />
-      <Route path="/users" element={<UsersPage/>} />
-      <Route path="/projects" element={<ProjectPage/>} />
-      <Route path="/novasenha/:param" element={<RecoverPasswordPage/>} />
-      <Route path="/form" element={<FormPage/>} />
-      <Route path="/prevenda" element={<PreSaleBudget/>} />
-      <Route path="/financeiro" element={<FinancialBudget/>} />
-      <Route path="/home" element={<HomePage/>} />
-      <Route path="/questoes" element={<QuestionsPage/>} />
-
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/users" element={<UsersPage />} />
+      <Route path="/projects" element={<ProjectPage />} />
+      <Route path="/novasenha/:param" element={<RecoverPasswordPage />} />
+      <Route path="/form" element={<FormPage />} />
+      <Route path="/prevenda" element={<PreSaleBudget />} />
+      <Route path="/financeiro" element={<FinancialBudget />} />
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/questoes" element={<QuestionsPage />} />
+      {/* <Route path="/new-user" element={<CreateAccountCard />} /> */}
     </Routes>
-
   );
 };
 
 export default Router;
- 

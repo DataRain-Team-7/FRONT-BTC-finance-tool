@@ -8,7 +8,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../contexts/auth";
 import Api from "../../services/api";
-import ForgotPassword from "../ModalForgotPassword";
+// import ForgotPassword from "../ModalForgotPassword";
 
 
 
@@ -32,7 +32,7 @@ const LoginCard = () => {
   const [isChecked, setIsChecked] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const navigate= useNavigate();
-  const { login, user } = useAuth();
+  const { login, userStorage } = useAuth();
 
 
   const {
@@ -68,7 +68,7 @@ const handleErrorMessage = () =>{
 }
 
 const handleTeste = () =>{
-  console.log(user)
+  console.log(userStorage)
 }
 
   return (
@@ -107,7 +107,7 @@ const handleTeste = () =>{
                       <Button type="submit" variant="contained" className="buttonEnter" onClick={()=>handleErrorMessage()}>Entrar</Button>
                     </section>
                 </form>
-                <div className="bottonContainer">
+                {/* <div className="bottonContainer">
                   <div className="or">
                     <Style.Line/>
                     <p onClick={()=>handleTeste()}>OU</p>
@@ -116,7 +116,7 @@ const handleTeste = () =>{
                   <Style.NewAccount onClick={()=>navigate('/cadastro')}>
                     Clique aqui para criar uma nova conta
                   </Style.NewAccount>
-                </div>
+                </div> */}
                 </Style.LoginCard>
           </Style.LoginContainer>
     </div>

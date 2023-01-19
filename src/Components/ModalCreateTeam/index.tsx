@@ -1,18 +1,18 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
 import { TeamsTypes } from "../../types/interface";
 import * as S from "./style";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import * as yup from "yup";
-import TeamService from "../../services/teams-service";
-import { useEffect, useState } from "react";
 import { useTeam } from "../../contexts/teamContext";
 import Api from "../../services/api";
-import toast from "react-hot-toast";
+import { ButtonsContainer } from "../../utils/globalStyles";
+
 
 interface ModalCreateProps {
   team: TeamsTypes;
@@ -36,7 +36,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 500,
-  height: 300,
+  height: 350,
   bgcolor: "background.paper",
   border: "0",
   boxShadow: 24,
@@ -46,14 +46,15 @@ const style = {
 
 interface ModalProps {
   openCreateModal: boolean;
-  setOpenCreateModal: ({props}:any) => void;
+  setOpenCreateModal: ({ props }: any) => void;
 }
 
-export default function ModalCreateTeam({setOpenCreateModal, openCreateModal}:ModalProps) {
+export default function ModalCreateTeam({
+  setOpenCreateModal,
+  openCreateModal,
+}: ModalProps) {
   const handleClose = () => setOpenCreateModal(!openCreateModal);
-  const { handleGetTeam } = useTeam()
-  
-
+  const { handleGetTeam } = useTeam();
 
   const {
     register,
@@ -61,20 +62,20 @@ export default function ModalCreateTeam({setOpenCreateModal, openCreateModal}:Mo
     formState: { errors },
   } = useForm<CreateTeamData>({ resolver: yupResolver(createTeamSchema) });
 
-const handleCreateTeam = (data: CreateTeamData) =>{
-  Api.post("team", data)
-  .then((res) => {
-    res;
-    toast.success("Time criado com sucesso");
-    handleClose()
-    handleGetTeam()
-  })
-  .catch((error) => {
-    error;
-    toast.error("Falha ao criar time");
-  });
-  handleClose()
-}
+  const handleCreateTeam = (data: CreateTeamData) => {
+    Api.post("team", data)
+      .then((res) => {
+        res;
+        toast.success("Time criado com sucesso");
+        handleClose();
+        handleGetTeam();
+      })
+      .catch((error) => {
+        error;
+        toast.error("Falha ao criar time");
+      });
+    handleClose();
+  };
 
   return (
     <div>
@@ -100,19 +101,13 @@ const handleCreateTeam = (data: CreateTeamData) =>{
             <S.LabelCreate htmlFor="name">
               {" "}
               Nome da Equipe:
-              <S.InputCreateTeam
-                type="text"
-                {...register("name")}
-              />
+              <S.InputCreateTeam type="text" {...register("name")} />
             </S.LabelCreate>
 
             <S.LabelCreate htmlFor="valuePerHour">
               {" "}
               Valor hora R$:
-              <S.InputCreateTeam
-                type="text"
-                {...register("valuePerHour")}
-              />
+              <S.InputCreateTeam type="text" {...register("valuePerHour")} />
             </S.LabelCreate>
             <Box
               display="flex"
@@ -120,8 +115,22 @@ const handleCreateTeam = (data: CreateTeamData) =>{
               justifyContent="center"
               width="100%"
             >
-              <S.ButtonCancel onClick={handleClose}>Cancelar</S.ButtonCancel>
-              <S.ButtonCreate type="submit">Criar</S.ButtonCreate>
+              <ButtonsContainer>
+                <Button
+                  variant="contained"
+                  className="buttonCancel"
+                  onClick={handleClose}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  variant="contained"
+                  className="buttonSave"
+                  type="submit"
+                >
+                  Criar
+                </Button>
+              </ButtonsContainer>
             </Box>
           </S.FormCreate>
         </Box>

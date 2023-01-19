@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "../../contexts/auth";
 import { useTeam } from "../../contexts/teamContext";
 import Header from "../Header";
 import ModalCreateTeam from "../ModalCreateTeam";
@@ -14,7 +15,8 @@ const Teams = () => {
     handleGetTeam()
   },[])
 
-  const user = true;
+  const { userStorage } = useAuth()
+
   return (
     <>
       <Header />
@@ -32,7 +34,7 @@ const Teams = () => {
               <p>Valor da Hora</p>
             </S.TeamsSubTitle>
             <S.TeamsUl>
-              {user ? (
+              {userStorage.roleName === "admin" ? (
                 <S.TeamMockedLi>
                   <S.TeamMockedLiContent>
                     <span>Cadastrar outra equipe</span>

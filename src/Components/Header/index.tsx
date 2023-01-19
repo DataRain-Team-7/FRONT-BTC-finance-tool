@@ -1,11 +1,11 @@
-import * as Style from './style'
-import user_default from '../../assets/images/user_default.png'
-import logo from '../../assets/images/logo.png'
 import { Badge } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import React from 'react';
+import logo from '../../assets/images/logo.png';
+import user_default from '../../assets/images/user_default.png';
 import { useAuth } from '../../contexts/auth';
+import * as Style from './style';
 
 const Header = () => {
 
@@ -25,7 +25,7 @@ const Header = () => {
                 <div className='animate__animated animate__fadeInLeftBig animate__delay-1s'>
                     <div>
                         <img src={user_default}></img>
-                        <p>ViniBlue</p>
+                        <p>{userStorage.name}</p>
                         <p className='secondColorElement'>(Admin)</p>
                         <p className='secondColorElement getOut' onClick={()=>logout()}>| SAIR</p>
                     </div>

@@ -1,25 +1,27 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
 import { UserTypes } from "../../types/interface";
 import * as S from "./style";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import UserService from "../../services/user-service";
+import { Button } from "@mui/material";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useAuth } from "../../contexts/auth";
+import Api from "../../services/api";
 
-interface ModalEditProps {
-  user: UserTypes;
+interface ModalEditUserProps {
+  userStorage: UserTypes;
+  openModal: boolean;
+  setOpenModal: ({ props }: any) => void;
 }
 
 interface EditUserData {
   name: string;
   email: string;
-  position: string;
+  currentPassword?: string;
+  password?: string;
+  confirmPassword?: string;
 }
 
 const style = {
@@ -27,8 +29,8 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
-  height: 400,
+  width: 800,
+  height: 500,
   bgcolor: "background.paper",
   border: "0",
   boxShadow: 24,
@@ -36,37 +38,90 @@ const style = {
   p: 4,
 };
 
-const updateUserSchema = yup.object().shape({
-  name: yup.string().required("Nome do usuário obrigatório"),
+export default function ModalEditUser({
+  userStorage,
+  openModal,
+  setOpenModal,
+}: ModalEditUserProps) {
+  const handleClose = () => setOpenModal(!openModal);
+  const [values, setValues] = useState<any>({});
+  const { getUserByToken } = useAuth();
 
-  email: yup
-    .string()
-    .email("Formato de e-mail inválido")
-    .required("E-mail obrigatório"),
+  const handleEdit = () => {
 
-  position: yup.string().required("Campo obrigatório"),
-});
+    //validação manuel se a senha possui números, letras e caracteres especiais
+    const senha = new RegExp(
+      "^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!:;/|.()])[0-9a-zA-Z$*&@#!:;/|.()]{8,}$"
+    );
 
-export default function ModalEditUser({ user }: ModalEditProps) {
-  const [open, setOpen] = React.useState(true);
-  const handleClose = () => setOpen(false);
+    //validação manual = se o nome possui apenas letras
+    const onlyString = new RegExp(
+      "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"
+    );
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<EditUserData>({ resolver: yupResolver(updateUserSchema) });
+    if (values.password) {
+      let validation = senha.test(values.password);
+      if (!validation) {
+        toast.error(`É preciso ter pelo menos uma letra maiuscula
+        uma minuscula
+         um simbolo(# @ *)
+          e um numero`);
+        return;
+      }
+    }
 
-  const handleEditUser = (values: EditUserData) => {
-    const userId = user.id || "";
-    UserService.editUser(userId, values);
-    UserService.findAllUsers()
+    if (values.name) {
+      let validation = onlyString.test(values.name);
+      if (!validation) {
+        toast.error("O nome deve conter apenas letras");
+        return;
+      }
+    }
+    if (values.password !== values.confirmPassword) {
+      toast.error("As senhas não coincidem ");
+    } else {
+      Api.patch("/user", values)
+        .then((res) => {
+          res;
+          toast.success("Usuário editado");
+          getUserByToken();
+        })
+        .catch((error) => {
+          error;
+          toast.error("Erro ao editar usuário");
+        });
+      handleClose();
+    }
+  };
+
+  const testeRegex = () => {
+    const a = "Abcd@1234";
+    const b = "12314123";
+
+    const senha = new RegExp(
+      "^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!:;/|.()])[0-9a-zA-Z$*&@#!:;/|.()]{8,}$"
+    );
+
+    const onlyNumbers = new RegExp("^[0-9]+$");
+
+    const onlyString = new RegExp(
+      "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"
+    );
+    console.log(senha.test(a));
+    console.log(senha.test(b));
+  };
+
+  const handleChangesValues = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValues((values: EditUserData) => ({
+      ...values,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   return (
     <div>
       <Modal
-        open={open}
+        open={openModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -82,14 +137,14 @@ export default function ModalEditUser({ user }: ModalEditProps) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Editar Usuário
           </Typography>
-          <S.FormEdit onSubmit={handleSubmit(handleEditUser)}>
+          <S.FormEdit onSubmit={(e) => e.preventDefault()}>
             <S.LabelEdit htmlFor="name">
               {" "}
               Nome:
               <S.InputEditUser
-                defaultValue={user.name}
                 type="text"
-                {...register("name")}
+                onChange={handleChangesValues}
+                name="name"
               />
             </S.LabelEdit>
 
@@ -97,19 +152,37 @@ export default function ModalEditUser({ user }: ModalEditProps) {
               {" "}
               Email:
               <S.InputEditUser
-                defaultValue={user.email}
+                name="email"
                 type="email"
-                {...register("email")}
+                onChange={handleChangesValues}
               />
             </S.LabelEdit>
 
-            <S.LabelEdit htmlFor="position">
+            <S.LabelEdit htmlFor="currentPassword">
               {" "}
-              Cargo:
+              Senha Atual:
               <S.InputEditUser
-                defaultValue={user.position}
-                type="text"
-                {...register("position")}
+                name="currentPassword"
+                type="password"
+                onChange={handleChangesValues}
+              />
+            </S.LabelEdit>
+            <S.LabelEdit htmlFor="password">
+              {" "}
+              Nova Senha
+              <S.InputEditUser
+                name="password"
+                type="password"
+                onChange={handleChangesValues}
+              />
+            </S.LabelEdit>
+            <S.LabelEdit htmlFor="confirmPassword">
+              {" "}
+              Repita Senha:
+              <S.InputEditUser
+                name="confirmPassword"
+                type="password"
+                onChange={handleChangesValues}
               />
             </S.LabelEdit>
             <Box
@@ -118,8 +191,23 @@ export default function ModalEditUser({ user }: ModalEditProps) {
               justifyContent="center"
               width="100%"
             >
-              <S.ButtonCancel onClick={handleClose}>Cancelar</S.ButtonCancel>
-              <S.ButtonEdit type="submit">Editar</S.ButtonEdit>
+              <S.ButtonsContainer>
+                <Button
+                  className="buttonCancel"
+                  variant="contained"
+                  onClick={handleClose}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  className="buttonSave"
+                  onClick={() => handleEdit()}
+                >
+                  Editar
+                </Button>
+              </S.ButtonsContainer>
             </Box>
           </S.FormEdit>
         </Box>
@@ -127,3 +215,4 @@ export default function ModalEditUser({ user }: ModalEditProps) {
     </div>
   );
 }
+

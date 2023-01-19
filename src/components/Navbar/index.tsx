@@ -1,19 +1,20 @@
-import * as S from "./style";
 import Logo from "../../assets/img/logo.svg";
+import * as S from "./style";
 //icons
-import {
-  AiOutlineHome,
-  AiOutlineUser,
-  AiOutlineTeam,
-  AiOutlineMessage,
-} from "react-icons/ai";
+import { toast } from "react-hot-toast";
+import { AiOutlineHome, AiOutlineTeam, AiOutlineUserAdd } from "react-icons/ai";
+import { FaUsers } from "react-icons/fa";
+import { BsGraphUp } from "react-icons/bs";
+import { CgProfile } from "react-icons/cg";
 import { GiRotaryPhone } from "react-icons/gi";
 import { MdAttachMoney } from "react-icons/md";
-import { BsGraphUp } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/auth";
 
 const Navbar = () => {
-  const navigate = useNavigate()
+  const { userStorage } = useAuth();
+
+  const navigate = useNavigate();
   return (
     <S.NavbarContainer>
       <S.NavbarWrapper>
@@ -22,37 +23,41 @@ const Navbar = () => {
         </S.NavbarLogo>
         <S.NavbarContent>
           <S.NavbarContentUl>
-            <S.NavbarContentLi onClick={()=> navigate("/home")}>
+            <S.NavbarContentLi onClick={() => navigate("/home")}>
               <span>
                 <AiOutlineHome />
               </span>
               Início
             </S.NavbarContentLi>
-            <S.NavbarContentLi onClick={()=> navigate("/users")}>
+            {
+                userStorage.roleName === "admin" ? (
+            <S.NavbarContentLi onClick={() => navigate("/users")}
+            >
               <span>
-                <AiOutlineUser />
+                <FaUsers />
               </span>
               Usuários
-            </S.NavbarContentLi>
-            <S.NavbarContentLi onClick={()=> navigate("/teams")}>
+            </S.NavbarContentLi>) : null
+            }
+            <S.NavbarContentLi onClick={() => navigate("/teams")}>
               <span>
                 <AiOutlineTeam />
               </span>
               Equipes
             </S.NavbarContentLi>
-            <S.NavbarContentLi>
+            <S.NavbarContentLi onClick={() => navigate("/profile")}>
               <span>
-                <AiOutlineMessage />
+                <CgProfile />
               </span>
-              Mensagens
+              Perfil
             </S.NavbarContentLi>
-            <S.NavbarContentLi onClick={()=> navigate("/projects")}>
+            <S.NavbarContentLi onClick={() => navigate("/projects")}>
               <span>
                 <S.ProjectIcon />
               </span>
               Projetos
             </S.NavbarContentLi>
-            <S.NavbarContentLi>
+            {/* <S.NavbarContentLi>
               <span>
                 <GiRotaryPhone />
               </span>
@@ -63,12 +68,18 @@ const Navbar = () => {
                 <MdAttachMoney />
               </span>
               Financeiro
-            </S.NavbarContentLi>
-            <S.NavbarContentLi onClick={()=> navigate("/questoes")}>
+            </S.NavbarContentLi> */}
+            <S.NavbarContentLi onClick={() => navigate("/questoes")}>
               <span>
                 <BsGraphUp />
               </span>
               Questionário
+            </S.NavbarContentLi>
+            <S.NavbarContentLi onClick={() => navigate("/new-user")}>
+              <span>
+                <AiOutlineUserAdd />
+              </span>
+              Cadastrar Usuário
             </S.NavbarContentLi>
           </S.NavbarContentUl>
         </S.NavbarContent>
