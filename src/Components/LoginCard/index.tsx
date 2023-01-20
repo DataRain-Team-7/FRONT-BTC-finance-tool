@@ -32,7 +32,7 @@ const LoginCard = () => {
   const [isChecked, setIsChecked] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const navigate= useNavigate();
-  const { login, user } = useAuth();
+  const { login, userStorage } = useAuth();
 
 
   const {
@@ -65,10 +65,6 @@ const handleErrorMessage = () =>{
   }else{
     clearErrors
   }
-}
-
-const handleTeste = () =>{
-  console.log(user)
 }
 
   return (
@@ -110,7 +106,7 @@ const handleTeste = () =>{
                 <div className="bottonContainer">
                   <div className="or">
                     <Style.Line/>
-                    <p onClick={()=>handleTeste()}>OU</p>
+                    <p>OU</p>
                     <Style.Line/>
                   </div>
                   <Style.NewAccount onClick={()=>navigate('/cadastro')}>

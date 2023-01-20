@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import FormModal from "../FormModal";
 import { useQuestions } from "../../../contexts/questions";
+import toast from "react-hot-toast";
 // import React from 'react';
 
 
@@ -49,16 +50,29 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
         setValue(oldValue)
     }
 
-    const handleNext = () =>{
-        if(value !== "")setOldValue(value)     
-        if(count === questions.length-1){
-            setIsModalOpen(true)
-            handleCurrentQuestion()
+    const validationNext = () =>{
+        if(value == "" || value == undefined){
+            return false
         }else{
-            handleCurrentQuestion()
-            setCount(count + 1)
+            return true
         }
     }
+
+    const handleNext = () =>{
+        if(text !== "" || validationNext()){
+            if(value !== "")setOldValue(value)     
+            if(count === questions.length-1){
+                setIsModalOpen(true)
+                handleCurrentQuestion()
+            }else{
+                handleCurrentQuestion()
+                setCount(count + 1)
+            }
+        }else{
+            toast.error("Resposta inválida")
+        }
+    }
+
 
     return(
         <Style.SecondPageCard>

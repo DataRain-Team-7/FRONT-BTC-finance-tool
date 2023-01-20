@@ -36,7 +36,7 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
             phone: phone
     }
         
-        if(mainContact !== "" && email !== "" && phone !== ""){
+        if(mainContact !== undefined && email !== undefined && phone !== undefined){
             if(email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-z]+)?$/i)){
                 if(phone.length > 7){
                     Api.post("/client", client)
@@ -53,6 +53,7 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
                 toast.error("Email inválido")
             }
         }else{
+            
             toast.error("Preencha os campos obrigatórios")
         }
     }
@@ -70,7 +71,6 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
                         <input type="number" value={phone} onChange={(e)=> setPhone(e.target.value)}></input>
                     </section>
                     <div>
-                        {/* <p>Utilizar calculadora personalizada?</p> */}
                         <FormControl>
                             <p>Utilizar calculadora personalizada?</p>
                             <RadioGroup row className="RadioGroup" defaultValue={false}>
