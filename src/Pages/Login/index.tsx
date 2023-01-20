@@ -1,6 +1,6 @@
 import * as Styled from './style'
-import LoginCard from '../../Components/LoginCard'
-import TopBar from '../../Components/TopBar'
+import LoginCard from '../../components/LoginCard'
+import TopBar from '../../components/TopBar'
 
 const LoginPage = () => {
   return (

@@ -1,6 +1,6 @@
 import * as Styled from "./style";
-import TopBar from "../../Components/TopBar";
-import CreateAccountCard from "../../Components/CreateAccountCard";
+import TopBar from "../../components/TopBar";
+import CreateAccountCard from "../../components/CreateAccountCard";
 
 const CreateAccount = () => {
   return (

@@ -1,13 +1,10 @@
 import Logo from "../../assets/img/logo.svg";
 import * as S from "./style";
 //icons
-import { toast } from "react-hot-toast";
 import { AiOutlineHome, AiOutlineTeam, AiOutlineUserAdd } from "react-icons/ai";
-import { FaUsers } from "react-icons/fa";
 import { BsGraphUp } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
-import { GiRotaryPhone } from "react-icons/gi";
-import { MdAttachMoney } from "react-icons/md";
+import { FaUsers } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth";
 
@@ -29,16 +26,14 @@ const Navbar = () => {
               </span>
               Início
             </S.NavbarContentLi>
-            {
-                userStorage.roleName === "admin" ? (
-            <S.NavbarContentLi onClick={() => navigate("/users")}
-            >
-              <span>
-                <FaUsers />
-              </span>
-              Usuários
-            </S.NavbarContentLi>) : null
-            }
+            {userStorage.roleName === "admin" ? (
+              <S.NavbarContentLi onClick={() => navigate("/users")}>
+                <span>
+                  <FaUsers />
+                </span>
+                Usuários
+              </S.NavbarContentLi>
+            ) : null}
             <S.NavbarContentLi onClick={() => navigate("/teams")}>
               <span>
                 <AiOutlineTeam />
@@ -57,30 +52,20 @@ const Navbar = () => {
               </span>
               Projetos
             </S.NavbarContentLi>
-            {/* <S.NavbarContentLi>
-              <span>
-                <GiRotaryPhone />
-              </span>
-              Pré Venda
-            </S.NavbarContentLi>
-            <S.NavbarContentLi>
-              <span>
-                <MdAttachMoney />
-              </span>
-              Financeiro
-            </S.NavbarContentLi> */}
             <S.NavbarContentLi onClick={() => navigate("/questoes")}>
               <span>
                 <BsGraphUp />
               </span>
               Questionário
             </S.NavbarContentLi>
-            <S.NavbarContentLi onClick={() => navigate("/new-user")}>
-              <span>
-                <AiOutlineUserAdd />
-              </span>
-              Cadastrar Usuário
-            </S.NavbarContentLi>
+            {userStorage.roleName === "admin" ? (
+              <S.NavbarContentLi onClick={() => navigate("/new-user")}>
+                <span>
+                  <AiOutlineUserAdd />
+                </span>
+                Cadastrar Usuário
+              </S.NavbarContentLi>
+            ) : null}
           </S.NavbarContentUl>
         </S.NavbarContent>
       </S.NavbarWrapper>
