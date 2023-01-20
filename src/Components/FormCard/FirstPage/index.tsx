@@ -21,71 +21,63 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
     const [ technicalContact, setTechnicalContact ] = useState<string>();
     const [ technicalContactEmail, setTechnicalContactEmail ] = useState<string>();
     const [ technicalContactPhone, setTechnicalContactPhone ] = useState<string>();
-
+    
+    const localClient = JSON.parse(sessionStorage.getItem("client") || "[]")
+    const clientId = sessionStorage.getItem("clientId")
+    
     useEffect(()=>{
-        const localClient = JSON.parse(sessionStorage.getItem("client") || "[]")
-        setMainContact(localClient.name);
-        setTechnicalContact(localClient.companyName);
+        setCompanyName(localClient.companyName)
+        setMainContact(localClient.mainContact);
         setEmail(localClient.email);
         setPhone(localClient.phone);
+        setTechnicalContact(localClient.technicalContact);
+        setTechnicalContactEmail(localClient.technicalContactEmail)
+        setTechnicalContactPhone(localClient.technicalContactPhone)
     },[])
 
-    //   companyName: string;
-    //   mainContact: string;
-    //   email: string;
-    //   phone: string;
-    //   technicalContact?: string;
-    //   technicalContactEmail?: string;
-    //   technicalContactPhone?: string;
-    
     const handleNewClient = () =>{
         const client = { 
-            companyName: companyName,
-            name: mainContact,
             email: email,
             phone: phone,
+            companyName: companyName,
+            mainContact: mainContact,
             technicalContact: technicalContact,
-            technicalContactEmail: technicalContactEmail,
             technicalContactPhone: technicalContactPhone,
-            projectName: undefined,
-            timeProject: undefined,
-            applicationDescription: undefined
+            technicalContactEmail: technicalContactEmail      
     }
-
-    technicalContactEmail
-    technicalContactPhone
 
     const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-z]+)?$/i
         
         if(companyName !== "" && mainContact !== "" && email !== "" && phone !== ""){
             if(email.match(regex)){
                 if(phone.length > 7){
-                    console.log(client)
-                    Api.post("/client", client)
-                    .then((res)=>{
-                        console.log(client)
-                        setStepNumber(1)
-                        sessionStorage.setItem("client", JSON.stringify(client))
-                        sessionStorage.setItem("clientId", res.data.id)
-                    })
-                    .catch(()=> toast.error("Dados de usuário inválido"))
+                    if(clientId){
+                        Api.patch(`/client/${clientId}`, client)
+                            .then((res)=>{
+                                setStepNumber(1)
+                                sessionStorage.setItem("client", JSON.stringify(client))
+                            })
+                            .catch(()=>{toast.error("Dados de usuário inválido")})
+                    }else{
+                        Api.post("/client", client)
+                            .then((res)=>{
+                                setStepNumber(1)
+                                sessionStorage.setItem("client", JSON.stringify(client))
+                                sessionStorage.setItem("clientId", res.data.id)
+                            })
+                            .catch(()=> toast.error("Dados de usuário inválido"))
+                    }
+
                 }else{
                     toast.error("Numero de telefone inválido")
                 }
             }else{
                 toast.error("Email inválido")
             }
-        }else{
-            
+        }else{ 
             toast.error("Preencha os campos obrigatórios")
         }
     }
-
-
-
-//   projectName?: string;
-//   timeProject?: string;
-//   applicationDescription?: string;
 
     return(
         <Style.FirstPageCard>

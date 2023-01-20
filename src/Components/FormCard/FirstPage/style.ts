@@ -45,8 +45,7 @@ export const FirstPageCard = styled.form`
                     padding: 11px 9px;
                     box-sizing: border-box;
                     width: 95%;
-                    cursor: pointer;
-                    color: ${theme.colors.inputFontColor};
+                    color: ${theme.colors.fundamentalColor};
                 }
             }
 
