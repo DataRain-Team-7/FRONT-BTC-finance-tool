@@ -8,6 +8,7 @@ import { UserTypes } from "../../types/interface";
 import ModalDeleteUser from "../ModalDeleteUser";
 import ModalEditUser from "../ModalEditUser";
 import { useAuth } from "../../contexts/auth";
+import ModalEditRole from "../ModalEditRole";
 
 interface MenuProps {
   user: UserTypes;
@@ -16,6 +17,7 @@ interface MenuProps {
 export default function BasicMenu({ user }: MenuProps) {
   const [openDeleteModal, setOpenDeleteModal] = React.useState<boolean>(false);
   const [openEditModal, setOpenEditModal] = React.useState<boolean>(false);
+  const [openEditRole, setOpenEditRole] = React.useState<boolean>(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -24,8 +26,7 @@ export default function BasicMenu({ user }: MenuProps) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const { userStorage } = useAuth()
-
+  const { userStorage } = useAuth();
 
   return (
     <div>
@@ -48,15 +49,26 @@ export default function BasicMenu({ user }: MenuProps) {
         }}
       >
         {userStorage.roleName === "admin" ? (
-          <MenuItem
-            className="MenuItem"
-            onClick={() => {
-              handleClose();
-              setOpenDeleteModal(!openDeleteModal);
-            }}
-          >
-            <BsTrash /> Excluir
-          </MenuItem>
+          <div>
+            <MenuItem
+              className="MenuItem"
+              onClick={() => {
+                handleClose();
+                setOpenDeleteModal(!openDeleteModal);
+              }}
+            >
+              <BsTrash /> Excluir
+            </MenuItem>
+            <MenuItem
+              className="MenuItem"
+              onClick={() => {
+                setOpenEditRole(!openEditRole);
+                handleClose();
+              }}
+            >
+              <BsPencil /> Editar Role
+            </MenuItem>
+          </div>
         ) : (
           <MenuItem
             selected
@@ -70,10 +82,29 @@ export default function BasicMenu({ user }: MenuProps) {
           </MenuItem>
         )}
       </Menu>
+      {openEditRole ? (
+        <ModalEditRole
+          openEditRole={openEditRole}
+          setOpenEditRole={setOpenEditRole}
+          user={user}
+        />
+      ) : null}
 
-      {openDeleteModal ? <ModalDeleteUser user={user} openDeleteModal={openDeleteModal} setOpenDeleteModal={setOpenDeleteModal} /> : null}
+      {openDeleteModal ? (
+        <ModalDeleteUser
+          user={user}
+          openDeleteModal={openDeleteModal}
+          setOpenDeleteModal={setOpenDeleteModal}
+        />
+      ) : null}
 
-      {openEditModal ? <ModalEditUser userStorage={user} openModal={openEditModal} setOpenModal={setOpenEditModal} /> : null}
+      {openEditModal ? (
+        <ModalEditUser
+          userStorage={user}
+          openModal={openEditModal}
+          setOpenModal={setOpenEditModal}
+        />
+      ) : null}
     </div>
   );
 }
