@@ -13,11 +13,14 @@ interface FirstPageProp {
 }
 
 const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
-
+    
+    const [ companyName, setCompanyName ] = useState<string>("");
     const [ mainContact, setMainContact ] = useState<string>("");
-    const [ technicalContact, setTechnicalContact ] = useState<string>("");
     const [ email, setEmail ] = useState<string>("");
     const [ phone, setPhone ] = useState<string>("");
+    const [ technicalContact, setTechnicalContact ] = useState<string>();
+    const [ technicalContactEmail, setTechnicalContactEmail ] = useState<string>();
+    const [ technicalContactPhone, setTechnicalContactPhone ] = useState<string>();
 
     useEffect(()=>{
         const localClient = JSON.parse(sessionStorage.getItem("client") || "[]")
@@ -27,20 +30,40 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
         setPhone(localClient.phone);
     },[])
 
+    //   companyName: string;
+    //   mainContact: string;
+    //   email: string;
+    //   phone: string;
+    //   technicalContact?: string;
+    //   technicalContactEmail?: string;
+    //   technicalContactPhone?: string;
     
     const handleNewClient = () =>{
         const client = { 
+            companyName: companyName,
             name: mainContact,
-            companyName: technicalContact,
             email: email,
-            phone: phone
+            phone: phone,
+            technicalContact: technicalContact,
+            technicalContactEmail: technicalContactEmail,
+            technicalContactPhone: technicalContactPhone,
+            projectName: undefined,
+            timeProject: undefined,
+            applicationDescription: undefined
     }
+
+    technicalContactEmail
+    technicalContactPhone
+
+    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-z]+)?$/i
         
-        if(mainContact !== undefined && email !== undefined && phone !== undefined){
-            if(email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-z]+)?$/i)){
+        if(companyName !== "" && mainContact !== "" && email !== "" && phone !== ""){
+            if(email.match(regex)){
                 if(phone.length > 7){
+                    console.log(client)
                     Api.post("/client", client)
                     .then((res)=>{
+                        console.log(client)
                         setStepNumber(1)
                         sessionStorage.setItem("client", JSON.stringify(client))
                         sessionStorage.setItem("clientId", res.data.id)
@@ -58,17 +81,29 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
         }
     }
 
+
+
+//   projectName?: string;
+//   timeProject?: string;
+//   applicationDescription?: string;
+
     return(
         <Style.FirstPageCard>
                     <section>
+                        <label>Empresa *</label>
+                        <input type="text" value={companyName} onChange={(e)=> setCompanyName(e.target.value)}></input>
                         <label>Contato Principal *</label>
                         <input type="text" value={mainContact} onChange={(e)=> setMainContact(e.target.value)}></input>
-                        <label>Contato Técnico</label>
-                        <input type="text" value={technicalContact} onChange={(e)=> setTechnicalContact(e.target.value)}></input>
                         <label>Email *</label>
-                        <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)}></input>
+                        <input type="text" value={email} onChange={(e)=> setEmail(e.target.value)}></input>
                         <label>Telefone *</label>
                         <input type="number" value={phone} onChange={(e)=> setPhone(e.target.value)}></input>
+                        <label>Contato Técnico</label>
+                        <input type="text" value={technicalContact} onChange={(e)=> setTechnicalContact(e.target.value)}></input>
+                        <label>Email do Contato Técnico</label>
+                        <input type="text" value={technicalContactEmail} onChange={(e)=> setTechnicalContactEmail(e.target.value)}></input>
+                        <label>Telefone do Contato Técnico</label>
+                        <input type="number" value={technicalContactPhone} onChange={(e)=> setTechnicalContactPhone(e.target.value)}></input>
                     </section>
                     <div>
                         <FormControl>
