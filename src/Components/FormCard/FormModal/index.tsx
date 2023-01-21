@@ -34,10 +34,15 @@ const FormModal = ({ isModalOpen, data, setIsModalOpen, setStepNumber }: FormMod
     }
 
     const handleFinish = () =>{
-        setStepNumber(3)
         Api.post("/budget-request", data)
-            .then(()=>toast.success("Deu certoooo"))
-            .catch((error)=>console.log(error))
+            .then(()=>{
+                setStepNumber(3)
+            })
+            .catch((error)=>{
+                console.log(error);
+                console.log(data)
+                toast.error("Erro ao enviar formulário");
+            })
     }
     
     return (
