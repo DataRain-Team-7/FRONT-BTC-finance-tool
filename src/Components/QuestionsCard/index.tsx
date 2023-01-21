@@ -37,7 +37,7 @@ const QuestionsCard = () => {
                             <input key={element.id} value={element.description}></input>
                           )
                         })}
-                        <input placeholder="Nova resposta" className="newAnswer"></input>
+                        <input placeholder="Nova resposta objetiva" className="newAnswer"></input>
                       </div>
                       <div className="second">
                         <p>Equipes</p>

@@ -19,6 +19,8 @@ interface AuthProviderData{
     login: (param:loginParams)=> void,
     logout: ()=> void,
     userStorage: UserTypes,
+    getUserByToken: () => void;
+
 }
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData)
@@ -36,6 +38,16 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         position: "",
         roleName: "",
     })
+
+    const getUserByToken = () =>{
+        Api.get("/user/myself")
+        .then((res)=>{
+            setUserStorage(res.data)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
 
     const checkTokenExpiration = ()=>{
 
@@ -77,7 +89,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         navigate("/");
     }
 
-    return <AuthContext.Provider value={{logged, login, logout, userStorage}}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{logged, login, logout, userStorage, getUserByToken}}>{children}</AuthContext.Provider>
 }
 
 export const useAuth = ()=> useContext(AuthContext)

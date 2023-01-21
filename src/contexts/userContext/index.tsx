@@ -30,7 +30,7 @@ export const UserProvider = ({children}: userProviderProps) => {
     
         Api.get("/user", headers).then((res) => setUser(res.data));
       };
-
+  
       useEffect(() => {
         if (logged) handleGetUsers();
       }, [logged]);

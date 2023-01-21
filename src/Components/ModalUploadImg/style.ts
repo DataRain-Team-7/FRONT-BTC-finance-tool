@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FormCreate = styled.form`
+export const FormUpload = styled.form`
   display: flex;
   width: 90%;
   height: 80%;
@@ -8,16 +8,16 @@ export const FormCreate = styled.form`
   align-items: center;
 `;
 
-export const LabelCreate =styled.label`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    width: 100%;
-    margin-right: 10px;
+export const LabelUpload = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  width: 100%;
+  margin-right: 10px;
 `;
 
-export const InputCreateTeam = styled.input`
+export const InputUpload = styled.input`
   width: 70%;
   height: 40px;
   font-size: 20px;

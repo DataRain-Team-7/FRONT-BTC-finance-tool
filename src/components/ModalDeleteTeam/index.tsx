@@ -9,11 +9,13 @@ import { useTeam } from "../../contexts/teamContext";
 import { BsHandIndexThumbFill } from "react-icons/bs";
 import Api from "../../services/api";
 import toast from "react-hot-toast";
+import { ButtonsContainer } from "../../utils/globalStyles";
+import { Button } from "@mui/material";
 
 interface ModalDeleteProps {
   team: TeamsTypes;
   openDeleteModal: boolean;
-  setOpenDeleteModal: ({props}:any) => void;
+  setOpenDeleteModal: ({ props }: any) => void;
 }
 
 const style = {
@@ -26,26 +28,29 @@ const style = {
   bgcolor: "background.paper",
   border: "0",
   boxShadow: 24,
-  borderRadius:6,
+  borderRadius: 6,
   p: 4,
 };
 
-export default function ModalDeleteTeam({ team, openDeleteModal, setOpenDeleteModal }: ModalDeleteProps) {
+export default function ModalDeleteTeam({
+  team,
+  openDeleteModal,
+  setOpenDeleteModal,
+}: ModalDeleteProps) {
   const handleClose = () => setOpenDeleteModal(!openDeleteModal);
-  const { handleGetTeam } = useTeam()
- 
+  const { handleGetTeam } = useTeam();
 
-  const deleteTeam = (id:any) => {
+  const deleteTeam = (id: any) => {
     Api.delete(`team/${id}`)
-    .then((res) => {
-      toast.success("Equipe deletada"), res;
-      handleClose()
-      handleGetTeam()
-    })
-    .catch((error) => {
-      toast.error("Falha ao deletar equipe"), error;
-    });
-  }
+      .then((res) => {
+        toast.success("Equipe deletada"), res;
+        handleClose();
+        handleGetTeam();
+      })
+      .catch((error) => {
+        toast.error("Falha ao deletar equipe"), error;
+      });
+  };
 
   return (
     <div>
@@ -62,13 +67,24 @@ export default function ModalDeleteTeam({ team, openDeleteModal, setOpenDeleteMo
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
           <Box display="flex" alignItems="center" justifyContent="center">
-            <S.ButtonDropdownNo onClick={handleClose}>Não</S.ButtonDropdownNo>
-            <S.ButtonDropdownYes
-              onClick={() => {
-                deleteTeam(team.id)}}
-            >
-              Sim
-            </S.ButtonDropdownYes>
+            <ButtonsContainer>
+              <Button
+                className="buttonCancel"
+                variant="contained"
+                onClick={handleClose}
+              >
+                Não
+              </Button>
+              <Button
+                className="buttonSave"
+                variant="contained"
+                onClick={() => {
+                  deleteTeam(team.id);
+                }}
+              >
+                Sim
+              </Button>
+            </ButtonsContainer>
           </Box>
         </Box>
       </Modal>
