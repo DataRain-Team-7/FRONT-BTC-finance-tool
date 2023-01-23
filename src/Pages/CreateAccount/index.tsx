@@ -5,7 +5,7 @@ import CreateAccountCard from "../../components/CreateAccountCard";
 const CreateAccount = () => {
   return (
     <Styled.CreateAccountContainer>
-      <TopBar />
+      <TopBar/>
       <CreateAccountCard/>
     </Styled.CreateAccountContainer>
   );

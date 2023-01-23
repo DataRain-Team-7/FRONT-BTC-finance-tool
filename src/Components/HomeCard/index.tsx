@@ -1,8 +1,11 @@
 import { useEffect } from "react";
-import { useTeam } from "../../contexts/teams";
+import { useNavigate } from "react-router-dom";
+import { useTeam } from "../../contexts/teamContext";
 import * as Style from "./style"
 
 const HomeCard = () => {
+
+  const navigate = useNavigate()
   
   return (
           <Style.HomeContainer>
@@ -17,84 +20,84 @@ const HomeCard = () => {
                 </div>           
               </section>
               <section className="section02">
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>
                   <p>23/11/2022</p>
                   <p>Aguardando revisão</p>
                 </div>
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>
                   <p>23/11/2022</p>
                   <p>Aguardando revisão</p>
                 </div>
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>
                   <p>23/11/2022</p>
                   <p>Aguardando revisão</p>
                 </div>
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>
                   <p>23/11/2022</p>
                   <p>Aguardando revisão</p>
                 </div>
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>
                   <p>23/11/2022</p>
                   <p>Aguardando revisão</p>
                 </div>
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>
                   <p>23/11/2022</p>
                   <p>Aguardando revisão</p>
                 </div>
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>
                   <p>23/11/2022</p>
                   <p>Aguardando revisão</p>
                 </div>
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>
                   <p>23/11/2022</p>
                   <p>Aguardando revisão</p>
                 </div>
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>
                   <p>23/11/2022</p>
                   <p>Aguardando revisão</p>
                 </div>
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>
                   <p>23/11/2022</p>
                   <p>Aguardando revisão</p>
                 </div>
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>
                   <p>23/11/2022</p>
                   <p>Aguardando revisão</p>
                 </div>
-                <div>
+                <div onClick={()=> navigate("/prevenda")}>
                   <p>Darlene Robertson</p>
                   <p>DataRain Blue EdTech</p>
                   <p>23/11/2022</p>

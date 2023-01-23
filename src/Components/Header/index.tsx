@@ -18,15 +18,17 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  console.log(userStorage)
+
   return (
     <Style.HeaderContainer>
       <section>
         <div className="animate__animated animate__fadeInLeftBig animate__delay-1s">
           <div>
             {userStorage.imageUrl === null ? (
-              <img alt="Imagem do Perfil" src={userStorage.imageUrl}></img>
-            ) : (
               <img alt="Imagem do Perfil" src={user_default}></img>
+              ) : (
+              <img alt="Imagem do Perfil" src={userStorage.imageUrl}></img>
             )}
             <p>{userStorage.name}</p>
             <p className="secondColorElement">(Admin)</p>

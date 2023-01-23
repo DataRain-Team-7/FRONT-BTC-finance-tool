@@ -23,8 +23,9 @@ const loginSchema = yup.object().shape({
 const LoginCard = () => {
   const [isChecked, setIsChecked] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const navigate = useNavigate();
+  const navigate= useNavigate();
   const { login, userStorage } = useAuth();
+
 
   const {
     register,

@@ -1,10 +1,18 @@
 import { Button } from "@mui/material"
+import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom"
 import * as Styled from "./style"
 
 const PreSaleBudgetCard = () =>{
 
+    const navigate = useNavigate()
+
     return(
         <Styled.PreSaleBudgetContainer>
+            <Styled.ProjectPageReturn>
+                {" "}
+                <Styled.BackIcon onClick={() => navigate("/home")} />{" "}
+            </Styled.ProjectPageReturn>
             <section className="client">
                 <div>
                     <p>Cliente</p>
@@ -106,7 +114,7 @@ const PreSaleBudgetCard = () =>{
                 </div>
             </section>
             <section className="botton">
-                <Button type="submit" variant="contained" className="buttonEnter">Finalizar Orçamento</Button>
+                <Button type="submit" variant="contained" className="buttonEnter" onClick={()=>{toast.success("Orçamento lançado"); navigate("/home")}}>Finalizar Orçamento</Button>
             </section>
    
         </Styled.PreSaleBudgetContainer>

@@ -13,47 +13,68 @@ interface FirstPageProp {
 }
 
 const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
-
+    
+    const [ companyName, setCompanyName ] = useState<string>("");
     const [ mainContact, setMainContact ] = useState<string>("");
-    const [ technicalContact, setTechnicalContact ] = useState<string>("");
     const [ email, setEmail ] = useState<string>("");
     const [ phone, setPhone ] = useState<string>("");
-
+    const [ technicalContact, setTechnicalContact ] = useState<string>();
+    const [ technicalContactEmail, setTechnicalContactEmail ] = useState<string>();
+    const [ technicalContactPhone, setTechnicalContactPhone ] = useState<string>();
+    
+    const localClient = JSON.parse(sessionStorage.getItem("client") || "[]")
+    const clientId = sessionStorage.getItem("clientId")
+    
     useEffect(()=>{
-        const localClient = JSON.parse(sessionStorage.getItem("client") || "[]")
-        setMainContact(localClient.name);
-        setTechnicalContact(localClient.companyName);
+        setCompanyName(localClient.companyName)
+        setMainContact(localClient.mainContact);
         setEmail(localClient.email);
         setPhone(localClient.phone);
+        setTechnicalContact(localClient.technicalContact);
+        setTechnicalContactEmail(localClient.technicalContactEmail)
+        setTechnicalContactPhone(localClient.technicalContactPhone)
     },[])
 
-    
     const handleNewClient = () =>{
         const client = { 
-            name: mainContact,
-            companyName: technicalContact,
             email: email,
-            phone: phone
+            phone: phone,
+            companyName: companyName,
+            mainContact: mainContact,
+            technicalContact: technicalContact,
+            technicalContactPhone: technicalContactPhone,
+            technicalContactEmail: technicalContactEmail      
     }
+
+    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-z]+)?$/i
         
-        if(mainContact !== "" && email !== "" && phone !== ""){
-            if(email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-z]+)?$/i)){
+        if(companyName !== "" && mainContact !== "" && email !== "" && phone !== ""){
+            if(email.match(regex)){
                 if(phone.length > 7){
-                    Api.post("/client", client)
-                    .then((res)=>{
-                        console.log(res);
-                        setStepNumber(1)
-                        sessionStorage.setItem("client", JSON.stringify(client))
-                        sessionStorage.setItem("clientId", res.data.id)
-                    })
-                    .catch(()=> toast.error("Dados de usuário inválido"))
+                    if(clientId){
+                        Api.patch(`/client/${clientId}`, client)
+                            .then((res)=>{
+                                setStepNumber(1)
+                                sessionStorage.setItem("client", JSON.stringify(client))
+                            })
+                            .catch(()=>{toast.error("Dados de usuário inválido")})
+                    }else{
+                        Api.post("/client", client)
+                            .then((res)=>{
+                                setStepNumber(1)
+                                sessionStorage.setItem("client", JSON.stringify(client))
+                                sessionStorage.setItem("clientId", res.data.id)
+                            })
+                            .catch(()=> toast.error("Dados de usuário inválido"))
+                    }
+
                 }else{
                     toast.error("Numero de telefone inválido")
                 }
             }else{
                 toast.error("Email inválido")
             }
-        }else{
+        }else{ 
             toast.error("Preencha os campos obrigatórios")
         }
     }
@@ -61,17 +82,22 @@ const FirstPageCard = ({setStepNumber}:FirstPageProp) =>{
     return(
         <Style.FirstPageCard>
                     <section>
+                        <label>Empresa *</label>
+                        <input type="text" value={companyName} onChange={(e)=> setCompanyName(e.target.value)}></input>
                         <label>Contato Principal *</label>
                         <input type="text" value={mainContact} onChange={(e)=> setMainContact(e.target.value)}></input>
-                        <label>Contato Técnico</label>
-                        <input type="text" value={technicalContact} onChange={(e)=> setTechnicalContact(e.target.value)}></input>
                         <label>Email *</label>
-                        <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)}></input>
+                        <input type="text" value={email} onChange={(e)=> setEmail(e.target.value)}></input>
                         <label>Telefone *</label>
                         <input type="number" value={phone} onChange={(e)=> setPhone(e.target.value)}></input>
+                        <label>Contato Técnico</label>
+                        <input type="text" value={technicalContact} onChange={(e)=> setTechnicalContact(e.target.value)}></input>
+                        <label>Email do Contato Técnico</label>
+                        <input type="text" value={technicalContactEmail} onChange={(e)=> setTechnicalContactEmail(e.target.value)}></input>
+                        <label>Telefone do Contato Técnico</label>
+                        <input type="number" value={technicalContactPhone} onChange={(e)=> setTechnicalContactPhone(e.target.value)}></input>
                     </section>
                     <div>
-                        {/* <p>Utilizar calculadora personalizada?</p> */}
                         <FormControl>
                             <p>Utilizar calculadora personalizada?</p>
                             <RadioGroup row className="RadioGroup" defaultValue={false}>
