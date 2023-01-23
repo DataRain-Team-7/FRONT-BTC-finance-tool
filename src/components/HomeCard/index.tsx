@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTeam } from "../../contexts/teamContext";
 import * as Style from "./style"
+import React from "react";
 
 const HomeCard = () => {
 

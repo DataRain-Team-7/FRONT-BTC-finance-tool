@@ -1,6 +1,7 @@
 import * as Styled from './style'
 import LoginCard from '../../components/LoginCard'
 import TopBar from '../../components/TopBar'
+import React from "react";
 
 const LoginPage = () => {
   return (

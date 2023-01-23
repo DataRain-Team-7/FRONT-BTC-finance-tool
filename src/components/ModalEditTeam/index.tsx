@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import { TeamsTypes } from "../../types/interface";
 import * as S from "./style";
+import React from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";

@@ -1,5 +1,7 @@
 import { createContext, useContext, ReactNode, useState, useEffect } from "react";
 import Api from "../../services/api";
+import React from "react";
+
 
 interface QuestionsProviderProps{
     children: ReactNode

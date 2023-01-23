@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import Api from "../../services/api";
 import { useAuth } from "../../contexts/auth";
+import React from "react";
 
 const RecoverPassword = () => {
 

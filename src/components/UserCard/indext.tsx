@@ -2,6 +2,7 @@ import * as S from "./style";
 import MenuDropdownUser from "../MenuDropdownUser";
 import { UserTypes } from "../../types/interface";
 import userDefault from "../../assets/images/default.png";
+import React from "react";
 
 interface UserProps {
   user: UserTypes;

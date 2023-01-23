@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import Api from "../../services/api";
 import { UserTypes } from "../../types/interface";
 import { useAuth } from "../auth";
+import React from "react";
 
 interface userProviderData {
     user: UserTypes[];

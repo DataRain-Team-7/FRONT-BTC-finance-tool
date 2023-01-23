@@ -6,6 +6,8 @@ import ModalCreateTeam from "../ModalCreateTeam";
 import Navbar from "../Navbar";
 import TeamsLi from "../TeamsLi";
 import * as S from "./style";
+import React from "react";
+
 
 const Teams = () => {
   const { handleGetTeam, team } = useTeam()

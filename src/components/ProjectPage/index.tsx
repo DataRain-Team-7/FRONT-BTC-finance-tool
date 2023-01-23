@@ -3,6 +3,9 @@ import Header from "../Header";
 import MockedUserCard from "../ModalCreateTeam/MockedUserCard";
 import UserCard from "../UserCard/indext.tsx";
 import * as S from "./style";
+import React from "react";
+
+
 const ProjectPage = () => {
   const navigate = useNavigate();
   // const users = [

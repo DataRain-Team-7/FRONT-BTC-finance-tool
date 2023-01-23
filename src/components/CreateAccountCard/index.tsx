@@ -7,6 +7,7 @@ import * as yup from "yup";
 import defaultImage from "../../assets/images/userDefault.png";
 import Api from "../../services/api";
 import * as Style from "../../components/CreateAccountCard/style";
+import React from "react";
 
 const CreateAccountCard = () => {
   const navigate = useNavigate();
@@ -20,16 +21,6 @@ const CreateAccountCard = () => {
   const registerSchema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
     email: yup.string().email("Email inválido").required("Email obrigatório"),
-    // phone: yup.string(),
-    // password: yup
-    //   .string()
-    //   .min(1, "Senha obrigatória")
-    //   .matches(
-    //     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!:;/\|.()])[0-9a-zA-Z$*&@#!:;/\|.()]{8,}$/,
-    //     "A senha deve conter um carácter especial, um número e ao menos uma letra maiúscula"
-    //   ),
-    // confirmPassword: yup.string().min(1, "Confirme sua senha"),
-    // role: yup.string().required("Tipo de conta obrigatório"),
     position: yup.string().required("Função obrigatória"),
   });
 
@@ -57,21 +48,6 @@ const CreateAccountCard = () => {
 
   const handleRegister = (data: CreateAccountData) => {
     if (data.name !== "" || data.email !== "" || data.position !== "") {
-      // if (data.password === data.confirmPassword) {
-      //   const loginData = {
-      //     email: data.email,
-      //     password: data.password,
-      //   };
-      //   Api.post("/user", loginData)
-      //     .then((res) => {
-      //       toast.success("Cadastro bem sucedido!");
-      //     })
-      //     .catch((error) => {
-      //       toast.error("Erro ao realizar cadastro");
-      //     });
-      // } else {
-      //   toast.error("As senhas não coincidem");
-      // }
       const dataCreate = {
         name: data.name,
         email: data.email,
@@ -79,7 +55,7 @@ const CreateAccountCard = () => {
       };
       Api.post("/user", dataCreate)
         .then((res) => {
-          toast.success("Cadastro bem sucedido!");
+          toast.success("Confira sua caixa de entrada e valide seu email");
         })
         .catch((error) => {
           toast.error("Erro ao realizar cadastro");

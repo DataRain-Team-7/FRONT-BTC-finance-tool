@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/auth";
 import { useQuestions } from "../../contexts/questions";
+import React from "react";
 
 import * as Style from "./style"
 import { useTeam } from "../../contexts/teamContext";

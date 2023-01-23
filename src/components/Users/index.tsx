@@ -4,6 +4,7 @@ import Header from "../Header";
 import Navbar from "../Navbar";
 import UserCard from "../UserCard/indext";
 import * as S from "./style";
+import React from "react";
 
 
 const UsersPage = () => {

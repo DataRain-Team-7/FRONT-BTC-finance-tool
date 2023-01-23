@@ -5,6 +5,7 @@ import Header from "../Header";
 import ModalEditUser from "../ModalEditUser";
 import Navbar from "../Navbar";
 import * as S from "./style";
+import React from "react";
 
 // enviar imagens dependencias
 import ModalUploadImg from "../ModalUploadImg";

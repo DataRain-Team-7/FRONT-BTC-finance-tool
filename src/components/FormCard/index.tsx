@@ -6,6 +6,8 @@ import { useState } from "react";
 import FirstPageCard from "./FirstPage";
 import SecondPageCard from "./SecondPage";
 import ThirdPageCard from "./ThirdPage";
+import React from "react";
+
 
 const steps = [ 
     "Contato", "Formulário", "Detalhes"

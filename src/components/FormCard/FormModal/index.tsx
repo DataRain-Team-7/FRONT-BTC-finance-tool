@@ -4,6 +4,8 @@ import * as Style from "./style"
 import Modal from "react-modal";
 import Api from "../../../services/api";
 import { toast } from "react-hot-toast";
+import React from "react";
+
 
 interface FormModalProps {
     isModalOpen: boolean;

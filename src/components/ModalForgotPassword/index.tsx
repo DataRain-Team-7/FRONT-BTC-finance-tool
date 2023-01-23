@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import * as Style from "./style";
 import Modal from "react-modal";
+import React from "react";
 
 interface ForgotPasswordProps {
   isModalOpen: boolean;

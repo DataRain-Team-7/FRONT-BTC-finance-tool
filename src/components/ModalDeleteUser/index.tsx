@@ -8,6 +8,8 @@ import Api from "../../services/api";
 import { UserTypes } from "../../types/interface";
 import { ButtonsContainer } from "../../utils/globalStyles";
 import * as S from "./style";
+import React from "react";
+
 
 interface ModalDeleteProps {
   user: UserTypes;

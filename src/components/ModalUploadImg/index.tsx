@@ -4,6 +4,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import * as S from "./style";
 import { ButtonsContainer } from "../../utils/globalStyles";
+import React from "react";
 
 import { toast } from "react-hot-toast";
 import { useAuth } from "../../contexts/auth";

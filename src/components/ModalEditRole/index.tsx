@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import { UserTypes } from "../../types/interface";
 import * as S from "./style";
+import React from "react";
 
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";

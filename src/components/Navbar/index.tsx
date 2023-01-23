@@ -7,6 +7,7 @@ import { CgProfile } from "react-icons/cg";
 import { FaUsers } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth";
+import React from "react";
 
 const Navbar = () => {
   const { userStorage } = useAuth();

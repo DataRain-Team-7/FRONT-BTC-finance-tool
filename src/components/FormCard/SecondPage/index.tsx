@@ -4,7 +4,7 @@ import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } f
 import FormModal from "../FormModal";
 import { useQuestions } from "../../../contexts/questions";
 import toast from "react-hot-toast";
-// import React from 'react';
+import React from 'react';
 
 
 interface FirstPageProp {

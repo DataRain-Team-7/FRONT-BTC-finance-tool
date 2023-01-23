@@ -1,6 +1,7 @@
 import * as S from "./style";
 import Logo from "../../assets/img/logo.svg";
-//icons
+import React from "react";
+
 import {
   AiOutlineHome,
   AiOutlineUser,
