@@ -1,29 +1,24 @@
-import * as Styled from './style'
-import Header from '../../components/Header'
-import HomeCard from '../../Components/HomeCard'
-import AsideBar from '../../Components/AsideBar'
-
+import Header from "../../components/Header";
+import HomeCard from "../../components/HomeCard";
+import Navbar from "../../components/Navbar";
+import * as Styled from "./style";
 
 const HomePage = () => {
-
   return (
     <Styled.HomeContainer>
-      <Header/>
-      <section className='mainSection'>
-        <div className='mainDiv'>
+      <Header />
+      <section className="mainSection">
+        <div className="mainDiv">
           <div className="AsideBar">
-            <AsideBar/>
+            <Navbar />
           </div>
           <div className="HomeCard">
-            <HomeCard/>
+            <HomeCard />
           </div>
         </div>
       </section>
-      
-      
-      </Styled.HomeContainer>
-  )
+    </Styled.HomeContainer>
+  );
+};
 
-}
-
-export default HomePage
+export default HomePage;
