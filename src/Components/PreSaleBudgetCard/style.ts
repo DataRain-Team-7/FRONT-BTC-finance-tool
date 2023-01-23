@@ -1,4 +1,6 @@
 import styled, { css } from "styled-components"
+import { IoIosArrowBack } from "react-icons/io";
+
 
 export const PreSaleBudgetContainer = styled.div`
   ${({ theme }) => css`
@@ -150,3 +152,16 @@ export const PreSaleBudgetContainer = styled.div`
         }
     
   `}`;
+
+export const ProjectPageReturn = styled.span`
+width: 100%;
+display: flex;
+justify-content: flex-start;
+`;
+
+export const BackIcon = styled(IoIosArrowBack)`
+  color: #0d78a0;
+  cursor: pointer;
+  font-size: 20px;
+  margin-bottom: .5rem;
+`;

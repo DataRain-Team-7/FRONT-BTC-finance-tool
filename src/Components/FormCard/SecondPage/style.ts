@@ -37,7 +37,25 @@ export const SecondPageCard = styled.div`
                 .FormControl{
                     padding: 0 5%;
                     box-sizing: border-box;
-                    height: 60%;
+                    height: 41%;
+                    width: 100%;
+                   
+
+                    overflow-y: scroll;
+                        ::-webkit-scrollbar {
+                            width: 10px;
+                        }
+                        ::-webkit-scrollbar-track {
+                            background: ${theme.colors.inputFontColor};
+                            border-radius:5px;
+                        }
+                        ::-webkit-scrollbar-thumb {
+                            background: ${theme.colors.tertiaryColor};
+                            border-radius:5px;
+                        }
+                        ::-webkit-scrollbar-thumb:hover {
+                            background: #ED8107;
+                        }  
                 }
 
                 .questionButtons{

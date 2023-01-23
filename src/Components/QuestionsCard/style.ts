@@ -76,8 +76,11 @@ export const QuestionsContainer = styled.div`
       display: flex;
       flex-direction: column;
       width: 100%;
-      margin-bottom: 45px;
-
+      margin-bottom: 5px;
+      padding: 4rem 0;
+      border-bottom: 1px solid ${theme.colors.inputFontColor};
+      border-top: 1px solid ${theme.colors.inputFontColor};
+      
       p{
       font-size: ${theme.constants.fontBody};
       }
@@ -87,6 +90,14 @@ export const QuestionsContainer = styled.div`
         width: 100%;
         justify-content: space-between;
         padding-right: 84px;
+
+        .updateButton{
+          background-color: ${theme.colors.tertiaryColor};
+          color: ${theme.colors.primaryColor};
+          padding: 0.2rem 0.5rem;
+          border-radius: 5px;
+          cursor: pointer;
+        }
       }
 
       section{

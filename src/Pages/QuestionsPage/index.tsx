@@ -1,7 +1,7 @@
 import * as Styled from './style'
 import Header from '../../components/Header'
-import AsideBar from '../../Components/AsideBar'
-import QuestionsCard from '../../Components/QuestionsCard'
+import AsideBar from '../../components/AsideBar'
+import QuestionsCard from '../../components/QuestionsCard'
 
 
 const QuestionsPage = () => {
