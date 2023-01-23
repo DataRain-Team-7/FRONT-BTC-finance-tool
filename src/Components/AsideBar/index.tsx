@@ -71,7 +71,7 @@ const AsideBar = () => {
                 <span>
                   <AiOutlineUserAdd />
                 </span>
-                Cadastrar Usuário
+                Cadastrar Usuário 
               </S.NavbarContentLi>
             ) : null}
           </S.NavbarContentUl>
