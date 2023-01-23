@@ -40,16 +40,11 @@ export const HeaderContainer = styled.div`
           max-width: 18.5rem;
         }
 
-        /* img{
-                height: 4rem;
-                border: 2px solid white;
-                border-radius: 50%;
-                margin-right: 0.5rem;
-            } */
         img {
-          width: 72px;
-          height: 72px;
+          width: 70px;
+          height: 70px;
           border-radius: 50px;
+          margin-right: 0.5rem;
         }
         p {
           font-size: ${theme.constants.fontHeader};

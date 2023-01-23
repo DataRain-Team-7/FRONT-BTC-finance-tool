@@ -41,7 +41,6 @@ export default function ModalUploadImg({
   const { getUserByToken } = useAuth();
 
   const handleImage = () => {
-    // e.preventDefalt()
     const data = new FormData();
 
     let input = document.querySelector("#arquivo") as HTMLInputElement;

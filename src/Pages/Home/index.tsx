@@ -5,25 +5,21 @@ import AsideBar from '../../components/AsideBar'
 
 
 const HomePage = () => {
-
   return (
     <Styled.HomeContainer>
-      <Header/>
-      <section className='mainSection'>
-        <div className='mainDiv'>
+      <Header />
+      <section className="mainSection">
+        <div className="mainDiv">
           <div className="AsideBar">
-            <AsideBar/>
+            <AsideBar />
           </div>
           <div className="HomeCard">
-            <HomeCard/>
+            <HomeCard />
           </div>
         </div>
       </section>
-      
-      
-      </Styled.HomeContainer>
-  )
+    </Styled.HomeContainer>
+  );
+};
 
-}
-
-export default HomePage
+export default HomePage;

@@ -37,7 +37,7 @@ const Profile = () => {
             <S.ProfileCard>
               {userStorage && (
                 <>
-                  {userStorage.imageUrl === null? (
+                  {userStorage.imageUrl === null ? (
                     <S.ProfileCardImage
                       src={userDefault}
                       alt="Imagem do perfil"
