@@ -52,6 +52,13 @@ export const HeaderContainer = styled.div`
 
         .secondColorElement {
           color: ${theme.colors.tertiaryColor};
+          text-align: start;
+        }
+
+        .position{
+          margin-left: 5%;
+          font-size: ${theme.constants.smallFont};
+          
         }
 
         .getOut {

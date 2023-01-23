@@ -33,10 +33,10 @@ const Header = () => {
                 src={`https://back-btc-finance-tool-production.up.railway.app/${userStorage.imageUrl}`}
               ></img>
             )}
-            <p>{userStorage.name}</p>
-            {/* <p className="secondColorElement">(Admin)</p> */}
+            <p>{userStorage.name.split(' ').slice(0, 1)}</p>
+            <p className="secondColorElement position">{userStorage.position}</p>
             <p className="secondColorElement getOut" onClick={() => logout()}>
-              | SAIR
+              SAIR
             </p>
           </div>
           <Badge badgeContent={2} color="warning" className="badge">
