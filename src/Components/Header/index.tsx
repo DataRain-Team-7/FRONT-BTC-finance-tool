@@ -18,6 +18,8 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  console.log(userStorage)
+
   return (
     <Style.HeaderContainer>
       <section>

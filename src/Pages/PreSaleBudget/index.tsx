@@ -1,5 +1,5 @@
 import Header from "../../components/Header"
-import PreSaleBudgetCard from "../../Components/PreSaleBudgetCard"
+import PreSaleBudgetCard from "../../components/PreSaleBudgetCard"
 import * as Style from "./style"
 
 const PreSaleBudget = () =>{

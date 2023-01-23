@@ -1,6 +1,7 @@
 import * as Styled from './style'
-import TopBar from '../../Components/TopBar'
-import FormCard from '../../Components/FormCard'
+
+import FormCard from '../../components/FormCard'
+import TopBar from '../../components/TopBar'
 
 const FormPage = () => {
   return (

@@ -4,6 +4,7 @@ import { useQuestions } from "../../contexts/questions";
 
 import * as Style from "./style"
 import { useTeam } from "../../contexts/teamContext";
+import toast from "react-hot-toast";
 
 const QuestionsCard = () => {
 
@@ -25,7 +26,7 @@ const QuestionsCard = () => {
                 <section key={element.id} className="section02">
                 <div className="title">
                   <p>{`Questão ${index+1}`}</p>
-                  <p>Editar</p>
+                  <p className="updateButton" onClick={()=> toast.success('Questão atualizada')}>Alterar</p>
                 </div>
                 <section>
                   <input value={element.description} className="firstInput"></input>
@@ -37,7 +38,7 @@ const QuestionsCard = () => {
                             <input key={element.id} value={element.description}></input>
                           )
                         })}
-                        <input placeholder="Nova resposta" className="newAnswer"></input>
+                        <input placeholder="Nova resposta objetiva" className="newAnswer"></input>
                       </div>
                       <div className="second">
                         <p>Equipes</p>
@@ -75,57 +76,6 @@ const QuestionsCard = () => {
 
               )
               })}
-              
-              {/* <section className="section02">
-                <div className="title">
-                  <p>Questão 02</p>
-                  <p>Editar</p>
-                </div>
-                <section>
-                  <input className="firstInput"></input>
-                    <div className="cards">
-                      <div className="first">
-                        <p>Respostas</p>
-                        <input></input>
-                        <input></input>
-                        <input></input>
-                        <input></input>
-                        <input className="newAnswer"></input>
-                      </div>
-                      <div className="second">
-                        <p>Equipes</p>
-                        <select>
-                          <option>Valor 1</option>
-                          <option>Valor 2</option>
-                        </select>
-                        <select>
-                          <option>Valor 1</option>
-                          <option>Valor 2</option>
-                        </select>
-                        <select>
-                          <option>Valor 1</option>
-                          <option>Valor 2</option>
-                        </select>
-                        <select>
-                          <option>Valor 1</option>
-                          <option>Valor 2</option>
-                        </select>
-                        <select className="newTeam">
-                          <option>Valor 1</option>
-                          <option>Valor 2</option>
-                        </select>
-                      </div>
-                      <div className="third">
-                        <p>Horas Totais</p>
-                        <input></input>
-                        <input></input>
-                        <input></input>
-                        <input></input>
-                        <input className="newHour"></input>
-                      </div>
-                    </div>
-                </section>
-              </section> */}
 
           </section>
 

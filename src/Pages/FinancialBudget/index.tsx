@@ -1,4 +1,4 @@
-import FinancialBudgetCard from "../../Components/FinancialBudgetCard"
+import FinancialBudgetCard from "../../components/FinancialBudgetCard"
 import Header from "../../components/Header"
 import * as Style from "./style"
 
