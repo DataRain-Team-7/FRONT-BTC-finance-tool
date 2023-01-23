@@ -20,7 +20,7 @@ const UserCard = ({ user, className }: UserProps) => {
       {user.imageUrl === null ? (
         <S.CardImage src={userDefault} alt="Imagem perfil" />
       ) : (
-        <S.CardImage src={`https://back-btc-finance-tool-production.up.railway.app/${user.imageUrl}`} alt="Imagem perfil" />
+        <S.CardImage src={`https://back-btc-finance-tool-production-0df0.up.railway.app${user.imageUrl}`} alt="Imagem perfil" />
       )}
 
       <S.CardName>{user.name}</S.CardName>
