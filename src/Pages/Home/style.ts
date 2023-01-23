@@ -18,6 +18,7 @@ export const HomeContainer = styled.div`
         display: flex;
         flex-direction: row;
         width: 100%;
+        height: 100vh;
         max-width: 120rem;
 
         .AsideBar{

@@ -44,7 +44,7 @@ const Profile = () => {
                     />
                   ) : (
                     <S.ProfileCardImage
-                      src={`https://back-btc-finance-tool-production.up.railway.app/${userStorage.imageUrl}`}
+                      src={`https://back-btc-finance-tool-production-0df0.up.railway.app/${userStorage.imageUrl}`}
                       alt="Imagem do perfil"
                     />
                   )}

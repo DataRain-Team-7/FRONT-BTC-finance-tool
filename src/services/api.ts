@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const Api = axios.create({
-  baseURL: "https://back-btc-finance-tool-production.up.railway.app",
+  // baseURL: "https://back-btc-finance-tool-production.up.railway.app", (antigo backend)
+  baseURL: "https://back-btc-finance-tool-production-0df0.up.railway.app",
 });
 
 Api.interceptors.request.use((config: any) => {
