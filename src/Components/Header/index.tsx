@@ -2,8 +2,8 @@ import { Badge } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
+import userDefault from "../../assets/images/default.png";
 import logo from "../../assets/images/logo.png";
-import user_default from "../../assets/images/user_default.png";
 import { useAuth } from "../../contexts/auth";
 import * as Style from "./style";
 
@@ -26,12 +26,15 @@ const Header = () => {
         <div className="animate__animated animate__fadeInLeftBig animate__delay-1s">
           <div>
             {userStorage.imageUrl === null ? (
-              <img alt="Imagem do Perfil" src={user_default}></img>
-              ) : (
-              <img alt="Imagem do Perfil" src={userStorage.imageUrl}></img>
+              <img alt="Imagem do Perfil" src={userDefault}></img>
+            ) : (
+              <img
+                alt="Imagem do Perfil"
+                src={`https://back-btc-finance-tool-production.up.railway.app/${userStorage.imageUrl}`}
+              ></img>
             )}
             <p>{userStorage.name}</p>
-            <p className="secondColorElement">(Admin)</p>
+            {/* <p className="secondColorElement">(Admin)</p> */}
             <p className="secondColorElement getOut" onClick={() => logout()}>
               | SAIR
             </p>
