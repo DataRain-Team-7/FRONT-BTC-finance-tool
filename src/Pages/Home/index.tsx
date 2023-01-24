@@ -1,8 +1,8 @@
-import * as Styled from './style'
-import Header from '../../components/Header'
-import HomeCard from '../../components/HomeCard'
-import AsideBar from '../../components/AsideBar'
-import React from "react";
+import AsideBar from '../../components/AsideBar';
+import Header from '../../components/Header';
+import HomeCard from '../../components/HomeCard';
+import Navbar from '../../components/Navbar';
+import * as Styled from './style';
 
 
 const HomePage = () => {
@@ -12,7 +12,7 @@ const HomePage = () => {
       <section className="mainSection">
         <div className="mainDiv">
           <div className="AsideBar">
-            <AsideBar />
+            <Navbar />
           </div>
           <div className="HomeCard">
             <HomeCard />

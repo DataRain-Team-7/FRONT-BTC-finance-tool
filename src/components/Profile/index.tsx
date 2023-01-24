@@ -1,11 +1,10 @@
 import { useState } from "react";
-import userDefault from "../../assets/images/default.png";
 import { useAuth } from "../../contexts/auth";
+import userDefault from "../../assets/images/default.png";
 import Header from "../Header";
 import ModalEditUser from "../ModalEditUser";
 import Navbar from "../Navbar";
 import * as S from "./style";
-import React from "react";
 
 // enviar imagens dependencias
 import ModalUploadImg from "../ModalUploadImg";
@@ -45,7 +44,7 @@ const Profile = () => {
                     />
                   ) : (
                     <S.ProfileCardImage
-                      src={`https://back-btc-finance-tool-production-0df0.up.railway.app${userStorage.imageUrl}`}
+                      src={`https://back-btc-finance-tool-production-0df0.up.railway.app/${userStorage.imageUrl}`}
                       alt="Imagem do perfil"
                     />
                   )}
