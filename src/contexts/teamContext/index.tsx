@@ -8,6 +8,8 @@ import {
 import Api from "../../services/api";
 import { TeamsTypes } from "../../types/interface";
 import { useAuth } from "../auth";
+import React from "react";
+
 
 interface TeamProviderProps {
   children: ReactNode;

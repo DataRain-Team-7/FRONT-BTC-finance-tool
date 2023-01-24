@@ -1,18 +1,26 @@
-import Logo from "../../assets/img/logo.svg";
 import * as S from "./style";
-//icons
-import { AiOutlineHome, AiOutlineTeam, AiOutlineUserAdd } from "react-icons/ai";
-import { BsGraphUp } from "react-icons/bs";
-import { CgProfile } from "react-icons/cg";
-import { FaUsers } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/auth";
+import Logo from "../../assets/img/logo.svg";
 import React from "react";
 
-const Navbar = () => {
-  const { userStorage } = useAuth();
+import {
+  AiOutlineHome,
+  AiOutlineUser,
+  AiOutlineTeam,
+  AiOutlineMessage,
+  AiOutlineUserAdd,
+} from "react-icons/ai";
+import { GiRotaryPhone } from "react-icons/gi";
+import { MdAttachMoney } from "react-icons/md";
+import { BsGraphUp } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/auth";
+import { FaUsers } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 
-  const navigate = useNavigate();
+const AsideBar = () => {
+  const navigate = useNavigate()
+  const { userStorage } = useAuth()
+
   return (
     <S.NavbarContainer>
       <S.NavbarWrapper>
@@ -20,7 +28,7 @@ const Navbar = () => {
           <S.NavbarImg src={Logo} alt="Logo da empresa" />
         </S.NavbarLogo>
         <S.NavbarContent>
-          <S.NavbarContentUl>
+        <S.NavbarContentUl>
             <S.NavbarContentLi onClick={() => navigate("/home")}>
               <span>
                 <AiOutlineHome />
@@ -74,4 +82,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AsideBar;

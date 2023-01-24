@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Api from "../../services/api";
 import { UserTypes } from "../../types/interface";
+import React from "react";
 
 interface AuthProviderProps{
     children: ReactNode

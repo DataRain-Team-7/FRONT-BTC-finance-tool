@@ -1,45 +1,29 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import { TeamsTypes } from "../../types/interface";
+import { UserTypes } from "../../types/interface";
 import * as S from "./style";
 import React from "react";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import * as yup from "yup";
-import { useTeam } from "../../contexts/teamContext";
-import Api from "../../services/api";
-import TeamService from "../../services/teams-service";
-import { ButtonsContainer } from "../../utils/globalStyles";
 import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useUsers } from "../../contexts/userContext";
+import Api from "../../services/api";
+import { ButtonsContainer } from "../../utils/globalStyles";
 
 interface ModalEditProps {
-  team: TeamsTypes;
-  openEditModal: boolean;
-  setOpenEditModal: ({ props }: any) => void;
+  user: UserTypes;
+  openEditRole: boolean;
+  setOpenEditRole: ({ props }: any) => void;
 }
-
-interface EditTeamData {
-  id?: string;
-  name: string;
-  valuePerHour: number;
-}
-
-const updateTeamSchema = yup.object().shape({
-  name: yup.string().required("Nome da equipe obrigatória"),
-
-  valuePerHour: yup.number().required("Campo obrigatório"),
-});
-
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
-  height: 300,
+  width: 400,
+  height: 200,
   bgcolor: "background.paper",
   border: "0",
   boxShadow: 24,
@@ -47,29 +31,38 @@ const style = {
   p: 4,
 };
 
-export default function ModalEditTeam({
-  team,
-  openEditModal,
-  setOpenEditModal,
+export default function ModalEditRole({
+  user,
+  openEditRole,
+  setOpenEditRole,
 }: ModalEditProps) {
-  const handleClose = () => setOpenEditModal(!openEditModal);
-  const { handleGetTeam } = useTeam();
+  const handleClose = () => setOpenEditRole(!openEditRole);
+  const { handleGetUsers } = useUsers();
+  const [role, setRole] = useState<any>([]);
+  const [value, setValue] = useState<string>();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<EditTeamData>({ resolver: yupResolver(updateTeamSchema) });
+  const getRoles = () => {
+    Api.get("/role")
+      .then((res) => setRole(res.data))
+      .catch((err) => toast.error("Falha ao buscar roles"));
+  };
 
-  const handleEditTeam = (values: EditTeamData) => {
-    const teamId = team.id || "";
-    Api.patch(`team/${teamId}`, values)
+  useEffect(() => {
+    getRoles();
+  }, []);
+
+  const handleEditRole = () => {
+    const data = {
+      userId: user.id,
+      roleId: value,
+    };
+    Api.post(`user/update-role`, data)
       .then((res) => {
         toast.success("Equipe editada com sucesso"), res;
-        handleGetTeam();
+        handleGetUsers();
       })
       .catch((error) => {
-        toast.error("Falha ao atualizar equipe"), error;
+        toast.error("Falha ao atualizar equipe"), console.log(error);
       });
     handleClose();
   };
@@ -77,7 +70,7 @@ export default function ModalEditTeam({
   return (
     <div>
       <Modal
-        open={openEditModal}
+        open={openEditRole}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -91,27 +84,25 @@ export default function ModalEditTeam({
           sx={style}
         >
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Editar Equipe
+            Editar Role
           </Typography>
-          <S.FormEdit onSubmit={handleSubmit(handleEditTeam)}>
-            <S.LabelEdit htmlFor="name">
-              {" "}
-              Equipe:
-              <S.InputEditTeam
-                defaultValue={team.name}
-                type="text"
-                {...register("name")}
-              />
-            </S.LabelEdit>
-
-            <S.LabelEdit htmlFor="valuePerHour">
-              {" "}
-              R$:
-              <S.InputEditTeam
-                defaultValue={team.valuePerHour}
-                type="text"
-                {...register("valuePerHour")}
-              />
+          <S.FormEdit>
+            <S.LabelEdit htmlFor="role">
+              Role:
+              <S.Select
+                required
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              >
+                {role.map((e: any) => {
+                  return (
+                    <option className="option-value" value={e.id} key={e.id}>
+                      {e.name}
+                    </option>
+                  );
+                })}
+              </S.Select>
             </S.LabelEdit>
             <Box
               display="flex"
@@ -130,7 +121,7 @@ export default function ModalEditTeam({
                 <Button
                   className="buttonSave"
                   variant="contained"
-                  type="submit"
+                  onClick={() => handleEditRole()}
                 >
                   Editar
                 </Button>

@@ -1,7 +1,7 @@
-import * as Styled from './style'
-import Header from '../../components/Header'
-import HomeCard from '../../components/HomeCard'
-import AsideBar from '../../components/AsideBar'
+import AsideBar from '../../components/AsideBar';
+import Header from '../../components/Header';
+import HomeCard from '../../components/HomeCard';
+import * as Styled from './style';
 
 
 const HomePage = () => {

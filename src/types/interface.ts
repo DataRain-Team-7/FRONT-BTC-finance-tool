@@ -6,8 +6,8 @@ export interface UserTypes {
     imageUrl: string,
     position: string,
     roleName: string,
-    billable?: string,
-    allocated?: string,
+    billable?: boolean,
+    allocated?: boolean,
     createdAt?: Date;
     updatedAt?: Date;
 }
