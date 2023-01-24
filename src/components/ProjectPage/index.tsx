@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
-import MockedUserCard from "../ModalCreateTeam/MockedUserCard";
+import MockedUserCard from "../MockedUserCard";
 import * as S from "./style";
 
 

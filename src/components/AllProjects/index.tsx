@@ -1,9 +1,15 @@
+import { useState } from "react";
+import { useAuth } from "../../contexts/auth";
+import { useUsers } from "../../contexts/userContext";
 import Header from "../Header";
+import ModalCreateProject from "../ModalCreateProject";
 import Navbar from "../Navbar";
 import ProjectLi from "../ProjectLi";
 import * as S from "./style";
 
 const AllProjects = () => {
+  const [openProjectModal, setOpenProjectModal] = useState<boolean>(false);
+  const { userStorage } = useAuth();
   return (
     <>
       <Header />
@@ -17,15 +23,19 @@ const AllProjects = () => {
           </S.ProjectsHeader>
           <S.ProjectsContent>
             <S.ProjectsUl>
-              <S.NewProject>
-                <S.NewProjectContent>
-                  <span>Criar outro projeto</span>
-                  <span>
-                    {" "}
-                    <S.AddProjectIcon />
-                  </span>
-                </S.NewProjectContent>
-              </S.NewProject>
+              {userStorage.roleName === "admin" ? (
+                <S.NewProject>
+                  <S.NewProjectContent>
+                    <span>Criar outro projeto</span>
+                    <span>
+                      {" "}
+                      <S.AddProjectIcon
+                        onClick={() => setOpenProjectModal(!openProjectModal)}
+                      />
+                    </span>
+                  </S.NewProjectContent>
+                </S.NewProject>
+              ) : null}
               <ProjectLi />
               <ProjectLi />
               <ProjectLi />
@@ -39,6 +49,12 @@ const AllProjects = () => {
             </S.ProjectsUl>
           </S.ProjectsContent>
         </S.ProjectsContainer>
+        {openProjectModal ? (
+          <ModalCreateProject
+            openProjectModal={openProjectModal}
+            setOpenProjectModal={setOpenProjectModal}
+          />
+        ) : null}
       </S.AllContainer>
     </>
   );
