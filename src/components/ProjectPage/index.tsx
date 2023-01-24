@@ -1,39 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import MockedUserCard from "../ModalCreateTeam/MockedUserCard";
-import UserCard from "../UserCard/indext.tsx";
 import * as S from "./style";
-import React from "react";
 
 
 const ProjectPage = () => {
   const navigate = useNavigate();
-  // const users = [
-  //   {
-  //     id: "1",
-  //     name: "Vini",
-  //     email: "vini@blue.com",
-  //     roleName: "Manager",
-  //     imageUrl: "https://avatars.githubusercontent.com/u/17714550?v=4",
-  //     position: "",
-  //   },
-  //   {
-  //     id: "2",
-  //     name: "Mathias",
-  //     email: "mathias@blue.com",
-  //     roleName: "PS",
-  //     imageUrl: "https://avatars.githubusercontent.com/u/99908779?v=4",
-  //     position: "",
-  //   },
-  //   {
-  //     id: "3",
-  //     name: "Lucas",
-  //     email: "lucas@blue.com",
-  //     roleName: "PS",
-  //     imageUrl: "https://avatars.githubusercontent.com/u/76230078?v=4",
-  //     position: "",
-  //   },
-  // ];
+ 
   return (
     <>
       <Header />
@@ -56,10 +29,6 @@ const ProjectPage = () => {
           </S.ProjectPageHeader>
           <S.ProjectPageContent>
             <MockedUserCard />
-            {/* {users.map((element, index) => {
-              console.log(element)
-              return <UserCard user={element} key={index} className="teste" />; */}
-            {/* })} */}
           </S.ProjectPageContent>
         </S.ProjectPageContainer>
       </S.ProjectAllContainer>

@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
+import AllProjects from "./components/AllProjects";
 import Profile from "./components/Profile";
-import ProjectPage from "./components/ProjectPage";
 import Teams from "./components/Teams";
 import UsersPage from "./components/Users";
 import CreateAccount from "./Pages/CreateAccount";
@@ -20,14 +20,13 @@ const Router = () => {
       <Route path="/teams" element={<Teams />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/users" element={<UsersPage />} />
-      <Route path="/projects" element={<ProjectPage />} />
+      <Route path="/projects" element={<AllProjects />} />
       <Route path="/novasenha/:param" element={<RecoverPasswordPage />} />
       <Route path="/form" element={<FormPage />} />
       <Route path="/prevenda" element={<PreSaleBudget />} />
       <Route path="/financeiro" element={<FinancialBudget />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/questoes" element={<QuestionsPage />} />
-      {/* <Route path="/new-user" element={<CreateAccountCard />} /> */}
     </Routes>
   );
 };
