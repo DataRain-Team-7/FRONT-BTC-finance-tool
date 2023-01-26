@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import AllProjects from "./components/AllProjects";
+import ClientsPage from "./components/ClientsPage";
+import CreateClientCard from "./components/CreateClientCard";
 import Profile from "./components/Profile";
 import Teams from "./components/Teams";
 import UsersPage from "./components/Users";
@@ -17,7 +19,9 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/new-user" element={<CreateAccount />} />
+      <Route path="/new-client" element={<CreateClientCard />} />
       <Route path="/teams" element={<Teams />} />
+      <Route path="/clients" element={<ClientsPage />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/projects" element={<AllProjects />} />

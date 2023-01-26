@@ -40,6 +40,12 @@ const Navbar = () => {
                 <AiOutlineTeam />
               </span>
               Equipes
+            </S.NavbarContentLi>  
+            <S.NavbarContentLi onClick={() => navigate("/clients")}>
+              <span>
+                <AiOutlineTeam />
+              </span>
+              Clientes
             </S.NavbarContentLi>
             <S.NavbarContentLi onClick={() => navigate("/profile")}>
               <span>
@@ -60,12 +66,20 @@ const Navbar = () => {
               Questionário
             </S.NavbarContentLi>
             {userStorage.roleName === "admin" ? (
+            <div>
               <S.NavbarContentLi onClick={() => navigate("/new-user")}>
                 <span>
                   <AiOutlineUserAdd />
                 </span>
                 Cadastrar Usuário
               </S.NavbarContentLi>
+              <S.NavbarContentLi onClick={() => navigate("/new-client")}>
+                <span>
+                  <AiOutlineUserAdd />
+                </span>
+                Cadastrar Cliente
+              </S.NavbarContentLi>
+            </div> 
             ) : null}
           </S.NavbarContentUl>
         </S.NavbarContent>
