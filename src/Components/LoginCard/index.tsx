@@ -62,10 +62,6 @@ const LoginCard = () => {
     }
   };
 
-  const handleTeste = () => {
-    console.log(userStorage);
-  };
-
   return (
     <>
       <div>

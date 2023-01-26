@@ -11,7 +11,9 @@ const QuestionsCard = () => {
   const { logged } = useAuth()
   const { questions } = useQuestions();
   const { team } = useTeam() 
-  
+
+  console.log(questions)
+
   return (
           <Style.QuestionsContainer>
               <section className="section01">
@@ -21,9 +23,9 @@ const QuestionsCard = () => {
 
             <section className="allQuestions">
 
-            {questions&& questions.map((element:any, index:any)=>{
+            {questions && questions.map((element:any, index:any)=>{
               return(                     
-                <section key={element.id} className="section02">
+                <section key={index} className="section02">
                 <div className="title">
                   <p>{`Questão ${index+1}`}</p>
                   <p className="updateButton" onClick={()=> toast.success('Questão atualizada')}>Alterar</p>
@@ -42,10 +44,10 @@ const QuestionsCard = () => {
                       </div>
                       <div className="second">
                         <p>Equipes</p>
-                        {element.alternatives.map((element2:any)=>{
+                        { element.alternatives.map((element2:any)=>{
                           return(              
-                            <select value={element2.teams[0].name}>
-                              {team.map((element3:any)=>{                       
+                            <select value={element2.teams[0]? element2.teams[0].name : ""}>
+                              {team && team.map((element3:any)=>{                       
                                 return(
                                   <option>{element3.name}</option>
                                 )
@@ -54,7 +56,7 @@ const QuestionsCard = () => {
                           )
                         })}
                             <select className="newTeam">
-                              {team.map((element3:any)=>{                       
+                              {team && team.map((element3:any)=>{                       
                                 return(
                                   <option>{element3.name}</option>
                                 )
@@ -65,7 +67,7 @@ const QuestionsCard = () => {
                         <p>Horas Totais</p>
                         {element.alternatives.map((element2:any)=>{
                           return(
-                            <input type="number" value={element2.teams[0].workHours}></input>
+                            <input type="number" value={element2.teams[0]? element2.teams[0].workHours : 0}></input>
                           )
                         })}
                         <input placeholder="Horas" className="newHour"></input>
@@ -73,12 +75,9 @@ const QuestionsCard = () => {
                     </div>
                 </section>
               </section>
-
               )
               })}
-
           </section>
-
 
           </Style.QuestionsContainer>  
   );

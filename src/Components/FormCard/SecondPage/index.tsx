@@ -38,7 +38,6 @@ const SecondPageCard = ({setStepNumber}:FirstPageProp) =>{
         setAnswers(content)
         setValue("")
         setText("")
-        console.log(answers)
     }
 
     const handleBack = () =>{
