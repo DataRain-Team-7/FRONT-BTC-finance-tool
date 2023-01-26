@@ -23,6 +23,7 @@ export interface ClientTypes {
   email: string;
   companyName: string;
   phone: string;
+  mainContact: string;
   technicalContact?: string;
   technicalContactPhone?: string;
   technicalContactEmail?: string;

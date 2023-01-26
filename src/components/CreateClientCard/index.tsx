@@ -4,36 +4,48 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import defaultImage from "../../assets/images/userDefault.png";
 import Api from "../../services/api";
 import * as Style from "../CreateAccountCard/style";
-import React from "react";
 import Header from "../Header";
 
 const CreateClientCard = () => {
   const navigate = useNavigate();
 
   interface CreateAccountData {
-    name: string;
+    companyName: string;
     email: string;
-    position: string;
+    phone: string;
+    mainContact: string;
+    technicalContact?: string;
+    technicalContactPhone?: string;
+    technicalContactEmail?: string;
   }
 
   const registerSchema = yup.object().shape({
-    name: yup.string().required("Nome obrigatório"),
     email: yup.string().email("Email inválido").required("Email obrigatório"),
-    position: yup.string().required("Função obrigatória"),
+    phone: yup
+      .string()
+      .max(11, "Campo telefone pode conter apenas 11 dígitos")
+      .required("Telefone obrigatório"),
+    companyName: yup.string().required("Nome obrigatório"),
+    mainContact: yup.string().required("Preencha o campo contato principal"),
+    technicalContact: yup.string(),
+    technicalContactPhone: yup.string().max(11, "Máximo 11 dígitos"),
+    technicalContactEmail: yup.string().email("Email inválido"),
   });
 
   const handleErrorMessage = () => {
-    if (errors.name) {
-      toast.error(`${errors.name?.message}`);
+    if (errors.companyName) {
+      toast.error(`${errors.companyName?.message}`);
       clearErrors();
     } else if (errors.email) {
       toast.error(`${errors.email?.message}`);
       clearErrors();
-    } else if (errors.position) {
-      toast.error(`${errors.position?.message}`);
+    } else if (errors.phone) {
+      toast.error(`${errors.phone?.message}`);
+      clearErrors();
+    } else if (errors.mainContact) {
+      toast.error(`${errors.mainContact?.message}`);
       clearErrors();
     } else {
       clearErrors;
@@ -48,27 +60,25 @@ const CreateClientCard = () => {
   } = useForm<CreateAccountData>({ resolver: yupResolver(registerSchema) });
 
   const handleRegister = (data: CreateAccountData) => {
-    if (data.name !== "" || data.email !== "" || data.position !== "") {
-      const dataCreate = {
-        name: data.name,
-        email: data.email,
-        position: data.position,
-      };
-      Api.post("/user", dataCreate)
+    if (
+      data.companyName !== "" ||
+      data.email !== "" ||
+      data.phone !== "" ||
+      data.mainContact !== ""
+    ) {
+      Api.post("/client", data)
         .then((res) => {
-          toast.success("Confira sua caixa de entrada e valide seu email");
+          toast.success("Cliente criado com sucesso");
         })
         .catch((error) => {
           toast.error("Erro ao realizar cadastro");
         });
-    } else {
-      toast.error("Preencha todos os campos");
     }
   };
 
   return (
     <>
-    <Header/>
+      <Header />
       <Style.CreateAccountContainer>
         <Style.CreateAccountCard onSubmit={handleSubmit(handleRegister)}>
           <Style.CreateUserTitleContainer>
@@ -78,17 +88,17 @@ const CreateClientCard = () => {
             <Style.InputLabel>Email</Style.InputLabel>
             <Style.Inputs type="email" {...register("email")} />
             <Style.InputLabel>Telefone</Style.InputLabel>
-            <Style.Inputs type="tel" />
+            <Style.Inputs type="tel" {...register("phone")} />
             <Style.InputLabel>Nome do cliente</Style.InputLabel>
-            <Style.Inputs type="text" {...register("name")} />
+            <Style.Inputs type="text" {...register("companyName")} />
             <Style.InputLabel>Nome do contato principal</Style.InputLabel>
-            <Style.Inputs />
+            <Style.Inputs type="text" {...register("mainContact")} />
             <Style.InputLabel>Nome do contato técnico</Style.InputLabel>
-            <Style.Inputs />
+            <Style.Inputs type="text" {...register("technicalContact")} />
             <Style.InputLabel>Telefone do contato técnico</Style.InputLabel>
-            <Style.Inputs type="tel" />
+            <Style.Inputs type="tel" {...register("technicalContactPhone")} />
             <Style.InputLabel>E-mail do contato técnico</Style.InputLabel>
-            <Style.Inputs type="email" />
+            <Style.Inputs type="email" {...register("technicalContactEmail")} />
           </Style.InputsContainer>
           <Style.ButtonsContainer>
             <Button
