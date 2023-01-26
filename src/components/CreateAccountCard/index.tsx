@@ -7,10 +7,18 @@ import * as yup from "yup";
 import defaultImage from "../../assets/images/userDefault.png";
 import Api from "../../services/api";
 import * as Style from "../../components/CreateAccountCard/style";
-import React from "react";
+import React, { useEffect } from "react";
+import { useActive } from "../../contexts/activePage";
 
 const CreateAccountCard = () => {
   const navigate = useNavigate();
+  const { setActive } = useActive()
+
+  useEffect(()=>{
+    sessionStorage.clear;
+    localStorage.clear
+  }
+    ,[])
 
   interface CreateAccountData {
     name: string;
@@ -86,7 +94,7 @@ const CreateAccountCard = () => {
           <Button
             variant="contained"
             className="buttonCancel"
-            onClick={() => navigate("/home")}
+            onClick={() => {navigate("/home"); setActive("home")}}
           >
             Cancelar
           </Button>

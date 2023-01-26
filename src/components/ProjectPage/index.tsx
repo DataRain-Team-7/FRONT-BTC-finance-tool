@@ -4,10 +4,12 @@ import MockedUserCard from "../ModalCreateTeam/MockedUserCard";
 import UserCard from "../UserCard/indext.tsx";
 import * as S from "./style";
 import React from "react";
+import { useActive } from "../../contexts/activePage";
 
 
 const ProjectPage = () => {
   const navigate = useNavigate();
+  const { setActive } = useActive()
   // const users = [
   //   {
   //     id: "1",
@@ -41,7 +43,7 @@ const ProjectPage = () => {
         <S.ProjectPageContainer>
           <S.ProjectPageReturn>
             {" "}
-            <S.BackIcon onClick={() => navigate("/home")} />{" "}
+            <S.BackIcon onClick={() => {navigate("/home"); setActive("home")}} />{" "}
           </S.ProjectPageReturn>
           <S.ProjectPageHeader>
             <div>
