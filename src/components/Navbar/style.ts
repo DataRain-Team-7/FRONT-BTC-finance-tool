@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { GrProjects } from "react-icons/gr"
+import { blue } from "@mui/material/colors";
 
 export const NavbarContainer = styled.div`
   display: flex;
@@ -41,10 +42,17 @@ export const NavbarContent = styled.div`
 `;
 
 export const NavbarContentUl = styled.ul`
-  display: block;
-  list-style: none;
-  margin-left: 4vw;
-  margin-top: 20px;
+  ${({ theme }) => css`
+    display: block;
+    list-style: none;
+    margin-left: 4vw;
+    margin-top: 20px;
+
+    .active{
+        background-color: ${theme.colors.tertiaryColor};
+        color: white;
+      }
+  `}
 `;
 
 export const NavbarContentLi = styled.li`
