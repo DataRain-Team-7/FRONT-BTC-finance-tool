@@ -130,4 +130,5 @@ const CreateAccountCard = () => {
   );
 };
 
+
 export default CreateAccountCard;
