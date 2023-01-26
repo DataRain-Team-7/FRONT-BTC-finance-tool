@@ -4,7 +4,13 @@ import { useTeam } from "../../contexts/teamContext";
 import * as Style from "./style"
 import React from "react";
 
-const HomeCard = () => {
+interface SearchProp {
+  search: string
+}
+
+const HomeCard = ({search}: SearchProp) => {
+
+  // const forms = dadosDobanco.filter(element => element.name 
 
   const navigate = useNavigate()
   

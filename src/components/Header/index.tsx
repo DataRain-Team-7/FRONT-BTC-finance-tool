@@ -1,13 +1,17 @@
 import { Badge } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import userDefault from "../../assets/images/userDefault.png";
 import logo from "../../assets/images/logo.png";
 import { useAuth } from "../../contexts/auth";
 import * as Style from "./style";
 
-const Header = () => {
+interface SearchProp {
+  setSearch: Dispatch<SetStateAction<string>>
+}
+
+const Header = ({setSearch}:SearchProp) => {
   const { userStorage, logout } = useAuth();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -46,6 +50,7 @@ const Header = () => {
           type="text"
           placeholder="Buscar por cliente, empresa, etc..."
           className="animate__animated animate__fadeIn animate__delay-1s"
+          onChange={(e)=> setSearch(e.target.value)}
         ></input>
         <img src={logo} onClick={handleClick}></img>
         <Menu
