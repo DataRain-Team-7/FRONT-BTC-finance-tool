@@ -6,12 +6,14 @@ import * as React from "react";
 import toast from "react-hot-toast";
 import { BsPencil, BsThreeDotsVertical, BsTrash } from "react-icons/bs";
 import { useAuth } from "../../contexts/auth";
+import { ClientTypes } from "../../types/interface";
+import ModalDeleteClient from "../ModalDeleteClient";
 
 interface ClientProps {
   client: ClientTypes;
 }
 
-export default function BasicMenuClient() {
+export default function BasicMenuClient({ client }: ClientProps) {
   const [openDeleteModal, setOpenDeleteModal] = React.useState<boolean>(false);
   const [openEditModal, setOpenEditModal] = React.useState<boolean>(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -22,8 +24,6 @@ export default function BasicMenuClient() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const { userStorage } = useAuth();
-
   return (
     <div>
       <Button
@@ -44,48 +44,35 @@ export default function BasicMenuClient() {
           "aria-labelledby": "basic-button",
         }}
       >
-        {userStorage.roleName === "admin" ? (
-          <div>
-            <MenuItem
-              className="MenuItem"
-              onClick={() => {
-                handleClose();
-                setOpenDeleteModal(!openDeleteModal);
-              }}
-            >
-              <BsTrash /> Excluir
-            </MenuItem>
-            <MenuItem
-              className="MenuItem"
-              onClick={() => {
-               toast.error("Seção em desenvolvimento");
-                handleClose();
-              }}
-            >
-              <BsPencil /> Editar
-            </MenuItem>
-          </div>
-        ) : (
+        <div>
           <MenuItem
-            selected
             className="MenuItem"
             onClick={() => {
-              setOpenEditModal(!openEditModal);
+              handleClose();
+              setOpenDeleteModal(!openDeleteModal);
+            }}
+          >
+            <BsTrash /> Excluir
+          </MenuItem>
+          <MenuItem
+            className="MenuItem"
+            onClick={() => {
+              toast.error("Seção em desenvolvimento");
               handleClose();
             }}
           >
             <BsPencil /> Editar
           </MenuItem>
-        )}
+        </div>
       </Menu>
 
-      {/* {openDeleteModal ? (
-        <ModalDeleteUser
-          user={client}
+      {openDeleteModal ? (
+        <ModalDeleteClient
+          client={client}
           openDeleteModal={openDeleteModal}
           setOpenDeleteModal={setOpenDeleteModal}
         />
-      ) : null} */}
+      ) : null}
 
       {/* {openEditModal ? (
         <ModalEditUser

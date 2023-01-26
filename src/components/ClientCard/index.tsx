@@ -12,7 +12,7 @@ const ClientCard = ({client}: ClientProps) => {
     <S.ClientContainer >
       <S.ClientHeader>
         <span>
-          {<MenuDropdownClient/>}
+          {<MenuDropdownClient client={client}/>}
         </span>
       </S.ClientHeader>
       <S.ClientName>{client.companyName}</S.ClientName>

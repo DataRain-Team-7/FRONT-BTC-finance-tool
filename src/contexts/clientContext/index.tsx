@@ -39,7 +39,7 @@ export const ClientProvider = ({ children }: ClientProviderProps) => {
   }, [logged]);
 
   return (
-    <ClientContext.Provider value={{ client, handleGetClients() {} }}>
+    <ClientContext.Provider value={{ client, handleGetClients}}>
       {children}
     </ClientContext.Provider>
   );
