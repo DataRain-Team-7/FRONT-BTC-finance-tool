@@ -5,9 +5,9 @@ import * as React from "react";
 
 import toast from "react-hot-toast";
 import { BsPencil, BsThreeDotsVertical, BsTrash } from "react-icons/bs";
-import { useAuth } from "../../contexts/auth";
 import { ClientTypes } from "../../types/interface";
 import ModalDeleteClient from "../ModalDeleteClient";
+import ModalEditClient from "../ModalEditClient";
 
 interface ClientProps {
   client: ClientTypes;
@@ -57,7 +57,7 @@ export default function BasicMenuClient({ client }: ClientProps) {
           <MenuItem
             className="MenuItem"
             onClick={() => {
-              toast.error("Seção em desenvolvimento");
+              setOpenEditModal(!openEditModal);
               handleClose();
             }}
           >
@@ -74,13 +74,13 @@ export default function BasicMenuClient({ client }: ClientProps) {
         />
       ) : null}
 
-      {/* {openEditModal ? (
-        <ModalEditUser
-          userStorage={user}
-          openModal={openEditModal}
-          setOpenModal={setOpenEditModal}
+      {openEditModal ? (
+        <ModalEditClient
+          client={client}
+          openEditModal={openEditModal}
+          setOpenEditModal={setOpenEditModal}
         />
-      ) : null} */}
+      ) : null}
     </div>
   );
 }
