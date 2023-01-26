@@ -1,9 +1,13 @@
+import { ClientTypes } from "../../types/interface";
 import MenuDropdownClient from "../MenuDropdownClient";
 import * as S from "./style";
 
+interface ClientProps{
+  client: ClientTypes;
+}
 
 
-const ClientCard = () => {
+const ClientCard = ({client}: ClientProps) => {
   return (
     <S.ClientContainer >
       <S.ClientHeader>
@@ -11,10 +15,14 @@ const ClientCard = () => {
           {<MenuDropdownClient/>}
         </span>
       </S.ClientHeader>
-      <S.ClientName>Mathias</S.ClientName>
-      <S.ClientEmail>mathiassouza10@outlook.test</S.ClientEmail>
-      <S.ClientPhone>(11) - 9 9933-9933 </S.ClientPhone>
-      <S.ClientMainContact>Adailton</S.ClientMainContact>
+      <S.ClientName>{client.companyName}</S.ClientName>
+      <S.ClientEmail>{client.email}</S.ClientEmail>
+      <S.ClientPhone>{client.phone}</S.ClientPhone>
+      {
+        client.technicalContact === "" ? (
+          <S.ClientMainContact>{client.technicalContact}</S.ClientMainContact>
+        ): null  
+      }
     </S.ClientContainer>
   );
 };

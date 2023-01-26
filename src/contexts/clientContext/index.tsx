@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import Api from "../../services/api";
+import { ClientTypes } from "../../types/interface";
 import { useAuth } from "../auth";
 
 interface ClientProviderProps {
@@ -32,6 +33,10 @@ export const ClientProvider = ({ children }: ClientProviderProps) => {
       .then((res) => setClient(res.data))
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    if (logged) handleGetClients();
+  }, [logged]);
 
   return (
     <ClientContext.Provider value={{ client, handleGetClients() {} }}>

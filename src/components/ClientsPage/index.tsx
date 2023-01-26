@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useClient } from "../../contexts/clientContext";
 import ClientCard from "../ClientCard";
 
 import Header from "../Header";
@@ -5,6 +7,12 @@ import Navbar from "../Navbar";
 import * as S from "./style";
 
 const ClientsPage = () => {
+  const{handleGetClients, client} = useClient()
+
+  useEffect(() => {
+    handleGetClients()
+  },[])
+
   return (
     <>
       <Header />
@@ -19,13 +27,11 @@ const ClientsPage = () => {
             </S.ClientsPageTitle>
           </S.ClientsPageHeader>
           <S.ClientsPageContent>
-            <ClientCard />
-            <ClientCard />
-            <ClientCard />
-            <ClientCard />
-            <ClientCard />
-            <ClientCard />
-            <ClientCard />
+            {
+              client.map((element, index) => {
+                return <ClientCard client={element} key={index}/>
+              })
+            }
           </S.ClientsPageContent>
         </S.ClientsPageContainer>
       </S.ClientsAllContent>
