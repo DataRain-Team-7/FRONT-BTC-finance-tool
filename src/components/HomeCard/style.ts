@@ -29,25 +29,18 @@ export const HomeContainer = styled.div`
         font-size: ${theme.constants.titleFontSize};
       }
 
-      div{
+      section{
         display: flex;
         flex-direction: row;
         width: 100%;
         justify-content: space-between;
-        padding: 0 7% 0 4.5%;
+        padding-right: 2%;
         box-sizing: border-box;
         font-size: 28px;
-
-        .company{
-          margin-left: 10%;
-        }
-
-        .last{
-          margin-right: 5%;
-        }
-
-        .date{
-          margin-left: 6%;
+        
+        div{
+          width: 100%;
+          text-align: center;
         }
 
       }
@@ -82,7 +75,7 @@ export const HomeContainer = styled.div`
                 background: #ED8107;
             }
 
-      div{
+      section{
         display: flex;
         flex-direction: row;
         width: 99%;
@@ -91,14 +84,19 @@ export const HomeContainer = styled.div`
         min-height: 5rem;
         margin-bottom: 16px;
         align-items: center;
-        padding: 0 36px;
+        /* padding: 0 36px; */
         border-radius: 5px;
         box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px;
         cursor: pointer;
 
+        div{
+          width: 100%;
+          text-align: center;
+        }
+
       }
 
-      div:hover{
+      section:hover{
         background-color: ${theme.colors.tertiaryColor};
         color: ${theme.colors.primaryColor};
       }
