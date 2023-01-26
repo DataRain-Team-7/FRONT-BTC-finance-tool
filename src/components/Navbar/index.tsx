@@ -1,6 +1,5 @@
 import Logo from "../../assets/img/logo.svg";
 import * as S from "./style";
-//icons
 import { AiOutlineHome, AiOutlineTeam, AiOutlineUserAdd } from "react-icons/ai";
 import { BsGraphUp } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
@@ -23,7 +22,7 @@ const Navbar = () => {
         </S.NavbarLogo>
         <S.NavbarContent>
           <S.NavbarContentUl>
-            <S.NavbarContentLi className={active === "home"? "active" : ""} onClick={() => {navigate("/home"); setActive("home")}}>
+            <S.NavbarContentLi className={active === "home" || active === ""? "active" : ""} onClick={() => {navigate("/home"); setActive("home")}}>
               <span>
                 <AiOutlineHome />
               </span>

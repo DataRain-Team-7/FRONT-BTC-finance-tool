@@ -1,17 +1,19 @@
 import { Badge } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import userDefault from "../../assets/images/userDefault.png";
 import logo from "../../assets/images/logo.png";
 import { useAuth } from "../../contexts/auth";
 import * as Style from "./style";
+import { useActive } from "../../contexts/activePage";
 
 interface SearchProp {
   setSearch: Dispatch<SetStateAction<string>>
 }
 
 const Header = ({setSearch}:SearchProp) => {
+  const { active, setActive, fade, setFade } = useActive();
   const { userStorage, logout } = useAuth();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -25,7 +27,7 @@ const Header = ({setSearch}:SearchProp) => {
   return (
     <Style.HeaderContainer>
       <section>
-        <div className="animate__animated animate__fadeInLeftBig animate__delay-1s">
+        <div className={ active == "" ? "animate__animated animate__fadeInLeftBig animate__delay-0.5s": ""}>
           <div>
             {userStorage.imageUrl === null ? (
               <img alt="Imagem do Perfil" src={userDefault}></img>
@@ -37,7 +39,7 @@ const Header = ({setSearch}:SearchProp) => {
             )}
             <p>{userStorage.name}</p>
             {/* <p className="secondColorElement">(Admin)</p> */}
-            <p className="secondColorElement getOut" onClick={() => logout()}>
+            <p className="secondColorElement getOut" onClick={() => {logout(); setActive("")}}>
               | SAIR
             </p>
           </div>
@@ -46,12 +48,17 @@ const Header = ({setSearch}:SearchProp) => {
           </Badge>
           <Style.gear />{" "}
         </div>
-        <input
+        {
+        fade && <input
           type="text"
           placeholder="Buscar por cliente, empresa, etc..."
-          className="animate__animated animate__fadeIn animate__delay-1s"
+          className={active== "home" || active == "" ? 
+                              "animate__animated animate__fadeIn animate__delay-0.5s" :
+                              "animate__animated animate__fadeOut animate__delay-0.5s"
+                    }
           onChange={(e)=> setSearch(e.target.value)}
         ></input>
+        }
         <img src={logo} onClick={handleClick}></img>
         <Menu
           anchorEl={anchorEl}

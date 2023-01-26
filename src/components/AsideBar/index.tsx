@@ -31,7 +31,7 @@ const AsideBar = () => {
         </S.NavbarLogo>
         <S.NavbarContent>
           <S.NavbarContentUl>
-            <S.NavbarContentLi className={active === "home"? "active" : ""} onClick={() => {navigate("/home"); setActive("home")}}>
+            <S.NavbarContentLi className={active === "home" || active === ""? "active" : ""} onClick={() => {navigate("/home"); setActive("home")}}>
               <span>
                 <AiOutlineHome />
               </span>
