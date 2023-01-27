@@ -1,21 +1,15 @@
+import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
-import { TeamsTypes } from "../../types/interface";
-import * as S from "./style";
-import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import * as yup from "yup";
+import toast from "react-hot-toast";
 import { useTeam } from "../../contexts/teamContext";
 import Api from "../../services/api";
 import { ButtonsContainer } from "../../utils/globalStyles";
+import * as S from "./style";
 
-interface ModalCreateProps {
-  team: TeamsTypes;
-}
 
 interface CreateTeamData {
   id?: string;
@@ -79,7 +73,6 @@ export default function ModalCreateTeam({
   return (
     <div>
       <Modal
-        // open={open}
         onClose={handleClose}
         open={openCreateModal}
         aria-labelledby="modal-modal-title"
