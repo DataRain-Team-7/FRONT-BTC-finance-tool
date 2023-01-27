@@ -9,7 +9,7 @@ interface SearchProp {
 const HomeCard = ({search}: SearchProp) => {
 
   const { budgets } = useUsers()
-  const forms = budgets.filter((element: any)=>element.client.companyName.toUpperCase().includes(search.toLocaleUpperCase()))
+  const forms = budgets? budgets.filter((element: any)=>element.client.companyName.toUpperCase().includes(search.toLocaleUpperCase())) : []
   console.log(forms) 
 
   const navigate = useNavigate()
