@@ -1,8 +1,5 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTeam } from "../../contexts/teamContext";
 import * as Style from "./style"
-import React from "react";
 import { useUsers } from "../../contexts/userContext";
 
 interface SearchProp {
@@ -12,8 +9,8 @@ interface SearchProp {
 const HomeCard = ({search}: SearchProp) => {
 
   const { budgets } = useUsers()
-  // console.log(budgets[0])
-  // const forms = dadosDobanco.filter(element => element.name 
+  const forms = budgets.filter((element: any)=>element.client.companyName.toUpperCase().includes(search.toLocaleUpperCase()))
+  console.log(forms) 
 
   const navigate = useNavigate()
   
@@ -40,7 +37,7 @@ const HomeCard = ({search}: SearchProp) => {
                 </section>           
               </section>
               <section className="section02">
-                {budgets && budgets.map((element: any) => {
+                {forms && forms.map((element: any) => {
                   return(
                     <section key={element.id} onClick={()=> navigate("/prevenda")}>
                       <div>
