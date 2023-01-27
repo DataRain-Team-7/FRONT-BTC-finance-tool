@@ -2,11 +2,14 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import MockedUserCard from "../MockedUserCard";
 import * as S from "./style";
+import React from "react";
+import { useActive } from "../../contexts/activePage";
 
 
 const ProjectPage = () => {
   const navigate = useNavigate();
- 
+  const { setActive } = useActive()
+
   return (
     <>
       <Header />
@@ -14,7 +17,7 @@ const ProjectPage = () => {
         <S.ProjectPageContainer>
           <S.ProjectPageReturn>
             {" "}
-            <S.BackIcon onClick={() => navigate("/home")} />{" "}
+            <S.BackIcon onClick={() => {navigate("/home"); setActive("home")}} />{" "}
           </S.ProjectPageReturn>
           <S.ProjectPageHeader>
             <div>

@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import theme from "../styles/theme";
+import { ActiveProvider } from "./activePage";
 import { AuthProvider } from "./auth";
 import { ClientProvider } from "./clientContext";
 import { QuestionsProvider } from "./questions";
@@ -20,7 +21,9 @@ const Providers = ({ children }: ProviderProps) => {
           <UserProvider>
             <ClientProvider>
               <QuestionsProvider>
-                <TeamProvider>{children}</TeamProvider>
+                <ActiveProvider>
+                  <TeamProvider>{children}</TeamProvider>
+                </ActiveProvider>
               </QuestionsProvider>
             </ClientProvider>
           </UserProvider>
