@@ -10,28 +10,6 @@ export const FormEdit = styled.form`
   align-items: center;
 `;
 
-export const LabelEdit = styled.label`
-  text-align: start;
-  width: 80%;
-  padding-left: 2%;
-  margin-top: 1%;
-  font-size: ${theme.constants.smallFont};
-  color: ${theme.colors.fundamentalColor};
-`;
-
-export const InputEditTeam = styled.input`
-  width: 70%;
-  height: 40px;
-  font-size: 20px;
-  border-radius: 5px;
-  border: 1px solid gray;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  outline: none;
-  padding: 5px;
-`;
-
 export const ButtonCancel = styled.button`
   font-size: 20px;
   border: 1px solid #0d78a0;
