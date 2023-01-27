@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <Style.HeaderContainer>
       <section>
-        <div className="animate__animated animate__fadeInLeftBig animate__delay-1s">
+        <div className="animate__animated animate__fadeInLeftBig animate__delay-0.5s">
           <div>
             {userStorage.imageUrl === null ? (
               <img alt="Imagem do Perfil" src={userDefault}></img>
@@ -45,7 +45,7 @@ const Header = () => {
         <input
           type="text"
           placeholder="Buscar por cliente, empresa, etc..."
-          className="animate__animated animate__fadeIn animate__delay-1s"
+          className="animate__animated animate__fadeIn animate__delay-0.5s"
         ></input>
         <img src={logo} onClick={handleClick}></img>
         <Menu
