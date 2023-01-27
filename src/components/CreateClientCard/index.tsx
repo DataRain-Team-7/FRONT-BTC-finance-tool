@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import Api from "../../services/api";
 import * as Style from "../CreateAccountCard/style";
-import Header from "../Header";
+import TopBar from "../TopBar";
 
 const CreateClientCard = () => {
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ const CreateClientCard = () => {
 
   return (
     <>
-      <Header />
+      <TopBar />
       <Style.CreateAccountContainer>
         <Style.CreateAccountCard onSubmit={handleSubmit(handleRegister)}>
           <Style.CreateUserTitleContainer>
