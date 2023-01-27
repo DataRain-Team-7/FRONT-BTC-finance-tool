@@ -1,4 +1,3 @@
-import AsideBar from '../../components/AsideBar';
 import Header from '../../components/Header';
 import HomeCard from '../../components/HomeCard';
 import Navbar from '../../components/Navbar';

@@ -9,6 +9,7 @@ import ModalDeleteUser from "../ModalDeleteUser";
 import ModalEditUser from "../ModalEditUser";
 import { useAuth } from "../../contexts/auth";
 import ModalEditRole from "../ModalEditRole";
+import toast from "react-hot-toast";
 
 interface MenuProps {
   user: UserTypes;
@@ -67,6 +68,15 @@ export default function BasicMenu({ user }: MenuProps) {
               }}
             >
               <BsPencil /> Editar Role
+            </MenuItem>
+            <MenuItem
+              className="MenuItem"
+              onClick={() => {
+               toast.error("Seção em desenvolvimento");
+                handleClose();
+              }}
+            >
+              <BsPencil /> Billable
             </MenuItem>
           </div>
         ) : (

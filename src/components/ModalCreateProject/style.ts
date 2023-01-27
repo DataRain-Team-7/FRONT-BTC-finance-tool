@@ -9,9 +9,8 @@ export const FormCreate = styled.form`
   align-items: center;
 `;
 
-// new
-
-export const CreateTeamTitle = styled.div`
+//new
+export const FormCreateTitle = styled.div`
   border-radius: 15px 15px 0 0;
   display: flex;
   width: 100%;
@@ -21,11 +20,19 @@ export const CreateTeamTitle = styled.div`
   background-color: ${theme.colors.primaryColor};
   margin-bottom: 30px;
 
-  .title-create-user {
+  .title-create-project {
     margin-left: 5%;
     font-size: ${theme.constants.fontHeader};
     color: ${theme.colors.fundamentalColor};
   }
+`;
+
+export const InputsCreateProject = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 export const InputLabel = styled.label`
@@ -33,16 +40,22 @@ export const InputLabel = styled.label`
   width: 80%;
   padding-left: 2%;
   margin-top: 1%;
+  margin-bottom: 5px;
   font-size: ${theme.constants.fontHeader};
   color: ${theme.colors.fundamentalColor};
 `;
 
-export const InputCreateContainer = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+export const InputTextAria = styled.textarea`
+  display: block;
+  all: unset;
+  border: 1px solid #d1d1d1;
+  border-radius: 4px;
+  font-size: ${theme.constants.smallFont};
+  padding: 0 9px;
+  box-sizing: border-box;
+  width: 80%;
+  background-color: ${theme.colors.primaryColor};
+
 `;
 
 export const InputCreateTeam = styled.input`

@@ -39,7 +39,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 500,
-  height: 300,
+  height: 320,
   bgcolor: "background.paper",
   border: "0",
   boxShadow: 24,
@@ -90,29 +90,25 @@ export default function ModalEditTeam({
           marginTop="10px"
           sx={style}
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Editar Equipe
-          </Typography>
           <S.FormEdit onSubmit={handleSubmit(handleEditTeam)}>
-            <S.LabelEdit htmlFor="name">
-              {" "}
-              Equipe:
+            <S.EditTeamTitle>
+              <h1 className="title-edit-user">Criar Equipe</h1>
+            </S.EditTeamTitle>
+            <S.InputEditContainer>
+              <S.InputLabel htmlFor="name"> Equipe</S.InputLabel>
               <S.InputEditTeam
                 defaultValue={team.name}
                 type="text"
                 {...register("name")}
               />
-            </S.LabelEdit>
 
-            <S.LabelEdit htmlFor="valuePerHour">
-              {" "}
-              R$:
+              <S.InputLabel htmlFor="valuePerHour">Valor R$</S.InputLabel>
               <S.InputEditTeam
                 defaultValue={team.valuePerHour}
                 type="text"
                 {...register("valuePerHour")}
               />
-            </S.LabelEdit>
+            </S.InputEditContainer>
             <Box
               display="flex"
               alignItems="center"

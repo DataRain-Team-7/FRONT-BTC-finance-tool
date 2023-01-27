@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { GrProjects } from "react-icons/gr"
+import { GrProjects } from "react-icons/gr";
 
 export const NavbarContainer = styled.div`
   display: flex;
@@ -8,12 +8,26 @@ export const NavbarContainer = styled.div`
   background-attachment: scroll;
   background-color: #f2f4f6;
   height: 100%;
-  /* position: relative; */
+
+  *::-webkit-scrollbar {
+    height: 75%;
+    width: 10px;
+    border-radius: 20px;
+    margin-right: 50px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #d1d1d1; // cor de fundo do scrol
+    border-radius: 20px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #ef8e1c; // cor do scroll
+    border-radius: 20px;
+  }
 `;
 
-export const ProjectIcon = styled(GrProjects)`
-
-`
+export const ProjectIcon = styled(GrProjects)``;
 
 export const NavbarWrapper = styled.div`
   display: block;
@@ -38,6 +52,8 @@ export const NavbarContent = styled.div`
   height: calc(100vh - 70px);
   padding: 10px 0;
   width: 100%;
+  position: relative;
+  overflow-x: hidden;
 `;
 
 export const NavbarContentUl = styled.ul`
