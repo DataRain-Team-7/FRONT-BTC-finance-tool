@@ -2,7 +2,7 @@ import { Badge } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import userDefault from "../../assets/images/userDefault.png";
+import userDefault from "../../assets/images/default.png";
 import logo from "../../assets/images/logo.png";
 import { useAuth } from "../../contexts/auth";
 import * as Style from "./style";

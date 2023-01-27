@@ -41,7 +41,7 @@ const HomeCard = ({search}: SearchProp) => {
                   return(
                     <section key={element.id} onClick={()=> navigate("/prevenda")}>
                       <div>
-                        <p>{element.client.companyName}</p>
+                        <p>{element.client.mainContact}</p>
                       </div>
                       <div>
                         <p>{element.client.companyName}</p>
