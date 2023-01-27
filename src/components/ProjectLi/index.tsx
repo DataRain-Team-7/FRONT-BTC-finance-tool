@@ -1,16 +1,21 @@
 import * as S from "./style";
 
-import { TeamsTypes } from "../../types/interface";
+import { ProjectTypes, TeamsTypes } from "../../types/interface";
 import MenuDropdown from "../MenuDropdownTeams";
 import { useAuth } from "../../contexts/auth";
 import React from "react";
 
-const ProjectLi = () => {
+interface Props{
+  project: ProjectTypes;
+}
+
+const ProjectLi = ({project}: Props) => {
+
   return (
     <S.ProjectLi>
       <S.LiContent>
         <S.DivContent>
-          <span>Projeto 1</span>
+          <span>{project.name}</span>
         </S.DivContent>
       </S.LiContent>
     </S.ProjectLi>

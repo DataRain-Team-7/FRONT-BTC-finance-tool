@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/auth";
-import { useUsers } from "../../contexts/userContext";
+import { useProject } from "../../contexts/projectContext";
 import Header from "../Header";
 import ModalCreateProject from "../ModalCreateProject";
 import Navbar from "../Navbar";
@@ -10,6 +10,11 @@ import * as S from "./style";
 const AllProjects = () => {
   const [openProjectModal, setOpenProjectModal] = useState<boolean>(false);
   const { userStorage } = useAuth();
+  const { project, handleGetProjects } = useProject();
+
+  useEffect(() => {
+    handleGetProjects();
+  }, []);
   return (
     <>
       <Header />
@@ -36,16 +41,10 @@ const AllProjects = () => {
                   </S.NewProjectContent>
                 </S.NewProject>
               ) : null}
-              <ProjectLi />
-              <ProjectLi />
-              <ProjectLi />
-              <ProjectLi />
-              <ProjectLi />
-              <ProjectLi />
-              <ProjectLi />
-              <ProjectLi />
-              <ProjectLi />
-              <ProjectLi />
+
+              {project.map((element) => {
+                return <ProjectLi project={element} key={element.id} />;
+              })}
             </S.ProjectsUl>
           </S.ProjectsContent>
         </S.ProjectsContainer>

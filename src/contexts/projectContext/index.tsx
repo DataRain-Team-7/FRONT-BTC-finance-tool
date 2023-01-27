@@ -27,19 +27,18 @@ export const ProjectProvider = ({ children }: ProjectProviderProps) => {
   const { logged } = useAuth();
 
   const handleGetProjects = () => {
-    Api.get("/project")
+
+    Api.get("/project" )
       .then((res) => setProject(res.data))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    if (logged) {
-      handleGetProjects();
-    }
+    if (logged) handleGetProjects();
   }, [logged]);
 
   return (
-    <ProjectContext.Provider value={{ handleGetProjects, project }}>
+    <ProjectContext.Provider value={{ project , handleGetProjects }}>
       {children}
     </ProjectContext.Provider>
   );

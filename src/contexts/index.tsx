@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { ProjectsContent } from "../components/AllProjects/style";
 import theme from "../styles/theme";
 import { ActiveProvider } from "./activePage";
 import { AuthProvider } from "./auth";
 import { ClientProvider } from "./clientContext";
+import { ProjectProvider } from "./projectContext";
 import { QuestionsProvider } from "./questions";
 import { TeamProvider } from "./teamContext";
 import { UserProvider } from "./userContext";
@@ -22,11 +22,11 @@ const Providers = ({ children }: ProviderProps) => {
           <UserProvider>
             <ClientProvider>
               <QuestionsProvider>
-                <ProjectsContent>
-                  <ActiveProvider>
+                <ActiveProvider>
+                  <ProjectProvider>
                     <TeamProvider>{children}</TeamProvider>
-                  </ActiveProvider>
-                </ProjectsContent>
+                  </ProjectProvider>
+                </ActiveProvider>
               </QuestionsProvider>
             </ClientProvider>
           </UserProvider>
