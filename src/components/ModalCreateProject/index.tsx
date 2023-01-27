@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
 import { useTeam } from "../../contexts/teamContext";
 import { ButtonsContainer } from "../../utils/globalStyles";
 import * as S from "./style";
@@ -13,7 +12,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 500,
-  height: 300,
+  height: 400,
   bgcolor: "background.paper",
   border: "0",
   boxShadow: 24,
@@ -31,7 +30,7 @@ export default function ModalCreateProject({
   openProjectModal,
 }: ModalProps) {
   const handleClose = () => setOpenProjectModal(!openProjectModal);
-  const { handleGetTeam } = useTeam();
+  
 
   return (
     <div>
@@ -49,15 +48,18 @@ export default function ModalCreateProject({
           marginTop="10px"
           sx={style}
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Criar Equipe
-          </Typography>
           <S.FormCreate>
-            <S.LabelCreate htmlFor="name">
-              {" "}
-              Nome do Projeto:
-              <S.InputCreateTeam type="text" />
-            </S.LabelCreate>
+            <S.FormCreateTitle>
+            <h1 className="title-create-project">Criar Projeto</h1>
+            </S.FormCreateTitle>
+            <S.InputsCreateProject>
+
+            <S.InputLabel htmlFor="name">Nome do projeto</S.InputLabel>
+            <S.InputCreateTeam type="text" />
+
+            <S.InputLabel htmlFor="description">Descrição</S.InputLabel>
+            <S.InputTextAria name="description"  rows={5} cols={15} placeholder="Digite sua mensagem"/>
+            </S.InputsCreateProject>
             <Box
               display="flex"
               alignItems="center"

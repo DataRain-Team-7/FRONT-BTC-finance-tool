@@ -28,3 +28,9 @@ export interface ClientTypes {
   technicalContactPhone?: string;
   technicalContactEmail?: string;
 }
+
+export interface ProjectTypes {
+  id?: string;
+  name: string;
+  description: string;
+}

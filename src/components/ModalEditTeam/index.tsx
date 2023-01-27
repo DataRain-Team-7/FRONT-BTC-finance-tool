@@ -96,19 +96,18 @@ export default function ModalEditTeam({
             </S.EditTeamTitle>
             <S.InputEditContainer>
               <S.InputLabel htmlFor="name"> Equipe</S.InputLabel>
-                <S.InputEditTeam
-                  defaultValue={team.name}
-                  type="text"
-                  {...register("name")}
-                />
+              <S.InputEditTeam
+                defaultValue={team.name}
+                type="text"
+                {...register("name")}
+              />
 
               <S.InputLabel htmlFor="valuePerHour">Valor R$</S.InputLabel>
-                <S.InputEditTeam
-                  defaultValue={team.valuePerHour}
-                  type="text"
-                  {...register("valuePerHour")}
-                />
-
+              <S.InputEditTeam
+                defaultValue={team.valuePerHour}
+                type="text"
+                {...register("valuePerHour")}
+              />
             </S.InputEditContainer>
             <Box
               display="flex"
