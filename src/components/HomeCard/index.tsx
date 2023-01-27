@@ -54,6 +54,7 @@ const HomeCard = ({search}: SearchProp) => {
                       </div>
                       <div> 
                         <p>{element.status}</p>
+                        {/* request | review | approved */}
                       </div>
                     </section>
                   )

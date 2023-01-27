@@ -7,16 +7,24 @@ import * as yup from "yup";
 import defaultImage from "../../assets/images/userDefault.png";
 import Api from "../../services/api";
 import * as Style from "../../components/CreateAccountCard/style";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useActive } from "../../contexts/activePage";
 
 const CreateAccountCard = () => {
   const navigate = useNavigate();
+  const [ role, setRole ] = useState([]);
   const { setActive } = useActive()
+
+  const getRoles = () => {
+    Api.get("/role")
+      .then((res) => setRole(res.data))
+      .catch((err) => toast.error("Falha ao buscar roles"));
+  };
 
   useEffect(()=>{
     sessionStorage.clear;
-    localStorage.clear
+    localStorage.clear;
+    getRoles();
   }
     ,[])
 
@@ -89,6 +97,22 @@ const CreateAccountCard = () => {
           <Style.Inputs type="text" {...register("email")} />
           <Style.InputLabel>Função</Style.InputLabel>
           <Style.Inputs {...register("position")} />
+          <section>
+          <Style.InputLabel>Cargo</Style.InputLabel>
+            <select >
+              {role && role.map((element:any)=>{
+                return(
+                  <option>{element.name}</option>
+                )
+              })}
+            </select>
+            <Style.InputLabel>Bilable</Style.InputLabel>
+            {/* onChange={(e)=>setValue(e.target.value) */}
+            <select >
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </section>
         </Style.InputsContainer>
         <Style.ButtonsContainer>
           <Button

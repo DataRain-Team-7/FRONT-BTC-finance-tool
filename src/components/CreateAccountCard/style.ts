@@ -65,6 +65,26 @@ export const InputsContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  section{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+
+    select{
+              height: 3.5vh;
+              border: none;
+              border-radius: 5px;
+              border: 1px solid #D1D1D1;
+
+              option{
+                width: 100%;
+                text-align: center;
+                font-size: ${theme.constants.fontBody};
+              }
+
+            }
+  }
 `;
 
 export const Inputs = styled.input`
