@@ -13,7 +13,7 @@ import { useActive } from "../../contexts/activePage";
 const CreateAccountCard = () => {
   const navigate = useNavigate();
   const [ role, setRole ] = useState<any[]>();
-  const [ selectdRole, setSelectedRole  ] = useState<string>()
+  const [ selectedRole, setSelectedRole  ] = useState<string>()
   const { setActive } = useActive()
   const [ billable, setBillable] = useState<boolean>(true)
 
@@ -74,7 +74,7 @@ const CreateAccountCard = () => {
         email: data.email,
         position: data.position,
         billable: billable,
-        roleId: selectdRole,
+        roleId: selectedRole,
       };
       Api.post("/user", dataCreate)
         .then((res) => {

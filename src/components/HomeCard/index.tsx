@@ -10,9 +10,20 @@ const HomeCard = ({search}: SearchProp) => {
 
   const { budgets } = useUsers()
   const forms = budgets? budgets.filter((element: any)=>element.client.companyName.toUpperCase().includes(search.toLocaleUpperCase())) : []
-  console.log(forms) 
 
   const navigate = useNavigate()
+
+  const handleStatus = (prop:string) =>{
+    if(prop === "request"){
+      return "Aguardando revisão"
+    }else if(prop === "review"){
+      return "Esperando aprovação"
+    }else if( prop === "approved"){
+      return "Orçamento concluído" 
+    }else{
+      return "erro"
+    }
+  }
   
   return (
           <Style.HomeContainer>
@@ -53,8 +64,7 @@ const HomeCard = ({search}: SearchProp) => {
                         <p>{element.updatedAt}</p>
                       </div>
                       <div> 
-                        <p>{element.status}</p>
-                        {/* request | review | approved */}
+                        <p className={element.status}>{handleStatus(element.status)}</p>
                       </div>
                     </section>
                   )

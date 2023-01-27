@@ -20,7 +20,7 @@ export const HomeContainer = styled.div`
       margin-bottom: 16px;
       p{
       font-size: ${theme.constants.fontHeader};
-    }
+      }
 
 
       h2{
@@ -56,7 +56,43 @@ export const HomeContainer = styled.div`
 
       p{
       font-size: ${theme.constants.fontBody};
-    }
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      }
+
+      div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .request{
+        background-color: #ff0000;
+        color: white;
+        height: 2rem;
+        width: 12rem;
+        border-radius: 5px;
+      }
+
+      .review{
+        background-color: #ef8e1c;
+        color: white;
+        height: 2rem;
+        width: 12rem;
+        border-radius: 5px;
+
+      }
+      
+      .approved{
+        background-color: #50bf16;
+        color: white;
+        height: 2rem;
+        width: 12rem;
+        border-radius: 5px;
+      }
+
+
 
 
       overflow-y: scroll;
