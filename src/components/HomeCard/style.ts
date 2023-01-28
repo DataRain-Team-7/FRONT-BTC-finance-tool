@@ -50,7 +50,7 @@ export const HomeContainer = styled.div`
     .section02{
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      /* justify-content: space-between; */
       width: 100%;
       height: 100%;
 

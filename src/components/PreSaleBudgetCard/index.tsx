@@ -10,11 +10,35 @@ const PreSaleBudgetCard = () =>{
     const navigate = useNavigate()
     const clientId = sessionStorage.getItem("clientId")
     const [ answers, setAnswers ] = useState<any>()
+    const [ budGet, setBudGet ] = useState<any>()
+    const [ value, setValue ] = useState<number>()
+    const [ hour, setHour ] = useState<number>()
 
     const handleGetForm = () =>{
         Api.get(`/budget-request/${clientId}`)
-            .then((res)=>{setAnswers(res.data)})
+            .then((res)=>{
+                setAnswers(res.data);
+                setBudGet(res.data.formResponses.map((element: any)=>{
+                    return {
+                        id: element.id,
+                        valuePerHour: element.valuePerHour,
+                        workHours: element.workHours
+                    }   
+                })) 
+            })
             .catch((err)=>{console.log(err)})
+    }
+
+    const handleUpdateHour = (index: number , value:number) =>{
+        let budget = budGet
+        budget[index].valuePerHour = value
+        setBudGet(budget)
+    }
+
+    const handleUpdateValue = (index: number, value:number) =>{
+        let budget = budGet
+        budget[index].workHours = value
+        setBudGet(budget)
     }
 
     useEffect(()=>handleGetForm(), [])
@@ -28,7 +52,7 @@ const PreSaleBudgetCard = () =>{
                 </Styled.ProjectPageReturn>
                 <section className="client">
                     <div>
-                        <p>Cliente</p>
+                        <p onClick={()=>console.log(budGet)}>Cliente</p>
                         <h3>{answers && answers.client.mainContact.charAt(0).toUpperCase() + answers.client.mainContact.slice(1)}</h3>
                     </div>
                     <div>
@@ -53,16 +77,20 @@ const PreSaleBudgetCard = () =>{
                     return( 
                         <section className="summary">
                             <div className="questions">
-                                <div>
-                                    <h4>{`${index + 1} - ${element.question.description}`}</h4>
-                                    <p>{`${element.alternative !== null?`RO: ${element.alternative}` : ""}`}</p>
-                                    <p>{`${element.responseDetails !== null? `RD: ${element.responseDetails}` : ""}`}</p>
-                                </div>                     
+                                    <div>
+                                        <h4>{`${index + 1}- `}</h4>
+                                        <h4>{`${element.question.description}`}</h4>
+                                    </div>
+                                    <p>{`${element.alternative !== null?`R. Obj.: ${element.alternative}` : ""}`}</p>
+                                    <p>{`${element.responseDetails !== null? `R. Disc.: ${element.responseDetails}` : ""}`}</p>                
                             </div>
                             <div className="hours">
                                 <section>
                                     <div>
-                                        <input type="number" placeholder="50"></input>
+                                        <input type="number" value={element.workHours} onChange={(e)=> {
+                                            // setHour(e.target.valueAsNumber);
+                                            handleUpdateValue(index, e.target.valueAsNumber)
+                                            }}></input>
                                         <p>hr</p>
                                     </div>
                                 </section>
@@ -71,7 +99,10 @@ const PreSaleBudgetCard = () =>{
                                 <section>
                                     <div>
                                         <p>R$: </p>
-                                        <input type="number" placeholder="159,90"></input>
+                                        <input type="number" value={element.valuePerHour} onChange={(e)=> {
+                                            // setValue(e.target.valueAsNumber)
+                                            handleUpdateHour(index, e.target.valueAsNumber)
+                                            }}></input>
                                     </div>
                                 </section>
                             </div>

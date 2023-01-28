@@ -35,7 +35,7 @@ export const PreSaleBudgetContainer = styled.div`
 
                 section{
                     width: 99%;
-                    padding: 3%;
+                    padding: 3% 0;
                 }
 
 
@@ -72,21 +72,22 @@ export const PreSaleBudgetContainer = styled.div`
     .summary{
         display: flex;
         justify-content: space-between;
-        height: 25%;
+        min-height: 6vh;
         border-bottom: 1px dotted black;
             
         .questions{
             width: 50%;
-            
-            div{
-                margin-left: 1rem;
-                
-                
+                margin-left: 2rem;
+
                 p{
-                    margin: .5rem 0;
+                    margin: .8rem 0;
                     margin-left: 1rem;
                 }
-            }
+
+                div{
+                    display: flex;
+                }
+            
         }
 
         .hours, .value{
@@ -105,14 +106,28 @@ export const PreSaleBudgetContainer = styled.div`
                 justify-content: center;
                 align-items: flex-start;
 
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    background-color: black;
+                }
+
                 input{
                     border: none;
                     all: unset;
-                    width: 5rem;
-                    text-align: end;
-                
-                    /* border: 1px solid black; */
-                } 
+                    width: 3.5rem;
+                    text-align: center;
+                }
+
+    
+                input::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+
+                input[type=number] {
+                    -moz-appearance: textfield;
+                }
 
                 p{
 
