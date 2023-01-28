@@ -12,13 +12,42 @@ export const PreSaleBudgetContainer = styled.div`
     height: 82.5vh;
     margin-top: 3.5vh;
     background-color: ${theme.colors.primaryColor};
-    padding: 3%;
+    padding: 2%;
     box-sizing: border-box;
+
+    .mainSection{
+        overflow-y: scroll;
+        width: 100%;
+                ::-webkit-scrollbar {
+                    width: 10px;
+                }
+                ::-webkit-scrollbar-track {
+                    background: ${theme.colors.inputFontColor};
+                    border-radius:5px;
+                }
+                ::-webkit-scrollbar-thumb {
+                    background: ${theme.colors.tertiaryColor};
+                    border-radius:5px;
+                }
+                ::-webkit-scrollbar-thumb:hover {
+                    background: #ED8107;
+                }
+
+                section{
+                    width: 99%;
+                    padding: 3%;
+                }
+
+
+    }
 
     .client{
         display: flex;
         width: 100%;
         justify-content: space-around;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid black;
+
     }
 
     .title{
@@ -27,9 +56,12 @@ export const PreSaleBudgetContainer = styled.div`
         width: 100%;
         margin: 2% 0;
         padding: 0 1rem;
-        h2{
+
+        div{
             width: 25%;
+            text-align: center;
         }
+
         .fisrth2{
             width: 50%;
         }
@@ -40,31 +72,15 @@ export const PreSaleBudgetContainer = styled.div`
     .summary{
         display: flex;
         justify-content: space-between;
-        height: 50%;
-        overflow-y: scroll;
-            ::-webkit-scrollbar {
-                width: 10px;
-            }
-            ::-webkit-scrollbar-track {
-                background: ${theme.colors.inputFontColor};
-                border-radius:5px;
-            }
-            ::-webkit-scrollbar-thumb {
-                background: ${theme.colors.tertiaryColor};
-                border-radius:5px;
-            }
-            ::-webkit-scrollbar-thumb:hover {
-                background: #ED8107;
-            }
+        height: 25%;
+        border-bottom: 1px dotted black;
             
-
-
         .questions{
             width: 50%;
             
             div{
                 margin-left: 1rem;
-                height: 10vh;
+                
                 
                 p{
                     margin: .5rem 0;
@@ -77,34 +93,33 @@ export const PreSaleBudgetContainer = styled.div`
             width: 25%;
             display: flex;
             flex-direction: column;
+            align-items: center;
 
-            h2{
-                margin-bottom: 3vh;
+            .section{
+                align-items: center;
             }
 
             div{
                 display: flex;
                 flex-direction: row;
-                justify-content: flex-start;
+                justify-content: center;
                 align-items: flex-start;
 
                 input{
                     border: none;
                     all: unset;
                     width: 5rem;
-                    text-align: center;
+                    text-align: end;
+                
                     /* border: 1px solid black; */
                 } 
 
                 p{
-                    margin-left: 1rem;
+
                     height: 10vh;
                     text-align: start; 
                 }
-            }
-
-            
-            
+            }    
         }
 
         

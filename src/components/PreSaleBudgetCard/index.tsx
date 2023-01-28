@@ -2,120 +2,95 @@ import { Button } from "@mui/material"
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
 import * as Styled from "./style"
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Api from "../../services/api";
 
 const PreSaleBudgetCard = () =>{
 
     const navigate = useNavigate()
+    const clientId = sessionStorage.getItem("clientId")
+    const [ answers, setAnswers ] = useState<any>()
+
+    const handleGetForm = () =>{
+        Api.get(`/budget-request/${clientId}`)
+            .then((res)=>{setAnswers(res.data)})
+            .catch((err)=>{console.log(err)})
+    }
+
+    useEffect(()=>handleGetForm(), [])
 
     return(
         <Styled.PreSaleBudgetContainer>
-            <Styled.ProjectPageReturn>
-                {" "}
-                <Styled.BackIcon onClick={() => navigate("/home")} />{" "}
-            </Styled.ProjectPageReturn>
-            <section className="client">
-                <div>
-                    <p>Cliente</p>
-                    <h3>Jenny Wilson</h3>
-                </div>
-                <div>
-                    <p>Empresa</p>
-                    <h3>Jenny Wilson</h3>
-                </div>
-            </section>
-            <div className="title">
-                <h2 className="fisrth2">Questões</h2>
-                <h2>Horas</h2>
-                <h2>Valor/hr</h2>
-            </div>
-            <section className="summary">
-                <div className="questions">
+            
+                <Styled.ProjectPageReturn>
+                    {" "}
+                    <Styled.BackIcon onClick={() => navigate("/home")} />{" "}
+                </Styled.ProjectPageReturn>
+                <section className="client">
                     <div>
-                        <h4>1- Quem veio primeiro, o ovo ou a galinha?</h4>
-                        <p>* O ovo veio primeiro</p>
-                        <p>* Porém era de codorna</p>
+                        <p>Cliente</p>
+                        <h3>{answers && answers.client.mainContact.charAt(0).toUpperCase() + answers.client.mainContact.slice(1)}</h3>
                     </div>
                     <div>
-                        <h4>2- Quem veio primeiro, o ovo ou a galinha?</h4>
-                        <p>* O ovo veio primeiro</p>
-                        <p>* Porém era de codorna</p>
+                        <p>Empresa</p>
+                        <h3>{answers && answers.client.companyName.charAt(0).toUpperCase() + answers.client.companyName.slice(1)}</h3>
+                    </div>
+                </section>
+                
+                <div className="title">
+                    <div className="fisrth2">
+                        <h2 className="fisrth2">Questões</h2>
                     </div>
                     <div>
-                        <h4>3- Quem veio primeiro, o ovo ou a galinha?</h4>
-                        <p>* O ovo veio primeiro</p>
-                        <p>* Porém era de codorna</p>
+                        <h2>Horas</h2>
                     </div>
                     <div>
-                        <h4>4- Quem veio primeiro, o ovo ou a galinha?</h4>
-                        <p>* O ovo veio primeiro</p>
-                        <p>* Porém era de codorna</p>
+                        <h2>Valor/hr</h2>
                     </div>
-                    <div>
-                        <h4>5- Quem veio primeiro, o ovo ou a galinha?</h4>
-                        <p>* O ovo veio primeiro</p>
-                        <p>* Porém era de codorna</p>
-                    </div>    
                 </div>
-                <div className="hours">
-                    <section>
-                        <div>
-                            <input type="number" placeholder="50"></input>
-                            <p>hr</p>
-                        </div>
-                        <div>
-                            <input type="number" placeholder="72"></input>
-                            <p>hr</p>
-                        </div>
-                        <div>
-                            <input type="number" placeholder="59"></input>
-                            <p>hr</p>
-                        </div>
-                        <div>
-                            <input type="number" placeholder="90"></input>
-                            <p>hr</p>
-                        </div>
-                        <div>
-                            <input type="number" placeholder="110"></input>
-                            <p>hr</p>
-                        </div>
-                    </section>
-                </div>
-                <div className="value">
-                    <section>
-                        <div>
-                            <p>R$: </p>
-                            <input type="number" placeholder="159,90"></input>
-                        </div>
-                        <div>
-                            <p>R$: </p>
-                            <input type="number" placeholder="140,90"></input>
-                        </div>
-                        <div>
-                            <p>R$: </p>
-                            <input type="number" placeholder="199,90"></input>
-                        </div>
-                        <div>
-                            <p>R$: </p>
-                            <input type="number" placeholder="159,90"></input>
-                        </div>
-                        <div>
-                            <p>R$: </p>
-                            <input type="number" placeholder="179,90"></input>
-                        </div>
-                    </section>
-                </div>
-            </section>
-            <section className="details">
-                <h2>Nota sobre o orçamento</h2>
-                <textarea wrap="hard" placeholder="Comentário adicional"></textarea>
-                <div className="extract">
-                    <p>Horas Totais = 194hr</p>
-                    <p>Valor Total = R$ 39.509,50</p>
-                </div>
-            </section>
-            <section className="botton">
-                <Button type="submit" variant="contained" className="buttonEnter" onClick={()=>{toast.success("Orçamento lançado"); navigate("/home")}}>Finalizar Orçamento</Button>
+                <section className="mainSection">
+                { answers && answers.formResponses.map((element:any, index:any)=>{
+                    return( 
+                        <section className="summary">
+                            <div className="questions">
+                                <div>
+                                    <h4>{`${index + 1} - ${element.question.description}`}</h4>
+                                    <p>{`${element.alternative !== null?`RO: ${element.alternative}` : ""}`}</p>
+                                    <p>{`${element.responseDetails !== null? `RD: ${element.responseDetails}` : ""}`}</p>
+                                </div>                     
+                            </div>
+                            <div className="hours">
+                                <section>
+                                    <div>
+                                        <input type="number" placeholder="50"></input>
+                                        <p>hr</p>
+                                    </div>
+                                </section>
+                            </div>
+                            <div className="value">
+                                <section>
+                                    <div>
+                                        <p>R$: </p>
+                                        <input type="number" placeholder="159,90"></input>
+                                    </div>
+                                </section>
+                            </div>
+                        </section>
+                    )
+                })
+                }
+                <section className="details">
+                    <h2>Nota sobre o orçamento</h2>
+                    <textarea wrap="hard" placeholder="Comentário adicional"></textarea>
+                    <div className="extract">
+                        <p>Horas Totais = 194hr</p>
+                        <p>Valor Total = R$ 39.509,50</p>
+                    </div>
+                </section>
+                <section className="botton">
+                    <Button type="submit" variant="contained" className="buttonEnter" onClick={()=>{toast.success("Orçamento lançado"); navigate("/home")}}>Finalizar Orçamento</Button>
+                </section>
+
             </section>
    
         </Styled.PreSaleBudgetContainer>

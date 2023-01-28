@@ -7,7 +7,7 @@ import React from "react";
 const PreSaleBudget = () =>{
     return(
         <Style.PreSaleBudgetContainer>
-            <Header/>
+            <Header setSearch={""} />
             <PreSaleBudgetCard/>
         </Style.PreSaleBudgetContainer>
     )

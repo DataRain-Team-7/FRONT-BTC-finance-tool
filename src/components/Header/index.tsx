@@ -9,7 +9,8 @@ import * as Style from "./style";
 import { useActive } from "../../contexts/activePage";
 
 interface SearchProp {
-  setSearch: Dispatch<SetStateAction<string>>
+  // setSearch: Dispatch<SetStateAction<string>>
+  setSearch: any
 }
 
 const Header = ({setSearch}:SearchProp) => {

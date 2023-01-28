@@ -50,7 +50,10 @@ const HomeCard = ({search}: SearchProp) => {
               <section className="section02">
                 {forms && forms.map((element: any) => {
                   return(
-                    <section key={element.id} onClick={()=> navigate("/prevenda")}>
+                    <section key={element.id} onClick={()=> {
+                      sessionStorage.setItem("clientId", element.id)
+                      navigate("/prevenda")
+                    }}>
                       <div>
                         <p>{element.client.mainContact}</p>
                       </div>
