@@ -43,7 +43,7 @@ const AllProjects = () => {
               ) : null}
 
               {project.map((element) => {
-                return <ProjectLi project={element} key={element.id} />;
+                return <ProjectLi  project={element} key={element.id} />;
               })}
             </S.ProjectsUl>
           </S.ProjectsContent>

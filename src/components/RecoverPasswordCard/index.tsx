@@ -1,11 +1,10 @@
-import { Button } from "@mui/material"
-import { Dispatch, SetStateAction, useState } from "react"
-import * as Style from "./style"
+import { Button } from "@mui/material";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import Api from "../../services/api";
 import { useAuth } from "../../contexts/auth";
-import React from "react";
+import Api from "../../services/api";
+import * as Style from "./style";
 
 const RecoverPassword = () => {
 

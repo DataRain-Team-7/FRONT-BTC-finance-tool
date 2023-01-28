@@ -1,7 +1,6 @@
-import * as Styled from './style'
-import TopBar from '../../components/TopBar'
-import RecoverPassword from '../../components/RecoverPasswordCard'
-import React from "react";
+import RecoverPassword from '../../components/RecoverPasswordCard';
+import TopBar from '../../components/TopBar';
+import * as Styled from './style';
 
 const RecoverPasswordPage = () => {
   return (

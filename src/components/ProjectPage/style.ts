@@ -3,8 +3,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import { CiSettings } from "react-icons/ci";
 
 export const ProjectAllContainer = styled.div`
-  width: 100vw;
-  height: 90vh;
+  width: 100%;
+  height: 87vh;
   background-color: #f2f4f6;
   display: flex;
   justify-content: center;
@@ -21,7 +21,7 @@ export const ProjectPageContainer = styled.div`
     border-radius: 10px;
     position: relative;
   `}
-    //scroll
+  //scroll
     *::-webkit-scrollbar {
     height: 95%;
     width: 10px;
@@ -91,6 +91,7 @@ export const ProjectHeaderSubtitle = styled.span`
   width: 80%;
   font-size: 16px;
   color: #535353;
+  margin-top: 10px;
 `;
 
 export const ProjectPageContent = styled.div`
@@ -101,7 +102,6 @@ export const ProjectPageContent = styled.div`
   gap: 5%;
   margin-left: 20px;
   overflow-y: scroll;
-
 
   .teste:nth-child(2) {
     background-color: #0d78a0;
@@ -116,4 +116,12 @@ export const ProjectPageContent = styled.div`
       color: #fff;
     }
   }
+`;
+
+export const ProjectDescription = styled.p`
+  width: 80%;
+  font-size: 16px;
+  color: #535353;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
