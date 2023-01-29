@@ -12,11 +12,13 @@ export const PreSaleBudgetContainer = styled.div`
     height: 82.5vh;
     margin-top: 3.5vh;
     background-color: ${theme.colors.primaryColor};
-    padding: 2%;
+    padding: 1%;
     box-sizing: border-box;
 
     .mainSection{
         overflow-y: scroll;
+        padding: 1%;
+
         width: 100%;
                 ::-webkit-scrollbar {
                     width: 10px;
@@ -117,6 +119,7 @@ export const PreSaleBudgetContainer = styled.div`
                     all: unset;
                     width: 3.5rem;
                     text-align: center;
+                    border-bottom: 1px solid black;
                 }
 
     

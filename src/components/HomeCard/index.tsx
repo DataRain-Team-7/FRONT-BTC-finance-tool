@@ -9,7 +9,15 @@ interface SearchProp {
 const HomeCard = ({search}: SearchProp) => {
 
   const { budgets } = useUsers()
-  const forms = budgets? budgets.filter((element: any)=>element.client.companyName.toUpperCase().includes(search.toLocaleUpperCase())) : []
+  
+  const getByCompany = budgets? budgets.filter((element: any)=>element.client.companyName.toUpperCase().includes(search.toLocaleUpperCase())) : []
+  const getByName = budgets? budgets.filter((element: any)=>element.client.mainContact.toUpperCase().includes(search.toLocaleUpperCase())) : []
+
+  const list = search.length > 0 ? getByCompany[0] ? getByCompany : getByName[0] ? getByName : [] : budgets
+
+  const forms = list&& list.slice(0).reverse();
+
+  console.log(forms)
 
   const navigate = useNavigate()
 
@@ -24,6 +32,10 @@ const HomeCard = ({search}: SearchProp) => {
       return "erro"
     }
   }
+
+  const handleFirstUpperCase = (prop: string) =>{
+    return prop.charAt(0).toUpperCase() + prop.slice(1)
+  } 
   
   return (
           <Style.HomeContainer>
@@ -31,7 +43,7 @@ const HomeCard = ({search}: SearchProp) => {
                 <h2>Central de Controle</h2>
                 <section>
                   <div>
-                    <p>Cliente</p>
+                    <p>Contato</p>
                   </div>
                   <div>
                     <p className="company">Empresa</p>
@@ -55,10 +67,10 @@ const HomeCard = ({search}: SearchProp) => {
                       navigate("/prevenda")
                     }}>
                       <div>
-                        <p>{element.client.mainContact}</p>
+                        <p>{handleFirstUpperCase(element.client.mainContact)}</p>
                       </div>
                       <div>
-                        <p>{element.client.companyName}</p>
+                        <p>{handleFirstUpperCase(element.client.companyName)}</p>
                       </div>
                       <div>
                         <p>{element.createdAt}</p>

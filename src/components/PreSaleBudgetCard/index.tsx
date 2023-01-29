@@ -11,8 +11,20 @@ const PreSaleBudgetCard = () =>{
     const clientId = sessionStorage.getItem("clientId")
     const [ answers, setAnswers ] = useState<any>()
     const [ budGet, setBudGet ] = useState<any>()
-    const [ value, setValue ] = useState<number>()
-    const [ hour, setHour ] = useState<number>()
+    const [ totalHours, setTotalHours ] = useState<number>(0)
+    const [ totalValue, setTotalValue ] = useState<number>(0)
+
+    const handleTotalValues = () =>{
+        budGet.map((element: any)=>{
+            if(element.valuePerHour !== null){
+                setTotalHours(totalHours + element.valuePerHour)
+            }
+            if(element.workHours !== null){
+                setTotalValue(totalValue + element.totalValue)
+            }
+        })
+        console.log({totalHours, totalValue})
+    }
 
     const handleGetForm = () =>{
         Api.get(`/budget-request/${clientId}`)
@@ -43,6 +55,8 @@ const PreSaleBudgetCard = () =>{
 
     useEffect(()=>handleGetForm(), [])
 
+    // console.log(budGet)
+
     return(
         <Styled.PreSaleBudgetContainer>
             
@@ -52,7 +66,7 @@ const PreSaleBudgetCard = () =>{
                 </Styled.ProjectPageReturn>
                 <section className="client">
                     <div>
-                        <p onClick={()=>console.log(budGet)}>Cliente</p>
+                        <p onClick={()=>handleTotalValues()}>Cliente</p>
                         <h3>{answers && answers.client.mainContact.charAt(0).toUpperCase() + answers.client.mainContact.slice(1)}</h3>
                     </div>
                     <div>
@@ -88,10 +102,9 @@ const PreSaleBudgetCard = () =>{
                                 <section>
                                     <div>
                                         <input type="number" value={element.workHours} onChange={(e)=> {
-                                            // setHour(e.target.valueAsNumber);
                                             handleUpdateValue(index, e.target.valueAsNumber)
                                             }}></input>
-                                        <p>hr</p>
+                                        <p> hr</p>
                                     </div>
                                 </section>
                             </div>
@@ -100,7 +113,6 @@ const PreSaleBudgetCard = () =>{
                                     <div>
                                         <p>R$: </p>
                                         <input type="number" value={element.valuePerHour} onChange={(e)=> {
-                                            // setValue(e.target.valueAsNumber)
                                             handleUpdateHour(index, e.target.valueAsNumber)
                                             }}></input>
                                     </div>
