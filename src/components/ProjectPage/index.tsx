@@ -1,25 +1,27 @@
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useActive } from "../../contexts/activePage";
+import Api from "../../services/api";
+import { ProjectTypes } from "../../types/interface";
 import Header from "../Header";
 import MockedUserCard from "../MockedUserCard";
+import ProjectCard from "../ProjectCard";
 import * as S from "./style";
-import React, { useEffect, useState } from "react";
-import { useActive } from "../../contexts/activePage";
-import { ProjectTypes } from "../../types/interface";
-import Api from "../../services/api";
 
-interface ProjectProps {
-  project: ProjectTypes;
-}
 
 const ProjectPage = () => {
   const navigate = useNavigate();
   const { setActive } = useActive();
   const { id } = useParams();
-  const [values, setValues] = useState({} as ProjectTypes);
+  const [values, setValues] = useState<ProjectTypes>({} as ProjectTypes);
+  const [valueUser, setValueUser] = useState<any>([]);
 
   const getAnProject = () => {
     Api.get(`/project/${id}`)
-      .then((res) => setValues(res.data))
+      .then((res) => {
+        setValues(res.data);
+        setValueUser(res.data.users)
+      })
       .catch((err) => console.log(err));
   };
 
@@ -46,15 +48,21 @@ const ProjectPage = () => {
               {" "}
               <S.EditIcon /> <span>Editar</span>
             </div>
-            <S.ProjectHeaderTitle>{values.name}</S.ProjectHeaderTitle>
+            <S.ProjectHeaderTitle>Nome</S.ProjectHeaderTitle>
             <S.ProjectHeaderSubtitle>
               {" "}
               Valor total por hora - R$: 999,00
             </S.ProjectHeaderSubtitle>
-            <S.ProjectDescription>{values.description}</S.ProjectDescription>
+            <S.ProjectDescription>Descrição</S.ProjectDescription>
           </S.ProjectPageHeader>
           <S.ProjectPageContent>
-            <MockedUserCard project={values}/>
+            <>
+              <MockedUserCard project={values} />
+              {valueUser.map((e: any, index: any) => {
+                return <ProjectCard user={e} key={index}/>
+                // return console.log(e);
+              })}
+            </> 
           </S.ProjectPageContent>
         </S.ProjectPageContainer>
       </S.ProjectAllContainer>

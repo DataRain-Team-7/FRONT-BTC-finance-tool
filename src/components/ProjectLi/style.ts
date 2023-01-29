@@ -11,6 +11,12 @@ export const ProjectLi = styled.li`
     border-radius: 8px;
     background-color: ${theme.colors.primaryColor};
     font-size: ${theme.constants.fontBody};
+    cursor: pointer;
+
+    :hover{
+      background-color: ${theme.colors.tertiaryColor};
+      color: ${theme.colors.primaryColor};
+    }
   `}
 `;
 

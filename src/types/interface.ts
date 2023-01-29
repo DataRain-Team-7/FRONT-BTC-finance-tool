@@ -33,5 +33,6 @@ export interface ProjectTypes {
   id?: string;
   name: string;
   description: string;
-  client?: UserTypes[];
+  client:string,
+  users: UserTypes[];
 }

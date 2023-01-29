@@ -1,4 +1,4 @@
-import { Button, MenuItem, TextField } from "@mui/material";
+import { Button, MenuItem, Select, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
@@ -40,10 +40,12 @@ const ModalAddUserToProject = ({
 
   const number = parseFloat(value2);
 
+  console.log(user)
+
   const avaliableUsers = user.filter(
     (element) =>
-      element.roleName == "manager" ||
-      element.roleName == "professional services"
+      element.roleName === "manager" ||
+      element.roleName === "professional services"
   );
 
   const handleAddUser = () => {
@@ -83,6 +85,7 @@ const ModalAddUserToProject = ({
           <form onSubmit={(e) => e.preventDefault()}>
             <TextField
               label="Selecione o usuário"
+              defaultValue = ""
               fullWidth
               required
               select
@@ -95,7 +98,7 @@ const ModalAddUserToProject = ({
             >
               {avaliableUsers.map((element) => {
                 return (
-                  <MenuItem value={element.id}>
+                  <MenuItem value={element.id} key={element.id}>
                     {element.name} <br /> {element.email}
                   </MenuItem>
                 );
