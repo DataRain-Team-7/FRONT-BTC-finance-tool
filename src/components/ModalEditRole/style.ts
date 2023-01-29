@@ -7,6 +7,14 @@ export const FormEdit = styled.form`
   height: 80%;
   flex-direction: column;
   align-items: center;
+
+  .menu-item-billable{
+    color: red;
+    text-align: center;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+  }
 `;
 
 export const LabelEdit = styled.label`
