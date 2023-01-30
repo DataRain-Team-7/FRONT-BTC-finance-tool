@@ -136,6 +136,17 @@ export const QuestionsContainer = styled.div`
               border-radius: 5px;
             }
 
+          .finish{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            p{
+              height: 2rem;
+            }
+           
+          }
+
         .firstInput{
           width: 100%;
           height: 40px;

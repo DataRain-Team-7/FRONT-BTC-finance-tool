@@ -13,8 +13,7 @@ const QuestionsCard = () => {
 
   const { logged } = useAuth()
   const { questions } = useQuestions();
-  const { team } = useTeam()
-  const firstTeamId = team[0].id? team[0].id : ""
+  const { team, firstTeamId } = useTeam()
 
   //newQuestion states:
   const [ newQuestion, setNewQuestion ] = useState<Boolean>(false)
@@ -26,21 +25,55 @@ const QuestionsCard = () => {
   const [ teamId, setTeamId ] = useState<string>(firstTeamId) // id do time selecionado
   const [ hours, setHours ] = useState<number>(0) //numero de horas necessárias
 
-  const handleNewQuestion = (prop:string) =>{
-    Api.post("/question", 
-        {
-          description: prop
-        }
-      )
-        .then((res) => {
-          setTitleId(res.data.id)
-        })
-        .catch((err)=> console.log(err))
-
-        
+  if(isNaN(hours)){
+    setHours(0)
   }
 
-  console.log(hours)
+  console.log(teamId)
+
+  const handleNewQuestion = () =>{
+    if(newAnswer === false){
+      if(newTitle !== ""){
+        Api.post("/question", 
+          {
+            description: newTitle
+          }
+        )
+          .then((res) => {
+            setTitleId(res.data.id)
+            setNewAnswer(true)
+            toast.success("Pergunta cadastrada")
+          })
+          .catch((err)=> {
+            toast.success("Erro ao cadastrar")
+          })
+      }else{
+        toast.error("A questão deve conter um título")
+      }
+    }else{
+      handleAddAnswear()
+    } 
+  }
+
+  const handleFinish = () =>{
+    if(newTitle !== ""){
+      const data = {
+        description: newTitle
+    }
+      Api.patch(`/question/${titleId}`, data)
+        .then(()=> {
+          toast.success("Feito!");
+          setNewTitle("");
+          setTitleId("")
+          setNewAnswer(false)
+        })
+        .catch((err)=>{toast.error("Erro ao finalizar")})
+    }else{
+      toast.error("A questão deve conter um título")
+    }
+  }
+
+  
 
   // console.log(
   //   {
@@ -55,30 +88,38 @@ const QuestionsCard = () => {
   //   }
   // )
 
+  console.log(titleId)
+  console.log(newTitle)
+
   const handleAddAnswear = () =>{
-    if(titleId === "" && newTitle ===""){
-      if(currentAnswer !=="" && teamId !=="" && hours >= 0){
-        Api.post("/alternative", 
-        {
-          description: currentAnswer,
-          questionId: titleId,
-          teams: [
-            {
-              teamId: teamId,
-              workHours: hours
-            }
-          ]
+    if(titleId !== "" || newTitle !==""){
+      if(currentAnswer !=="" && teamId !==""){
+        if(hours > 0){
+          Api.post("/alternative", 
+          {
+            description: currentAnswer,
+            questionId: titleId,
+            teams: [
+              {
+                teamId: teamId,
+                workHours: hours
+              }
+            ]
+          }
+          )
+            .then(()=>{
+              setCurrentAnswer("");
+              toast.success("Resposta cadastrada")
+            })
+            .catch((err)=>{toast.error("Erro ao cadastrar resposta")})
+        }else{
+          toast.error("A quantidade de horas inválida")
         }
-        )
-          .then(()=>{
-            setCurrentAnswer("");
-            setTeamId("");
-            setHours(0)
-          })
-          .catch((err)=>console.log(err))
+      }else{
+        toast.error("Preencha todos os campos")
       }
     }else{
-      toast.error("A questão deve conter um título")
+      toast.error("A questão deve conter um títuloo")
     }
   }
   
@@ -86,7 +127,7 @@ const QuestionsCard = () => {
       <Style.QuestionsContainer>
             <section className="section01">
               <h2>Gerenciamento de questões</h2>
-              <p onClick={() => setNewQuestion(true)}>{`Adicionar nova questão +`}</p> 
+              <p onClick={() => setNewQuestion(!newQuestion)}>{`Adicionar nova questão ${newQuestion? "-" : "+"}`}</p> 
             </section>
 
           <section className="allQuestions">
@@ -99,7 +140,7 @@ const QuestionsCard = () => {
           {newQuestion && <section className="section02 newQuestion animate__animated animate__fadeInDownBig animate__delay-0.5s">
               <div className="title">
                 <p>{`Nova Questão`}</p>
-                  <p className="updateButton" onClick={() => setNewQuestion(false)}>Finalizar</p>
+                  {/* <p className="updateButton" onClick={() => setNewQuestion(false)}>Finalizar</p> */}
               </div>
               <section>
                 <input value={newTitle} className="firstInput" onChange={(e) => setNewTitle(e.target.value)}></input>
@@ -121,10 +162,13 @@ const QuestionsCard = () => {
                     </div>
                     <div className="third">
                       <p>Horas Totais</p>  
-                      <input type="number" placeholder="Horas" className="newHour" onChange={(e)=> setHours(e.target.valueAsNumber)}></input>
+                      <input type="number" value={hours} placeholder="Horas" className="newHour" onChange={(e)=> setHours(e.target.valueAsNumber)}></input>
                     </div>
                   </div>}
-              <p className="newAlternative" onClick={()=> setNewAnswer(!newAnswer)}>{newAnswer? "Adicionar resposta":"Cadastrar questão"}</p>
+                <p className="newAlternative" onClick={()=> handleNewQuestion()}>{newAnswer? "Cadastrar resposta":"Cadastrar questão"}</p>
+              <div className="finish">
+                {newAnswer && <p className="newAlternative" onClick={()=> handleFinish()}>Finalizar</p>}
+              </div>
               </section>
             </section>}
             
