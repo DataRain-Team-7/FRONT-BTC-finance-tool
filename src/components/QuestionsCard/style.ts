@@ -141,11 +141,20 @@ export const QuestionsContainer = styled.div`
             width: 100%;
             align-items: center;
             justify-content: center;
+            margin-top: 2%;
+            margin-bottom: -2%;
+
+            .cancel{
+              background-color: #0b7ca3;
+              margin-left: 1rem;
+            }
+
             p{
-              height: 2rem;
+              height: 2.5rem;
             }
            
           }
+
 
         .firstInput{
           width: 100%;

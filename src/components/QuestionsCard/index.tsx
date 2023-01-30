@@ -12,7 +12,7 @@ import Api from "../../services/api";
 const QuestionsCard = () => {
 
   const { logged } = useAuth()
-  const { questions } = useQuestions();
+  const { questions, updateQuestion } = useQuestions();
   const { team, firstTeamId } = useTeam()
 
   //newQuestion states:
@@ -66,31 +66,14 @@ const QuestionsCard = () => {
           setNewTitle("");
           setTitleId("")
           setNewAnswer(false)
+          updateQuestion()
         })
         .catch((err)=>{toast.error("Erro ao finalizar")})
     }else{
       toast.error("A questão deve conter um título")
     }
   }
-
   
-
-  // console.log(
-  //   {
-  //     description: currentAnswer,
-  //     questionId: titleId,
-  //     teams: [
-  //       {
-  //         teamId: teamId,
-  //         workHours: hours
-  //       }
-  //     ]
-  //   }
-  // )
-
-  console.log(titleId)
-  console.log(newTitle)
-
   const handleAddAnswear = () =>{
     if(titleId !== "" || newTitle !==""){
       if(currentAnswer !=="" && teamId !==""){
@@ -121,6 +104,20 @@ const QuestionsCard = () => {
     }else{
       toast.error("A questão deve conter um títuloo")
     }
+  }
+
+  const handleCancel = () =>{
+    Api.delete(`/question/${titleId}`)
+      .then(()=>{
+          setNewTitle("");
+          setTitleId("")
+          setNewAnswer(false)
+          setCurrentAnswer("")
+          setHours(0)
+          setTeamId(firstTeamId)
+          updateQuestion()
+      })
+      .catch(()=> toast.error("Erro ao cancelar"))
   }
   
   return (
@@ -166,9 +163,10 @@ const QuestionsCard = () => {
                     </div>
                   </div>}
                 <p className="newAlternative" onClick={()=> handleNewQuestion()}>{newAnswer? "Cadastrar resposta":"Cadastrar questão"}</p>
-              <div className="finish">
-                {newAnswer && <p className="newAlternative" onClick={()=> handleFinish()}>Finalizar</p>}
-              </div>
+              {newAnswer && <div className="finish">
+                <p className="newAlternative" onClick={()=> handleFinish()}>Finalizar</p>
+                <p className="newAlternative cancel" onClick={()=> handleCancel()}>Cancelar</p>
+              </div>}
               </section>
             </section>}
             
