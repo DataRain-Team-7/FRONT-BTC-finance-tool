@@ -54,3 +54,11 @@ export const CardEmail = styled.p`
   color: #000;
   margin-top: 15px;
 `;
+
+export const CardBillable = styled.p`
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: #000;
+  margin-top: 15px;
+`;

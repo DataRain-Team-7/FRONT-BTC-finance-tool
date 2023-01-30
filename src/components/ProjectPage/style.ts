@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { IoIosArrowBack } from "react-icons/io";
 import { CiSettings } from "react-icons/ci";
+import theme from "../../styles/theme";
 
 export const ProjectAllContainer = styled.div`
   width: 100%;
@@ -70,6 +71,17 @@ export const ProjectPageHeader = styled.div`
     span {
       font-size: 20px;
       color: #535353;
+      padding: 5px;
+      cursor: pointer;
+      border: 1px solid #c3c3c3;
+      transition: 0.3s ease-in-out;
+      border-radius: 8px;
+      margin-bottom: 5px;
+      :hover {
+        border: 1px solid ${theme.colors.tertiaryColor};
+        background-color: ${theme.colors.tertiaryColor};
+        color: #ffffff;
+      }
     }
   }
 `;

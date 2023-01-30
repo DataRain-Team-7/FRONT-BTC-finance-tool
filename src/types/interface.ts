@@ -35,4 +35,5 @@ export interface ProjectTypes {
   description: string;
   client:string,
   users: UserTypes[];
+  containsManager: boolean;
 }

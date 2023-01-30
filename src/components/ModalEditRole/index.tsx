@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import { UserTypes } from "../../types/interface";
 import * as S from "./style";
+import { SelectChangeEvent } from "@mui/material";
 import React from "react";
 
 import { Button, MenuItem, TextField } from "@mui/material";
@@ -39,12 +40,8 @@ export default function ModalEditRole({
   const handleClose = () => setOpenEditRole(!openEditRole);
   const { handleGetUsers } = useUsers();
   const [role, setRole] = useState<any>([]);
-  const [value, setValue] = useState<string>();
-  const[value2, setValue2] = useState<string>()
-  const[newValue, setNewValue] = useState<boolean>()
-  const billable = ['Sim', 'Não']
-
-console.log(value2)
+  const [value, setValue] = useState<string>("");
+  const [value2, setValue2] = useState<string>("");
 
   const getRoles = () => {
     Api.get("/role")
@@ -56,26 +53,33 @@ console.log(value2)
     getRoles();
   }, []);
 
+  let newValue: boolean;
   const handleEditUser = () => {
-    if(value2 === 'sim'){
-      setNewValue(true) 
-    } else{
-      setNewValue(false)
+    if (value === "" && value2 === "") {
+      return toast.dismiss("Nenhum campo alterado");
     }
-    const data = {
-      billable: newValue,
+
+    if (value2 === "true") {
+      newValue = true;
+    } else if (value2 === "false") {
+      newValue = false;
+    }
+
+    const data: any = {
       roleId: value,
-      
+      billable: newValue,
     };
-    Api.patch(`user/${user.id}`, data)
+
+    if (data.roleId === "") {
+      delete data.roleId;
+    }
+
+    Api.patch(`/user/${user.id}`, data)
       .then((res) => {
-        toast.success("Usuário editado com sucesso"), res;
-        handleGetUsers();
+        toast.success("Usuário editado com sucesso");
+        handleClose();
       })
-      .catch((error) => {
-        toast.error("Falha ao atualizar usuário"), console.log(error);
-      });
-    handleClose();
+      .catch((err) => toast.error("FAlha ao editar usuário"));
   };
 
   return (
@@ -95,7 +99,7 @@ console.log(value2)
           sx={style}
         >
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Editar Role
+            Editar Usuário
           </Typography>
           <S.FormEdit>
             <TextField
@@ -125,15 +129,10 @@ console.log(value2)
               margin={"normal"}
               select
               defaultValue=""
-              onChange={(e)=> setValue2(e.target.value) }
+              onChange={(e) => setValue2(e.target.value)}
             >
-              {billable.map((e) => {
-                return (
-                  <MenuItem value={e}>{e}</MenuItem>
-                  )
-              })
-
-              }
+              <MenuItem value={"false"}>Não</MenuItem>;
+              <MenuItem value={"true"}>Sim</MenuItem>;
             </TextField>
             <Box
               display="flex"
@@ -152,7 +151,9 @@ console.log(value2)
                 <Button
                   className="buttonSave"
                   variant="contained"
-                  onClick={() => handleEditUser()}
+                  onClick={() => {
+                    handleEditUser();
+                  }}
                 >
                   Editar
                 </Button>
