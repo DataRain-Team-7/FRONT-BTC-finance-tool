@@ -1,23 +1,27 @@
 import * as S from "./style";
 
-import { ProjectTypes, TeamsTypes } from "../../types/interface";
-import MenuDropdown from "../MenuDropdownTeams";
-import { useAuth } from "../../contexts/auth";
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ProjectTypes } from "../../types/interface";
+import MenuDropdownProject from "../MenuDropdownProject";
 
-interface Props{
+interface Props {
   project: ProjectTypes;
 }
 
-const ProjectLi = ({project}: Props) => {
-  const navigate = useNavigate()
+const ProjectLi = ({ project }: Props) => {
+  const navigate = useNavigate();
 
   return (
-    <S.ProjectLi onClick={()=> navigate(`/project-page/${project.id}`)}>
+    <S.ProjectLi>
       <S.LiContent>
         <S.DivContent>
-          <span>{project.name}</span>
+          <span className="span-li" onClick={() => navigate(`/project-page/${project.id}`)}>
+            {project.name}
+          </span>
+          <span className="span-dropdown">
+            {" "}
+            <MenuDropdownProject project={project} />{" "}
+          </span>
         </S.DivContent>
       </S.LiContent>
     </S.ProjectLi>

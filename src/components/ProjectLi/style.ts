@@ -11,7 +11,6 @@ export const ProjectLi = styled.li`
     border-radius: 8px;
     background-color: ${theme.colors.primaryColor};
     font-size: ${theme.constants.fontBody};
-    cursor: pointer;
 
     :hover{
       background-color: ${theme.colors.tertiaryColor};
@@ -42,7 +41,18 @@ export const LiContent = styled.div`
 export const DivContent = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  align-items: center;
+  width: 100%;
+
+  .span-li{
+    width: 90%;
+    cursor: pointer;
+  }
+
+  .span-dropdown{
+    width: 10%;
+    cursor: pointer;
+  }
 `
 
 export const DropdownUl = styled.ul`

@@ -66,19 +66,19 @@ const ProjectPage = () => {
                 project={values}
               />
             ) : null}
-            <S.ProjectHeaderTitle>nome</S.ProjectHeaderTitle>
+            <S.ProjectHeaderTitle>{values.name}</S.ProjectHeaderTitle>
             <S.ProjectHeaderSubtitle>
               {" "}
               Valor total por hora - R$: 999,00
             </S.ProjectHeaderSubtitle>
-            <S.ProjectDescription>descrição</S.ProjectDescription>
+            <S.ProjectDescription>{values.description}</S.ProjectDescription>
           </S.ProjectPageHeader>
           <S.ProjectPageContent>
             <>
               <MockedUserCard project={values} />
               {valueUser.map((e: any, index: any) => {
                 return <ProjectCard user={e} key={index} />;
-                // return console.log(e);
+
               })}
             </>
           </S.ProjectPageContent>
