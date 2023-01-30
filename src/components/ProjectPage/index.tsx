@@ -77,7 +77,7 @@ const ProjectPage = () => {
             <>
               <MockedUserCard project={values} />
               {valueUser.map((e: any, index: any) => {
-                return <ProjectCard user={e} key={index} />;
+                return <ProjectCard idProject={values.id} user={e} key={index} />;
 
               })}
             </>

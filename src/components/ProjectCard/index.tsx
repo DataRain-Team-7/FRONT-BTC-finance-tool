@@ -1,23 +1,30 @@
-import { UserTypes } from "../../types/interface";
 import * as S from "./style";
+import {BsTrash} from "react-icons/bs"
+import { useState } from "react";
+import ModalRemoveUser from "../ModalRemoveUser";
 
-interface UserProps {
-  user:UserTypes ;
-}
-
-const ProjectCard = ({ user }: any) => {
+const ProjectCard = ({ user, idProject }: any) => { 
+  const[openRemoveModal,setOpenRemoveModal] = useState<boolean>(false)
 
 
   return (
     <S.CardContainer>
       <S.CardHeader>
         <S.CardFunction>{user.user.roleName}</S.CardFunction>
-        <span>
+        <span className="trash-icon" onClick={()=> setOpenRemoveModal(!openRemoveModal)}>
+          <BsTrash/>
         </span>
       </S.CardHeader>
       <S.CardName>{user.user.name}</S.CardName>
       <S.CardName>{user.user.position}</S.CardName>
       <S.CardName>Hora: {(user.valuePerUserHour).toFixed(2)}</S.CardName>
+      {
+        openRemoveModal ? (
+          <ModalRemoveUser projectId={idProject} openRemoveModal={openRemoveModal} 
+          setOpenRemoveModal={setOpenRemoveModal} userId={user.user.id} userName={user.user.name}
+          />
+        ) : null
+      }
 
     </S.CardContainer>
   );
