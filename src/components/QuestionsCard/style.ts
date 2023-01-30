@@ -20,6 +20,8 @@ export const QuestionsContainer = styled.div`
       margin-bottom: 16px;
       p{
       font-size: ${theme.constants.fontHeader};
+      cursor: pointer;
+      width: 18%;
     }
 
 
@@ -72,6 +74,10 @@ export const QuestionsContainer = styled.div`
             }
     }
 
+    .newQuestion{
+      background-color: #CCDFED60;
+    }
+
     .section02{
       display: flex;
       flex-direction: column;
@@ -90,6 +96,18 @@ export const QuestionsContainer = styled.div`
         width: 100%;
         justify-content: space-between;
         padding-right: 84px;
+        padding-left: 2rem;
+
+        div{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 20%;
+        }
+        
+        p{
+          font-size: ${theme.constants.fontHeader};
+        }
 
         .updateButton{
           background-color: ${theme.colors.tertiaryColor};
@@ -103,6 +121,20 @@ export const QuestionsContainer = styled.div`
       section{
         width: 100%;
         padding: 0 70px;
+
+        .newAlternative{
+              margin-top: 1.5%;
+              cursor: pointer;
+              width: 14%;
+              background-color: ${theme.colors.tertiaryColor};
+              color: white;
+              height: 1.5rem;
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 5px;
+            }
 
         .firstInput{
           width: 100%;
@@ -139,7 +171,7 @@ export const QuestionsContainer = styled.div`
             margin-right: 2%;
 
             .newAnswer{
-              background-color: #d2d2d2;
+              background-color: #d2d2d290;
             }
             
           }
@@ -149,7 +181,7 @@ export const QuestionsContainer = styled.div`
             margin-right: 2%;
 
             .newTeam{
-              background-color: #d2d2d2;
+              background-color: #d2d2d290;
             }
 
             select{
@@ -173,12 +205,13 @@ export const QuestionsContainer = styled.div`
             width: 20%;
 
             .newHour{
-              background-color: #d2d2d2;
+              background-color: #d2d2d290;
             }
 
             input{
               text-align: center;
             }
+
         }
       }
     }
