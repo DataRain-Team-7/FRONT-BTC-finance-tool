@@ -94,13 +94,13 @@ const QuestionsCard = () => {
             })
             .catch((err)=>{toast.error("Erro ao cadastrar resposta")})
         }else{
-          toast.error("A quantidade de horas inválida")
+          toast.error("Quantidade de horas inválida")
         }
       }else{
         toast.error("Preencha todos os campos")
       }
     }else{
-      toast.error("A questão deve conter um títuloo")
+      toast.error("A questão deve conter um título")
     }
   }
 
@@ -127,8 +127,21 @@ const QuestionsCard = () => {
   const [ questionIndex, setQuestionIndex ] = useState<number>(0)
   const [ questionId, setQuestionId] = useState<string>("")
   const [ alternativeIndex, setAlternativeIndex ] = useState<number>(0)
+  // const [ oderordenedList, setOrdenedList ] = useState<any>("")
 
-  useEffect(()=>setEditQuestions(questions),[questions])
+  const ordernedList:any = editQuestions && editQuestions.sort(function(a:any,b:any){
+    return a.description < b.description ? -1 : a.description > b.description ? 1 : 0
+  })
+
+  // console.log(ordernedList)
+  // console.log(editQuestions)
+
+  // const orderedList = filteredProducts.sort((a, b)=> a.code - b.code)
+
+  useEffect(()=>{
+    setEditQuestions(questions);
+  }
+    ,[questions])
 
   const UpdateTitle = (index:number, newTitle:string) =>{
       let newValues = editQuestions
@@ -187,14 +200,46 @@ const QuestionsCard = () => {
           })
           .then(()=>updateQuestion())
           .catch(()=> toast.error("Erro ao atualizar respostas"))
-        }else{
+        }else if(newAnswer === ""){
           Api.delete(`/alternative/${answearId}`)
             .then(()=>updateQuestion())
             .catch(()=>toast.error("Erro ao excluir resposta"))
         }
-        })
+        }) 
+        // regiteAnswer()
         toast.success("Questão atualizada")
         }
+
+        const [ catchNewTitle, setCatchNewTitle ] = useState<string>("")
+        const [ catchNewTeamId, setCatchNewTeamId ] = useState<string>(firstTeamId)
+        const [ catchNewHour, setCatchNewHour ] = useState<number>(0)
+
+        // const regiteAnswer = () => {
+        //   if(catchNewTeamId !== "" && catchNewHour > 0){
+        //     console.log("entrei aqui")
+        //     Api.post(`/alternative`,
+        //     {
+        //       description: catchNewTitle,
+        //       questionId: questionId,
+        //       teams: [
+        //         {
+        //           teamId: catchNewTeamId,
+        //           workHours: catchNewHour
+        //         }
+        //       ]
+        //     }
+        //     )
+        //       .then(()=>{
+        //         setCatchNewTitle("");
+        //         setCatchNewTeamId(firstTeamId);
+        //         setCatchNewHour(0);
+        //         toast.success("Foi pow")
+        //         updateQuestion();
+        //       })
+        //       .catch(()=>toast.error("Erro ao cadastrar nova resposta"))
+        //   }
+        //   updateQuestion();
+        // }
         
   return (
       <Style.QuestionsContainer>
@@ -237,13 +282,14 @@ const QuestionsCard = () => {
               </div>}
               </section>
             </section>}
-          {editQuestions && editQuestions.map((element:any, index:any)=>{
+          {ordernedList && ordernedList.map((element:any, index:any)=>{
             return(                     
               <form onSubmit={(e)=>e.preventDefault()} key={index} className="section02">
               <div className="title">
                 <p>{`Questão ${index+1}`}</p>
                 <div>
                   <p className="updateButton" onClick={()=>{
+                    setQuestionId(element.id)
                     updateAlternatives(index)
                   }}>Editar</p>
                   <p className="updateButton delete" onClick={()=>{
@@ -257,9 +303,9 @@ const QuestionsCard = () => {
                 <input
                 onClick={()=>setFillValue(true)}
                 onChange={(e)=>{UpdateTitle(index, e.target.value)}}
-                placeholder={element.description}
                 className="firstInput"
-                value={fillValue?element.description:undefined}
+                placeholder={element.description}
+                value={fillValue? element.description:undefined}
                 ></input>
                   <div className="cards">
                     <div className="first">
@@ -276,13 +322,14 @@ const QuestionsCard = () => {
                           value={fillValue?element1.description:undefined}></input>
                         )
                       })}
-                      <input placeholder="Nova resposta objetiva" className="newAnswer"></input>
+                      <input placeholder="Nova resposta objetiva" className="newAnswer" onChange={(e)=>setCatchNewTitle(e.target.value)}></input>
                     </div>
                     <div className="second">
                       <p>Equipes</p>
                       {element.alternatives.map((element2:any, index:number)=>{
                         return(              
                           <select
+                          placeholder={element2.teams[0].id}
                           value={fillValue?element2.teams[0].id:undefined}
                           onChange={(e)=>{updateTeam(e.target.value)}}
                           onClick={()=>{ 
@@ -299,10 +346,10 @@ const QuestionsCard = () => {
                           </select>                         
                         )
                       })}
-                          <select className="newTeam" >
+                          <select className="newTeam" onChange={(e)=>setCatchNewTeamId(e.target.value)}>
                             {team && team.map((element3:any)=>{                       
                               return(
-                                <option >{element3.name}</option>
+                                <option value={element3.id}>{element3.name}</option>
                               )
                             })}
                           </select>
@@ -317,13 +364,14 @@ const QuestionsCard = () => {
                             setFillValue(true)
                           }}
                           onChange={(e)=>{updateHours(e.target.valueAsNumber)}}
-                          key={element2.id} 
+                          key={element2.id}
+                          placeholder={element2.teams[0].workHours}
                           value={fillValue? element2.teams[0].workHours: undefined}
                           type="number" 
                           ></input>
                         )
                       })}
-                      <input placeholder="Horas" className="newHour"></input>
+                      <input type="number" placeholder="Horas" className="newHour" onChange={(e)=>setCatchNewHour(e.target.valueAsNumber)}></input>
                     </div>
                   </div>
               </section>
