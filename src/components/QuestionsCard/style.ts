@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import theme from "../../styles/theme";
-
+import { FaRegTrashAlt } from "react-icons/fa";
+import { BsFolderPlus } from "react-icons/bs";
 
 export const QuestionsContainer = styled.div`
   ${({ theme }) => css`
@@ -102,7 +103,7 @@ export const QuestionsContainer = styled.div`
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          width: 15%;
+          width: 20%;
         }
         
         p{
@@ -230,6 +231,19 @@ export const QuestionsContainer = styled.div`
           .third{
             width: 20%;
 
+            section{
+              display: flex;
+              flex-direction: row;
+              padding: 0;
+
+              div{
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+            }
+
             .newHour{
               background-color: #d2d2d290;
             }
@@ -255,3 +269,16 @@ export const QuestionsContainer = styled.div`
 
   `}
 `;
+
+export const trash = styled(FaRegTrashAlt)`
+margin-top: 50%;
+  height: 2rem;
+  cursor: pointer;
+  margin-left: 1rem;
+`
+
+export const plus = styled(BsFolderPlus)`
+margin-top: 50%;
+cursor: pointer;
+margin-left: 1rem;
+`

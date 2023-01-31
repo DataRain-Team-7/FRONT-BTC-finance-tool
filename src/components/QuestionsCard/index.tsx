@@ -20,8 +20,8 @@ const QuestionsCard = () => {
 
   const [ newTitle, setNewTitle ] = useState<string>("") //pergunta em si
   const [ titleId, setTitleId ] = useState<string>("") //id da pergunta depois do post
-  const [ currentAnswer, setCurrentAnswer] = useState<string>("") //resposta em si
-  const [ teamId, setTeamId ] = useState<string>(firstTeamId) // id do time selecionado
+  // const [ currentAnswer, setCurrentAnswer] = useState<string>("") //resposta em si
+  // const [ teamId, setTeamId ] = useState<string>(firstTeamId) // id do time selecionado
   const [ hours, setHours ] = useState<number>(0) //numero de horas necessárias
 
   if(isNaN(hours)){
@@ -29,7 +29,6 @@ const QuestionsCard = () => {
   }
 
   const handleNewQuestion = () =>{
-    if(newAnswer === false){
       if(newTitle !== ""){
         Api.post("/question", 
           {
@@ -39,6 +38,8 @@ const QuestionsCard = () => {
           .then((res) => {
             setTitleId(res.data.id)
             setNewAnswer(true)
+            setNewTitle("")
+            updateQuestion();
             toast.success("Pergunta cadastrada")
           })
           .catch((err)=> {
@@ -47,99 +48,72 @@ const QuestionsCard = () => {
       }else{
         toast.error("A questão deve conter um título")
       }
-    }else{
-      handleAddAnswear()
-    } 
   }
 
-  const handleFinish = () =>{
-    if(newTitle !== ""){
-      const data = {
-        description: newTitle
-    }
-      Api.patch(`/question/${titleId}`, data)
-        .then(()=> {
-          updateQuestion()
-          toast.success("Feito!");
-          setNewTitle("");
-          setTitleId("")
-          setNewAnswer(false)
-          updateQuestion()
-        })
-        .catch((err)=>{toast.error("Erro ao finalizar")})
-    }else{
-      toast.error("A questão deve conter um título")
-    }
-  }
+  // const handleAddAnswear = () =>{
+  //   if(titleId !== "" || newTitle !==""){
+  //     if(currentAnswer !=="" && teamId !==""){
+  //       if(hours > 0){
+  //         Api.post("/alternative", 
+  //         {
+  //           description: currentAnswer,
+  //           questionId: titleId,
+  //           teams: [
+  //             {
+  //               teamId: teamId,
+  //               workHours: hours
+  //             }
+  //           ]
+  //         }
+  //         )
+  //           .then(()=>{
+  //             setCurrentAnswer("");
+  //             toast.success("Resposta cadastrada")
+  //           })
+  //           .catch((err)=>{toast.error("Erro ao cadastrar resposta")})
+  //       }else{
+  //         toast.error("Quantidade de horas inválida")
+  //       }
+  //     }else{
+  //       toast.error("Preencha todos os campos")
+  //     }
+  //   }else{
+  //     toast.error("A questão deve conter um título")
+  //   }
+  // }
 
-  const handleAddAnswear = () =>{
-    if(titleId !== "" || newTitle !==""){
-      if(currentAnswer !=="" && teamId !==""){
-        if(hours > 0){
-          Api.post("/alternative", 
-          {
-            description: currentAnswer,
-            questionId: titleId,
-            teams: [
-              {
-                teamId: teamId,
-                workHours: hours
-              }
-            ]
-          }
-          )
-            .then(()=>{
-              setCurrentAnswer("");
-              toast.success("Resposta cadastrada")
-            })
-            .catch((err)=>{toast.error("Erro ao cadastrar resposta")})
-        }else{
-          toast.error("Quantidade de horas inválida")
-        }
-      }else{
-        toast.error("Preencha todos os campos")
-      }
-    }else{
-      toast.error("A questão deve conter um título")
-    }
-  }
+  // const handleCancel = () =>{
+  //   Api.delete(`/question/${titleId}`)
+  //     .then(()=>{
+  //         updateQuestion()
+  //         setNewTitle("");
+  //         setTitleId("")
+  //         setNewAnswer(false)
+  //         setCurrentAnswer("")
+  //         setHours(0)
+  //         setTeamId(firstTeamId)
+  //         updateQuestion()
+  //     })
+  //     .catch(()=> toast.error("Erro ao cancelar"))
+  // }
 
-  const handleCancel = () =>{
-    Api.delete(`/question/${titleId}`)
-      .then(()=>{
-          updateQuestion()
-          setNewTitle("");
-          setTitleId("")
-          setNewAnswer(false)
-          setCurrentAnswer("")
-          setHours(0)
-          setTeamId(firstTeamId)
-          updateQuestion()
-      })
-      .catch(()=> toast.error("Erro ao cancelar"))
-  }
-
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
 
   //updateOldQuestions states and functions:
 
-  const [ editQuestions, setEditQuestions] = useState<any>(questions)
+  const ordernedList = questions && questions.sort(function(a:any,b:any){
+    return a.id < b.id ? -1 : a.id > b.id ? 1 : 0
+  })
+
+  const [ editQuestions, setEditQuestions] = useState<any>(ordernedList)
   const [ fillValue, setFillValue ] = useState<boolean>(true)
   const [ questionIndex, setQuestionIndex ] = useState<number>(0)
   const [ questionId, setQuestionId] = useState<string>("")
   const [ alternativeIndex, setAlternativeIndex ] = useState<number>(0)
-  // const [ oderordenedList, setOrdenedList ] = useState<any>("")
-
-  const ordernedList:any = editQuestions && editQuestions.sort(function(a:any,b:any){
-    return a.description < b.description ? -1 : a.description > b.description ? 1 : 0
-  })
-
-  // console.log(ordernedList)
-  // console.log(editQuestions)
-
-  // const orderedList = filteredProducts.sort((a, b)=> a.code - b.code)
 
   useEffect(()=>{
-    setEditQuestions(questions);
+    setEditQuestions(ordernedList);
   }
     ,[questions])
 
@@ -170,17 +144,59 @@ const QuestionsCard = () => {
     setFillValue(false)
 
   }
+  
+  //////////////////////////
 
-  const updateAlternatives = (index:number) => {
-    setQuestionIndex(index);
-    const questionId:string = editQuestions[index].id;
+  const deleteAnswear = (answearId:string) =>{
+      Api.delete(`/alternative/${answearId}`)
+            .then(()=>updateQuestion())
+            .catch(()=>toast.error("Erro ao excluir resposta"))
+  }
+
+  //////////////////////////
+
+  const registeAnswer = (elementId: string) => {
+    if(catchNewTeamId !== "" && catchNewHour > 0){
+      Api.post(`/alternative`,
+      {
+        description: catchNewTitle,
+        questionId: elementId,
+        teams: [
+          {
+            teamId: catchNewTeamId,
+            workHours: catchNewHour
+          }
+        ]
+      }
+      )
+        .then(()=>{
+          setCatchNewTitle("");
+          setCatchNewTeamId(firstTeamId);
+          setCatchNewHour(0);
+          // toast.success("Foi pow")
+          updateQuestion();
+        })
+        .catch(()=>toast.error("Erro ao cadastrar nova resposta"))
+    }else{
+      toast.error("Valores inválidos")
+    }
+    updateQuestion();
+  }
+
+  //////////////////////////////////////////
+
+  const updateAlternatives = (index:number, questionId: string) => {
+    
     const newQuestion:string = editQuestions[index].description;
     Api.patch(`/question/${questionId}`,
     {
       description: newQuestion
-    }
-    ).then(()=>updateQuestion())
-      .catch(()=> toast.error("Erro ao atualizar questão"))
+    })
+      .then(()=>{
+        updateQuestion();
+        toast.success("Valores atualizados")
+      })
+      .catch(()=> toast.error("Erro ao atualizar questão"));
     
       editQuestions[index].alternatives.map((element:any) => {
       const answearId:string = element.id
@@ -198,48 +214,21 @@ const QuestionsCard = () => {
               }
             ]
           })
-          .then(()=>updateQuestion())
+          .then(()=>{
+            updateQuestion();
+          })
           .catch(()=> toast.error("Erro ao atualizar respostas"))
-        }else if(newAnswer === ""){
-          Api.delete(`/alternative/${answearId}`)
-            .then(()=>updateQuestion())
-            .catch(()=>toast.error("Erro ao excluir resposta"))
+        }else{
+          toast.error("Valores inválidos")
         }
-        }) 
-        // regiteAnswer()
-        toast.success("Questão atualizada")
+        })
         }
 
         const [ catchNewTitle, setCatchNewTitle ] = useState<string>("")
         const [ catchNewTeamId, setCatchNewTeamId ] = useState<string>(firstTeamId)
         const [ catchNewHour, setCatchNewHour ] = useState<number>(0)
 
-        // const regiteAnswer = () => {
-        //   if(catchNewTeamId !== "" && catchNewHour > 0){
-        //     console.log("entrei aqui")
-        //     Api.post(`/alternative`,
-        //     {
-        //       description: catchNewTitle,
-        //       questionId: questionId,
-        //       teams: [
-        //         {
-        //           teamId: catchNewTeamId,
-        //           workHours: catchNewHour
-        //         }
-        //       ]
-        //     }
-        //     )
-        //       .then(()=>{
-        //         setCatchNewTitle("");
-        //         setCatchNewTeamId(firstTeamId);
-        //         setCatchNewHour(0);
-        //         toast.success("Foi pow")
-        //         updateQuestion();
-        //       })
-        //       .catch(()=>toast.error("Erro ao cadastrar nova resposta"))
-        //   }
-        //   updateQuestion();
-        // }
+       
         
   return (
       <Style.QuestionsContainer>
@@ -250,14 +239,13 @@ const QuestionsCard = () => {
           <section className="allQuestions">
           {newQuestion && <section className="section02 newQuestion animate__animated animate__fadeInDownBig animate__delay-0.5s">
               <div className="title">
-                <p>{`Nova Questão`}</p>
+                <p>{`Título da Questão`}</p>
               </div>
               <section>
                 <input value={newTitle} className="firstInput" onChange={(e) => setNewTitle(e.target.value)}></input>
-                  {newAnswer && <div className="cards">
+                  {/* {newAnswer && <div className="cards">
                     <div className="first">
                       <p>Adicionar alternativa (Opcional)</p>
-                          {/* <input></input> */}
                       <input placeholder="Nova resposta objetiva" className="newAnswer" onChange={(e)=> setCurrentAnswer(e.target.value)}></input>
                     </div>
                     <div className="second">
@@ -279,21 +267,20 @@ const QuestionsCard = () => {
               {newAnswer && <div className="finish">
                 <p className="newAlternative" onClick={()=> handleFinish()}>Finalizar</p>
                 <p className="newAlternative cancel" onClick={()=> handleCancel()}>Cancelar</p>
-              </div>}
+              </div>} */}
+              <p className="newAlternative" onClick={()=> handleNewQuestion()}>{newAnswer? "Cadastrar resposta":"Cadastrar questão"}</p>
               </section>
             </section>}
-          {ordernedList && ordernedList.map((element:any, index:any)=>{
+          {editQuestions && editQuestions.map((element:any, index:any)=>{
             return(                     
               <form onSubmit={(e)=>e.preventDefault()} key={index} className="section02">
               <div className="title">
                 <p>{`Questão ${index+1}`}</p>
                 <div>
                   <p className="updateButton" onClick={()=>{
-                    setQuestionId(element.id)
-                    updateAlternatives(index)
-                  }}>Editar</p>
+                    updateAlternatives(index, element.id)
+                  }}>Atualizar</p>
                   <p className="updateButton delete" onClick={()=>{
-                    setQuestionIndex(index)
                     setQuestionId(element.id)
                     setIsModalOpen(true);
                     }}>Excluir</p>
@@ -322,7 +309,7 @@ const QuestionsCard = () => {
                           value={fillValue?element1.description:undefined}></input>
                         )
                       })}
-                      <input placeholder="Nova resposta objetiva" className="newAnswer" onChange={(e)=>setCatchNewTitle(e.target.value)}></input>
+                      <input placeholder="Nova resposta objetiva" value={catchNewTitle} className="newAnswer" onChange={(e)=>setCatchNewTitle(e.target.value)}></input>
                     </div>
                     <div className="second">
                       <p>Equipes</p>
@@ -346,7 +333,7 @@ const QuestionsCard = () => {
                           </select>                         
                         )
                       })}
-                          <select className="newTeam" onChange={(e)=>setCatchNewTeamId(e.target.value)}>
+                          <select className="newTeam" value={catchNewTeamId} onChange={(e)=>setCatchNewTeamId(e.target.value)}>
                             {team && team.map((element3:any)=>{                       
                               return(
                                 <option value={element3.id}>{element3.name}</option>
@@ -358,20 +345,31 @@ const QuestionsCard = () => {
                       <p>Horas Totais</p>
                       {element.alternatives.map((element2:any, index:number)=>{
                         return(
-                          <input 
-                          onClick={()=>{
-                            setAlternativeIndex(index);
-                            setFillValue(true)
-                          }}
-                          onChange={(e)=>{updateHours(e.target.valueAsNumber)}}
-                          key={element2.id}
-                          placeholder={element2.teams[0].workHours}
-                          value={fillValue? element2.teams[0].workHours: undefined}
-                          type="number" 
-                          ></input>
+                          <section>
+                            <input 
+                            onClick={()=>{
+                              setAlternativeIndex(index);
+                              setFillValue(true)
+                            }}
+                            onChange={(e)=>{updateHours(e.target.valueAsNumber)}}
+                            key={element2.id}
+                            placeholder={element2.teams[0].workHours}
+                            value={fillValue? element2.teams[0].workHours: undefined}
+                            type="number" 
+                            ></input>
+                            <div onClick={()=> deleteAnswear(element2.id)}>
+                              <Style.trash/>{" "}
+                            </div>
+                          </section>
                         )
+                        
                       })}
-                      <input type="number" placeholder="Horas" className="newHour" onChange={(e)=>setCatchNewHour(e.target.valueAsNumber)}></input>
+                      <section>
+                        <input type="number" placeholder="Horas" value={catchNewHour}className="newHour" onChange={(e)=>setCatchNewHour(e.target.valueAsNumber)}></input>
+                        <div onClick={()=> registeAnswer(element.id)}>
+                          <Style.plus/>{" "}
+                        </div>
+                      </section>
                     </div>
                   </div>
               </section>
