@@ -60,7 +60,13 @@ const Navbar = () => {
               </span>
               Equipes
             </S.NavbarContentLi>
-            <S.NavbarContentLi onClick={() => navigate("/clients")}>
+            <S.NavbarContentLi
+              className={active === "clients" ? "active" : ""}
+              onClick={() => {
+                navigate("/clients")
+                setActive("clients")
+              }}
+            >
               <span>
                 <AiOutlineTeam />
               </span>
@@ -79,7 +85,7 @@ const Navbar = () => {
               Perfil
             </S.NavbarContentLi>
             <S.NavbarContentLi
-              className={active}
+              className={active === "projects" ? "active" : ""}
               onClick={() => {
                 navigate("/projects");
                 setActive("projects");

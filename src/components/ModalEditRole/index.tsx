@@ -55,10 +55,6 @@ export default function ModalEditRole({
 
   let newValue: boolean;
   const handleEditUser = () => {
-    if (value === "" && value2 === "") {
-      return toast.dismiss("Nenhum campo alterado");
-    }
-
     if (value2 === "true") {
       newValue = true;
     } else if (value2 === "false") {
@@ -78,8 +74,9 @@ export default function ModalEditRole({
       .then((res) => {
         toast.success("Usuário editado com sucesso");
         handleClose();
+        handleGetUsers();
       })
-      .catch((err) => toast.error("FAlha ao editar usuário"));
+      .catch((err) => toast.error("Falha ao editar usuário"));
   };
 
   return (

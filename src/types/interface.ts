@@ -36,4 +36,5 @@ export interface ProjectTypes {
   client:string,
   users: UserTypes[];
   containsManager: boolean;
+  summedTimeValueOfAllUsers: number;
 }

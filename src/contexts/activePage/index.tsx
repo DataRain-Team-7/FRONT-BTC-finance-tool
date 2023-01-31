@@ -1,8 +1,4 @@
-import { createContext, useContext, ReactNode, useState, useEffect } from "react";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import Api from "../../services/api";
-import { UserTypes } from "../../types/interface";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 interface ActiveProviderProps{
     children: ReactNode

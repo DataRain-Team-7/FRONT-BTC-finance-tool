@@ -69,7 +69,7 @@ const ProjectPage = () => {
             <S.ProjectHeaderTitle>{values.name}</S.ProjectHeaderTitle>
             <S.ProjectHeaderSubtitle>
               {" "}
-              Valor total por hora - R$: 999,00
+              Valor total por hora - R$: {values.summedTimeValueOfAllUsers}
             </S.ProjectHeaderSubtitle>
             <S.ProjectDescription>{values.description}</S.ProjectDescription>
           </S.ProjectPageHeader>
