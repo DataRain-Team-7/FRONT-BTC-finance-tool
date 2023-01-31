@@ -102,7 +102,7 @@ export const QuestionsContainer = styled.div`
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          width: 20%;
+          width: 15%;
         }
         
         p{
@@ -115,6 +115,12 @@ export const QuestionsContainer = styled.div`
           padding: 0.2rem 0.5rem;
           border-radius: 5px;
           cursor: pointer;
+          width: 45%;
+          text-align: center;
+        }
+
+        .delete{
+          background-color: #0b7ca3;
         }
       }
 
