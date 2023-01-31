@@ -9,8 +9,7 @@ import Api from "../../services/api";
 import DeleteQuestion from "../ModalDelete";
 
 const QuestionsCard = () => {
-
-  const { logged } = useAuth()
+  
   const { questions, updateQuestion } = useQuestions();
   const { team, firstTeamId } = useTeam()
   const [ isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -60,6 +59,7 @@ const QuestionsCard = () => {
     }
       Api.patch(`/question/${titleId}`, data)
         .then(()=> {
+          updateQuestion()
           toast.success("Feito!");
           setNewTitle("");
           setTitleId("")
@@ -107,6 +107,7 @@ const QuestionsCard = () => {
   const handleCancel = () =>{
     Api.delete(`/question/${titleId}`)
       .then(()=>{
+          updateQuestion()
           setNewTitle("");
           setTitleId("")
           setNewAnswer(false)
@@ -165,7 +166,7 @@ const QuestionsCard = () => {
     {
       description: newQuestion
     }
-    ).then(()=>{})
+    ).then(()=>updateQuestion())
       .catch(()=> toast.error("Erro ao atualizar questão"))
     
       editQuestions[index].alternatives.map((element:any) => {
@@ -184,13 +185,14 @@ const QuestionsCard = () => {
               }
             ]
           })
-          .then(()=>{})
+          .then(()=>updateQuestion())
           .catch(()=> toast.error("Erro ao atualizar respostas"))
         }else{
-          toast.error("Erro ao atualizar quetão com valor nulo")
+          Api.delete(`/alternative/${answearId}`)
+            .then(()=>updateQuestion())
+            .catch(()=>toast.error("Erro ao excluir resposta"))
         }
         })
-        updateQuestion()
         toast.success("Questão atualizada")
         }
         
