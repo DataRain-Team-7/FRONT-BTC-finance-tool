@@ -130,7 +130,7 @@ const QuestionsCard = () => {
   const [ alternativeIndex, setAlternativeIndex ] = useState<number>(0)
 
   const UpdateTitle = (index:number, newTitle:string) =>{
-    let newValues = editQuestions
+      let newValues = editQuestions
     newValues[index].description = newTitle
     setEditQuestions(newValues)
     setFillValue(false)
@@ -177,19 +177,23 @@ const QuestionsCard = () => {
       const newTeamId:string = element.teams[0].id
       const newHours:number = element.teams[0].workHours
 
-      Api.patch(`/alternative/${answearId}`,{
-        description: newAnswer,
-        teams: [
-          {
-            teamId: newTeamId,
-            workHours: newHours
-          }
-        ]
-      })
-      .then(()=>toast.success("Foooi!"))
-      .catch(()=> toast.error("Erro ao atualizar respostas"))
-    })
-  }
+        if(newAnswer !== "" && newHours > 0){
+          Api.patch(`/alternative/${answearId}`,{
+            description: newAnswer,
+            teams: [
+              {
+                teamId: newTeamId,
+                workHours: newHours
+              }
+            ]
+          })
+          .then(()=>toast.success("Foooi!"))
+          .catch(()=> toast.error("Erro ao atualizar respostas"))
+        }else{
+          toast.error("Erro ao atualizar quetão com valor nulo")
+        }
+        })
+        }
   
   return (
       <Style.QuestionsContainer>
@@ -297,10 +301,12 @@ const QuestionsCard = () => {
                       <p>Equipes</p>
                       {element.alternatives.map((element2:any, index:number)=>{
                         return(              
-                          <select 
+                          <select
+                          value={fillValue?element2.teams[0].id:undefined}
                           onChange={(e)=>{updateTeam(e.target.value)}}
                           onClick={()=>{ 
                             setAlternativeIndex(index);
+                            setFillValue(false)
                             }
                           }
                           >
@@ -312,10 +318,10 @@ const QuestionsCard = () => {
                           </select>                         
                         )
                       })}
-                          <select className="newTeam">
+                          <select className="newTeam" >
                             {team && team.map((element3:any)=>{                       
                               return(
-                                <option>{element3.name}</option>
+                                <option >{element3.name}</option>
                               )
                             })}
                           </select>
