@@ -3,13 +3,9 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import toast from "react-hot-toast";
-import { useUsers } from "../../contexts/userContext";
-import Api from "../../services/api";
-import { UserTypes } from "../../types/interface";
-import { ButtonsContainer } from "../../utils/globalStyles";
-import * as S from "./style";
-import React from "react";
 import { useProject } from "../../contexts/projectContext";
+import Api from "../../services/api";
+import { ButtonsContainer } from "../../utils/globalStyles";
 
 interface ModalDeleteProps {
   userId: string;
@@ -41,14 +37,14 @@ export default function ModalRemoveUser({
   setOpenRemoveModal,
 }: ModalDeleteProps) {
   const handleClose = () => setOpenRemoveModal(!openRemoveModal);
-  const { alteraTeste } = useProject();
+  const { alteraEstado } = useProject();
 
   const removeUser = (id: any) => {
     Api.delete(`project/remove-user/${projectId}/${id}`)
       .then((res) => {
         toast.success("Usuário removido do projeto"), res;
         handleClose();
-        alteraTeste();
+        alteraEstado();
       })
       .catch((error) => {
         toast.error("Falha ao remover usuário do projeto"), error;
