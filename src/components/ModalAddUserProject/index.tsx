@@ -40,11 +40,10 @@ const ModalAddUserToProject = ({
   const [value, setValue] = useState<string>();
   const [valueManager, setValueManager] = useState<string>("");
   const [valueUser, setValueUser] = useState<string>("");
-  const{alteraTeste} = useProject()
+  const { alteraEstado } = useProject();
 
   const number = parseFloat(valueManager);
   const number2 = parseFloat(valueUser);
-  
 
   // filtro para buscar o manager
   const avaliableMannager = user.filter(
@@ -68,8 +67,7 @@ const ModalAddUserToProject = ({
         res;
         toast.success("Manager adicionado ao projeto");
         handleClose();
-        alteraTeste()
-
+        alteraEstado();
       })
       .catch((err) => {
         console.log(err);
@@ -89,7 +87,7 @@ const ModalAddUserToProject = ({
         res;
         toast.success("Usuário adicionado ao projeto");
         handleClose();
-        alteraTeste()
+        alteraEstado();
       })
       .catch((err) => {
         console.log(err);
@@ -129,6 +127,7 @@ const ModalAddUserToProject = ({
                     multiple: false,
                   }}
                 >
+                  {/* <input placeholder="Pesquisar por mannager" /> */}
                   {avaliableMannager.map((element) => {
                     return (
                       <MenuItem value={element.id} key={element.id}>

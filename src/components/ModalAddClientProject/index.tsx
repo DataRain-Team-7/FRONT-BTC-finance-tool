@@ -4,6 +4,7 @@ import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useClient } from "../../contexts/clientContext";
+import { useProject } from "../../contexts/projectContext";
 import Api from "../../services/api";
 import { ProjectTypes } from "../../types/interface";
 import * as S from "./style";
@@ -36,6 +37,7 @@ const ModalAddClientToProject = ({
   const handleClose = () => setOpenModalClient(!openModalClient);
   const { client } = useClient();
   const [value, setValue] = useState<string>();
+  const { alteraEstado } = useProject();
 
   //adicionar um cliente
   const handleAddClient = () => {
@@ -48,6 +50,7 @@ const ModalAddClientToProject = ({
         res;
         toast.success("Cliente adicionado ao projeto");
         handleClose();
+        alteraEstado()
       })
       .catch((err) => {
         console.log(err);

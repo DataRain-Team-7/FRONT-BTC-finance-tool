@@ -18,7 +18,7 @@ const ProjectPage = () => {
   const [values, setValues] = useState<ProjectTypes>({} as ProjectTypes);
   const [valueUser, setValueUser] = useState<any>([]);
   const [openModalClient, setOpenModalClient] = useState<boolean>(false);
-  const{ teste} = useProject()
+  const { estado } = useProject();
 
   const getAnProject = () => {
     Api.get(`/project/${id}`)
@@ -30,8 +30,8 @@ const ProjectPage = () => {
   };
 
   useEffect(() => {
-    getAnProject()
-  }, [teste]);
+    getAnProject();
+  }, [estado]);
 
   return (
     <>
@@ -77,8 +77,9 @@ const ProjectPage = () => {
             <>
               <MockedUserCard project={values} />
               {valueUser.map((e: any, index: any) => {
-                return <ProjectCard idProject={values.id} user={e} key={index} />;
-
+                return (
+                  <ProjectCard idProject={values.id} user={e} key={index} />
+                );
               })}
             </>
           </S.ProjectPageContent>
