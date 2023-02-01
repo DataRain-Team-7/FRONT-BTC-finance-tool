@@ -69,7 +69,7 @@ const ProjectPage = () => {
             <S.ProjectHeaderTitle>{values.name}</S.ProjectHeaderTitle>
             <S.ProjectHeaderSubtitle>
               {" "}
-              Valor total por hora - R$: {(values.summedTimeValueOfAllUsers).toFixed(2)}
+              Valor total por hora - R$: {(values.summedTimeValueOfAllUsers) && (values.summedTimeValueOfAllUsers).toFixed(2)}
             </S.ProjectHeaderSubtitle>
             <S.ProjectDescription>{values.description}</S.ProjectDescription>
           </S.ProjectPageHeader>

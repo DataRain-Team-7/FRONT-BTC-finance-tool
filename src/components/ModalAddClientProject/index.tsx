@@ -38,6 +38,16 @@ const ModalAddClientToProject = ({
   const { client } = useClient();
   const [value, setValue] = useState<string>();
   const { alteraEstado } = useProject();
+  const [search, setSearch] = useState<string>("");
+
+  const searchLower = search.toLowerCase();
+
+  const filteredClients = client.filter((e) =>
+    client
+      ? e.companyName.toLowerCase().includes(searchLower) ||
+        e.email.toLowerCase().includes(searchLower)
+      : []
+  );
 
   //adicionar um cliente
   const handleAddClient = () => {
@@ -50,7 +60,7 @@ const ModalAddClientToProject = ({
         res;
         toast.success("Cliente adicionado ao projeto");
         handleClose();
-        alteraEstado()
+        alteraEstado();
       })
       .catch((err) => {
         console.log(err);
@@ -88,7 +98,15 @@ const ModalAddClientToProject = ({
                 multiple: false,
               }}
             >
-              {client.map((element) => {
+              <TextField
+                size="small"
+                type={"search"}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearch(e.target.value)
+                }
+                defaultValue=""
+              />
+              {filteredClients.map((element) => {
                 return (
                   <MenuItem value={element.id} key={element.id}>
                     {element.companyName} <br /> {element.email}
