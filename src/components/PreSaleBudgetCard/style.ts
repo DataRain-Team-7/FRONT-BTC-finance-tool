@@ -18,6 +18,7 @@ export const PreSaleBudgetContainer = styled.div`
     .mainSection{
         overflow-y: scroll;
         padding: 1%;
+    
 
         width: 100%;
                 ::-webkit-scrollbar {
@@ -60,7 +61,7 @@ export const PreSaleBudgetContainer = styled.div`
         padding: 0 1rem;
 
         div{
-            width: 25%;
+            width: 20%;
             text-align: center;
         }
 
@@ -92,8 +93,8 @@ export const PreSaleBudgetContainer = styled.div`
             
         }
 
-        .hours, .value{
-            width: 25%;
+        .hours, .value, .team{
+            width: 20%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -176,11 +177,26 @@ export const PreSaleBudgetContainer = styled.div`
             .buttonEnter{
               background-color: ${theme.colors.tertiaryColor};
               height: 3rem;
-              width: 40%;
+              width: 25%;
+              margin: 0 3%;
               font-size: ${theme.constants.buttonFontSize};
             }
             .buttonEnter:hover{
               background-color: ${theme.colors.tertiaryColor};
+            }
+
+            .save{
+                background-color: ${theme.colors.secundaryColor};
+            }
+            .save:hover{
+              background-color: ${theme.colors.secundaryColor};
+            }
+
+            .report{
+                background-color: ${theme.colors.inputFontColor};
+            }
+            .report:hover{
+              background-color: ${theme.colors.inputFontColor};
             }
         }
     

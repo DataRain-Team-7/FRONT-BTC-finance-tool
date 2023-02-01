@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom"
 import * as Styled from "./style"
 import React, { useEffect, useState } from "react";
 import Api from "../../services/api";
+import reportPDF from "../Report/report"
+
+
+
+
 
 const PreSaleBudgetCard = () =>{
 
@@ -80,6 +85,9 @@ const PreSaleBudgetCard = () =>{
                         <h2 className="fisrth2">Questões</h2>
                     </div>
                     <div>
+                        <h2>Equipe</h2>
+                    </div>
+                    <div>
                         <h2>Horas</h2>
                     </div>
                     <div>
@@ -95,8 +103,11 @@ const PreSaleBudgetCard = () =>{
                                         <h4>{`${index + 1}- `}</h4>
                                         <h4>{`${element.question.description}`}</h4>
                                     </div>
-                                    <p>{`${element.alternative !== null?`R. Obj.: ${element.alternative}` : ""}`}</p>
-                                    <p>{`${element.responseDetails !== null? `R. Disc.: ${element.responseDetails}` : ""}`}</p>                
+                                    <p>{`${element.alternative !== null?`R. Obj.: ${element.alternative.description}` : ""}`}</p>
+                                    <p>{`${element.responseDetails !== null? `R. Disc.: ${element.responseDetails}` : ""}`}</p>
+                            </div>
+                            <div className="team">
+                                <p>{ element.alternative !== null? element.alternative.teams[0].team.name : "____"}</p>
                             </div>
                             <div className="hours">
                                 <section>
@@ -131,7 +142,18 @@ const PreSaleBudgetCard = () =>{
                     </div>
                 </section>
                 <section className="botton">
-                    <Button type="submit" variant="contained" className="buttonEnter" onClick={()=>{toast.success("Orçamento lançado"); navigate("/home")}}>Finalizar Orçamento</Button>
+                    <Button  variant="contained" className="buttonEnter" onClick={()=>{
+                        reportPDF("casa")
+                        }}>Finalizar orçamento
+                    </Button>
+                    <Button  variant="contained" className="buttonEnter save" onClick={()=>{
+                        reportPDF("casa")
+                        }}>Salvar alterações
+                    </Button>
+                    <Button  variant="contained" className="buttonEnter report" onClick={()=>{
+                        reportPDF("casa")
+                        }}>Gerar Relatório
+                    </Button>
                 </section>
 
             </section>
