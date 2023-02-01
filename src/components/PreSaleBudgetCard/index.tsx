@@ -6,30 +6,34 @@ import React, { useEffect, useState } from "react";
 import Api from "../../services/api";
 import reportPDF from "../Report/report"
 
-
-
-
-
 const PreSaleBudgetCard = () =>{
 
     const navigate = useNavigate()
     const clientId = sessionStorage.getItem("clientId")
+
+    const [ getInputFree, setGetInputFree ] = useState<boolean>(true)
     const [ answers, setAnswers ] = useState<any>()
     const [ budGet, setBudGet ] = useState<any>()
     const [ totalHours, setTotalHours ] = useState<number>(0)
     const [ totalValue, setTotalValue ] = useState<number>(0)
 
+    // console.log(budGet)
+
     const handleTotalValues = () =>{
-        budGet.map((element: any)=>{
-            if(element.valuePerHour !== null){
-                setTotalHours(totalHours + element.valuePerHour)
+        let newHour:number = 0
+        let newValue: number =0
+        budGet && budGet.map((element: any)=>{
+            if(!isNaN(element.workHours) && element.workHours !==null){
+                newHour = newHour + element.workHours
+                setTotalHours(newHour)
             }
-            if(element.workHours !== null){
-                setTotalValue(totalValue + element.totalValue)
+            if(!isNaN(element.valuePerHour) && element.valuePerHour !== null){
+                newValue = newValue + element.valuePerHour
+                setTotalValue(newValue)
             }
         })
-        console.log({totalHours, totalValue})
     }
+    // console.log({totalHours, totalValue})
 
     const handleGetForm = () =>{
         Api.get(`/budget-request/${clientId}`)
@@ -59,8 +63,10 @@ const PreSaleBudgetCard = () =>{
     }
 
     useEffect(()=>handleGetForm(), [])
+    useEffect(()=>handleTotalValues(), [budGet])
+    
 
-    // console.log(budGet)
+
 
     return(
         <Styled.PreSaleBudgetContainer>
@@ -112,9 +118,16 @@ const PreSaleBudgetCard = () =>{
                             <div className="hours">
                                 <section>
                                     <div>
-                                        <input type="number" value={element.workHours} onChange={(e)=> {
-                                            handleUpdateValue(index, e.target.valueAsNumber)
-                                            }}></input>
+                                        <input
+                                            className={element.workHours? "" : "empty"} 
+                                            type="number" 
+                                            value={getInputFree? element.workHours: undefined} 
+                                            onChange={(e)=> {
+                                            handleUpdateValue(index, e.target.valueAsNumber);
+                                            handleTotalValues();
+                                            }}
+                                            onClick={()=>setGetInputFree(false)}
+                                            ></input>
                                         <p> hr</p>
                                     </div>
                                 </section>
@@ -123,9 +136,16 @@ const PreSaleBudgetCard = () =>{
                                 <section>
                                     <div>
                                         <p>R$: </p>
-                                        <input type="number" value={element.valuePerHour} onChange={(e)=> {
-                                            handleUpdateHour(index, e.target.valueAsNumber)
-                                            }}></input>
+                                        <input
+                                            className={element.valuePerHour? "" : "empty"} 
+                                            type="number" 
+                                            value={getInputFree? element.valuePerHour: undefined} 
+                                            onChange={(e)=> {
+                                            handleUpdateHour(index, e.target.valueAsNumber);
+                                            handleTotalValues();
+                                            }}
+                                            onClick={()=>setGetInputFree(false)}
+                                            ></input>
                                     </div>
                                 </section>
                             </div>
@@ -137,8 +157,8 @@ const PreSaleBudgetCard = () =>{
                     <h2>Nota sobre o orçamento</h2>
                     <textarea wrap="hard" placeholder="Comentário adicional"></textarea>
                     <div className="extract">
-                        <p>Horas Totais = 194hr</p>
-                        <p>Valor Total = R$ 39.509,50</p>
+                        <p>{`Horas Totais = ${totalHours.toFixed(0)}hr`}</p>
+                        <p>{`Valor Total = R$ ${totalValue.toFixed(2)}`}</p>
                     </div>
                 </section>
                 <section className="botton">

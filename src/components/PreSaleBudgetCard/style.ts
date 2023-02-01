@@ -98,6 +98,8 @@ export const PreSaleBudgetContainer = styled.div`
             display: flex;
             flex-direction: column;
             align-items: center;
+            border-left: 1px dotted black;
+            justify-content: center;
 
             .section{
                 align-items: center;
@@ -107,7 +109,7 @@ export const PreSaleBudgetContainer = styled.div`
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
-                align-items: flex-start;
+                align-items: center;
 
                 div{
                     display: flex;
@@ -123,6 +125,10 @@ export const PreSaleBudgetContainer = styled.div`
                     border-bottom: 1px solid black;
                 }
 
+                .empty{
+                    background-color: #F2EDE4;
+                }
+
     
                 input::-webkit-inner-spin-button {
                     -webkit-appearance: none;
@@ -134,9 +140,11 @@ export const PreSaleBudgetContainer = styled.div`
                 }
 
                 p{
-
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     height: 10vh;
-                    text-align: start; 
+                    text-align: start;
                 }
             }    
         }
