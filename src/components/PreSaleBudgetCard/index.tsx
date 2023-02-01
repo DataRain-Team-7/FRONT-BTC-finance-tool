@@ -16,8 +16,42 @@ const PreSaleBudgetCard = () =>{
     const [ budGet, setBudGet ] = useState<any>()
     const [ totalHours, setTotalHours ] = useState<number>(0)
     const [ totalValue, setTotalValue ] = useState<number>(0)
+    const [ coment, setComent ] = useState<string>() //para futura implementação do campo de comentário adicional 
 
-    // console.log(budGet)
+    const handleSave = () =>{
+        Api.patch(`/budget-request/${clientId}`, 
+        {
+            formResponses: [
+                ...budGet
+            ]
+        }
+        )
+            .then(()=>toast.success("Orçamento salvo"))
+            .catch(()=>toast.error("Erro ao alterar orçamento"))
+    }
+
+    const handleFinishBudget = () =>{
+        Api.patch(`/budget-request/${clientId}`, 
+        {
+            formResponses: [
+                ...budGet
+            ]
+        }
+        )
+            .then(()=>{
+                Api.post("/budget-request/approved",
+                {
+                    budgetRequestId: clientId
+                }
+                )
+                .then(()=>{
+                    navigate("/home");
+                    toast.success("Orçamento concluído")
+                })
+                .catch(()=>toast.error("Erro ao finalizar"))
+            }) 
+            .catch(()=>toast.error("Erro ao alterar orçamento"))
+    }
 
     const handleTotalValues = () =>{
         let newHour:number = 0
@@ -39,6 +73,7 @@ const PreSaleBudgetCard = () =>{
         Api.get(`/budget-request/${clientId}`)
             .then((res)=>{
                 setAnswers(res.data);
+                // setBudGetId(res.data)
                 setBudGet(res.data.formResponses.map((element: any)=>{
                     return {
                         id: element.id,
@@ -66,7 +101,7 @@ const PreSaleBudgetCard = () =>{
     useEffect(()=>handleTotalValues(), [budGet])
     
 
-
+    console.log(budGet)
 
     return(
         <Styled.PreSaleBudgetContainer>
@@ -155,7 +190,7 @@ const PreSaleBudgetCard = () =>{
                 }
                 <section className="details">
                     <h2>Nota sobre o orçamento</h2>
-                    <textarea wrap="hard" placeholder="Comentário adicional"></textarea>
+                    <textarea wrap="hard" placeholder="Comentário adicional" onChange={(e)=>setComent(e.target.value)}></textarea>
                     <div className="extract">
                         <p>{`Horas Totais = ${totalHours.toFixed(0)}hr`}</p>
                         <p>{`Valor Total = R$ ${totalValue.toFixed(2)}`}</p>
@@ -163,19 +198,18 @@ const PreSaleBudgetCard = () =>{
                 </section>
                 <section className="botton">
                     <Button  variant="contained" className="buttonEnter" onClick={()=>{
-                        reportPDF("casa")
+                        handleFinishBudget()
                         }}>Finalizar orçamento
                     </Button>
                     <Button  variant="contained" className="buttonEnter save" onClick={()=>{
-                        reportPDF("casa")
+                        handleSave()
                         }}>Salvar alterações
                     </Button>
                     <Button  variant="contained" className="buttonEnter report" onClick={()=>{
-                        reportPDF("casa")
+                        reportPDF()
                         }}>Gerar Relatório
                     </Button>
                 </section>
-
             </section>
    
         </Styled.PreSaleBudgetContainer>
