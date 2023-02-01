@@ -4,11 +4,10 @@ import ProjectPage from "./components/ProjectPage";
 import Teams from "./components/Teams";
 import UsersPage from "./components/Users";
 import CreateAccount from "./Pages/CreateAccount";
-import FinancialBudget from "./Pages/FinancialBudget";
 import FormPage from "./Pages/Form";
 import HomePage from "./Pages/Home";
 import Login from "./Pages/Login";
-import PreSaleBudget from "./Pages/PreSaleBudget";
+import Budget from "./Pages/Budget";
 import QuestionsPage from "./Pages/QuestionsPage";
 import RecoverPasswordPage from "./Pages/RecoverPassword";
 
@@ -23,8 +22,7 @@ const Router = () => {
       <Route path="/projects" element={<ProjectPage />} />
       <Route path="/novasenha/:param" element={<RecoverPasswordPage />} />
       <Route path="/form" element={<FormPage />} />
-      <Route path="/prevenda" element={<PreSaleBudget />} />
-      <Route path="/financeiro" element={<FinancialBudget />} />
+      <Route path="/budget" element={<Budget />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/questoes" element={<QuestionsPage />} />
       {/* <Route path="/new-user" element={<CreateAccountCard />} /> */}

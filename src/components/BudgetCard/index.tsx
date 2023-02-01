@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import Api from "../../services/api";
 import reportPDF from "../Report/report"
 
-const PreSaleBudgetCard = () =>{
+const BudgetCard = () =>{
 
     const navigate = useNavigate()
     const clientId = sessionStorage.getItem("clientId")
@@ -66,8 +66,12 @@ const PreSaleBudgetCard = () =>{
                 setTotalValue(newValue)
             }
         })
+        
     }
+    // const finalValue = totalHours * totalValue
+
     // console.log({totalHours, totalValue})
+    // console.log(finalValue)
 
     const handleGetForm = () =>{
         Api.get(`/budget-request/${clientId}`)
@@ -104,7 +108,7 @@ const PreSaleBudgetCard = () =>{
     console.log(budGet)
 
     return(
-        <Styled.PreSaleBudgetContainer>
+        <Styled.BudgetContainer>
             
                 <Styled.ProjectPageReturn>
                     {" "}
@@ -193,7 +197,7 @@ const PreSaleBudgetCard = () =>{
                     <textarea wrap="hard" placeholder="Comentário adicional" onChange={(e)=>setComent(e.target.value)}></textarea>
                     <div className="extract">
                         <p>{`Horas Totais = ${totalHours.toFixed(0)}hr`}</p>
-                        <p>{`Valor Total = R$ ${totalValue.toFixed(2)}`}</p>
+                        <p>{`Valor Total = R$ ${(totalHours * totalValue).toFixed(2)}`}</p>
                     </div>
                 </section>
                 <section className="botton">
@@ -212,8 +216,8 @@ const PreSaleBudgetCard = () =>{
                 </section>
             </section>
    
-        </Styled.PreSaleBudgetContainer>
+        </Styled.BudgetContainer>
     )
 }
 
-export default PreSaleBudgetCard
+export default BudgetCard

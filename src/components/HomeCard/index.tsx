@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import * as Style from "./style"
 import { useUsers } from "../../contexts/userContext";
+import { useAuth } from "../../contexts/auth";
+import { useEffect } from "react";
 
 interface SearchProp {
   search: string
@@ -8,7 +10,10 @@ interface SearchProp {
 
 const HomeCard = ({search}: SearchProp) => {
 
-  const { budgets } = useUsers()
+  const { budgets, handleGetBudgets } = useUsers()
+  const { userStorage } = useAuth()
+
+  console.log(userStorage)
   
   const getByCompany = budgets? budgets.filter((element: any)=>element.client.companyName.toUpperCase().includes(search.toLocaleUpperCase())) : []
   const getByName = budgets? budgets.filter((element: any)=>element.client.mainContact.toUpperCase().includes(search.toLocaleUpperCase())) : []
@@ -17,7 +22,7 @@ const HomeCard = ({search}: SearchProp) => {
 
   const forms = list&& list.slice(0).reverse();
 
-  console.log(forms)
+  useEffect(()=> handleGetBudgets() ,[])
 
   const navigate = useNavigate()
 
@@ -54,9 +59,9 @@ const HomeCard = ({search}: SearchProp) => {
                   <div>
                     <p className="last">Última Edição</p>
                   </div>
-                  <div>
+                  {userStorage.roleName.toUpperCase() =="ADMIN" && <div>
                     <p>Status</p>
-                  </div>
+                  </div>}
                 </section>           
               </section>
               <section className="section02">
@@ -64,7 +69,7 @@ const HomeCard = ({search}: SearchProp) => {
                   return(
                     <section key={element.id} onClick={()=> {
                       sessionStorage.setItem("clientId", element.id)
-                      navigate("/prevenda")
+                      navigate("/budget")
                     }}>
                       <div>
                         <p>{handleFirstUpperCase(element.client.mainContact)}</p>
@@ -78,9 +83,9 @@ const HomeCard = ({search}: SearchProp) => {
                       <div>
                         <p>{element.updatedAt}</p>
                       </div>
-                      <div> 
+                      {userStorage.roleName.toUpperCase() =="ADMIN" && <div> 
                         <p className={element.status}>{handleStatus(element.status)}</p>
-                      </div>
+                      </div>}
                     </section>
                   )
                 })}

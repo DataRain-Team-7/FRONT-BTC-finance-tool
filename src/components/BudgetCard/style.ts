@@ -2,7 +2,7 @@ import styled, { css } from "styled-components"
 import { IoIosArrowBack } from "react-icons/io";
 
 
-export const PreSaleBudgetContainer = styled.div`
+export const BudgetContainer = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
