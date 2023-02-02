@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import AllProjects from "./components/AllProjects";
 import ClientsPage from "./components/ClientsPage";
 import CreateClientCard from "./components/CreateClientCard";
@@ -13,8 +13,12 @@ import Budget from "./Pages/Budget";
 import QuestionsPage from "./Pages/QuestionsPage";
 import RecoverPasswordPage from "./Pages/RecoverPassword";
 import ExtraHour from "./Pages/ExtraHour";
+import { useAuth } from "./contexts/auth";
 
 const Router = () => {
+
+  const { logged } = useAuth()
+
   return (
     <Routes>
       <Route path="/" element={<Login />} />
@@ -31,7 +35,9 @@ const Router = () => {
       <Route path="/home" element={<HomePage />} />
       <Route path="/questoes" element={<QuestionsPage />} />
       <Route path="/extra-hour" element={<ExtraHour />} />
-      
+
+      <Route path="*" element={<Navigate to={logged ? "/home" : "/"} />} />
+
     </Routes>
   );
 };

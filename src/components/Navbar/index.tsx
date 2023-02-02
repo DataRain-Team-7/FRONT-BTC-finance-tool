@@ -76,6 +76,7 @@ const Navbar = () => {
               </span>
               Perfil
             </S.NavbarContentLi>
+            {userStorage.roleName === "admin" || userStorage.roleName === "manager"? (
             <S.NavbarContentLi
               className={active === "extra-hour" ? "active" : ""}
               onClick={() => {
@@ -88,6 +89,7 @@ const Navbar = () => {
               </span>
               Hora Extra
             </S.NavbarContentLi>
+            ) : null}
             <S.NavbarContentLi
               className={active === "projects" ? "active" : ""}
               onClick={() => {
