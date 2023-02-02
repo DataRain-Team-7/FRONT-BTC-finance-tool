@@ -16,7 +16,7 @@ const BudgetCard = () =>{
     const [ budGet, setBudGet ] = useState<any>()
     const [ totalHours, setTotalHours ] = useState<number>(0)
     const [ totalValue, setTotalValue ] = useState<number>(0)
-    const [ coment, setComent ] = useState<string>() //para futura implementação do campo de comentário adicional 
+    const [ coment, setComent ] = useState<string>() //para futura implementação do campo de comentário adicional
 
     const handleSave = () =>{
         Api.patch(`/budget-request/${clientId}`, 
@@ -105,8 +105,57 @@ const BudgetCard = () =>{
     useEffect(()=>handleTotalValues(), [budGet])
     
 
-    console.log(budGet)
+    // console.log(budGet)
 
+    // const finalBudGet = {
+    //     client:{
+    //         name: "",
+    //         company: "",
+    //         email: "",
+    //         phone: ""
+    //     },
+    //     budget:[
+    //         {
+
+    //         },
+    //         {
+
+    //         },
+    //         {
+
+    //         }
+    //     ],
+    //     totalValues:{
+    //         totalHours: totalHours,
+    //         totalValue: totalValue
+    //     }
+
+        
+    // }
+
+    
+    const handlePDF = () =>{
+        Api.patch(`/budget-request/${clientId}`, 
+        {
+            formResponses: [
+                ...budGet
+            ]
+        }
+        )
+            .then(()=>{
+                let data
+                Api.get(`/budget-request/${clientId}`)
+                    .then((res)=>{
+                        data = res.data;
+                        toast.success("Aqui foi!")
+                        reportPDF(data)
+                    })
+                    .catch(()=> {})
+               
+        })
+        
+        
+    }
     return(
         <Styled.BudgetContainer>
             
@@ -210,7 +259,7 @@ const BudgetCard = () =>{
                         }}>Salvar alterações
                     </Button>
                     <Button  variant="contained" className="buttonEnter report" onClick={()=>{
-                        reportPDF()
+                        handlePDF()
                         }}>Gerar Relatório
                     </Button>
                 </section>

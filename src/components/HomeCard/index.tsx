@@ -12,8 +12,6 @@ const HomeCard = ({search}: SearchProp) => {
 
   const { budgets, handleGetBudgets } = useUsers()
   const { userStorage } = useAuth()
-
-  console.log(userStorage)
   
   const getByCompany = budgets? budgets.filter((element: any)=>element.client.companyName.toUpperCase().includes(search.toLocaleUpperCase())) : []
   const getByName = budgets? budgets.filter((element: any)=>element.client.mainContact.toUpperCase().includes(search.toLocaleUpperCase())) : []

@@ -43,7 +43,7 @@ const QuestionsCard = () => {
             toast.success("Pergunta cadastrada")
           })
           .catch((err)=> {
-            toast.success("Erro ao cadastrar")
+            toast.error("Erro ao cadastrar")
           })
       }else{
         toast.error("A questão deve conter um título")
@@ -116,6 +116,7 @@ const QuestionsCard = () => {
     setEditQuestions(ordernedList);
   }
     ,[questions])
+  useEffect(()=>updateQuestion(),[])
 
   const UpdateTitle = (index:number, newTitle:string) =>{
       let newValues = editQuestions
