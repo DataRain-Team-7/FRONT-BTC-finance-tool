@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
 import { GrProjects } from "react-icons/gr"
+import { ImHourGlass } from "react-icons/im"
+
 
 export const NavbarContainer = styled.div`
   display: flex;
@@ -12,6 +14,10 @@ export const NavbarContainer = styled.div`
 `;
 
 export const ProjectIcon = styled(GrProjects)`
+
+`
+
+export const ExtraHourIcon = styled(ImHourGlass)`
 
 `
 

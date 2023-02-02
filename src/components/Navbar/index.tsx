@@ -77,6 +77,18 @@ const Navbar = () => {
               Perfil
             </S.NavbarContentLi>
             <S.NavbarContentLi
+              className={active === "extra-hour" ? "active" : ""}
+              onClick={() => {
+                navigate("/extra-hour");
+                setActive("extra-hour");
+              }}
+            >
+              <span>
+                <S.ExtraHourIcon/>
+              </span>
+              Hora extra
+            </S.NavbarContentLi>
+            <S.NavbarContentLi
               className={active === "projects" ? "active" : ""}
               onClick={() => {
                 navigate("/projects");

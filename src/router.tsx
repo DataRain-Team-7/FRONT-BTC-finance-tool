@@ -12,6 +12,7 @@ import Login from "./Pages/Login";
 import Budget from "./Pages/Budget";
 import QuestionsPage from "./Pages/QuestionsPage";
 import RecoverPasswordPage from "./Pages/RecoverPassword";
+import ExtraHour from "./Pages/ExtraHour";
 
 const Router = () => {
   return (
@@ -29,6 +30,8 @@ const Router = () => {
       <Route path="/budget" element={<Budget />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/questoes" element={<QuestionsPage />} />
+      <Route path="/extra-hour" element={<ExtraHour />} />
+      
     </Routes>
   );
 };
