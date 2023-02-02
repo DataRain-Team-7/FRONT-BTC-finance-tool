@@ -43,7 +43,7 @@ const ProjectUserPage = () => {
 
   return (
     <>
-      <Header />
+      <Header  setSearch={""}/>
       <S.ProjectAllContainer>
         <S.ProjectPageContainer>
           <S.ProjectPageReturn>
