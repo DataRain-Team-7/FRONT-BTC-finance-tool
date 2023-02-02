@@ -3,13 +3,13 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 import { useEffect } from "react";
 
 
-const reportPDF = (data) =>{
+const reportPDF = (data:any) =>{
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     const totalValue = `R$: ${data.amount.toFixed(2)}`
     const totalhour =  `${data.totalHours} hr`
 
-    const teams = data.formResponses.map((element, index)=>{
+    const teams = data.formResponses.map((element:any, index:any)=>{
         const totalValue = `R$: ${(element.valuePerHour*element.workHours).toFixed(2)}`
         const team = element.alternative !== null ? element.alternative.teams[0].team.name : `dataRain`
         const hours = `${element.workHours} hr`

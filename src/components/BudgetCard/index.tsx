@@ -114,7 +114,6 @@ const BudgetCard = () =>{
                 Api.get(`/budget-request/${clientId}`)
                     .then((res)=>{
                         data = res.data;
-                        toast.success("Aqui foi!")
                         reportPDF(data)
                     })
                     .catch(()=> toast.error("Erro ao gerar PDF"))

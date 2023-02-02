@@ -17,7 +17,7 @@ const AllProjects = () => {
   }, []);
   return (
     <>
-      <Header />
+      <Header setSearch={""}/>
       <S.AllContainer>
         <S.ProjectNavbar>
           <Navbar />

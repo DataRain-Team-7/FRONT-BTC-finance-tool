@@ -15,7 +15,7 @@ const ClientsPage = () => {
 
   return (
     <>
-      <Header />
+      <Header setSearch={""}/>
       <S.ClientsAllContent>
         <S.ClientsNavbar>
           <Navbar />

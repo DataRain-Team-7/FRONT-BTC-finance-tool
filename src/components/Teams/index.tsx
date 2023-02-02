@@ -21,7 +21,7 @@ const Teams = () => {
 
   return (
     <>
-      <Header />
+      <Header setSearch={""}/>
       <S.TeamsAllContainer>
         <S.TeamsNavbar>
           <Navbar />

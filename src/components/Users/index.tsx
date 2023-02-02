@@ -15,7 +15,7 @@ const { handleGetUsers, user } = useUsers()
   },[])
   return (
     <>
-      <Header />
+      <Header setSearch={""} />
       <S.UserAllContent>
       <S.UserNavbar>
         <Navbar />

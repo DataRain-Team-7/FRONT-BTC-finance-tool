@@ -16,7 +16,7 @@ const Profile = () => {
 
   return (
     <>
-      <Header />
+      <Header setSearch={""}/>
       <S.ALlProfilePageContainer>
         <S.ProfileNavbar>
           <Navbar />
