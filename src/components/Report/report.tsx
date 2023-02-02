@@ -1,7 +1,6 @@
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import { useEffect } from "react";
-
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const reportPDF = (data:any) =>{
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
