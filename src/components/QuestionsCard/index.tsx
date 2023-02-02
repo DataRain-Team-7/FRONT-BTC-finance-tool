@@ -11,8 +11,9 @@ import DeleteQuestion from "../ModalDelete";
 const QuestionsCard = () => {
   
   const { questions, updateQuestion } = useQuestions();
-  const { team, firstTeamId } = useTeam()
+  const { team , firstTeamId } = useTeam()
   const [ isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [ test , setTest ] = useState<boolean>(true)
 
   //newQuestion states and functions:
   const [ newQuestion, setNewQuestion ] = useState<Boolean>(false)
@@ -39,7 +40,7 @@ const QuestionsCard = () => {
             setTitleId(res.data.id)
             setNewAnswer(true)
             setNewTitle("")
-            updateQuestion();
+            setTest(!test);
             toast.success("Pergunta cadastrada")
           })
           .catch((err)=> {
@@ -85,14 +86,14 @@ const QuestionsCard = () => {
   // const handleCancel = () =>{
   //   Api.delete(`/question/${titleId}`)
   //     .then(()=>{
-  //         updateQuestion()
+  //         setTest(!test);
   //         setNewTitle("");
   //         setTitleId("")
   //         setNewAnswer(false)
   //         setCurrentAnswer("")
   //         setHours(0)
   //         setTeamId(firstTeamId)
-  //         updateQuestion()
+  //         setTest(!test);
   //     })
   //     .catch(()=> toast.error("Erro ao cancelar"))
   // }
@@ -117,6 +118,8 @@ const QuestionsCard = () => {
   }
     ,[questions])
   useEffect(()=>updateQuestion(),[])
+
+  useEffect(()=>updateQuestion() ,[test])
 
   const UpdateTitle = (index:number, newTitle:string) =>{
       let newValues = editQuestions
@@ -150,7 +153,10 @@ const QuestionsCard = () => {
 
   const deleteAnswear = (answearId:string) =>{
       Api.delete(`/alternative/${answearId}`)
-            .then(()=>updateQuestion())
+            .then(()=>{
+              setTest(!test);
+              updateQuestion();
+            })
             .catch(()=>toast.error("Erro ao excluir resposta"))
   }
 
@@ -174,8 +180,7 @@ const QuestionsCard = () => {
           setCatchNewTitle("");
           setCatchNewTeamId(firstTeamId);
           setCatchNewHour(0);
-          // toast.success("Foi pow")
-          updateQuestion();
+          setTest(!test)
         })
         .catch(()=>toast.error("Erro ao cadastrar nova resposta"))
     }else{
@@ -307,7 +312,7 @@ const QuestionsCard = () => {
                           }}
                           onChange={(e)=>{UpdateAnswer(e.target.value)}}
                           key={element1.id} 
-                          value={fillValue?element1.description:undefined}></input>
+                          defaultValue={fillValue?element1.description:undefined}></input>
                         )
                       })}
                       <input placeholder="Nova resposta objetiva" value={catchNewTitle} className="newAnswer" onChange={(e)=>setCatchNewTitle(e.target.value)}></input>
