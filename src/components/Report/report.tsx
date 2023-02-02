@@ -105,7 +105,7 @@ const reportPDF = (data:any) =>{
     //     ]
     // }
 
-    const docDefinitions = {
+    const docDefinitions: any = {
         pageSize: "A4",
         pageMargins: [15, 50, 15, 40],
 
