@@ -67,16 +67,7 @@ export default function BasicMenu({ user }: MenuProps) {
                 handleClose();
               }}
             >
-              <BsPencil /> Editar Role
-            </MenuItem>
-            <MenuItem
-              className="MenuItem"
-              onClick={() => {
-               toast.error("Seção em desenvolvimento");
-                handleClose();
-              }}
-            >
-              <BsPencil /> Billable
+              <BsPencil /> Editar Usuário
             </MenuItem>
           </div>
         ) : (

@@ -28,42 +28,45 @@ const Navbar = () => {
               Início
             </S.NavbarContentLi>
             {userStorage.roleName === "admin" ? (
-              <S.NavbarContentLi
-                className={active === "users" ? "active" : ""}
-                onClick={() => {
-                  navigate("/users");
-                  setActive("users");
-                }}
-              >
-                <span>
-                  <FaUsers />
-                </span>
-                Usuários
-              </S.NavbarContentLi>
+              <div>
+                <S.NavbarContentLi
+                  className={active === "users" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/users");
+                    setActive("users");
+                  }}
+                >
+                  <span>
+                    <FaUsers />
+                  </span>
+                  Usuários
+                </S.NavbarContentLi>
+                <S.NavbarContentLi
+                  className={active === "teams" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/teams");
+                    setActive("teams");
+                  }}
+                >
+                  <span>
+                    <AiOutlineTeam />
+                  </span>
+                  Equipes
+                </S.NavbarContentLi>
+                <S.NavbarContentLi
+                  className={active === "clients" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/clients");
+                    setActive("clients");
+                  }}
+                >
+                  <span>
+                    <AiOutlineTeam />
+                  </span>
+                  Clientes
+                </S.NavbarContentLi>
+              </div>
             ) : null}
-            <S.NavbarContentLi
-              className={active === "teams" ? "active" : ""}
-              onClick={() => {
-                navigate("/teams");
-                setActive("teams");
-              }}
-            >
-              <span>
-                <AiOutlineTeam />
-              </span>
-              Equipes
-            </S.NavbarContentLi>
-            <S.NavbarContentLi 
-              className={active === "clients" ? "active" : ""}
-              onClick={() => {
-                navigate("/clients");
-                setActive("clients");
-                }}>
-              <span>
-                <AiOutlineTeam />
-              </span>
-              Clientes
-            </S.NavbarContentLi>
             <S.NavbarContentLi
               className={active === "profile" ? "active" : ""}
               onClick={() => {

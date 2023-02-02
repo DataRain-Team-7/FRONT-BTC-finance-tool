@@ -39,6 +39,7 @@ const createProjectSchema = yup.object().shape({
   name: yup.string().required("Nome do projeto obrigatório"),
   description: yup
     .string()
+    .min(10, "Descrição muito curta")
     .max(500, "Descrição muito longa")
     .required("Descrição obrigatória"),
 });

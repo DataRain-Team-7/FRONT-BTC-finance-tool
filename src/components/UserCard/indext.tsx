@@ -26,6 +26,13 @@ const UserCard = ({ user, className }: UserProps) => {
 
       <S.CardName>{user.name}</S.CardName>
       <S.CardEmail>{user.email}</S.CardEmail>
+      {
+        user.billable == true ? (
+
+           <S.CardBillable>Billable: Sim</S.CardBillable>
+          ) :
+          <S.CardBillable>Billable: Não</S.CardBillable>
+      }
     </S.CardContainer>
   );
 };

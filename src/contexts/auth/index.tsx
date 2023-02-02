@@ -38,6 +38,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         imageUrl: "",
         position: "",
         roleName: "",
+        billable: false,
     })
 
     const getUserByToken = () =>{
