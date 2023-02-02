@@ -72,7 +72,8 @@ const ExtraHourCard = () => {
                     <Button  variant="contained" className="buttonEnter reprove" onClick={()=>handleDesaprove(element.requestSendOvertimeId)}>Negar pedido</Button>
                   </div>
                 </section>
-                )})}
+                )}
+                )}
               </section>
           </Style.ExtraHourContainer>  
   );
