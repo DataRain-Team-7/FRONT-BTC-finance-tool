@@ -100,7 +100,7 @@ const AsideBar = () => {
               <span>
                 <S.ExtraHourIcon/>
               </span>
-              Hora extra
+              Hora Extra
             </S.NavbarContentLi>
             <S.NavbarContentLi
               className={active === "projects" ? "active" : ""}
