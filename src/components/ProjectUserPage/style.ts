@@ -134,6 +134,7 @@ export const ProjectPageContent = styled.div`
     border-radius: 9px;
     border: 1px solid #c3c3c3;
     transition: 0.3s ease-in-out;
+    margin-left: 10px;
     :hover {
       background-color: ${theme.colors.tertiaryColor};
       color: #fff;

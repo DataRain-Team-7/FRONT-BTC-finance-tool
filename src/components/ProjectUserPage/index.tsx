@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import userDefault from "../../assets/images/default.png";
 import { useActive } from "../../contexts/activePage";
 import { useAuth } from "../../contexts/auth";
 import Api from "../../services/api";
 import { ProjectTypes } from "../../types/interface";
 import Header from "../Header";
 import ModalAddClientToProject from "../ModalAddClientProject";
+import ModalReqUserHour from "../ModalReqUserHour";
+import ModalUserHour from "../ModalUserHour";
 import * as S from "./style";
-import userDefault from "../../assets/images/default.png";
 
 const ProjectUserPage = () => {
   const navigate = useNavigate();
@@ -17,6 +19,10 @@ const ProjectUserPage = () => {
   const [values, setValues] = useState<ProjectTypes>({} as ProjectTypes);
   const [users, setUsers] = useState<any>([]);
   const [openModalClient, setOpenModalClient] = useState<boolean>(false);
+
+  //states que alteram status do modal
+  const [openModalAddHour, setOpenModalAddHour] = useState<boolean>(false);
+  const [openModalReqHour, setOpenModalReqHour] = useState<boolean>(false);
 
   const getProject = async () => {
     await Api.get(`/project/${id}`)
@@ -70,9 +76,10 @@ const ProjectUserPage = () => {
               return (
                 <div className="content-page">
                   {e.user.imageUrl === null ? (
-                    <S.Image src={userDefault} alt="Imagem perfil" />
+                    <S.Image key={e.id} src={userDefault} alt="Imagem perfil" />
                   ) : (
                     <S.Image
+                      key={e.id}
                       src={`https://back-btc-finance-tool-production-0df0.up.railway.app/${e.user.imageUrl}`}
                       alt="Imagem perfil"
                     />
@@ -84,14 +91,38 @@ const ProjectUserPage = () => {
               );
             })}
             {userStorage.billable ? (
-              <>
-              <button className="add-hour">Enviar hora</button>
-              <button className="add-hour-extra">Requisitar hora extra</button>
-              </>
+              <div>
+                <button
+                  className="add-hour"
+                  onClick={() => setOpenModalAddHour(!openModalAddHour)}
+                >
+                  Registrar hora
+                </button>
+                <button
+                  className="add-hour-extra"
+                  onClick={() => {
+                    setOpenModalReqHour(!openModalReqHour);
+                  }}
+                >
+                  Requisitar hora extra
+                </button>
+              </div>
             ) : null}
           </S.ProjectPageContent>
         </S.ProjectPageContainer>
       </S.ProjectAllContainer>
+      {openModalAddHour ? (
+        <ModalUserHour
+          openModalAddHour={openModalAddHour}
+          setOpenModalAddHour={setOpenModalAddHour}
+        />
+      ) : null}
+      {openModalReqHour ? (
+        <ModalReqUserHour
+          openModalReqHour={openModalReqHour}
+          setOpenModalReqHour={setOpenModalReqHour}
+        />
+      ) : null}
     </>
   );
 };
