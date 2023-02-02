@@ -1,7 +1,7 @@
 import { Button, MenuItem, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useClient } from "../../contexts/clientContext";
 import { useProject } from "../../contexts/projectContext";
@@ -38,16 +38,23 @@ const ModalAddClientToProject = ({
   const { client } = useClient();
   const [value, setValue] = useState<string>();
   const { alteraEstado } = useProject();
-  const [search, setSearch] = useState<string>("");
+  const [filtered, setFiltered] = useState<ClientTypes[]>([]);
 
-  const searchLower = search.toLowerCase();
+  const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log();
+    const result: any = client.filter((element) => {
+      if (e.target.value === "") return client;
+      return (
+        element.companyName
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase()) ||
+        element.email.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+    });
+    setFiltered(result);
+  };
 
-  const filteredClients = client.filter((e) =>
-    client
-      ? e.companyName.toLowerCase().includes(searchLower) ||
-        e.email.toLowerCase().includes(searchLower)
-      : []
-  );
+
 
   //adicionar um cliente
   const handleAddClient = () => {
@@ -98,15 +105,7 @@ const ModalAddClientToProject = ({
                 multiple: false,
               }}
             >
-              <TextField
-                size="small"
-                type={"search"}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setSearch(e.target.value)
-                }
-                defaultValue=""
-              />
-              {filteredClients.map((element) => {
+              {client.map((element: any) => {
                 return (
                   <MenuItem value={element.id} key={element.id}>
                     {element.companyName} <br /> {element.email}
@@ -114,6 +113,22 @@ const ModalAddClientToProject = ({
                 );
               })}
             </TextField>
+            {/* <S.SearchInput
+              list="data"
+              onChange={(e) => {setValue(e.target.value)
+                console.log(value)}}
+              placeholder="Search"
+            />
+            <S.OptionsList id="data">
+              {client.map((op) => (
+                <option >
+                  <p>{op.companyName}</p> <br />
+                  <br />
+                  <p>{op.email}</p>
+                  <p>{op.id}</p>
+                </option>
+              ))}
+            </S.OptionsList> */}
             <S.ButtonsContainer>
               <Button
                 variant="contained"

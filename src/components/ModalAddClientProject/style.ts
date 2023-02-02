@@ -32,6 +32,24 @@ export const ButtonsContainer = styled.div`
   .buttonRegister:hover {
     background-color: ${theme.colors.tertiaryColor};
   }
+
+  *::-webkit-scrollbar {
+    height: 95%;
+    width: 10px;
+    border-radius: 20px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #d1d1d1; // cor de fundo do scrol
+    border-radius: 20px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #ef8e1c; // cor do scroll
+    border-radius: 20px;
+  }
+
+  
 `;
 
 export const Label = styled.label`
@@ -44,7 +62,7 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-   all: unset;
+  all: unset;
   border: 1px solid #d1d1d1;
   border-radius: 4px;
   font-size: ${theme.constants.smallFont};
@@ -53,4 +71,19 @@ export const Input = styled.input`
   box-sizing: border-box;
   width: 80%;
   background-color: ${theme.colors.primaryColor};
-`
+`;
+
+export const SearchInput = styled.input`
+  width: 100%;
+  height: 5vh;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid #c3c3c3;
+  text-align: center;
+`;
+
+export const OptionsList = styled.datalist`
+  width: 100%;
+  height: 5vh;
+  border-radius: 8px;
+`;

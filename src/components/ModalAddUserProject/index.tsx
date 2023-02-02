@@ -127,7 +127,6 @@ const ModalAddUserToProject = ({
                     multiple: false,
                   }}
                 >
-                  {/* <input placeholder="Pesquisar por mannager" /> */}
                   {avaliableMannager.map((element) => {
                     return (
                       <MenuItem value={element.id} key={element.id}>
