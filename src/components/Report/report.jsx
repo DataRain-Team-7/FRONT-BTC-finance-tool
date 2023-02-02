@@ -83,18 +83,27 @@ const reportPDF = (data) =>{
         }
     ];
 
-    // const rodape = [];
-    const rodape = (currentPage, pageCount) =>{
-        return(
-            {
-                text: currentPage + "/" +pageCount,
-                alignment: "right",
-                fontSize: 9,
-                bold: false,
-                margin: [0, 10, 20, 0]
-            }
-        )
-    }
+    const footer = [
+        {
+            text: `${data.updatedAt}`,
+            alignment: "right",
+            fontSize: 9,
+            bold: false,
+            margin: [0, 10, 20, 0]
+        }
+    ];
+
+    // const footer = (currentPage, pageCount) =>{
+    //     return[
+    //         {
+    //             text: `${currentPage} "/" ${pageCount}`,
+    //             alignment: "right",
+    //             fontSize: 9,
+    //             bold: false,
+    //             margin: [0, 10, 20, 0]
+    //         }
+    //     ]
+    // }
 
     const docDefinitions = {
         pageSize: "A4",
@@ -102,7 +111,7 @@ const reportPDF = (data) =>{
 
         header: [reportTitle],
         content: [details],
-        footer:[rodape]
+        footer:[footer]
     }
     
     pdfMake.createPdf(docDefinitions).download();
