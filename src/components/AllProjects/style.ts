@@ -81,7 +81,7 @@ export const NewProject = styled.li`
 `;
 
 export const NewProjectContent = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

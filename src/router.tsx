@@ -3,6 +3,8 @@ import AllProjects from "./components/AllProjects";
 import ClientsPage from "./components/ClientsPage";
 import CreateClientCard from "./components/CreateClientCard";
 import Profile from "./components/Profile";
+import ProjectPage from "./components/ProjectPage";
+import ProjectUserPage from "./components/ProjectUserPage";
 import Teams from "./components/Teams";
 import UsersPage from "./components/Users";
 import CreateAccount from "./Pages/CreateAccount";
@@ -25,6 +27,8 @@ const Router = () => {
       <Route path="/profile" element={<Profile />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/projects" element={<AllProjects />} />
+      <Route path="/project-page/:id" element={<ProjectPage />} />
+      <Route path="/project-user/:id/:manager" element={<ProjectUserPage />} />
       <Route path="/novasenha/:param" element={<RecoverPasswordPage />} />
       <Route path="/form" element={<FormPage />} />
       <Route path="/prevenda" element={<PreSaleBudget />} />

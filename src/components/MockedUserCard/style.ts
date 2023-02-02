@@ -40,3 +40,19 @@ export const MockedUserTitle = styled.span`
 text-align: center;
   font-size: 26px;
 `;
+
+export const UserPhotoContainer = styled.div`
+  display: flex;
+  height: 12vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: .5%;
+
+  .imagesProfile {
+    height: 100%;
+    width: 12vh;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+`;

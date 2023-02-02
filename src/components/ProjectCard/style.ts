@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import theme from "../../styles/theme";
 
 export const CardContainer = styled.div`
   ${({ theme }) => css`
@@ -20,6 +21,14 @@ export const CardHeader = styled.div`
   justify-content: space-between;
   width: 100%;
   margin: 20px 0;
+
+  .trash-icon{
+    cursor: pointer;
+    margin: 10px;
+    :hover{
+      transform: scale(1.3);
+    }
+  }
 `;
 
 export const CardFunction = styled.p`
@@ -48,14 +57,6 @@ export const CardName = styled.p`
 `;
 
 export const CardEmail = styled.p`
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 0.8rem;
-  color: #000;
-  margin-top: 15px;
-`;
-
-export const CardBillable = styled.p`
   display: flex;
   flex-wrap: wrap;
   font-size: 0.8rem;

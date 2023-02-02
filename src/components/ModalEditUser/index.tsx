@@ -80,7 +80,7 @@ export default function ModalEditUser({
     if (values.password !== values.confirmPassword) {
       toast.error("As senhas não coincidem ");
     } else {
-      Api.patch("/user", values)
+      Api.patch("/user/myself", values)
         .then((res) => {
           res;
           toast.success("Usuário editado");
