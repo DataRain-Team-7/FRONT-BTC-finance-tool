@@ -49,7 +49,6 @@ export default function ModalEditUser({
   const { getUserByToken } = useAuth();
 
   const handleEdit = () => {
-
     //validação manuel se a senha possui números, letras e caracteres especiais
     const senha = new RegExp(
       "^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!:;/|.()])[0-9a-zA-Z$*&@#!:;/|.()]{8,}$"
@@ -135,57 +134,44 @@ export default function ModalEditUser({
           marginTop="10px"
           sx={style}
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Editar Usuário
-          </Typography>
+          <S.EditUserTitle>
+            <h1 className="title-user">Editar Usuário</h1>
+          </S.EditUserTitle>
           <S.FormEdit onSubmit={(e) => e.preventDefault()}>
-            <S.LabelEdit htmlFor="name">
-              {" "}
-              Nome:
+            <S.InputsEditUser>
+              <S.InputLabel>Nome</S.InputLabel>
               <S.InputEditUser
                 type="text"
                 onChange={handleChangesValues}
                 name="name"
               />
-            </S.LabelEdit>
-
-            <S.LabelEdit htmlFor="email">
-              {" "}
-              Email:
+              <S.InputLabel htmlFor="email">E-mail</S.InputLabel>
               <S.InputEditUser
                 name="email"
                 type="email"
                 onChange={handleChangesValues}
               />
-            </S.LabelEdit>
+              <S.InputLabel htmlFor="currentPassword">Senha atual</S.InputLabel>
+                <S.InputEditUser
+                  name="currentPassword"
+                  type="password"
+                  onChange={handleChangesValues}
+                />
 
-            <S.LabelEdit htmlFor="currentPassword">
-              {" "}
-              Senha Atual:
-              <S.InputEditUser
-                name="currentPassword"
-                type="password"
-                onChange={handleChangesValues}
-              />
-            </S.LabelEdit>
-            <S.LabelEdit htmlFor="password">
-              {" "}
-              Nova Senha
-              <S.InputEditUser
-                name="password"
-                type="password"
-                onChange={handleChangesValues}
-              />
-            </S.LabelEdit>
-            <S.LabelEdit htmlFor="confirmPassword">
-              {" "}
-              Repita Senha:
-              <S.InputEditUser
-                name="confirmPassword"
-                type="password"
-                onChange={handleChangesValues}
-              />
-            </S.LabelEdit>
+              <S.InputLabel htmlFor="password">Nova senha</S.InputLabel>
+                <S.InputEditUser
+                  name="password"
+                  type="password"
+                  onChange={handleChangesValues}
+                />
+              <S.InputLabel htmlFor="confirmPassword">Confime a senha</S.InputLabel>
+                <S.InputEditUser
+                  name="confirmPassword"
+                  type="password"
+                  onChange={handleChangesValues}
+                />
+
+            </S.InputsEditUser>
             <Box
               display="flex"
               alignItems="center"
@@ -216,4 +202,3 @@ export default function ModalEditUser({
     </div>
   );
 }
-

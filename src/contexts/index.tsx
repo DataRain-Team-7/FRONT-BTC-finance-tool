@@ -4,6 +4,8 @@ import { ThemeProvider } from "styled-components";
 import theme from "../styles/theme";
 import { ActiveProvider } from "./activePage";
 import { AuthProvider } from "./auth";
+import { ClientProvider } from "./clientContext";
+import { ProjectProvider } from "./projectContext";
 import { QuestionsProvider } from "./questions";
 import { TeamProvider } from "./teamContext";
 import { UserProvider } from "./userContext";
@@ -18,11 +20,15 @@ const Providers = ({ children }: ProviderProps) => {
       <ThemeProvider theme={theme}>
         <AuthProvider>
           <UserProvider>
-          <QuestionsProvider>
-          <ActiveProvider>
-            <TeamProvider>{children}</TeamProvider>
-          </ActiveProvider>
-          </QuestionsProvider>
+            <ClientProvider>
+              <QuestionsProvider>
+                <ActiveProvider>
+                  <ProjectProvider>
+                    <TeamProvider>{children}</TeamProvider>
+                  </ProjectProvider>
+                </ActiveProvider>
+              </QuestionsProvider>
+            </ClientProvider>
           </UserProvider>
         </AuthProvider>
       </ThemeProvider>

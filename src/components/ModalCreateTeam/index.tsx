@@ -1,22 +1,15 @@
+import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
-import { TeamsTypes } from "../../types/interface";
-import * as S from "./style";
-import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import * as yup from "yup";
+import toast from "react-hot-toast";
 import { useTeam } from "../../contexts/teamContext";
 import Api from "../../services/api";
 import { ButtonsContainer } from "../../utils/globalStyles";
+import * as S from "./style";
 
-
-interface ModalCreateProps {
-  team: TeamsTypes;
-}
 
 interface CreateTeamData {
   id?: string;
@@ -80,7 +73,6 @@ export default function ModalCreateTeam({
   return (
     <div>
       <Modal
-        // open={open}
         onClose={handleClose}
         open={openCreateModal}
         aria-labelledby="modal-modal-title"
@@ -94,21 +86,18 @@ export default function ModalCreateTeam({
           marginTop="10px"
           sx={style}
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Criar Equipe
-          </Typography>
           <S.FormCreate onSubmit={handleSubmit(handleCreateTeam)}>
-            <S.LabelCreate htmlFor="name">
-              {" "}
-              Nome da Equipe:
-              <S.InputCreateTeam type="text" {...register("name")} />
-            </S.LabelCreate>
+            <S.CreateTeamTitle>
+              <h1 className="title-create-user">Criar Equipe</h1>
+            </S.CreateTeamTitle>
+            <S.InputCreateContainer>
+              <S.InputLabel htmlFor="name">Nome da Equipe</S.InputLabel>
+                <S.InputCreateTeam type="text" {...register("name")} />
 
-            <S.LabelCreate htmlFor="valuePerHour">
-              {" "}
-              Valor hora R$:
-              <S.InputCreateTeam type="text" {...register("valuePerHour")} />
-            </S.LabelCreate>
+              <S.InputLabel htmlFor="valuePerHour">Valor da hora R$:</S.InputLabel>
+                <S.InputCreateTeam type="text" {...register("valuePerHour")} />
+
+            </S.InputCreateContainer>
             <Box
               display="flex"
               alignItems="center"

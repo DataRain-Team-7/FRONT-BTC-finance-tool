@@ -19,6 +19,7 @@ export const ProfilePageContainer = styled.div`
     width: 75%;
     height: 100vh;
     position: relative;
+    padding-left: 10px;
   `}
 `;
 

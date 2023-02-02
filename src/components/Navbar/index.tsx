@@ -6,7 +6,6 @@ import { CgProfile } from "react-icons/cg";
 import { FaUsers } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth";
-import React from "react";
 import { useActive } from "../../contexts/activePage";
 
 const Navbar = () => {
@@ -29,44 +28,94 @@ const Navbar = () => {
               Início
             </S.NavbarContentLi>
             {userStorage.roleName === "admin" ? (
-              <S.NavbarContentLi className={active === "users"? "active" : ""} onClick={() => {navigate("/users"); setActive("users")}}>
+              <S.NavbarContentLi
+                className={active === "users" ? "active" : ""}
+                onClick={() => {
+                  navigate("/users");
+                  setActive("users");
+                }}
+              >
                 <span>
                   <FaUsers />
                 </span>
                 Usuários
               </S.NavbarContentLi>
             ) : null}
-            <S.NavbarContentLi className={active === "teams"? "active" : ""} onClick={() => {navigate("/teams"); setActive("teams")}}>
+            <S.NavbarContentLi
+              className={active === "teams" ? "active" : ""}
+              onClick={() => {
+                navigate("/teams");
+                setActive("teams");
+              }}
+            >
               <span>
                 <AiOutlineTeam />
               </span>
               Equipes
             </S.NavbarContentLi>
-            <S.NavbarContentLi className={active === "profile"? "active" : ""} onClick={() => {navigate("/profile"); setActive("profile")}}>
+            <S.NavbarContentLi onClick={() => navigate("/clients")}>
+              <span>
+                <AiOutlineTeam />
+              </span>
+              Clientes
+            </S.NavbarContentLi>
+            <S.NavbarContentLi
+              className={active === "profile" ? "active" : ""}
+              onClick={() => {
+                navigate("/profile");
+                setActive("profile");
+              }}
+            >
               <span>
                 <CgProfile />
               </span>
               Perfil
             </S.NavbarContentLi>
-            <S.NavbarContentLi className={active} onClick={() => {navigate("/projects"); setActive("projects")}}>
+            <S.NavbarContentLi
+              className={active}
+              onClick={() => {
+                navigate("/projects");
+                setActive("projects");
+              }}
+            >
               <span>
                 <S.ProjectIcon />
               </span>
               Projetos
             </S.NavbarContentLi>
-            <S.NavbarContentLi className={active === "questoes"? "active" : ""} onClick={() => {navigate("/questoes"); setActive("questoes")}}>
+            <S.NavbarContentLi
+              className={active === "questoes" ? "active" : ""}
+              onClick={() => {
+                navigate("/questoes");
+                setActive("questoes");
+              }}
+            >
               <span>
                 <BsGraphUp />
               </span>
               Questionário
             </S.NavbarContentLi>
             {userStorage.roleName === "admin" ? (
-              <S.NavbarContentLi className={active === "new-user"? "active" : ""} onClick={() => {navigate("/new-user"); setActive("new-user")}}>
-                <span>
-                  <AiOutlineUserAdd />
-                </span>
-                Cadastrar Usuário
-              </S.NavbarContentLi>
+              <div>
+                <S.NavbarContentLi
+                  className={active === "new-user" ? "active" : ""}
+                  onClick={() => {
+                    navigate("/new-user");
+                    setActive("new-user");
+                  }}
+                >
+                  <span>
+                    <AiOutlineUserAdd />
+                  </span>
+                  Cadastrar Usuário
+                </S.NavbarContentLi>
+                <S.NavbarContentLi onClick={() => navigate("/new-client")}>
+                  <span>
+                    <AiOutlineUserAdd />
+                  </span>
+                  Cadastrar Cliente
+                </S.NavbarContentLi>
+              </div>
             ) : null}
           </S.NavbarContentUl>
         </S.NavbarContent>

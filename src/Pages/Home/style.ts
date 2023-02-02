@@ -27,6 +27,7 @@ export const HomeContainer = styled.div`
 
         .HomeCard{
             width: 75%;
+            padding-left: 10px;
         }
     }
 `
