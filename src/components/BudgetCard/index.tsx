@@ -68,10 +68,6 @@ const BudgetCard = () =>{
         })
         
     }
-    // const finalValue = totalHours * totalValue
-
-    // console.log({totalHours, totalValue})
-    // console.log(finalValue)
 
     const handleGetForm = () =>{
         Api.get(`/budget-request/${clientId}`)
@@ -103,35 +99,6 @@ const BudgetCard = () =>{
 
     useEffect(()=>handleGetForm(), [])
     useEffect(()=>handleTotalValues(), [budGet])
-    
-
-    // console.log(budGet)
-
-    // const finalBudGet = {
-    //     client:{
-    //         name: "",
-    //         company: "",
-    //         email: "",
-    //         phone: ""
-    //     },
-    //     budget:[
-    //         {
-
-    //         },
-    //         {
-
-    //         },
-    //         {
-
-    //         }
-    //     ],
-    //     totalValues:{
-    //         totalHours: totalHours,
-    //         totalValue: totalValue
-    //     }
-
-        
-    // }
 
     
     const handlePDF = () =>{
@@ -150,9 +117,9 @@ const BudgetCard = () =>{
                         toast.success("Aqui foi!")
                         reportPDF(data)
                     })
-                    .catch(()=> {})
+                    .catch(()=> toast.error("Erro ao gerar PDF"))
                
-        })
+        }).catch(()=> toast.error("Erro ao gerar PDF"))
         
         
     }

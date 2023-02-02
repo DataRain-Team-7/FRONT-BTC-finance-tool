@@ -11,7 +11,7 @@ const reportPDF = (data) =>{
 
     const teams = data.formResponses.map((element, index)=>{
         const totalValue = `R$: ${(element.valuePerHour*element.workHours).toFixed(2)}`
-        const team = element.alternative !== null ? element.alternative.teams[0].team.name : `dataRain ${index+1}`
+        const team = element.alternative !== null ? element.alternative.teams[0].team.name : `dataRain`
         const hours = `${element.workHours} hr`
         const valuePerHour = `R$: ${element.valuePerHour.toFixed(2)}/hr`
         return [
@@ -59,14 +59,9 @@ const reportPDF = (data) =>{
                         {text: 'Valor Total:', style: 'tableHeader', fontSize:13, marginTop: 10, marginLeft: 0, bold: "true"},
 
                     ],
-                    ...teams,
-                    // [
-                    //     {text: 'Equipe', style: 'tableHeader', marginTop: 7, marginLeft: 80, fontSize:11},
-                    //     {text: 'Horas Totais', style: 'tableHeader', marginTop: 7, marginLeft: 40, fontSize:11},
-                    //     {text: 'Valor Total', style: 'tableHeader', marginTop: 7, marginLeft: 40, fontSize:11},
-                    //     {text: ''},
 
-                    // ],
+                    ...teams,
+
                     [
                         {text: ''},
                         {text: 'Horas Absolutas:', style: 'tableHeader', fontSize:13, marginTop: 50, bold: "true"},
