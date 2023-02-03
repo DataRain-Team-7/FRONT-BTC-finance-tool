@@ -2,6 +2,7 @@ import * as Styled from './style'
 import Header from '../../components/Header'
 import AsideBar from '../../components/AsideBar'
 import QuestionsCard from '../../components/QuestionsCard'
+import Navbar from '../../components/Navbar'
 
 const QuestionsPage = () => {
 
@@ -11,7 +12,8 @@ const QuestionsPage = () => {
       <section className='mainSection'>
         <div className='mainDiv'>
           <div className="AsideBar">
-            <AsideBar/>
+            {/* <AsideBar /> */}
+            <Navbar />
           </div>
           <div className="HomeCard">
             <QuestionsCard/>
