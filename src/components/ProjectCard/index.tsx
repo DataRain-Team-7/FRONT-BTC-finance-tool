@@ -4,6 +4,7 @@ import { useState } from "react";
 import ModalRemoveUser from "../ModalRemoveUser";
 import userDefault from "../../assets/images/default.png";
 
+
 const ProjectCard = ({ user, idProject }: any) => {
   const [openRemoveModal, setOpenRemoveModal] = useState<boolean>(false);
 
@@ -18,7 +19,7 @@ const ProjectCard = ({ user, idProject }: any) => {
           <BsTrash />
         </span>
       </S.CardHeader>
-      {user.imageUrl !== null ? (
+      {user.imageUrl === null ? (
         <S.CardImage src={userDefault} alt="Imagem perfil" />
       ) : (
         <S.CardImage
