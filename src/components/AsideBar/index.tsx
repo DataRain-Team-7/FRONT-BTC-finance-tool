@@ -117,18 +117,20 @@ const AsideBar = () => {
               </span>
               Projetos
             </S.NavbarContentLi>
+            {userStorage.roleName === "admin"? (
             <S.NavbarContentLi
-              className={active === "questoes" ? "active" : ""}
-              onClick={() => {
-                navigate("/questoes");
-                setActive("questoes");
-              }}
+            className={active === "questoes" ? "active" : ""}
+            onClick={() => {
+              navigate("/questoes");
+              setActive("questoes");
+            }}
             >
-              <span>
-                <BsGraphUp />
-              </span>
-              Questionário
-            </S.NavbarContentLi>
+            <span>
+              <BsGraphUp />
+            </span>
+            Questionário
+          </S.NavbarContentLi>
+            ) : null}
             {userStorage.roleName === "admin" ? (
               <div>
                 <S.NavbarContentLi
