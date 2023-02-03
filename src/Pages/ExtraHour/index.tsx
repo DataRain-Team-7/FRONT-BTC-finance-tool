@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AsideBar from '../../components/AsideBar';
 import ExtraHourCard from '../../components/ExtraHourCard';
 import Header from '../../components/Header';
+import Navbar from '../../components/Navbar';
 import * as Styled from './style';
 
 
@@ -13,7 +14,8 @@ const ExtraHour = () => {
       <section className="mainSection">
         <div className="mainDiv">
           <div className="AsideBar">
-            <AsideBar />
+            {/* <AsideBar /> */}
+            <Navbar />
           </div>
           <div className="HomeCard">
             <ExtraHourCard/>
