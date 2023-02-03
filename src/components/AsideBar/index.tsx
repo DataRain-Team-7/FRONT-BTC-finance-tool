@@ -18,7 +18,7 @@ import { CgProfile } from "react-icons/cg";
 import { useActive } from "../../contexts/activePage";
 
 const AsideBar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { userStorage } = useAuth()
   const { active, setActive } = useActive();
 
