@@ -11,6 +11,23 @@ export const NavbarContainer = styled.div`
   background-color: #f2f4f6;
   height: calc(100vh - 5rem);
   /* position: relative; */
+
+  *::-webkit-scrollbar {
+    height: 75%;
+    width: 10px;
+    border-radius: 20px;
+    margin-right: 50px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #d1d1d1; // cor de fundo do scrol
+    border-radius: 20px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #ef8e1c; // cor do scroll
+    border-radius: 20px;
+  }
 `;
 
 export const ProjectIcon = styled(GrProjects)`
