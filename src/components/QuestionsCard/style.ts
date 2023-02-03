@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import theme from "../../styles/theme";
-
+import { FaRegTrashAlt } from "react-icons/fa";
+import { BsFolderPlus } from "react-icons/bs";
 
 export const QuestionsContainer = styled.div`
   ${({ theme }) => css`
@@ -20,6 +21,8 @@ export const QuestionsContainer = styled.div`
       margin-bottom: 16px;
       p{
       font-size: ${theme.constants.fontHeader};
+      cursor: pointer;
+      width: 18%;
     }
 
 
@@ -72,6 +75,10 @@ export const QuestionsContainer = styled.div`
             }
     }
 
+    .newQuestion{
+      background-color: #CCDFED60;
+    }
+
     .section02{
       display: flex;
       flex-direction: column;
@@ -90,6 +97,18 @@ export const QuestionsContainer = styled.div`
         width: 100%;
         justify-content: space-between;
         padding-right: 84px;
+        padding-left: 2rem;
+
+        div{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 20%;
+        }
+        
+        p{
+          font-size: ${theme.constants.fontHeader};
+        }
 
         .updateButton{
           background-color: ${theme.colors.tertiaryColor};
@@ -97,12 +116,52 @@ export const QuestionsContainer = styled.div`
           padding: 0.2rem 0.5rem;
           border-radius: 5px;
           cursor: pointer;
+          width: 45%;
+          text-align: center;
+        }
+
+        .delete{
+          background-color: #0b7ca3;
         }
       }
 
       section{
         width: 100%;
         padding: 0 70px;
+
+        .newAlternative{
+              margin-top: 1.5%;
+              cursor: pointer;
+              width: 14%;
+              background-color: ${theme.colors.tertiaryColor};
+              color: white;
+              height: 1.5rem;
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 5px;
+            }
+
+          .finish{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2%;
+            margin-bottom: -2%;
+
+            .cancel{
+              background-color: #0b7ca3;
+              margin-left: 1rem;
+            }
+
+            p{
+              height: 2.5rem;
+            }
+           
+          }
+
 
         .firstInput{
           width: 100%;
@@ -139,7 +198,7 @@ export const QuestionsContainer = styled.div`
             margin-right: 2%;
 
             .newAnswer{
-              background-color: #d2d2d2;
+              background-color: #d2d2d290;
             }
             
           }
@@ -149,7 +208,7 @@ export const QuestionsContainer = styled.div`
             margin-right: 2%;
 
             .newTeam{
-              background-color: #d2d2d2;
+              background-color: #d2d2d290;
             }
 
             select{
@@ -172,16 +231,54 @@ export const QuestionsContainer = styled.div`
           .third{
             width: 20%;
 
+            section{
+              display: flex;
+              flex-direction: row;
+              padding: 0;
+
+              div{
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+            }
+
             .newHour{
-              background-color: #d2d2d2;
+              background-color: #d2d2d290;
             }
 
             input{
               text-align: center;
             }
+
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+
+            /* Firefox */
+            input[type=number] {
+              -moz-appearance: textfield;
+}
+
         }
       }
     }
 
   `}
 `;
+
+export const trash = styled(FaRegTrashAlt)`
+margin-top: 50%;
+  height: 2rem;
+  cursor: pointer;
+  margin-left: 1rem;
+`
+
+export const plus = styled(BsFolderPlus)`
+margin-top: 50%;
+cursor: pointer;
+margin-left: 1rem;
+`

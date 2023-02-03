@@ -15,8 +15,8 @@ const Profile = () => {
   const { userStorage } = useAuth();
 
   return (
-    <>
-      <Header />
+    <S.MainSection>
+      <Header setSearch={""}/>
       <S.ALlProfilePageContainer>
         <S.ProfileNavbar>
           <Navbar />
@@ -73,7 +73,7 @@ const Profile = () => {
           </S.ProfileContent>
         </S.ProfilePageContainer>
       </S.ALlProfilePageContainer>
-    </>
+    </S.MainSection>
   );
 };
 

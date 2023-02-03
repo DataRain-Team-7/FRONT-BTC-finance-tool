@@ -2,21 +2,34 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useAsyncValue, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import defaultImage from "../../assets/images/userDefault.png";
 import Api from "../../services/api";
 import * as Style from "../../components/CreateAccountCard/style";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useActive } from "../../contexts/activePage";
 
 const CreateAccountCard = () => {
   const navigate = useNavigate();
+  const [ role, setRole ] = useState<any[]>();
+  const [ selectedRole, setSelectedRole  ] = useState<string>()
   const { setActive } = useActive()
+  const [ billable, setBillable] = useState<boolean>(true)
+
+  const getRoles = () => {
+    Api.get("/role")
+      .then((res) => {
+        setRole(res.data)
+        setSelectedRole(res.data[0].id)
+      })
+      .catch((err) => toast.error("Falha ao buscar roles"));
+  };
 
   useEffect(()=>{
     sessionStorage.clear;
-    localStorage.clear
+    localStorage.clear;
+    getRoles();
   }
     ,[])
 
@@ -60,6 +73,8 @@ const CreateAccountCard = () => {
         name: data.name,
         email: data.email,
         position: data.position,
+        billable: billable,
+        roleId: selectedRole,
       };
       Api.post("/user", dataCreate)
         .then((res) => {
@@ -72,6 +87,14 @@ const CreateAccountCard = () => {
       toast.error("Preencha todos os campos");
     }
   };
+
+  const handleBillable = (prop:string) => {
+    if(prop === "sim"){
+      setBillable(true)
+    }else{
+      setBillable(false)
+    }
+  }
 
   return (
     <Style.CreateAccountContainer>
@@ -89,6 +112,22 @@ const CreateAccountCard = () => {
           <Style.Inputs type="text" {...register("email")} />
           <Style.InputLabel>Função</Style.InputLabel>
           <Style.Inputs {...register("position")} />
+          <section>
+          <Style.InputLabel>Cargo</Style.InputLabel>
+            <select onChange={(e) => setSelectedRole(e.target.value)}>
+              {role && role.map((element:any)=>{
+                return(
+                  <option value={element.id}>{element.name}</option>
+                )
+              })}
+            </select>
+            <Style.InputLabel>Billable</Style.InputLabel>
+            {/* onChange={(e)=>setValue(e.target.value) */}
+            <select onChange={(e)=> handleBillable(e.target.value)}>
+              <option value={"sim"} >Sim</option>
+              <option value={"nao"}>Não</option>
+            </select>
+          </section>
         </Style.InputsContainer>
         <Style.ButtonsContainer>
           <Button

@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
 import { GrProjects } from "react-icons/gr"
+import { ImHourGlass } from "react-icons/im"
+
 
 export const NavbarContainer = styled.div`
   display: flex;
@@ -15,6 +17,10 @@ export const ProjectIcon = styled(GrProjects)`
 
 `
 
+export const ExtraHourIcon = styled(ImHourGlass)`
+
+`
+
 export const NavbarWrapper = styled.div`
   display: block;
 `;
@@ -24,6 +30,7 @@ export const NavbarLogo = styled.div`
   align-items: center;
   padding: 15px 20px;
   height: 70px;
+  margin-right: 1%;;
 `;
 
 export const NavbarImg = styled.img`

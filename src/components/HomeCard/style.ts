@@ -20,7 +20,7 @@ export const HomeContainer = styled.div`
       margin-bottom: 16px;
       p{
       font-size: ${theme.constants.fontHeader};
-    }
+      }
 
 
       h2{
@@ -29,25 +29,18 @@ export const HomeContainer = styled.div`
         font-size: ${theme.constants.titleFontSize};
       }
 
-      div{
+      section{
         display: flex;
         flex-direction: row;
         width: 100%;
         justify-content: space-between;
-        padding: 0 7% 0 4.5%;
+        padding-right: 2%;
         box-sizing: border-box;
         font-size: 28px;
-
-        .company{
-          margin-left: 10%;
-        }
-
-        .last{
-          margin-right: 5%;
-        }
-
-        .date{
-          margin-left: 6%;
+        
+        div{
+          width: 100%;
+          text-align: center;
         }
 
       }
@@ -57,13 +50,49 @@ export const HomeContainer = styled.div`
     .section02{
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      /* justify-content: space-between; */
       width: 100%;
       height: 100%;
 
       p{
       font-size: ${theme.constants.fontBody};
-    }
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      }
+
+      div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .request{
+        background-color: #ff0000;
+        color: white;
+        height: 2rem;
+        width: 12rem;
+        border-radius: 5px;
+      }
+
+      .review{
+        background-color: #ef8e1c;
+        color: white;
+        height: 2rem;
+        width: 12rem;
+        border-radius: 5px;
+
+      }
+      
+      .approved{
+        background-color: #50bf16;
+        color: white;
+        height: 2rem;
+        width: 12rem;
+        border-radius: 5px;
+      }
+
+
 
 
       overflow-y: scroll;
@@ -82,7 +111,7 @@ export const HomeContainer = styled.div`
                 background: #ED8107;
             }
 
-      div{
+      section{
         display: flex;
         flex-direction: row;
         width: 99%;
@@ -91,14 +120,19 @@ export const HomeContainer = styled.div`
         min-height: 5rem;
         margin-bottom: 16px;
         align-items: center;
-        padding: 0 36px;
+        /* padding: 0 36px; */
         border-radius: 5px;
         box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px;
         cursor: pointer;
 
+        div{
+          width: 100%;
+          text-align: center;
+        }
+
       }
 
-      div:hover{
+      section:hover{
         background-color: ${theme.colors.tertiaryColor};
         color: ${theme.colors.primaryColor};
       }

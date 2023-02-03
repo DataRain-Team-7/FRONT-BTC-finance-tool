@@ -1,6 +1,5 @@
 import Logo from "../../assets/img/logo.svg";
 import * as S from "./style";
-//icons
 import { AiOutlineHome, AiOutlineTeam, AiOutlineUserAdd } from "react-icons/ai";
 import { BsGraphUp } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
@@ -22,13 +21,7 @@ const Navbar = () => {
         </S.NavbarLogo>
         <S.NavbarContent>
           <S.NavbarContentUl>
-            <S.NavbarContentLi
-              className={active === "home" ? "active" : ""}
-              onClick={() => {
-                navigate("/home");
-                setActive("home");
-              }}
-            >
+            <S.NavbarContentLi className={active === "home" || active === ""? "active" : ""} onClick={() => {navigate("/home"); setActive("home")}}>
               <span>
                 <AiOutlineHome />
               </span>
@@ -86,6 +79,20 @@ const Navbar = () => {
               </span>
               Perfil
             </S.NavbarContentLi>
+            {userStorage.roleName === "admin" || userStorage.roleName === "manager"? (
+            <S.NavbarContentLi
+              className={active === "extra-hour" ? "active" : ""}
+              onClick={() => {
+                navigate("/extra-hour");
+                setActive("extra-hour");
+              }}
+            >
+              <span>
+                <S.ExtraHourIcon/>
+              </span>
+              Hora Extra
+            </S.NavbarContentLi>
+            ) : null}
             <S.NavbarContentLi
               className={active === "projects" ? "active" : ""}
               onClick={() => {
@@ -124,7 +131,12 @@ const Navbar = () => {
                   </span>
                   Cadastrar Usuário
                 </S.NavbarContentLi>
-                <S.NavbarContentLi onClick={() => navigate("/new-client")}>
+                <S.NavbarContentLi
+                className={active === "new-client" ? "active" : ""} 
+                onClick={() => {
+                  navigate("/new-client");
+                  setActive("new-client");
+                  }}>
                   <span>
                     <AiOutlineUserAdd />
                   </span>

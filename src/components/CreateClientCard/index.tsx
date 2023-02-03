@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import Api from "../../services/api";
-import * as Style from "../CreateAccountCard/style";
+import * as Style from "./style";
 import TopBar from "../TopBar";
 
 const CreateClientCard = () => {
@@ -77,8 +77,8 @@ const CreateClientCard = () => {
   };
 
   return (
-    <>
-      <TopBar />
+    <Style.MainSection>
+    <TopBar />
       <Style.CreateAccountContainer>
         <Style.CreateAccountCard onSubmit={handleSubmit(handleRegister)}>
           <Style.CreateUserTitleContainer>
@@ -119,7 +119,7 @@ const CreateClientCard = () => {
           </Style.ButtonsContainer>
         </Style.CreateAccountCard>
       </Style.CreateAccountContainer>
-    </>
+    </Style.MainSection>
   );
 };
 

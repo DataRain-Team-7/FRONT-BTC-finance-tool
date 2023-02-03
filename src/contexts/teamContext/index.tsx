@@ -17,6 +17,7 @@ interface TeamProviderProps {
 
 interface TeamProviderData {
   team: TeamsTypes[];
+  firstTeamId: string;
   handleGetTeam: () => void;
 }
 
@@ -24,6 +25,7 @@ const TeamContext = createContext<TeamProviderData>({} as TeamProviderData);
 
 export const TeamProvider = ({ children }: TeamProviderProps) => {
   const [team, setTeam] = useState<TeamsTypes[]>([]);
+  const [ firstTeamId, setFirstTeamId ] = useState<string>("")
 
   const { logged } = useAuth();
 
@@ -36,7 +38,10 @@ export const TeamProvider = ({ children }: TeamProviderProps) => {
       },
     };
 
-    Api.get("/team", headers).then((res) => setTeam(res.data));
+    Api.get("/team", headers).then((res) => {
+      setTeam(res.data);
+      setFirstTeamId(res.data[0].id)
+    });
   };
 
   useEffect(() => {
@@ -44,7 +49,7 @@ export const TeamProvider = ({ children }: TeamProviderProps) => {
   }, [logged]);
 
   return (
-    <TeamContext.Provider value={{ team, handleGetTeam }}>
+    <TeamContext.Provider value={{ team, firstTeamId, handleGetTeam }}>
       {children}
     </TeamContext.Provider>
   );

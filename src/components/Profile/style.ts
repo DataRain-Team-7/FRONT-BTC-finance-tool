@@ -1,8 +1,19 @@
 import { AiOutlineSetting } from "react-icons/ai";
 import styled, { css } from "styled-components";
 
+export const MainSection = styled.div`
+${({ theme }) => css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: ${theme.colors.backgroundColor};
+  `}`
+
 export const ALlProfilePageContainer = styled.div`
   width: 100%;
+  max-width: 120rem;
   height: 100vh;
   display: flex;
 `;

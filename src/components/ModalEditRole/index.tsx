@@ -3,8 +3,6 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import { UserTypes } from "../../types/interface";
 import * as S from "./style";
-import { SelectChangeEvent } from "@mui/material";
-import React from "react";
 
 import { Button, MenuItem, TextField } from "@mui/material";
 import { useEffect, useState } from "react";

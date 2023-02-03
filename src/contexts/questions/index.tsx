@@ -9,7 +9,7 @@ interface QuestionsProviderProps{
 
 interface QuestionsProviderData{
     questions: any,
-    updateQuestion: ()=> void,
+    updateQuestion: ()=> void
 }
 
 const QuestionsContext = createContext<QuestionsProviderData>({} as QuestionsProviderData)
@@ -30,7 +30,7 @@ export const QuestionsProvider = ({children}:QuestionsProviderProps)=>{
     
     useEffect(() => updateQuestion(), [])
 
-    return <QuestionsContext.Provider value={{ questions, updateQuestion  }}>{children}</QuestionsContext.Provider>
+    return <QuestionsContext.Provider value={{ questions, updateQuestion }}>{children}</QuestionsContext.Provider>
 }
 
 export const useQuestions = ()=> useContext(QuestionsContext)
