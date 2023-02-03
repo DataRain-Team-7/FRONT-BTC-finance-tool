@@ -74,11 +74,13 @@ const ModalReqUserHour = ({
     Api.post("request-send-overtime", res)
       .then((res) => {
         toast.success("Sucesso ao requisitar hora extra");
+        handleClose();
         res;
       })
       .catch((err) => {
         console.log(err);
         toast.error("Falha ao requisitar solicitação de hora");
+        handleClose();
       });
   };
 

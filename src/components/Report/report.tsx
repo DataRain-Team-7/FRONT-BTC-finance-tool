@@ -1,15 +1,12 @@
-// import * as pdfMake from 'pdfmake/build/pdfmake';
 import pdfMake from "pdfmake/build/pdfmake";
-// import pdfFonts from "pdfmake/build/vfs_fonts";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-// import * as pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
-// (pdfMake).vfs= pdfFonts.pdfMake.vfs;
 
 
 const reportPDF = (data:any) =>{
-    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    // pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     const totalValue = `R$: ${data.amount.toFixed(2)}`
     const totalhour =  `${data.totalHours} hr`
@@ -118,8 +115,8 @@ const reportPDF = (data:any) =>{
         content: [details],
         footer:[footer]
     }
-    
-    pdfMake.createPdf(docDefinitions).download();
+    var str = data.client.companyName.replace(/\s/g, '');
+    pdfMake.createPdf(docDefinitions).download(`${str}.pdf` || `dataRain.pdf`);
 }
 
 
