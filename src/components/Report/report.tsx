@@ -1,15 +1,15 @@
-// import * as pdfMake from 'pdfmake/build/pdfmake';
+// import pdfMake from "pdfmake/build/pdfmake";
+// import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
 import pdfMake from "pdfmake/build/pdfmake";
-// import pdfFonts from "pdfmake/build/vfs_fonts";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-// import * as pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
-// (pdfMake).vfs= pdfFonts.pdfMake.vfs;
 
 
 const reportPDF = (data:any) =>{
-    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    // pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     const totalValue = `R$: ${data.amount.toFixed(2)}`
     const totalhour =  `${data.totalHours} hr`
