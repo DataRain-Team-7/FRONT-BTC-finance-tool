@@ -20,7 +20,7 @@ const Teams = () => {
   const { userStorage } = useAuth()
 
   return (
-    <>
+    <S.MainSection>
       <Header setSearch={""}/>
       <S.TeamsAllContainer>
         <S.TeamsNavbar>
@@ -59,7 +59,7 @@ const Teams = () => {
           </S.TeamsContent>
         </S.TeamsContainer>
       </S.TeamsAllContainer>
-    </>
+    </S.MainSection>
   );
 };
 

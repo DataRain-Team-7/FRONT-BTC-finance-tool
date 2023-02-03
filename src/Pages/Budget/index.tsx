@@ -1,10 +1,9 @@
 import Header from "../../components/Header"
 import BudgetCard from "../../components/BudgetCard"
 import * as Style from "./style"
-import React from "react";
 
 
-const PreSaleBudget = () =>{
+const BudGet = () =>{
     return(
         <Style.PreSaleBudgetContainer>
             <Header setSearch={""} />
@@ -13,4 +12,4 @@ const PreSaleBudget = () =>{
     )
 }
 
-export default PreSaleBudget
+export default BudGet

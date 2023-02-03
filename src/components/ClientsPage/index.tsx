@@ -14,7 +14,7 @@ const ClientsPage = () => {
   },[])
 
   return (
-    <>
+    <S.MainSection>
       <Header setSearch={""}/>
       <S.ClientsAllContent>
         <S.ClientsNavbar>
@@ -35,7 +35,7 @@ const ClientsPage = () => {
           </S.ClientsPageContent>
         </S.ClientsPageContainer>
       </S.ClientsAllContent>
-    </>
+    </S.MainSection>
   );
 };
 

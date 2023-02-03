@@ -9,23 +9,13 @@ import { toast } from "react-hot-toast";
 
 const ExtraHourCard = () => {
 
-  const [ requests, setRequests ] = useState<any>()
-  const [ test, setTest ] = useState <boolean>(true)
-
-
     useEffect(()=> handleGetRequest(),[])
-    useEffect(()=> {
-      setTimeout(() => {
-        handleGetRequest()
-      }, 2000);
-    },[test])
+
+    const [ requests, setRequests ] = useState<any>()
 
     const handleGetRequest = () => {
       Api.get(`/request-send-overtime`)
-        .then((res)=>{
-          setRequests(res.data);
-          setTest(!test)
-        })
+        .then((res)=>setRequests(res.data))
         .catch(()=>{})
     }
 
@@ -37,7 +27,6 @@ const ExtraHourCard = () => {
       )
       .then(()=>{
         handleGetRequest();
-        setTest(!test);
         toast.success("Feito")
       })
       .catch(()=>toast.error("Não foi possível concluir"))
@@ -51,7 +40,6 @@ const ExtraHourCard = () => {
       )
       .then(()=>{
         handleGetRequest();
-        setTest(!test);
         toast.success("Feito")
       })
       .catch(()=>toast.error("Não foi possível concluir"))

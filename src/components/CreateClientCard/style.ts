@@ -1,6 +1,19 @@
 import styled, { css } from "styled-components";
 import theme from "../../styles/theme";
 
+
+export const MainSection = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    background-color: #f2f4f6;
+  `}
+`;
+
+
 export const CreateAccountContainer = styled.div`
   ${({ theme }) => css`
     display: flex;
@@ -8,6 +21,7 @@ export const CreateAccountContainer = styled.div`
     align-items: center;
     width: 100%;
     height: calc(100vh - 5.3rem);
+    /* background-color: #f2f4f6; */
   `}
 `;
 
@@ -24,6 +38,9 @@ export const CreateAccountCard = styled.form`
   padding: 0;
   margin-top: -1rem;
 `;
+
+
+
 
 export const CreateUserTitleContainer = styled.div`
     border-radius: 15px 15px 0 0;

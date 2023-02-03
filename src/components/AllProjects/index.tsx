@@ -32,7 +32,7 @@ const AllProjects = () => {
   }
 
   return (
-    <>
+    <S.MainSection>
       <Header setSearch={""}/>
       <S.AllContainer>
         <S.ProjectNavbar>
@@ -75,7 +75,7 @@ const AllProjects = () => {
           />
         ) : null}
       </S.AllContainer>
-    </>
+    </S.MainSection>
   );
 };
 
