@@ -16,7 +16,10 @@ const Navbar = () => {
   return (
     <S.NavbarContainer>
       <S.NavbarWrapper>
-        <S.NavbarLogo>
+        <S.NavbarLogo onClick={
+          ()=>{navigate("/home");
+          setActive("home")}
+          }>
           <S.NavbarImg src={Logo} alt="Logo da empresa" />
         </S.NavbarLogo>
         <S.NavbarContent>

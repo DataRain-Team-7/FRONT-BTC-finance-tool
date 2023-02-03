@@ -30,7 +30,8 @@ export const NavbarLogo = styled.div`
   align-items: center;
   padding: 15px 20px;
   height: 70px;
-  margin-right: 1%;;
+  margin-right: 1%;
+  cursor: pointer;
 `;
 
 export const NavbarImg = styled.img`
