@@ -18,7 +18,7 @@ const ProjectCard = ({ user, idProject }: any) => {
           <BsTrash />
         </span>
       </S.CardHeader>
-      {user.imageUrl === null ? (
+      {user.imageUrl !== null ? (
         <S.CardImage src={userDefault} alt="Imagem perfil" />
       ) : (
         <S.CardImage
