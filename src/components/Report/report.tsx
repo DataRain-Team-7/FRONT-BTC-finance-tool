@@ -115,8 +115,8 @@ const reportPDF = (data:any) =>{
         content: [details],
         footer:[footer]
     }
-    
-    pdfMake.createPdf(docDefinitions).download();
+    var str = data.client.companyName.replace(/\s/g, '');
+    pdfMake.createPdf(docDefinitions).download(`${str}.pdf` || `dataRain.pdf`);
 }
 
 
